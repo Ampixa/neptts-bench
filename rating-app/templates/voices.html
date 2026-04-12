@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NepTTS Benchmark — Voice Browser</title>
+<style>
+:root {
+    --text: #1a1a1a;
+    --text-secondary: #555;
+    --text-muted: #888;
+    --bg: #fafafa;
+    --surface: #fff;
+    --border: #e0e0e0;
+    --accent-soft: #f0f0f0;
+    --active: #1a1a1a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+}
+
+h1 { font-size: 1.125rem; font-weight: 600; margin-bottom: 4px; }
+.subtitle { font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 28px; }
+
+/* System tabs */
+.sys-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
+}
+
+.sys-tab {
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--surface);
+    font-size: 0.75rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.12s;
+    white-space: nowrap;
+}
+
+.sys-tab:hover { border-color: #aaa; }
+
+.sys-tab.active {
+    background: var(--active);
+    color: #fff;
+    border-color: var(--active);
+}
+
+.sys-tab .count {
+    font-size: 0.625rem;
+    opacity: 0.6;
+    margin-left: 4px;
+}
+
+/* Sentence list */
+.sent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sent-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.12s;
+}
+
+.sent-row:hover { border-color: #aaa; }
+.sent-row.active { border-color: var(--active); background: var(--accent-soft); }
+
+.sent-row .play-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s;
+}
+
+.sent-row .play-btn:hover { border-color: var(--text); }
+.sent-row .play-btn.playing { border-color: var(--text); background: var(--text); }
+.sent-row .play-btn svg { width: 12px; height: 12px; fill: var(--text); }
+.sent-row .play-btn.playing svg { fill: #fff; }
+
+.sent-row .text {
+    flex: 1;
+    min-width: 0;
+}
+
+.sent-row .dev {
+    font-size: 0.9375rem;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sent-row .meta {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+}
+
+.sent-row .sid {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+}
+
+.sent-row .rating-badge {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: var(--accent-soft);
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    min-width: 32px;
+    text-align: center;
+}
+
+.sent-row .rating-badge.high { background: #d5f5e3; color: #1e8449; }
+.sent-row .rating-badge.mid { background: #fef9e7; color: #b7950b; }
+.sent-row .rating-badge.low { background: #fdedec; color: #c0392b; }
+
+/* Compare strip */
+.compare-strip {
+    position: sticky;
+    bottom: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 12px 0;
+    margin-top: 20px;
+    display: none;
+}
+
+.compare-strip.visible { display: block; }
+
+.compare-strip .label {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.compare-btns {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.compare-btn {
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    font-size: 0.6875rem;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.compare-btn:hover { border-color: var(--text); }
+.compare-btn.playing { background: var(--active); color: #fff; border-color: var(--active); }
+
+/* Rate strip */
+.rate-strip {
+    position: sticky;
+    bottom: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 10px 0;
+    margin-top: 8px;
+}
+
+.rate-btns {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.rate-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.rate-btn:hover { border-color: var(--active); }
+.rate-btn.rated { background: var(--active); color: #fff; border-color: var(--active); }
+
+.rate-status {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    margin-left: 8px;
+}
+
+.kbd-hint {
+    text-align: center;
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    margin-top: 16px;
+}
+
+.kbd-hint kbd {
+    display: inline-block;
+    padding: 1px 5px;
+    font-family: inherit;
+    font-size: 0.625rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: var(--accent-soft);
+}
+</style>
+</head>
+<body>
+<div class="page">
+    <h1>NepTTS Benchmark</h1>
+    <div class="subtitle">Browse and compare voices</div>
+
+    <div class="sys-tabs" id="sys-tabs"></div>
+    <div class="sent-list" id="sent-list"></div>
+    <div class="kbd-hint">
+        <kbd>Up</kbd>/<kbd>Down</kbd> navigate, <kbd>Space</kbd> play, <kbd>1</kbd>-<kbd>9</kbd> switch system
+    </div>
+
+    <div class="compare-strip" id="compare-strip">
+        <div class="label">Compare this sentence across systems</div>
+        <div class="compare-btns" id="compare-btns"></div>
+    </div>
+
+    <div class="rate-strip" id="rate-strip" style="display:none">
+        <div class="label">Rate current audio</div>
+        <div class="rate-btns">
+            <button class="rate-btn" onclick="submitRating(1)">1</button>
+            <button class="rate-btn" onclick="submitRating(2)">2</button>
+            <button class="rate-btn" onclick="submitRating(3)">3</button>
+            <button class="rate-btn" onclick="submitRating(4)">4</button>
+            <button class="rate-btn" onclick="submitRating(5)">5</button>
+            <span class="rate-status" id="rate-status"></span>
+        </div>
+    </div>
+</div>
+
+<script>
+const BASE = window.location.pathname.replace(/\/voices\/?$/, '');
+const playSvg = '<polygon points="7,4 17,11 7,18"/>';
+const pauseSvg = '<rect x="5" y="4" width="3.5" height="14"/><rect x="12.5" y="4" width="3.5" height="14"/>';
+
+let allSentences = [];
+let allSystems = [];
+let allRatings = {};
+let currentSystem = null;
+let currentSentences = [];
+let currentIdx = -1;
+let audio = null;
+let playingBtn = null;
+
+async function init() {
+    const [sentRes, ratRes] = await Promise.all([
+        fetch(`${BASE}/api/voices/sentences`),
+        fetch(`${BASE}/api/voices/ratings`),
+    ]);
+    const data = await sentRes.json();
+    allSentences = data.sentences;
+    allSystems = data.systems;
+    allRatings = await ratRes.json();
+
+    renderTabs();
+    selectSystem(allSystems[0]);
+}
+
+function getRating(sys, sentId) {
+    return allRatings[`${sys}/${sentId}`] || null;
+}
+
+function renderTabs() {
+    const tabs = document.getElementById('sys-tabs');
+    tabs.innerHTML = '';
+    allSystems.forEach((sys, i) => {
+        const count = allSentences.filter(s => (s.systems || []).includes(sys)).length;
+        const tab = document.createElement('button');
+        tab.className = 'sys-tab';
+        tab.dataset.sys = sys;
+        tab.innerHTML = `${sys}<span class="count">${count}</span>`;
+        tab.onclick = () => selectSystem(sys);
+        tabs.appendChild(tab);
+    });
+}
+
+function selectSystem(sys) {
+    currentSystem = sys;
+    currentSentences = allSentences.filter(s => (s.systems || []).includes(sys));
+    currentIdx = 0;
+
+    // Update tabs
+    document.querySelectorAll('.sys-tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.sys === sys);
+    });
+
+    renderList();
+}
+
+function renderList() {
+    stopAudio();
+    const list = document.getElementById('sent-list');
+    list.innerHTML = '';
+
+    currentSentences.forEach((s, i) => {
+        const row = document.createElement('div');
+        row.className = `sent-row${i === currentIdx ? ' active' : ''}`;
+        row.dataset.idx = i;
+
+        const r = getRating(currentSystem, s.sent_id);
+        let badge = '';
+        if (r) {
+            const cls = r.avg >= 4 ? 'high' : r.avg >= 3 ? 'mid' : 'low';
+            badge = `<div class="rating-badge ${cls}">${r.avg}</div>`;
+        }
+
+        row.innerHTML = `
+            <button class="play-btn" data-idx="${i}" onclick="event.stopPropagation(); playSent(${i})">
+                <svg viewBox="0 0 22 22">${playSvg}</svg>
+            </button>
+            <div class="text">
+                <div class="dev">${s.text_dev}</div>
+                <div class="meta">${s.category || ''}</div>
+            </div>
+            ${badge}
+            <div class="sid">${s.sent_id}</div>
+        `;
+        row.onclick = () => { currentIdx = i; highlightRow(i); showCompare(i); };
+        list.appendChild(row);
+    });
+}
+
+function highlightRow(idx) {
+    document.querySelectorAll('.sent-row').forEach((r, i) => {
+        r.classList.toggle('active', i === idx);
+    });
+    // Scroll into view
+    const row = document.querySelector(`.sent-row[data-idx="${idx}"]`);
+    if (row) row.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+}
+
+function playSent(idx) {
+    const s = currentSentences[idx];
+    currentIdx = idx;
+    highlightRow(idx);
+    showCompare(idx);
+
+    const btn = document.querySelector(`.play-btn[data-idx="${idx}"]`);
+
+    if (audio && playingBtn === btn) {
+        if (audio.paused) {
+            audio.play();
+            btn.classList.add('playing');
+            btn.querySelector('svg').innerHTML = pauseSvg;
+        } else {
+            stopAudio();
+        }
+        return;
+    }
+
+    stopAudio();
+    const url = `${BASE}/api/audio/${currentSystem}/${s.sent_id}`;
+    audio = new Audio(url);
+    playingBtn = btn;
+    btn.classList.add('playing');
+    btn.querySelector('svg').innerHTML = pauseSvg;
+    audio.play();
+    audio.onended = () => stopAudio();
+    audio.onerror = () => stopAudio();
+}
+
+function stopAudio() {
+    if (audio) { audio.pause(); audio = null; }
+    if (playingBtn) {
+        playingBtn.classList.remove('playing');
+        playingBtn.querySelector('svg').innerHTML = playSvg;
+        playingBtn = null;
+    }
+    // Also stop compare audio
+    document.querySelectorAll('.compare-btn.playing').forEach(b => b.classList.remove('playing'));
+}
+
+function showCompare(idx) {
+    const s = currentSentences[idx];
+    const strip = document.getElementById('compare-strip');
+    const btns = document.getElementById('compare-btns');
+    const available = s.systems || [];
+
+    if (available.length <= 1) {
+        strip.classList.remove('visible');
+        return;
+    }
+
+    strip.classList.add('visible');
+    btns.innerHTML = '';
+    available.forEach(sys => {
+        const btn = document.createElement('button');
+        btn.className = `compare-btn${sys === currentSystem ? ' playing' : ''}`;
+        btn.textContent = sys;
+        btn.onclick = () => playCompare(btn, sys, s.sent_id);
+        btns.appendChild(btn);
+    });
+}
+
+function playCompare(btn, sys, sentId) {
+    stopAudio();
+    document.querySelectorAll('.compare-btn').forEach(b => b.classList.remove('playing'));
+    btn.classList.add('playing');
+
+    const url = `${BASE}/api/audio/${sys}/${sentId}`;
+    audio = new Audio(url);
+    audio.play();
+    audio.onended = () => { btn.classList.remove('playing'); audio = null; };
+    audio.onerror = () => { btn.classList.remove('playing'); audio = null; };
+}
+
+function navSent(delta) {
+    if (!currentSentences.length) return;
+    currentIdx = Math.max(0, Math.min(currentSentences.length - 1, currentIdx + delta));
+    highlightRow(currentIdx);
+    showCompare(currentIdx);
+}
+
+// Admin rating
+let adminRaterId = localStorage.getItem('admin_rater_id');
+let lastPlayedSys = null;
+let lastPlayedSent = null;
+
+async function ensureAdminRater() {
+    if (adminRaterId) return;
+    const res = await fetch(`${BASE}/api/raters`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name: 'Admin (voices)', native_speaker: true, minutes: 30}),
+    });
+    const data = await res.json();
+    adminRaterId = data.rater_id;
+    localStorage.setItem('admin_rater_id', adminRaterId);
+}
+
+async function submitRating(score) {
+    if (!lastPlayedSys || !lastPlayedSent) return;
+    await ensureAdminRater();
+
+    await fetch(`${BASE}/api/ratings`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            rater_id: adminRaterId,
+            system_name: lastPlayedSys,
+            sent_id: lastPlayedSent,
+            score: score,
+        }),
+    });
+
+    document.querySelectorAll('.rate-btn').forEach((b, i) => {
+        b.classList.toggle('rated', i + 1 === score);
+    });
+    document.getElementById('rate-status').textContent = `Rated ${lastPlayedSys}/${lastPlayedSent}: ${score}`;
+
+    // Update cached ratings and refresh list
+    const key = `${lastPlayedSys}/${lastPlayedSent}`;
+    const existing = allRatings[key];
+    if (existing) {
+        existing.avg = Math.round(((existing.avg * existing.n) + score) / (existing.n + 1) * 100) / 100;
+        existing.n += 1;
+    } else {
+        allRatings[key] = {avg: score, n: 1};
+    }
+    renderList();
+}
+
+// Override playSent to track what's playing
+const _origPlaySent = playSent;
+playSent = function(idx) {
+    lastPlayedSys = currentSystem;
+    lastPlayedSent = currentSentences[idx]?.sent_id;
+    document.getElementById('rate-strip').style.display = 'block';
+    document.querySelectorAll('.rate-btn').forEach(b => b.classList.remove('rated'));
+    document.getElementById('rate-status').textContent = `Playing: ${lastPlayedSys}`;
+    _origPlaySent(idx);
+};
+
+// Override playCompare to track
+const _origPlayCompare = playCompare;
+playCompare = function(btn, sys, sentId) {
+    lastPlayedSys = sys;
+    lastPlayedSent = sentId;
+    document.getElementById('rate-strip').style.display = 'block';
+    document.querySelectorAll('.rate-btn').forEach(b => b.classList.remove('rated'));
+    document.getElementById('rate-status').textContent = `Playing: ${sys}`;
+    _origPlayCompare(btn, sys, sentId);
+};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowUp') { e.preventDefault(); navSent(-1); }
+    else if (e.key === 'ArrowDown') { e.preventDefault(); navSent(1); }
+    else if (e.key === ' ') { e.preventDefault(); playSent(currentIdx); }
+    else if (e.key >= '1' && e.key <= '9') {
+        if (e.shiftKey) {
+            // Shift+1-5 = rate
+            const score = parseInt(e.key);
+            if (score <= 5) submitRating(score);
+        } else {
+            const idx = parseInt(e.key) - 1;
+            if (idx < allSystems.length) selectSystem(allSystems[idx]);
+        }
+    }
+});
+
+init();
+</script>
+</body>
+</html>

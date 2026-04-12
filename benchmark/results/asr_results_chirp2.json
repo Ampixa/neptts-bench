@@ -1,0 +1,47 @@
+{
+  "edge_tts/hemkala": {
+    "avg_cer": 0.1695,
+    "n_files": 164,
+    "n_errors": 0
+  },
+  "edge_tts/sagar": {
+    "avg_cer": 0.1462,
+    "n_files": 164,
+    "n_errors": 0
+  },
+  "gtts": {
+    "avg_cer": 0.4727,
+    "n_files": 164,
+    "n_errors": 0
+  },
+  "gemini": {
+    "avg_cer": 0.1437,
+    "n_files": 161,
+    "n_errors": 0
+  },
+  "piper": {
+    "avg_cer": 0.186,
+    "n_files": 193,
+    "n_errors": 0
+  },
+  "tingting_asmita": {
+    "avg_cer": 0.1405,
+    "n_files": 192,
+    "n_errors": 0
+  },
+  "tingting_sambriddhi": {
+    "avg_cer": 0.2164,
+    "n_files": 191,
+    "n_errors": 1
+  },
+  "tingting_subina": {
+    "avg_cer": 0.1204,
+    "n_files": 192,
+    "n_errors": 0
+  },
+  "elevenlabs": {
+    "avg_cer": 0.1063,
+    "n_files": 193,
+    "n_errors": 0
+  }
+}

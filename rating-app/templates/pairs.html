@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NepTTS Benchmark — Minimal Pairs</title>
+<style>
+:root {
+    --text: #1a1a1a;
+    --text-secondary: #555;
+    --text-muted: #888;
+    --bg: #fafafa;
+    --surface: #fff;
+    --border: #e0e0e0;
+    --accent-soft: #f0f0f0;
+    --active: #1a1a1a;
+    --a-color: #2980b9;
+    --b-color: #8e44ad;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+}
+
+h1 { font-size: 1.125rem; font-weight: 600; margin-bottom: 4px; }
+.subtitle { font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 24px; }
+
+/* Pair selector */
+.pair-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+.pair-tab {
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+    font-size: 0.6875rem;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.pair-tab:hover { border-color: #aaa; }
+.pair-tab.active { background: var(--active); color: #fff; border-color: var(--active); }
+
+/* Category filter */
+.cat-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.cat-btn {
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    font-size: 0.75rem;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.cat-btn:hover { border-color: #aaa; }
+.cat-btn.active { background: var(--active); color: #fff; border-color: var(--active); }
+
+/* Pair display */
+.pair-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.pair-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.pair-id {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    font-family: monospace;
+}
+
+.contrast-type {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--accent-soft);
+}
+
+.pair-sentences {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.sent-card {
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.sent-card.a { background: #ebf5fb; border: 1px solid #aed6f1; }
+.sent-card.b { background: #f4ecf7; border: 1px solid #d2b4de; }
+
+.sent-card .label {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.sent-card.a .label { color: var(--a-color); }
+.sent-card.b .label { color: var(--b-color); }
+
+.sent-card .text-dev {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.sent-card .contrast {
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+}
+
+.sent-card.a .contrast { text-decoration-color: var(--a-color); }
+.sent-card.b .contrast { text-decoration-color: var(--b-color); }
+
+.sent-card .text-roman {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* System playback grid */
+.sys-grid {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr auto;
+    gap: 6px;
+    align-items: center;
+}
+
+.sys-grid .pair-verdict {
+    display: flex;
+    gap: 4px;
+}
+
+.v-btn {
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    font-size: 0.625rem;
+    font-family: inherit;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.v-btn:hover { border-color: #aaa; }
+.v-btn.yes.voted { background: #27ae60; color: #fff; border-color: #27ae60; }
+.v-btn.no.voted { background: #c0392b; color: #fff; border-color: #c0392b; }
+
+.sys-grid .sys-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding-right: 8px;
+}
+
+.play-sm {
+    padding: 6px 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    font-size: 0.6875rem;
+    font-family: inherit;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.12s;
+}
+
+.play-sm:hover { border-color: #aaa; }
+.play-sm.playing { background: var(--active); color: #fff; border-color: var(--active); }
+.play-sm.a-btn:hover { border-color: var(--a-color); }
+.play-sm.b-btn:hover { border-color: var(--b-color); }
+
+.nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.nav-row button {
+    padding: 8px 20px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    font-family: inherit;
+    font-size: 0.8125rem;
+    cursor: pointer;
+}
+
+.nav-row button:hover { border-color: var(--text); }
+.nav-row .counter { font-size: 0.8125rem; color: var(--text-muted); }
+
+.kbd-hint {
+    text-align: center;
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    margin-top: 12px;
+}
+
+.kbd-hint kbd {
+    padding: 1px 5px;
+    font-family: inherit;
+    font-size: 0.625rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: var(--accent-soft);
+}
+</style>
+</head>
+<body>
+<div class="page">
+    <h1>NepTTS Benchmark</h1>
+    <div class="subtitle">Minimal pair comparison — listen to phonological contrasts across systems</div>
+
+    <div class="cat-filter" id="cat-filter"></div>
+    <div id="pair-content"></div>
+
+    <div class="nav-row">
+        <button onclick="navPair(-1)">Previous</button>
+        <span class="counter" id="counter"></span>
+        <button onclick="navPair(1)">Next</button>
+    </div>
+
+    <div class="kbd-hint">
+        <kbd>Left</kbd>/<kbd>Right</kbd> navigate pairs, <kbd>A</kbd> play sentence A, <kbd>B</kbd> play sentence B
+    </div>
+</div>
+
+<script>
+const BASE = window.location.pathname.replace(/\/pairs(\/all)?\/?$/, '');
+let allPairs = [];
+let filteredPairs = [];
+let currentIdx = 0;
+let currentCat = 'all';
+let audio = null;
+let playingBtn = null;
+
+async function init() {
+    const r = await fetch(`${BASE}/api/pairs`);
+    const data = await r.json();
+    allPairs = data.pairs;
+
+    renderCatFilter(data.categories);
+    filterPairs('all');
+}
+
+function renderCatFilter(categories) {
+    const div = document.getElementById('cat-filter');
+    const allBtn = document.createElement('button');
+    allBtn.className = 'cat-btn active';
+    allBtn.textContent = `All (${allPairs.length})`;
+    allBtn.onclick = () => filterPairs('all');
+    div.appendChild(allBtn);
+
+    for (const cat of categories) {
+        const count = allPairs.filter(p => p.category === cat).length;
+        const btn = document.createElement('button');
+        btn.className = 'cat-btn';
+        btn.dataset.cat = cat;
+        const short = cat.replace('phonological_minimal_pairs/', '').replace(/_/g, ' ');
+        btn.textContent = `${short} (${count})`;
+        btn.onclick = () => filterPairs(cat);
+        div.appendChild(btn);
+    }
+}
+
+function filterPairs(cat) {
+    currentCat = cat;
+    filteredPairs = cat === 'all' ? allPairs : allPairs.filter(p => p.category === cat);
+    currentIdx = 0;
+
+    document.querySelectorAll('.cat-btn').forEach(b => {
+        b.classList.toggle('active', (cat === 'all' && !b.dataset.cat) || b.dataset.cat === cat);
+    });
+
+    renderPair();
+}
+
+function renderPair() {
+    stopAudio();
+    const div = document.getElementById('pair-content');
+
+    if (!filteredPairs.length) {
+        div.innerHTML = '<p style="color:var(--text-muted)">No pairs in this category</p>';
+        return;
+    }
+
+    const p = filteredPairs[currentIdx];
+    const a = p.sent_a;
+    const b = p.sent_b;
+
+    // Highlight contrast word in text
+    function highlight(text, word, cls) {
+        if (!word) return text;
+        return text.replace(word, `<span class="contrast">${word}</span>`);
+    }
+
+    let sysRows = '';
+    for (const sys of p.systems) {
+        sysRows += `
+            <div class="sys-name">${sys}</div>
+            <button class="play-sm a-btn" onclick="playAudio(this, '${sys}', '${a.sent_id}')">▶ A</button>
+            <button class="play-sm b-btn" onclick="playAudio(this, '${sys}', '${b.sent_id}')">▶ B</button>
+            <div class="pair-verdict" id="verdict-${sys.replace(/\//g,'-')}">
+                <button class="v-btn yes" onclick="ratePair('${sys}', '${p.pair_id}', '${a.sent_id}', '${b.sent_id}', 1, this)">Yes</button>
+                <button class="v-btn no" onclick="ratePair('${sys}', '${p.pair_id}', '${a.sent_id}', '${b.sent_id}', 0, this)">No</button>
+            </div>
+        `;
+    }
+
+    div.innerHTML = `
+        <div class="pair-card">
+            <div class="pair-header">
+                <span class="pair-id">${p.pair_id}</span>
+                <span class="contrast-type">${p.contrast_label}</span>
+            </div>
+            <div class="pair-sentences">
+                <div class="sent-card a">
+                    <div class="label">Sentence A — ${a.contrast_word}</div>
+                    <div class="text-dev">${highlight(a.text_dev, a.contrast_word, 'a')}</div>
+                    <div class="text-roman">${a.text_roman || ''}</div>
+                </div>
+                <div class="sent-card b">
+                    <div class="label">Sentence B — ${b.contrast_word}</div>
+                    <div class="text-dev">${highlight(b.text_dev, b.contrast_word, 'b')}</div>
+                    <div class="text-roman">${b.text_roman || ''}</div>
+                </div>
+            </div>
+            <div class="sys-grid">${sysRows}</div>
+        </div>
+    `;
+
+    document.getElementById('counter').textContent = `${currentIdx + 1} / ${filteredPairs.length}`;
+}
+
+function playAudio(btn, sys, sentId) {
+    stopAudio();
+    btn.classList.add('playing');
+    playingBtn = btn;
+    audio = new Audio(`${BASE}/api/audio/${sys}/${sentId}`);
+    audio.play();
+    audio.onended = () => stopAudio();
+    audio.onerror = () => stopAudio();
+}
+
+function stopAudio() {
+    if (audio) { audio.pause(); audio = null; }
+    if (playingBtn) { playingBtn.classList.remove('playing'); playingBtn = null; }
+}
+
+function navPair(delta) {
+    currentIdx = Math.max(0, Math.min(filteredPairs.length - 1, currentIdx + delta));
+    renderPair();
+}
+
+// Rating
+let pairRaterId = localStorage.getItem('pair_rater_id');
+
+async function ensurePairRater() {
+    if (pairRaterId) return;
+    const res = await fetch(`${BASE}/api/raters`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name: 'Pair Tester', native_speaker: true, minutes: 30}),
+    });
+    const data = await res.json();
+    pairRaterId = data.rater_id;
+    localStorage.setItem('pair_rater_id', pairRaterId);
+}
+
+async function ratePair(sys, pairId, sentA, sentB, canDistinguish, btn) {
+    await ensurePairRater();
+
+    await fetch(`${BASE}/api/pair-test/submit`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            rater_id: pairRaterId,
+            system_name: sys,
+            pair_id: pairId,
+            sent_id_a: sentA,
+            sent_id_b: sentB,
+            can_distinguish: canDistinguish,
+        }),
+    });
+
+    // Highlight voted button
+    const parent = btn.parentElement;
+    parent.querySelectorAll('.v-btn').forEach(b => b.classList.remove('voted'));
+    btn.classList.add('voted');
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); navPair(-1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); navPair(1); }
+});
+
+init();
+</script>
+</body>
+</html>

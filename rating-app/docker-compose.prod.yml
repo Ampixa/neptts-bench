@@ -1,0 +1,29 @@
+services:
+  rating-app:
+    build: .
+    container_name: neptts-rating-app
+    restart: unless-stopped
+    environment:
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-changeme}
+      - TTS_DIR=/tts_data
+      - DATA_DIR=/app/data
+    volumes:
+      - rating-data:/app/data
+      - tts-audio:/tts_data:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.neptts-rating.rule=Host(`rating.doctorsewa.org`)"
+      - "traefik.http.routers.neptts-rating.entrypoints=websecure"
+      - "traefik.http.routers.neptts-rating.tls.certresolver=letsencrypt-dns"
+      - "traefik.http.services.neptts-rating.loadbalancer.server.port=8001"
+    networks:
+      - traefik-proxy
+
+volumes:
+  rating-data:
+  tts-audio:
+
+networks:
+  traefik-proxy:
+    external: true
+    name: traefik-proxy

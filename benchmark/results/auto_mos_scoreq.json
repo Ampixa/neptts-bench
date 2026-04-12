@@ -1,0 +1,6527 @@
+{
+  "edge_tts/hemkala": {
+    "scores": [
+      {
+        "file": "sent_001",
+        "scoreq_mos": 3.214
+      },
+      {
+        "file": "sent_002",
+        "scoreq_mos": 4.179
+      },
+      {
+        "file": "sent_003",
+        "scoreq_mos": 4.052
+      },
+      {
+        "file": "sent_004",
+        "scoreq_mos": 3.662
+      },
+      {
+        "file": "sent_005",
+        "scoreq_mos": 4.109
+      },
+      {
+        "file": "sent_006",
+        "scoreq_mos": 4.105
+      },
+      {
+        "file": "sent_007",
+        "scoreq_mos": 3.936
+      },
+      {
+        "file": "sent_008",
+        "scoreq_mos": 3.04
+      },
+      {
+        "file": "sent_009",
+        "scoreq_mos": 4.217
+      },
+      {
+        "file": "sent_010",
+        "scoreq_mos": 4.104
+      },
+      {
+        "file": "sent_011",
+        "scoreq_mos": 3.546
+      },
+      {
+        "file": "sent_012",
+        "scoreq_mos": 3.94
+      },
+      {
+        "file": "sent_013",
+        "scoreq_mos": 3.616
+      },
+      {
+        "file": "sent_014",
+        "scoreq_mos": 4.216
+      },
+      {
+        "file": "sent_015",
+        "scoreq_mos": 3.956
+      },
+      {
+        "file": "sent_016",
+        "scoreq_mos": 4.081
+      },
+      {
+        "file": "sent_017",
+        "scoreq_mos": 3.536
+      },
+      {
+        "file": "sent_018",
+        "scoreq_mos": 3.663
+      },
+      {
+        "file": "sent_019",
+        "scoreq_mos": 3.921
+      },
+      {
+        "file": "sent_020",
+        "scoreq_mos": 3.865
+      },
+      {
+        "file": "sent_021",
+        "scoreq_mos": 3.79
+      },
+      {
+        "file": "sent_022",
+        "scoreq_mos": 4.207
+      },
+      {
+        "file": "sent_023",
+        "scoreq_mos": 3.899
+      },
+      {
+        "file": "sent_024",
+        "scoreq_mos": 3.023
+      },
+      {
+        "file": "sent_025",
+        "scoreq_mos": 3.573
+      },
+      {
+        "file": "sent_026",
+        "scoreq_mos": 3.511
+      },
+      {
+        "file": "sent_027",
+        "scoreq_mos": 3.051
+      },
+      {
+        "file": "sent_028",
+        "scoreq_mos": 3.878
+      },
+      {
+        "file": "sent_029",
+        "scoreq_mos": 4.305
+      },
+      {
+        "file": "sent_030",
+        "scoreq_mos": 3.476
+      },
+      {
+        "file": "sent_031",
+        "scoreq_mos": 3.691
+      },
+      {
+        "file": "sent_032",
+        "scoreq_mos": 2.948
+      },
+      {
+        "file": "sent_033",
+        "scoreq_mos": 4.023
+      },
+      {
+        "file": "sent_034",
+        "scoreq_mos": 3.489
+      },
+      {
+        "file": "sent_035",
+        "scoreq_mos": 4.236
+      },
+      {
+        "file": "sent_036",
+        "scoreq_mos": 3.513
+      },
+      {
+        "file": "sent_037",
+        "scoreq_mos": 3.892
+      },
+      {
+        "file": "sent_038",
+        "scoreq_mos": 3.389
+      },
+      {
+        "file": "sent_039",
+        "scoreq_mos": 4.078
+      },
+      {
+        "file": "sent_040",
+        "scoreq_mos": 3.818
+      },
+      {
+        "file": "sent_041",
+        "scoreq_mos": 3.785
+      },
+      {
+        "file": "sent_042",
+        "scoreq_mos": 3.558
+      },
+      {
+        "file": "sent_043",
+        "scoreq_mos": 3.394
+      },
+      {
+        "file": "sent_044",
+        "scoreq_mos": 3.938
+      },
+      {
+        "file": "sent_045",
+        "scoreq_mos": 3.903
+      },
+      {
+        "file": "sent_046",
+        "scoreq_mos": 3.679
+      },
+      {
+        "file": "sent_047",
+        "scoreq_mos": 3.998
+      },
+      {
+        "file": "sent_048",
+        "scoreq_mos": 4.049
+      },
+      {
+        "file": "sent_049",
+        "scoreq_mos": 4.238
+      },
+      {
+        "file": "sent_050",
+        "scoreq_mos": 4.146
+      },
+      {
+        "file": "sent_051",
+        "scoreq_mos": 3.673
+      },
+      {
+        "file": "sent_052",
+        "scoreq_mos": 4.054
+      },
+      {
+        "file": "sent_053",
+        "scoreq_mos": 4.087
+      },
+      {
+        "file": "sent_054",
+        "scoreq_mos": 3.981
+      },
+      {
+        "file": "sent_055",
+        "scoreq_mos": 4.183
+      },
+      {
+        "file": "sent_056",
+        "scoreq_mos": 3.215
+      },
+      {
+        "file": "sent_057",
+        "scoreq_mos": 3.985
+      },
+      {
+        "file": "sent_058",
+        "scoreq_mos": 4.193
+      },
+      {
+        "file": "sent_059",
+        "scoreq_mos": 3.126
+      },
+      {
+        "file": "sent_060",
+        "scoreq_mos": 3.892
+      },
+      {
+        "file": "sent_061",
+        "scoreq_mos": 3.172
+      },
+      {
+        "file": "sent_062",
+        "scoreq_mos": 3.976
+      },
+      {
+        "file": "sent_063",
+        "scoreq_mos": 3.351
+      },
+      {
+        "file": "sent_064",
+        "scoreq_mos": 3.045
+      },
+      {
+        "file": "sent_065",
+        "scoreq_mos": 3.744
+      },
+      {
+        "file": "sent_066",
+        "scoreq_mos": 3.618
+      },
+      {
+        "file": "sent_067",
+        "scoreq_mos": 4.076
+      },
+      {
+        "file": "sent_068",
+        "scoreq_mos": 3.884
+      },
+      {
+        "file": "sent_069",
+        "scoreq_mos": 4.465
+      },
+      {
+        "file": "sent_070",
+        "scoreq_mos": 4.1
+      },
+      {
+        "file": "sent_071",
+        "scoreq_mos": 4.054
+      },
+      {
+        "file": "sent_072",
+        "scoreq_mos": 4.098
+      },
+      {
+        "file": "sent_073",
+        "scoreq_mos": 4.123
+      },
+      {
+        "file": "sent_074",
+        "scoreq_mos": 3.568
+      },
+      {
+        "file": "sent_075",
+        "scoreq_mos": 4.213
+      },
+      {
+        "file": "sent_076",
+        "scoreq_mos": 4.355
+      },
+      {
+        "file": "sent_077",
+        "scoreq_mos": 4.296
+      },
+      {
+        "file": "sent_078",
+        "scoreq_mos": 3.498
+      },
+      {
+        "file": "sent_079",
+        "scoreq_mos": 3.207
+      },
+      {
+        "file": "sent_080",
+        "scoreq_mos": 4.145
+      },
+      {
+        "file": "sent_081",
+        "scoreq_mos": 3.69
+      },
+      {
+        "file": "sent_082",
+        "scoreq_mos": 3.589
+      },
+      {
+        "file": "sent_083",
+        "scoreq_mos": 4.164
+      },
+      {
+        "file": "sent_084",
+        "scoreq_mos": 4.23
+      },
+      {
+        "file": "sent_085",
+        "scoreq_mos": 3.57
+      },
+      {
+        "file": "sent_086",
+        "scoreq_mos": 3.469
+      },
+      {
+        "file": "sent_087",
+        "scoreq_mos": 3.286
+      },
+      {
+        "file": "sent_088",
+        "scoreq_mos": 2.955
+      },
+      {
+        "file": "sent_089",
+        "scoreq_mos": 2.96
+      },
+      {
+        "file": "sent_090",
+        "scoreq_mos": 3.024
+      },
+      {
+        "file": "sent_091",
+        "scoreq_mos": 3.608
+      },
+      {
+        "file": "sent_092",
+        "scoreq_mos": 4.16
+      },
+      {
+        "file": "sent_093",
+        "scoreq_mos": 3.89
+      },
+      {
+        "file": "sent_094",
+        "scoreq_mos": 3.733
+      },
+      {
+        "file": "sent_095",
+        "scoreq_mos": 3.781
+      },
+      {
+        "file": "sent_096",
+        "scoreq_mos": 3.963
+      },
+      {
+        "file": "sent_097",
+        "scoreq_mos": 3.028
+      },
+      {
+        "file": "sent_098",
+        "scoreq_mos": 3.751
+      },
+      {
+        "file": "sent_099",
+        "scoreq_mos": 3.211
+      },
+      {
+        "file": "sent_100",
+        "scoreq_mos": 3.975
+      },
+      {
+        "file": "sent_101",
+        "scoreq_mos": 3.828
+      },
+      {
+        "file": "sent_102",
+        "scoreq_mos": 4.096
+      },
+      {
+        "file": "sent_103",
+        "scoreq_mos": 4.031
+      },
+      {
+        "file": "sent_104",
+        "scoreq_mos": 3.078
+      },
+      {
+        "file": "sent_105",
+        "scoreq_mos": 3.478
+      },
+      {
+        "file": "sent_106",
+        "scoreq_mos": 4.049
+      },
+      {
+        "file": "sent_107",
+        "scoreq_mos": 4.01
+      },
+      {
+        "file": "sent_108",
+        "scoreq_mos": 3.944
+      },
+      {
+        "file": "sent_109",
+        "scoreq_mos": 3.26
+      },
+      {
+        "file": "sent_110",
+        "scoreq_mos": 3.632
+      },
+      {
+        "file": "sent_111",
+        "scoreq_mos": 3.506
+      },
+      {
+        "file": "sent_112",
+        "scoreq_mos": 4.053
+      },
+      {
+        "file": "sent_113",
+        "scoreq_mos": 2.922
+      },
+      {
+        "file": "sent_114",
+        "scoreq_mos": 4.08
+      },
+      {
+        "file": "sent_115",
+        "scoreq_mos": 3.829
+      },
+      {
+        "file": "sent_116",
+        "scoreq_mos": 3.888
+      },
+      {
+        "file": "sent_117",
+        "scoreq_mos": 4.001
+      },
+      {
+        "file": "sent_118",
+        "scoreq_mos": 3.628
+      },
+      {
+        "file": "sent_119",
+        "scoreq_mos": 3.487
+      },
+      {
+        "file": "sent_120",
+        "scoreq_mos": 3.293
+      },
+      {
+        "file": "sent_121",
+        "scoreq_mos": 4.017
+      },
+      {
+        "file": "sent_122",
+        "scoreq_mos": 3.313
+      },
+      {
+        "file": "sent_123",
+        "scoreq_mos": 3.084
+      },
+      {
+        "file": "sent_124",
+        "scoreq_mos": 3.711
+      },
+      {
+        "file": "sent_125",
+        "scoreq_mos": 4.169
+      },
+      {
+        "file": "sent_126",
+        "scoreq_mos": 3.93
+      },
+      {
+        "file": "sent_137",
+        "scoreq_mos": 3.784
+      },
+      {
+        "file": "sent_138",
+        "scoreq_mos": 3.577
+      },
+      {
+        "file": "sent_139",
+        "scoreq_mos": 4.207
+      },
+      {
+        "file": "sent_140",
+        "scoreq_mos": 3.577
+      },
+      {
+        "file": "sent_141",
+        "scoreq_mos": 3.691
+      },
+      {
+        "file": "sent_142",
+        "scoreq_mos": 3.962
+      },
+      {
+        "file": "sent_143",
+        "scoreq_mos": 4.39
+      },
+      {
+        "file": "sent_144",
+        "scoreq_mos": 4.113
+      },
+      {
+        "file": "sent_145",
+        "scoreq_mos": 3.941
+      },
+      {
+        "file": "sent_146",
+        "scoreq_mos": 4.12
+      },
+      {
+        "file": "sent_147",
+        "scoreq_mos": 2.556
+      },
+      {
+        "file": "sent_148",
+        "scoreq_mos": 2.517
+      },
+      {
+        "file": "sent_149",
+        "scoreq_mos": 3.774
+      },
+      {
+        "file": "sent_150",
+        "scoreq_mos": 3.748
+      },
+      {
+        "file": "sent_151",
+        "scoreq_mos": 3.933
+      },
+      {
+        "file": "sent_152",
+        "scoreq_mos": 3.998
+      },
+      {
+        "file": "sent_153",
+        "scoreq_mos": 3.64
+      },
+      {
+        "file": "sent_154",
+        "scoreq_mos": 3.631
+      },
+      {
+        "file": "sent_155",
+        "scoreq_mos": 3.413
+      },
+      {
+        "file": "sent_156",
+        "scoreq_mos": 3.169
+      },
+      {
+        "file": "sent_157",
+        "scoreq_mos": 3.413
+      },
+      {
+        "file": "sent_158",
+        "scoreq_mos": 3.242
+      },
+      {
+        "file": "sent_159",
+        "scoreq_mos": 3.069
+      },
+      {
+        "file": "sent_160",
+        "scoreq_mos": 3.695
+      },
+      {
+        "file": "sent_161",
+        "scoreq_mos": 4.065
+      },
+      {
+        "file": "sent_162",
+        "scoreq_mos": 3.485
+      },
+      {
+        "file": "sent_163",
+        "scoreq_mos": 3.196
+      },
+      {
+        "file": "sent_164",
+        "scoreq_mos": 4.026
+      },
+      {
+        "file": "sent_165",
+        "scoreq_mos": 3.577
+      },
+      {
+        "file": "sent_166",
+        "scoreq_mos": 3.829
+      },
+      {
+        "file": "sent_167",
+        "scoreq_mos": 3.927
+      },
+      {
+        "file": "sent_168",
+        "scoreq_mos": 4.02
+      },
+      {
+        "file": "sent_169",
+        "scoreq_mos": 3.746
+      },
+      {
+        "file": "sent_170",
+        "scoreq_mos": 3.809
+      },
+      {
+        "file": "sent_171",
+        "scoreq_mos": 3.884
+      },
+      {
+        "file": "sent_172",
+        "scoreq_mos": 3.841
+      },
+      {
+        "file": "sent_173",
+        "scoreq_mos": 3.503
+      },
+      {
+        "file": "sent_174",
+        "scoreq_mos": 3.677
+      }
+    ],
+    "avg_mos": 3.737,
+    "n_scored": 164,
+    "n_errors": 0
+  },
+  "edge_tts/sagar": {
+    "scores": [
+      {
+        "file": "sent_001",
+        "scoreq_mos": 3.714
+      },
+      {
+        "file": "sent_002",
+        "scoreq_mos": 4.197
+      },
+      {
+        "file": "sent_003",
+        "scoreq_mos": 3.735
+      },
+      {
+        "file": "sent_004",
+        "scoreq_mos": 3.588
+      },
+      {
+        "file": "sent_005",
+        "scoreq_mos": 3.805
+      },
+      {
+        "file": "sent_006",
+        "scoreq_mos": 3.706
+      },
+      {
+        "file": "sent_007",
+        "scoreq_mos": 3.564
+      },
+      {
+        "file": "sent_008",
+        "scoreq_mos": 3.292
+      },
+      {
+        "file": "sent_009",
+        "scoreq_mos": 3.951
+      },
+      {
+        "file": "sent_010",
+        "scoreq_mos": 3.706
+      },
+      {
+        "file": "sent_011",
+        "scoreq_mos": 3.463
+      },
+      {
+        "file": "sent_012",
+        "scoreq_mos": 3.776
+      },
+      {
+        "file": "sent_013",
+        "scoreq_mos": 3.545
+      },
+      {
+        "file": "sent_014",
+        "scoreq_mos": 4.094
+      },
+      {
+        "file": "sent_015",
+        "scoreq_mos": 2.911
+      },
+      {
+        "file": "sent_016",
+        "scoreq_mos": 4.03
+      },
+      {
+        "file": "sent_017",
+        "scoreq_mos": 3.985
+      },
+      {
+        "file": "sent_018",
+        "scoreq_mos": 3.618
+      },
+      {
+        "file": "sent_019",
+        "scoreq_mos": 3.785
+      },
+      {
+        "file": "sent_020",
+        "scoreq_mos": 3.475
+      },
+      {
+        "file": "sent_021",
+        "scoreq_mos": 3.376
+      },
+      {
+        "file": "sent_022",
+        "scoreq_mos": 3.74
+      },
+      {
+        "file": "sent_023",
+        "scoreq_mos": 3.662
+      },
+      {
+        "file": "sent_024",
+        "scoreq_mos": 3.111
+      },
+      {
+        "file": "sent_025",
+        "scoreq_mos": 3.278
+      },
+      {
+        "file": "sent_026",
+        "scoreq_mos": 2.977
+      },
+      {
+        "file": "sent_027",
+        "scoreq_mos": 3.528
+      },
+      {
+        "file": "sent_028",
+        "scoreq_mos": 3.919
+      },
+      {
+        "file": "sent_029",
+        "scoreq_mos": 3.855
+      },
+      {
+        "file": "sent_030",
+        "scoreq_mos": 3.635
+      },
+      {
+        "file": "sent_031",
+        "scoreq_mos": 2.977
+      },
+      {
+        "file": "sent_032",
+        "scoreq_mos": 2.763
+      },
+      {
+        "file": "sent_033",
+        "scoreq_mos": 3.78
+      },
+      {
+        "file": "sent_034",
+        "scoreq_mos": 3.271
+      },
+      {
+        "file": "sent_035",
+        "scoreq_mos": 4.248
+      },
+      {
+        "file": "sent_036",
+        "scoreq_mos": 3.437
+      },
+      {
+        "file": "sent_037",
+        "scoreq_mos": 3.703
+      },
+      {
+        "file": "sent_038",
+        "scoreq_mos": 3.873
+      },
+      {
+        "file": "sent_039",
+        "scoreq_mos": 3.746
+      },
+      {
+        "file": "sent_040",
+        "scoreq_mos": 3.764
+      },
+      {
+        "file": "sent_041",
+        "scoreq_mos": 3.842
+      },
+      {
+        "file": "sent_042",
+        "scoreq_mos": 3.217
+      },
+      {
+        "file": "sent_043",
+        "scoreq_mos": 2.822
+      },
+      {
+        "file": "sent_044",
+        "scoreq_mos": 3.638
+      },
+      {
+        "file": "sent_045",
+        "scoreq_mos": 3.356
+      },
+      {
+        "file": "sent_046",
+        "scoreq_mos": 3.791
+      },
+      {
+        "file": "sent_047",
+        "scoreq_mos": 3.469
+      },
+      {
+        "file": "sent_048",
+        "scoreq_mos": 3.609
+      },
+      {
+        "file": "sent_049",
+        "scoreq_mos": 3.951
+      },
+      {
+        "file": "sent_050",
+        "scoreq_mos": 3.732
+      },
+      {
+        "file": "sent_051",
+        "scoreq_mos": 3.895
+      },
+      {
+        "file": "sent_052",
+        "scoreq_mos": 3.623
+      },
+      {
+        "file": "sent_053",
+        "scoreq_mos": 3.677
+      },
+      {
+        "file": "sent_054",
+        "scoreq_mos": 4.04
+      },
+      {
+        "file": "sent_055",
+        "scoreq_mos": 3.966
+      },
+      {
+        "file": "sent_056",
+        "scoreq_mos": 3.457
+      },
+      {
+        "file": "sent_057",
+        "scoreq_mos": 3.686
+      },
+      {
+        "file": "sent_058",
+        "scoreq_mos": 4.087
+      },
+      {
+        "file": "sent_059",
+        "scoreq_mos": 3.131
+      },
+      {
+        "file": "sent_060",
+        "scoreq_mos": 3.543
+      },
+      {
+        "file": "sent_061",
+        "scoreq_mos": 2.813
+      },
+      {
+        "file": "sent_062",
+        "scoreq_mos": 3.663
+      },
+      {
+        "file": "sent_063",
+        "scoreq_mos": 3.231
+      },
+      {
+        "file": "sent_064",
+        "scoreq_mos": 3.664
+      },
+      {
+        "file": "sent_065",
+        "scoreq_mos": 3.646
+      },
+      {
+        "file": "sent_066",
+        "scoreq_mos": 3.24
+      },
+      {
+        "file": "sent_067",
+        "scoreq_mos": 3.911
+      },
+      {
+        "file": "sent_068",
+        "scoreq_mos": 3.85
+      },
+      {
+        "file": "sent_069",
+        "scoreq_mos": 4.192
+      },
+      {
+        "file": "sent_070",
+        "scoreq_mos": 3.708
+      },
+      {
+        "file": "sent_071",
+        "scoreq_mos": 3.707
+      },
+      {
+        "file": "sent_072",
+        "scoreq_mos": 3.657
+      },
+      {
+        "file": "sent_073",
+        "scoreq_mos": 4.115
+      },
+      {
+        "file": "sent_074",
+        "scoreq_mos": 3.229
+      },
+      {
+        "file": "sent_075",
+        "scoreq_mos": 3.941
+      },
+      {
+        "file": "sent_076",
+        "scoreq_mos": 3.934
+      },
+      {
+        "file": "sent_077",
+        "scoreq_mos": 3.69
+      },
+      {
+        "file": "sent_078",
+        "scoreq_mos": 3.674
+      },
+      {
+        "file": "sent_079",
+        "scoreq_mos": 3.051
+      },
+      {
+        "file": "sent_080",
+        "scoreq_mos": 4.023
+      },
+      {
+        "file": "sent_081",
+        "scoreq_mos": 3.826
+      },
+      {
+        "file": "sent_082",
+        "scoreq_mos": 3.451
+      },
+      {
+        "file": "sent_083",
+        "scoreq_mos": 4.257
+      },
+      {
+        "file": "sent_084",
+        "scoreq_mos": 4.282
+      },
+      {
+        "file": "sent_085",
+        "scoreq_mos": 3.403
+      },
+      {
+        "file": "sent_086",
+        "scoreq_mos": 3.784
+      },
+      {
+        "file": "sent_087",
+        "scoreq_mos": 3.435
+      },
+      {
+        "file": "sent_088",
+        "scoreq_mos": 2.972
+      },
+      {
+        "file": "sent_089",
+        "scoreq_mos": 3.722
+      },
+      {
+        "file": "sent_090",
+        "scoreq_mos": 2.848
+      },
+      {
+        "file": "sent_091",
+        "scoreq_mos": 3.583
+      },
+      {
+        "file": "sent_092",
+        "scoreq_mos": 3.417
+      },
+      {
+        "file": "sent_093",
+        "scoreq_mos": 3.785
+      },
+      {
+        "file": "sent_094",
+        "scoreq_mos": 3.612
+      },
+      {
+        "file": "sent_095",
+        "scoreq_mos": 3.877
+      },
+      {
+        "file": "sent_096",
+        "scoreq_mos": 3.68
+      },
+      {
+        "file": "sent_097",
+        "scoreq_mos": 3.218
+      },
+      {
+        "file": "sent_098",
+        "scoreq_mos": 4.103
+      },
+      {
+        "file": "sent_099",
+        "scoreq_mos": 3.225
+      },
+      {
+        "file": "sent_100",
+        "scoreq_mos": 4.1
+      },
+      {
+        "file": "sent_101",
+        "scoreq_mos": 3.736
+      },
+      {
+        "file": "sent_102",
+        "scoreq_mos": 4.045
+      },
+      {
+        "file": "sent_103",
+        "scoreq_mos": 3.982
+      },
+      {
+        "file": "sent_104",
+        "scoreq_mos": 3.879
+      },
+      {
+        "file": "sent_105",
+        "scoreq_mos": 3.824
+      },
+      {
+        "file": "sent_106",
+        "scoreq_mos": 3.901
+      },
+      {
+        "file": "sent_107",
+        "scoreq_mos": 3.866
+      },
+      {
+        "file": "sent_108",
+        "scoreq_mos": 4.032
+      },
+      {
+        "file": "sent_109",
+        "scoreq_mos": 4.083
+      },
+      {
+        "file": "sent_110",
+        "scoreq_mos": 3.497
+      },
+      {
+        "file": "sent_111",
+        "scoreq_mos": 3.338
+      },
+      {
+        "file": "sent_112",
+        "scoreq_mos": 3.793
+      },
+      {
+        "file": "sent_113",
+        "scoreq_mos": 3.307
+      },
+      {
+        "file": "sent_114",
+        "scoreq_mos": 3.973
+      },
+      {
+        "file": "sent_115",
+        "scoreq_mos": 4.0
+      },
+      {
+        "file": "sent_116",
+        "scoreq_mos": 3.604
+      },
+      {
+        "file": "sent_117",
+        "scoreq_mos": 3.533
+      },
+      {
+        "file": "sent_118",
+        "scoreq_mos": 3.785
+      },
+      {
+        "file": "sent_119",
+        "scoreq_mos": 3.495
+      },
+      {
+        "file": "sent_120",
+        "scoreq_mos": 3.642
+      },
+      {
+        "file": "sent_121",
+        "scoreq_mos": 4.054
+      },
+      {
+        "file": "sent_122",
+        "scoreq_mos": 3.86
+      },
+      {
+        "file": "sent_123",
+        "scoreq_mos": 2.013
+      },
+      {
+        "file": "sent_124",
+        "scoreq_mos": 3.284
+      },
+      {
+        "file": "sent_125",
+        "scoreq_mos": 3.554
+      },
+      {
+        "file": "sent_126",
+        "scoreq_mos": 3.726
+      },
+      {
+        "file": "sent_137",
+        "scoreq_mos": 3.38
+      },
+      {
+        "file": "sent_138",
+        "scoreq_mos": 3.629
+      },
+      {
+        "file": "sent_139",
+        "scoreq_mos": 4.104
+      },
+      {
+        "file": "sent_140",
+        "scoreq_mos": 3.629
+      },
+      {
+        "file": "sent_141",
+        "scoreq_mos": 3.99
+      },
+      {
+        "file": "sent_142",
+        "scoreq_mos": 4.122
+      },
+      {
+        "file": "sent_143",
+        "scoreq_mos": 4.016
+      },
+      {
+        "file": "sent_144",
+        "scoreq_mos": 3.534
+      },
+      {
+        "file": "sent_145",
+        "scoreq_mos": 3.714
+      },
+      {
+        "file": "sent_146",
+        "scoreq_mos": 4.04
+      },
+      {
+        "file": "sent_147",
+        "scoreq_mos": 3.323
+      },
+      {
+        "file": "sent_148",
+        "scoreq_mos": 1.523
+      },
+      {
+        "file": "sent_149",
+        "scoreq_mos": 2.817
+      },
+      {
+        "file": "sent_150",
+        "scoreq_mos": 3.791
+      },
+      {
+        "file": "sent_151",
+        "scoreq_mos": 3.759
+      },
+      {
+        "file": "sent_152",
+        "scoreq_mos": 4.23
+      },
+      {
+        "file": "sent_153",
+        "scoreq_mos": 3.478
+      },
+      {
+        "file": "sent_154",
+        "scoreq_mos": 3.725
+      },
+      {
+        "file": "sent_155",
+        "scoreq_mos": 3.57
+      },
+      {
+        "file": "sent_156",
+        "scoreq_mos": 3.241
+      },
+      {
+        "file": "sent_157",
+        "scoreq_mos": 3.57
+      },
+      {
+        "file": "sent_158",
+        "scoreq_mos": 2.986
+      },
+      {
+        "file": "sent_159",
+        "scoreq_mos": 3.896
+      },
+      {
+        "file": "sent_160",
+        "scoreq_mos": 3.78
+      },
+      {
+        "file": "sent_161",
+        "scoreq_mos": 2.699
+      },
+      {
+        "file": "sent_162",
+        "scoreq_mos": 3.902
+      },
+      {
+        "file": "sent_163",
+        "scoreq_mos": 3.573
+      },
+      {
+        "file": "sent_164",
+        "scoreq_mos": 4.157
+      },
+      {
+        "file": "sent_165",
+        "scoreq_mos": 3.417
+      },
+      {
+        "file": "sent_166",
+        "scoreq_mos": 3.824
+      },
+      {
+        "file": "sent_167",
+        "scoreq_mos": 3.855
+      },
+      {
+        "file": "sent_168",
+        "scoreq_mos": 3.632
+      },
+      {
+        "file": "sent_169",
+        "scoreq_mos": 3.648
+      },
+      {
+        "file": "sent_170",
+        "scoreq_mos": 3.779
+      },
+      {
+        "file": "sent_171",
+        "scoreq_mos": 3.438
+      },
+      {
+        "file": "sent_172",
+        "scoreq_mos": 3.655
+      },
+      {
+        "file": "sent_173",
+        "scoreq_mos": 3.585
+      },
+      {
+        "file": "sent_174",
+        "scoreq_mos": 3.445
+      }
+    ],
+    "avg_mos": 3.627,
+    "n_scored": 164,
+    "n_errors": 0
+  },
+  "elevenlabs": {
+    "scores": [
+      {
+        "file": "sent_001",
+        "scoreq_mos": 4.213
+      },
+      {
+        "file": "sent_002",
+        "scoreq_mos": 4.844
+      },
+      {
+        "file": "sent_003",
+        "scoreq_mos": 4.241
+      },
+      {
+        "file": "sent_004",
+        "scoreq_mos": 4.939
+      },
+      {
+        "file": "sent_005",
+        "scoreq_mos": 4.784
+      },
+      {
+        "file": "sent_006",
+        "scoreq_mos": 4.926
+      },
+      {
+        "file": "sent_007",
+        "scoreq_mos": 4.575
+      },
+      {
+        "file": "sent_008",
+        "scoreq_mos": 4.24
+      },
+      {
+        "file": "sent_009",
+        "scoreq_mos": 4.879
+      },
+      {
+        "file": "sent_010",
+        "scoreq_mos": 4.618
+      },
+      {
+        "file": "sent_011",
+        "scoreq_mos": 4.528
+      },
+      {
+        "file": "sent_012",
+        "scoreq_mos": 4.726
+      },
+      {
+        "file": "sent_013",
+        "scoreq_mos": 3.352
+      },
+      {
+        "file": "sent_014",
+        "scoreq_mos": 4.617
+      },
+      {
+        "file": "sent_015",
+        "scoreq_mos": 4.249
+      },
+      {
+        "file": "sent_016",
+        "scoreq_mos": 4.517
+      },
+      {
+        "file": "sent_017",
+        "scoreq_mos": 4.637
+      },
+      {
+        "file": "sent_018",
+        "scoreq_mos": 4.989
+      },
+      {
+        "file": "sent_019",
+        "scoreq_mos": 4.332
+      },
+      {
+        "file": "sent_020",
+        "scoreq_mos": 4.127
+      },
+      {
+        "file": "sent_021",
+        "scoreq_mos": 4.559
+      },
+      {
+        "file": "sent_022",
+        "scoreq_mos": 4.285
+      },
+      {
+        "file": "sent_023",
+        "scoreq_mos": 4.414
+      },
+      {
+        "file": "sent_024",
+        "scoreq_mos": 4.144
+      },
+      {
+        "file": "sent_025",
+        "scoreq_mos": 4.295
+      },
+      {
+        "file": "sent_026",
+        "scoreq_mos": 4.197
+      },
+      {
+        "file": "sent_027",
+        "scoreq_mos": 4.472
+      },
+      {
+        "file": "sent_028",
+        "scoreq_mos": 4.448
+      },
+      {
+        "file": "sent_029",
+        "scoreq_mos": 4.809
+      },
+      {
+        "file": "sent_030",
+        "scoreq_mos": 4.63
+      },
+      {
+        "file": "sent_031",
+        "scoreq_mos": 4.638
+      },
+      {
+        "file": "sent_032",
+        "scoreq_mos": 4.354
+      },
+      {
+        "file": "sent_033",
+        "scoreq_mos": 4.475
+      },
+      {
+        "file": "sent_034",
+        "scoreq_mos": 3.961
+      },
+      {
+        "file": "sent_035",
+        "scoreq_mos": 4.492
+      },
+      {
+        "file": "sent_036",
+        "scoreq_mos": 4.689
+      },
+      {
+        "file": "sent_037",
+        "scoreq_mos": 4.855
+      },
+      {
+        "file": "sent_038",
+        "scoreq_mos": 4.492
+      },
+      {
+        "file": "sent_039",
+        "scoreq_mos": 4.663
+      },
+      {
+        "file": "sent_040",
+        "scoreq_mos": 4.629
+      },
+      {
+        "file": "sent_041",
+        "scoreq_mos": 4.241
+      },
+      {
+        "file": "sent_042",
+        "scoreq_mos": 4.613
+      },
+      {
+        "file": "sent_043",
+        "scoreq_mos": 4.029
+      },
+      {
+        "file": "sent_044",
+        "scoreq_mos": 4.086
+      },
+      {
+        "file": "sent_045",
+        "scoreq_mos": 4.721
+      },
+      {
+        "file": "sent_046",
+        "scoreq_mos": 4.811
+      },
+      {
+        "file": "sent_047",
+        "scoreq_mos": 4.969
+      },
+      {
+        "file": "sent_048",
+        "scoreq_mos": 4.433
+      },
+      {
+        "file": "sent_049",
+        "scoreq_mos": 4.999
+      },
+      {
+        "file": "sent_050",
+        "scoreq_mos": 4.62
+      },
+      {
+        "file": "sent_051",
+        "scoreq_mos": 4.252
+      },
+      {
+        "file": "sent_052",
+        "scoreq_mos": 4.286
+      },
+      {
+        "file": "sent_053",
+        "scoreq_mos": 4.39
+      },
+      {
+        "file": "sent_054",
+        "scoreq_mos": 4.49
+      },
+      {
+        "file": "sent_055",
+        "scoreq_mos": 4.582
+      },
+      {
+        "file": "sent_056",
+        "scoreq_mos": 4.111
+      },
+      {
+        "file": "sent_057",
+        "scoreq_mos": 4.832
+      },
+      {
+        "file": "sent_058",
+        "scoreq_mos": 4.568
+      },
+      {
+        "file": "sent_059",
+        "scoreq_mos": 4.06
+      },
+      {
+        "file": "sent_060",
+        "scoreq_mos": 4.283
+      },
+      {
+        "file": "sent_061",
+        "scoreq_mos": 4.158
+      },
+      {
+        "file": "sent_062",
+        "scoreq_mos": 4.781
+      },
+      {
+        "file": "sent_063",
+        "scoreq_mos": 4.158
+      },
+      {
+        "file": "sent_064",
+        "scoreq_mos": 3.389
+      },
+      {
+        "file": "sent_065",
+        "scoreq_mos": 4.562
+      },
+      {
+        "file": "sent_066",
+        "scoreq_mos": 4.294
+      },
+      {
+        "file": "sent_067",
+        "scoreq_mos": 4.334
+      },
+      {
+        "file": "sent_068",
+        "scoreq_mos": 4.473
+      },
+      {
+        "file": "sent_069",
+        "scoreq_mos": 4.973
+      },
+      {
+        "file": "sent_070",
+        "scoreq_mos": 4.19
+      },
+      {
+        "file": "sent_071",
+        "scoreq_mos": 4.676
+      },
+      {
+        "file": "sent_072",
+        "scoreq_mos": 4.241
+      },
+      {
+        "file": "sent_073",
+        "scoreq_mos": 4.931
+      },
+      {
+        "file": "sent_074",
+        "scoreq_mos": 4.017
+      },
+      {
+        "file": "sent_075",
+        "scoreq_mos": 4.616
+      },
+      {
+        "file": "sent_076",
+        "scoreq_mos": 4.306
+      },
+      {
+        "file": "sent_077",
+        "scoreq_mos": 4.883
+      },
+      {
+        "file": "sent_078",
+        "scoreq_mos": 4.423
+      },
+      {
+        "file": "sent_079",
+        "scoreq_mos": 4.067
+      },
+      {
+        "file": "sent_080",
+        "scoreq_mos": 4.86
+      },
+      {
+        "file": "sent_081",
+        "scoreq_mos": 4.311
+      },
+      {
+        "file": "sent_082",
+        "scoreq_mos": 4.515
+      },
+      {
+        "file": "sent_083",
+        "scoreq_mos": 4.187
+      },
+      {
+        "file": "sent_084",
+        "scoreq_mos": 4.909
+      },
+      {
+        "file": "sent_085",
+        "scoreq_mos": 4.681
+      },
+      {
+        "file": "sent_086",
+        "scoreq_mos": 4.657
+      },
+      {
+        "file": "sent_087",
+        "scoreq_mos": 4.126
+      },
+      {
+        "file": "sent_088",
+        "scoreq_mos": 4.28
+      },
+      {
+        "file": "sent_089",
+        "scoreq_mos": 4.059
+      },
+      {
+        "file": "sent_090",
+        "scoreq_mos": 4.211
+      },
+      {
+        "file": "sent_091",
+        "scoreq_mos": 4.484
+      },
+      {
+        "file": "sent_092",
+        "scoreq_mos": 4.085
+      },
+      {
+        "file": "sent_093",
+        "scoreq_mos": 4.564
+      },
+      {
+        "file": "sent_094",
+        "scoreq_mos": 4.799
+      },
+      {
+        "file": "sent_095",
+        "scoreq_mos": 4.562
+      },
+      {
+        "file": "sent_096",
+        "scoreq_mos": 4.793
+      },
+      {
+        "file": "sent_097",
+        "scoreq_mos": 4.351
+      },
+      {
+        "file": "sent_098",
+        "scoreq_mos": 4.892
+      },
+      {
+        "file": "sent_099",
+        "scoreq_mos": 4.388
+      },
+      {
+        "file": "sent_100",
+        "scoreq_mos": 4.003
+      },
+      {
+        "file": "sent_101",
+        "scoreq_mos": 4.375
+      },
+      {
+        "file": "sent_102",
+        "scoreq_mos": 4.646
+      },
+      {
+        "file": "sent_103",
+        "scoreq_mos": 4.49
+      },
+      {
+        "file": "sent_104",
+        "scoreq_mos": 4.278
+      },
+      {
+        "file": "sent_105",
+        "scoreq_mos": 4.545
+      },
+      {
+        "file": "sent_106",
+        "scoreq_mos": 4.543
+      },
+      {
+        "file": "sent_107",
+        "scoreq_mos": 4.753
+      },
+      {
+        "file": "sent_108",
+        "scoreq_mos": 4.719
+      },
+      {
+        "file": "sent_109",
+        "scoreq_mos": 4.404
+      },
+      {
+        "file": "sent_110",
+        "scoreq_mos": 4.322
+      },
+      {
+        "file": "sent_111",
+        "scoreq_mos": 4.658
+      },
+      {
+        "file": "sent_112",
+        "scoreq_mos": 5.081
+      },
+      {
+        "file": "sent_113",
+        "scoreq_mos": 3.403
+      },
+      {
+        "file": "sent_114",
+        "scoreq_mos": 4.877
+      },
+      {
+        "file": "sent_115",
+        "scoreq_mos": 4.486
+      },
+      {
+        "file": "sent_116",
+        "scoreq_mos": 4.414
+      },
+      {
+        "file": "sent_117",
+        "scoreq_mos": 4.437
+      },
+      {
+        "file": "sent_118",
+        "scoreq_mos": 4.159
+      },
+      {
+        "file": "sent_119",
+        "scoreq_mos": 4.471
+      },
+      {
+        "file": "sent_120",
+        "scoreq_mos": 4.683
+      },
+      {
+        "file": "sent_121",
+        "scoreq_mos": 4.55
+      },
+      {
+        "file": "sent_122",
+        "scoreq_mos": 4.413
+      },
+      {
+        "file": "sent_123",
+        "scoreq_mos": 3.484
+      },
+      {
+        "file": "sent_124",
+        "scoreq_mos": 4.44
+      },
+      {
+        "file": "sent_125",
+        "scoreq_mos": 4.606
+      },
+      {
+        "file": "sent_126",
+        "scoreq_mos": 4.244
+      },
+      {
+        "file": "sent_137",
+        "scoreq_mos": 4.098
+      },
+      {
+        "file": "sent_138",
+        "scoreq_mos": 4.497
+      },
+      {
+        "file": "sent_139",
+        "scoreq_mos": 4.837
+      },
+      {
+        "file": "sent_140",
+        "scoreq_mos": 4.605
+      },
+      {
+        "file": "sent_141",
+        "scoreq_mos": 4.789
+      },
+      {
+        "file": "sent_142",
+        "scoreq_mos": 4.534
+      },
+      {
+        "file": "sent_143",
+        "scoreq_mos": 4.944
+      },
+      {
+        "file": "sent_144",
+        "scoreq_mos": 4.561
+      },
+      {
+        "file": "sent_145",
+        "scoreq_mos": 3.998
+      },
+      {
+        "file": "sent_146",
+        "scoreq_mos": 5.083
+      },
+      {
+        "file": "sent_147",
+        "scoreq_mos": 3.451
+      },
+      {
+        "file": "sent_149",
+        "scoreq_mos": 3.749
+      },
+      {
+        "file": "sent_150",
+        "scoreq_mos": 4.278
+      },
+      {
+        "file": "sent_151",
+        "scoreq_mos": 5.047
+      },
+      {
+        "file": "sent_152",
+        "scoreq_mos": 4.636
+      },
+      {
+        "file": "sent_153",
+        "scoreq_mos": 3.901
+      },
+      {
+        "file": "sent_154",
+        "scoreq_mos": 4.333
+      },
+      {
+        "file": "sent_155",
+        "scoreq_mos": 4.381
+      },
+      {
+        "file": "sent_156",
+        "scoreq_mos": 4.848
+      },
+      {
+        "file": "sent_157",
+        "scoreq_mos": 4.2
+      },
+      {
+        "file": "sent_158",
+        "scoreq_mos": 4.079
+      },
+      {
+        "file": "sent_159",
+        "scoreq_mos": 4.364
+      },
+      {
+        "file": "sent_160",
+        "scoreq_mos": 3.932
+      },
+      {
+        "file": "sent_161",
+        "scoreq_mos": 3.43
+      },
+      {
+        "file": "sent_162",
+        "scoreq_mos": 4.322
+      },
+      {
+        "file": "sent_163",
+        "scoreq_mos": 4.632
+      },
+      {
+        "file": "sent_164",
+        "scoreq_mos": 4.46
+      },
+      {
+        "file": "sent_165",
+        "scoreq_mos": 4.517
+      },
+      {
+        "file": "sent_166",
+        "scoreq_mos": 4.958
+      },
+      {
+        "file": "sent_167",
+        "scoreq_mos": 4.643
+      },
+      {
+        "file": "sent_168",
+        "scoreq_mos": 4.681
+      },
+      {
+        "file": "sent_169",
+        "scoreq_mos": 4.209
+      },
+      {
+        "file": "sent_170",
+        "scoreq_mos": 4.414
+      },
+      {
+        "file": "sent_171",
+        "scoreq_mos": 4.141
+      },
+      {
+        "file": "sent_172",
+        "scoreq_mos": 3.973
+      },
+      {
+        "file": "sent_173",
+        "scoreq_mos": 4.086
+      },
+      {
+        "file": "sent_174",
+        "scoreq_mos": 4.061
+      },
+      {
+        "file": "sent_175",
+        "scoreq_mos": 4.613
+      },
+      {
+        "file": "sent_176",
+        "scoreq_mos": 4.157
+      },
+      {
+        "file": "sent_177",
+        "scoreq_mos": 4.396
+      },
+      {
+        "file": "sent_178",
+        "scoreq_mos": 5.0
+      },
+      {
+        "file": "sent_179",
+        "scoreq_mos": 3.981
+      },
+      {
+        "file": "sent_180",
+        "scoreq_mos": 3.88
+      },
+      {
+        "file": "sent_181",
+        "scoreq_mos": 4.182
+      },
+      {
+        "file": "sent_182",
+        "scoreq_mos": 4.193
+      },
+      {
+        "file": "sent_183",
+        "scoreq_mos": 4.639
+      },
+      {
+        "file": "sent_184",
+        "scoreq_mos": 4.291
+      },
+      {
+        "file": "sent_185",
+        "scoreq_mos": 4.703
+      },
+      {
+        "file": "sent_186",
+        "scoreq_mos": 4.451
+      },
+      {
+        "file": "sent_187",
+        "scoreq_mos": 4.889
+      },
+      {
+        "file": "sent_188",
+        "scoreq_mos": 4.584
+      },
+      {
+        "file": "sent_189",
+        "scoreq_mos": 4.041
+      },
+      {
+        "file": "sent_190",
+        "scoreq_mos": 4.419
+      },
+      {
+        "file": "sent_191",
+        "scoreq_mos": 4.664
+      },
+      {
+        "file": "sent_192",
+        "scoreq_mos": 4.655
+      },
+      {
+        "file": "sent_193",
+        "scoreq_mos": 4.56
+      },
+      {
+        "file": "sent_194",
+        "scoreq_mos": 4.578
+      },
+      {
+        "file": "sent_195",
+        "scoreq_mos": 4.15
+      },
+      {
+        "file": "sent_196",
+        "scoreq_mos": 4.534
+      },
+      {
+        "file": "sent_197",
+        "scoreq_mos": 4.952
+      },
+      {
+        "file": "sent_198",
+        "scoreq_mos": 4.619
+      },
+      {
+        "file": "sent_199",
+        "scoreq_mos": 4.494
+      },
+      {
+        "file": "sent_200",
+        "scoreq_mos": 4.737
+      },
+      {
+        "file": "sent_201",
+        "scoreq_mos": 4.328
+      },
+      {
+        "file": "sent_202",
+        "scoreq_mos": 4.721
+      },
+      {
+        "file": "sent_203",
+        "scoreq_mos": 4.996
+      }
+    ],
+    "avg_mos": 4.448,
+    "n_scored": 192,
+    "n_errors": 1
+  },
+  "gemini": {
+    "scores": [
+      {
+        "file": "sent_001",
+        "scoreq_mos": 3.268
+      },
+      {
+        "file": "sent_002",
+        "scoreq_mos": 3.564
+      },
+      {
+        "file": "sent_003",
+        "scoreq_mos": 3.793
+      },
+      {
+        "file": "sent_004",
+        "scoreq_mos": 4.505
+      },
+      {
+        "file": "sent_005",
+        "scoreq_mos": 3.772
+      },
+      {
+        "file": "sent_006",
+        "scoreq_mos": 4.728
+      },
+      {
+        "file": "sent_007",
+        "scoreq_mos": 4.121
+      },
+      {
+        "file": "sent_008",
+        "scoreq_mos": 3.868
+      },
+      {
+        "file": "sent_009",
+        "scoreq_mos": 3.989
+      },
+      {
+        "file": "sent_010",
+        "scoreq_mos": 4.568
+      },
+      {
+        "file": "sent_011",
+        "scoreq_mos": 4.129
+      },
+      {
+        "file": "sent_012",
+        "scoreq_mos": 4.379
+      },
+      {
+        "file": "sent_013",
+        "scoreq_mos": 4.291
+      },
+      {
+        "file": "sent_014",
+        "scoreq_mos": 4.65
+      },
+      {
+        "file": "sent_015",
+        "scoreq_mos": 4.704
+      },
+      {
+        "file": "sent_016",
+        "scoreq_mos": 4.426
+      },
+      {
+        "file": "sent_017",
+        "scoreq_mos": 3.687
+      },
+      {
+        "file": "sent_018",
+        "scoreq_mos": 3.769
+      },
+      {
+        "file": "sent_019",
+        "scoreq_mos": 4.147
+      },
+      {
+        "file": "sent_020",
+        "scoreq_mos": 4.035
+      },
+      {
+        "file": "sent_021",
+        "scoreq_mos": 3.683
+      },
+      {
+        "file": "sent_022",
+        "scoreq_mos": 4.408
+      },
+      {
+        "file": "sent_023",
+        "scoreq_mos": 4.411
+      },
+      {
+        "file": "sent_024",
+        "scoreq_mos": 3.53
+      },
+      {
+        "file": "sent_025",
+        "scoreq_mos": 4.049
+      },
+      {
+        "file": "sent_026",
+        "scoreq_mos": 3.188
+      },
+      {
+        "file": "sent_027",
+        "scoreq_mos": 4.089
+      },
+      {
+        "file": "sent_028",
+        "scoreq_mos": 3.301
+      },
+      {
+        "file": "sent_029",
+        "scoreq_mos": 3.746
+      },
+      {
+        "file": "sent_030",
+        "scoreq_mos": 3.712
+      },
+      {
+        "file": "sent_031",
+        "scoreq_mos": 4.269
+      },
+      {
+        "file": "sent_032",
+        "scoreq_mos": 3.813
+      },
+      {
+        "file": "sent_033",
+        "scoreq_mos": 3.906
+      },
+      {
+        "file": "sent_034",
+        "scoreq_mos": 3.56
+      },
+      {
+        "file": "sent_035",
+        "scoreq_mos": 4.037
+      },
+      {
+        "file": "sent_036",
+        "scoreq_mos": 4.055
+      },
+      {
+        "file": "sent_037",
+        "scoreq_mos": 4.475
+      },
+      {
+        "file": "sent_038",
+        "scoreq_mos": 4.22
+      },
+      {
+        "file": "sent_039",
+        "scoreq_mos": 4.296
+      },
+      {
+        "file": "sent_040",
+        "scoreq_mos": 3.974
+      },
+      {
+        "file": "sent_041",
+        "scoreq_mos": 3.395
+      },
+      {
+        "file": "sent_042",
+        "scoreq_mos": 3.968
+      },
+      {
+        "file": "sent_043",
+        "scoreq_mos": 3.64
+      },
+      {
+        "file": "sent_044",
+        "scoreq_mos": 4.379
+      },
+      {
+        "file": "sent_045",
+        "scoreq_mos": 4.072
+      },
+      {
+        "file": "sent_046",
+        "scoreq_mos": 4.481
+      },
+      {
+        "file": "sent_047",
+        "scoreq_mos": 4.414
+      },
+      {
+        "file": "sent_048",
+        "scoreq_mos": 4.239
+      },
+      {
+        "file": "sent_049",
+        "scoreq_mos": 4.336
+      },
+      {
+        "file": "sent_050",
+        "scoreq_mos": 4.237
+      },
+      {
+        "file": "sent_051",
+        "scoreq_mos": 4.196
+      },
+      {
+        "file": "sent_052",
+        "scoreq_mos": 3.933
+      },
+      {
+        "file": "sent_053",
+        "scoreq_mos": 4.074
+      },
+      {
+        "file": "sent_054",
+        "scoreq_mos": 4.518
+      },
+      {
+        "file": "sent_055",
+        "scoreq_mos": 4.704
+      },
+      {
+        "file": "sent_056",
+        "scoreq_mos": 3.963
+      },
+      {
+        "file": "sent_057",
+        "scoreq_mos": 4.19
+      },
+      {
+        "file": "sent_058",
+        "scoreq_mos": 4.141
+      },
+      {
+        "file": "sent_059",
+        "scoreq_mos": 4.166
+      },
+      {
+        "file": "sent_060",
+        "scoreq_mos": 4.115
+      },
+      {
+        "file": "sent_061",
+        "scoreq_mos": 3.679
+      },
+      {
+        "file": "sent_062",
+        "scoreq_mos": 4.627
+      },
+      {
+        "file": "sent_063",
+        "scoreq_mos": 3.879
+      },
+      {
+        "file": "sent_064",
+        "scoreq_mos": 4.019
+      },
+      {
+        "file": "sent_065",
+        "scoreq_mos": 4.22
+      },
+      {
+        "file": "sent_066",
+        "scoreq_mos": 3.072
+      },
+      {
+        "file": "sent_067",
+        "scoreq_mos": 4.635
+      },
+      {
+        "file": "sent_068",
+        "scoreq_mos": 4.194
+      },
+      {
+        "file": "sent_069",
+        "scoreq_mos": 4.512
+      },
+      {
+        "file": "sent_070",
+        "scoreq_mos": 4.571
+      },
+      {
+        "file": "sent_071",
+        "scoreq_mos": 4.255
+      },
+      {
+        "file": "sent_072",
+        "scoreq_mos": 4.358
+      },
+      {
+        "file": "sent_073",
+        "scoreq_mos": 4.124
+      },
+      {
+        "file": "sent_074",
+        "scoreq_mos": 4.117
+      },
+      {
+        "file": "sent_075",
+        "scoreq_mos": 4.252
+      },
+      {
+        "file": "sent_076",
+        "scoreq_mos": 4.773
+      },
+      {
+        "file": "sent_077",
+        "scoreq_mos": 4.254
+      },
+      {
+        "file": "sent_078",
+        "scoreq_mos": 3.898
+      },
+      {
+        "file": "sent_079",
+        "scoreq_mos": 3.655
+      },
+      {
+        "file": "sent_080",
+        "scoreq_mos": 4.665
+      },
+      {
+        "file": "sent_081",
+        "scoreq_mos": 4.004
+      },
+      {
+        "file": "sent_082",
+        "scoreq_mos": 3.927
+      },
+      {
+        "file": "sent_083",
+        "scoreq_mos": 4.228
+      },
+      {
+        "file": "sent_084",
+        "scoreq_mos": 4.463
+      },
+      {
+        "file": "sent_085",
+        "scoreq_mos": 4.951
+      },
+      {
+        "file": "sent_086",
+        "scoreq_mos": 4.123
+      },
+      {
+        "file": "sent_087",
+        "scoreq_mos": 4.127
+      },
+      {
+        "file": "sent_088",
+        "scoreq_mos": 4.086
+      },
+      {
+        "file": "sent_089",
+        "scoreq_mos": 4.334
+      },
+      {
+        "file": "sent_090",
+        "scoreq_mos": 4.189
+      },
+      {
+        "file": "sent_091",
+        "scoreq_mos": 3.627
+      },
+      {
+        "file": "sent_092",
+        "scoreq_mos": 3.99
+      },
+      {
+        "file": "sent_093",
+        "scoreq_mos": 4.393
+      },
+      {
+        "file": "sent_094",
+        "scoreq_mos": 4.005
+      },
+      {
+        "file": "sent_095",
+        "scoreq_mos": 4.562
+      },
+      {
+        "file": "sent_096",
+        "scoreq_mos": 4.179
+      },
+      {
+        "file": "sent_097",
+        "scoreq_mos": 4.054
+      },
+      {
+        "file": "sent_098",
+        "scoreq_mos": 4.165
+      },
+      {
+        "file": "sent_099",
+        "scoreq_mos": 3.221
+      },
+      {
+        "file": "sent_100",
+        "scoreq_mos": 4.095
+      },
+      {
+        "file": "sent_101",
+        "scoreq_mos": 4.236
+      },
+      {
+        "file": "sent_102",
+        "scoreq_mos": 4.347
+      },
+      {
+        "file": "sent_103",
+        "scoreq_mos": 4.137
+      },
+      {
+        "file": "sent_104",
+        "scoreq_mos": 4.139
+      },
+      {
+        "file": "sent_105",
+        "scoreq_mos": 4.101
+      },
+      {
+        "file": "sent_106",
+        "scoreq_mos": 4.008
+      },
+      {
+        "file": "sent_107",
+        "scoreq_mos": 4.458
+      },
+      {
+        "file": "sent_108",
+        "scoreq_mos": 4.096
+      },
+      {
+        "file": "sent_109",
+        "scoreq_mos": 3.91
+      },
+      {
+        "file": "sent_110",
+        "scoreq_mos": 4.327
+      },
+      {
+        "file": "sent_111",
+        "scoreq_mos": 4.351
+      },
+      {
+        "file": "sent_112",
+        "scoreq_mos": 4.349
+      },
+      {
+        "file": "sent_113",
+        "scoreq_mos": 3.367
+      },
+      {
+        "file": "sent_114",
+        "scoreq_mos": 3.996
+      },
+      {
+        "file": "sent_115",
+        "scoreq_mos": 4.445
+      },
+      {
+        "file": "sent_116",
+        "scoreq_mos": 4.228
+      },
+      {
+        "file": "sent_118",
+        "scoreq_mos": 3.653
+      },
+      {
+        "file": "sent_119",
+        "scoreq_mos": 4.077
+      },
+      {
+        "file": "sent_120",
+        "scoreq_mos": 4.376
+      },
+      {
+        "file": "sent_121",
+        "scoreq_mos": 4.111
+      },
+      {
+        "file": "sent_122",
+        "scoreq_mos": 4.17
+      },
+      {
+        "file": "sent_123",
+        "scoreq_mos": 3.259
+      },
+      {
+        "file": "sent_124",
+        "scoreq_mos": 3.897
+      },
+      {
+        "file": "sent_125",
+        "scoreq_mos": 4.063
+      },
+      {
+        "file": "sent_126",
+        "scoreq_mos": 4.618
+      },
+      {
+        "file": "sent_137",
+        "scoreq_mos": 4.099
+      },
+      {
+        "file": "sent_138",
+        "scoreq_mos": 4.407
+      },
+      {
+        "file": "sent_139",
+        "scoreq_mos": 4.655
+      },
+      {
+        "file": "sent_140",
+        "scoreq_mos": 4.384
+      },
+      {
+        "file": "sent_141",
+        "scoreq_mos": 3.74
+      },
+      {
+        "file": "sent_142",
+        "scoreq_mos": 3.827
+      },
+      {
+        "file": "sent_143",
+        "scoreq_mos": 4.439
+      },
+      {
+        "file": "sent_144",
+        "scoreq_mos": 4.373
+      },
+      {
+        "file": "sent_145",
+        "scoreq_mos": 3.806
+      },
+      {
+        "file": "sent_146",
+        "scoreq_mos": 4.487
+      },
+      {
+        "file": "sent_147",
+        "scoreq_mos": 3.69
+      },
+      {
+        "file": "sent_148",
+        "scoreq_mos": 2.388
+      },
+      {
+        "file": "sent_149",
+        "scoreq_mos": 4.591
+      },
+      {
+        "file": "sent_150",
+        "scoreq_mos": 4.552
+      },
+      {
+        "file": "sent_152",
+        "scoreq_mos": 4.449
+      },
+      {
+        "file": "sent_153",
+        "scoreq_mos": 3.689
+      },
+      {
+        "file": "sent_154",
+        "scoreq_mos": 4.173
+      },
+      {
+        "file": "sent_155",
+        "scoreq_mos": 4.188
+      },
+      {
+        "file": "sent_156",
+        "scoreq_mos": 3.974
+      },
+      {
+        "file": "sent_157",
+        "scoreq_mos": 3.685
+      },
+      {
+        "file": "sent_158",
+        "scoreq_mos": 3.496
+      },
+      {
+        "file": "sent_159",
+        "scoreq_mos": 4.141
+      },
+      {
+        "file": "sent_160",
+        "scoreq_mos": 4.368
+      },
+      {
+        "file": "sent_162",
+        "scoreq_mos": 3.505
+      },
+      {
+        "file": "sent_163",
+        "scoreq_mos": 3.884
+      },
+      {
+        "file": "sent_164",
+        "scoreq_mos": 4.17
+      },
+      {
+        "file": "sent_165",
+        "scoreq_mos": 4.342
+      },
+      {
+        "file": "sent_166",
+        "scoreq_mos": 4.207
+      },
+      {
+        "file": "sent_167",
+        "scoreq_mos": 4.142
+      },
+      {
+        "file": "sent_168",
+        "scoreq_mos": 4.359
+      },
+      {
+        "file": "sent_169",
+        "scoreq_mos": 3.882
+      },
+      {
+        "file": "sent_170",
+        "scoreq_mos": 3.811
+      },
+      {
+        "file": "sent_171",
+        "scoreq_mos": 3.95
+      },
+      {
+        "file": "sent_172",
+        "scoreq_mos": 4.366
+      },
+      {
+        "file": "sent_173",
+        "scoreq_mos": 4.338
+      },
+      {
+        "file": "sent_174",
+        "scoreq_mos": 4.414
+      }
+    ],
+    "avg_mos": 4.102,
+    "n_scored": 161,
+    "n_errors": 0
+  },
+  "gtts": {
+    "scores": [
+      {
+        "file": "sent_001",
+        "scoreq_mos": 3.017
+      },
+      {
+        "file": "sent_002",
+        "scoreq_mos": 3.513
+      },
+      {
+        "file": "sent_003",
+        "scoreq_mos": 3.542
+      },
+      {
+        "file": "sent_004",
+        "scoreq_mos": 3.118
+      },
+      {
+        "file": "sent_005",
+        "scoreq_mos": 3.33
+      },
+      {
+        "file": "sent_006",
+        "scoreq_mos": 2.897
+      },
+      {
+        "file": "sent_007",
+        "scoreq_mos": 3.372
+      },
+      {
+        "file": "sent_008",
+        "scoreq_mos": 2.898
+      },
+      {
+        "file": "sent_009",
+        "scoreq_mos": 3.074
+      },
+      {
+        "file": "sent_010",
+        "scoreq_mos": 3.037
+      },
+      {
+        "file": "sent_011",
+        "scoreq_mos": 3.006
+      },
+      {
+        "file": "sent_012",
+        "scoreq_mos": 2.609
+      },
+      {
+        "file": "sent_013",
+        "scoreq_mos": 3.237
+      },
+      {
+        "file": "sent_014",
+        "scoreq_mos": 2.351
+      },
+      {
+        "file": "sent_015",
+        "scoreq_mos": 2.386
+      },
+      {
+        "file": "sent_016",
+        "scoreq_mos": 3.27
+      },
+      {
+        "file": "sent_017",
+        "scoreq_mos": 2.794
+      },
+      {
+        "file": "sent_018",
+        "scoreq_mos": 2.871
+      },
+      {
+        "file": "sent_019",
+        "scoreq_mos": 3.135
+      },
+      {
+        "file": "sent_020",
+        "scoreq_mos": 2.635
+      },
+      {
+        "file": "sent_021",
+        "scoreq_mos": 3.302
+      },
+      {
+        "file": "sent_022",
+        "scoreq_mos": 3.337
+      },
+      {
+        "file": "sent_023",
+        "scoreq_mos": 2.661
+      },
+      {
+        "file": "sent_024",
+        "scoreq_mos": 3.08
+      },
+      {
+        "file": "sent_025",
+        "scoreq_mos": 3.195
+      },
+      {
+        "file": "sent_026",
+        "scoreq_mos": 2.514
+      },
+      {
+        "file": "sent_027",
+        "scoreq_mos": 2.905
+      },
+      {
+        "file": "sent_028",
+        "scoreq_mos": 3.04
+      },
+      {
+        "file": "sent_029",
+        "scoreq_mos": 3.046
+      },
+      {
+        "file": "sent_030",
+        "scoreq_mos": 2.69
+      },
+      {
+        "file": "sent_031",
+        "scoreq_mos": 2.86
+      },
+      {
+        "file": "sent_032",
+        "scoreq_mos": 2.446
+      },
+      {
+        "file": "sent_033",
+        "scoreq_mos": 2.699
+      },
+      {
+        "file": "sent_034",
+        "scoreq_mos": 3.079
+      },
+      {
+        "file": "sent_035",
+        "scoreq_mos": 3.213
+      },
+      {
+        "file": "sent_036",
+        "scoreq_mos": 2.671
+      },
+      {
+        "file": "sent_037",
+        "scoreq_mos": 3.619
+      },
+      {
+        "file": "sent_038",
+        "scoreq_mos": 3.064
+      },
+      {
+        "file": "sent_039",
+        "scoreq_mos": 3.091
+      },
+      {
+        "file": "sent_040",
+        "scoreq_mos": 3.25
+      },
+      {
+        "file": "sent_041",
+        "scoreq_mos": 3.023
+      },
+      {
+        "file": "sent_042",
+        "scoreq_mos": 2.685
+      },
+      {
+        "file": "sent_043",
+        "scoreq_mos": 2.981
+      },
+      {
+        "file": "sent_044",
+        "scoreq_mos": 3.233
+      },
+      {
+        "file": "sent_045",
+        "scoreq_mos": 3.065
+      },
+      {
+        "file": "sent_046",
+        "scoreq_mos": 2.62
+      },
+      {
+        "file": "sent_047",
+        "scoreq_mos": 3.217
+      },
+      {
+        "file": "sent_048",
+        "scoreq_mos": 3.536
+      },
+      {
+        "file": "sent_049",
+        "scoreq_mos": 2.961
+      },
+      {
+        "file": "sent_050",
+        "scoreq_mos": 2.731
+      },
+      {
+        "file": "sent_051",
+        "scoreq_mos": 3.249
+      },
+      {
+        "file": "sent_052",
+        "scoreq_mos": 2.117
+      },
+      {
+        "file": "sent_053",
+        "scoreq_mos": 2.706
+      },
+      {
+        "file": "sent_054",
+        "scoreq_mos": 3.102
+      },
+      {
+        "file": "sent_055",
+        "scoreq_mos": 3.21
+      },
+      {
+        "file": "sent_056",
+        "scoreq_mos": 2.697
+      },
+      {
+        "file": "sent_057",
+        "scoreq_mos": 3.392
+      },
+      {
+        "file": "sent_058",
+        "scoreq_mos": 3.326
+      },
+      {
+        "file": "sent_059",
+        "scoreq_mos": 2.843
+      },
+      {
+        "file": "sent_060",
+        "scoreq_mos": 3.382
+      },
+      {
+        "file": "sent_061",
+        "scoreq_mos": 3.026
+      },
+      {
+        "file": "sent_062",
+        "scoreq_mos": 3.435
+      },
+      {
+        "file": "sent_063",
+        "scoreq_mos": 3.056
+      },
+      {
+        "file": "sent_064",
+        "scoreq_mos": 2.759
+      },
+      {
+        "file": "sent_065",
+        "scoreq_mos": 2.896
+      },
+      {
+        "file": "sent_066",
+        "scoreq_mos": 2.297
+      },
+      {
+        "file": "sent_067",
+        "scoreq_mos": 3.098
+      },
+      {
+        "file": "sent_068",
+        "scoreq_mos": 2.854
+      },
+      {
+        "file": "sent_069",
+        "scoreq_mos": 3.033
+      },
+      {
+        "file": "sent_070",
+        "scoreq_mos": 3.668
+      },
+      {
+        "file": "sent_071",
+        "scoreq_mos": 3.098
+      },
+      {
+        "file": "sent_072",
+        "scoreq_mos": 2.553
+      },
+      {
+        "file": "sent_073",
+        "scoreq_mos": 3.25
+      },
+      {
+        "file": "sent_074",
+        "scoreq_mos": 3.442
+      },
+      {
+        "file": "sent_075",
+        "scoreq_mos": 3.158
+      },
+      {
+        "file": "sent_076",
+        "scoreq_mos": 2.902
+      },
+      {
+        "file": "sent_077",
+        "scoreq_mos": 3.252
+      },
+      {
+        "file": "sent_078",
+        "scoreq_mos": 3.067
+      },
+      {
+        "file": "sent_079",
+        "scoreq_mos": 2.889
+      },
+      {
+        "file": "sent_080",
+        "scoreq_mos": 2.8
+      },
+      {
+        "file": "sent_081",
+        "scoreq_mos": 3.67
+      },
+      {
+        "file": "sent_082",
+        "scoreq_mos": 3.309
+      },
+      {
+        "file": "sent_083",
+        "scoreq_mos": 3.252
+      },
+      {
+        "file": "sent_084",
+        "scoreq_mos": 3.794
+      },
+      {
+        "file": "sent_085",
+        "scoreq_mos": 3.649
+      },
+      {
+        "file": "sent_086",
+        "scoreq_mos": 3.474
+      },
+      {
+        "file": "sent_087",
+        "scoreq_mos": 2.876
+      },
+      {
+        "file": "sent_088",
+        "scoreq_mos": 2.822
+      },
+      {
+        "file": "sent_089",
+        "scoreq_mos": 2.858
+      },
+      {
+        "file": "sent_090",
+        "scoreq_mos": 3.125
+      },
+      {
+        "file": "sent_091",
+        "scoreq_mos": 3.049
+      },
+      {
+        "file": "sent_092",
+        "scoreq_mos": 2.965
+      },
+      {
+        "file": "sent_093",
+        "scoreq_mos": 3.194
+      },
+      {
+        "file": "sent_094",
+        "scoreq_mos": 3.053
+      },
+      {
+        "file": "sent_095",
+        "scoreq_mos": 3.116
+      },
+      {
+        "file": "sent_096",
+        "scoreq_mos": 3.631
+      },
+      {
+        "file": "sent_097",
+        "scoreq_mos": 2.438
+      },
+      {
+        "file": "sent_098",
+        "scoreq_mos": 3.439
+      },
+      {
+        "file": "sent_099",
+        "scoreq_mos": 2.813
+      },
+      {
+        "file": "sent_100",
+        "scoreq_mos": 3.505
+      },
+      {
+        "file": "sent_101",
+        "scoreq_mos": 2.985
+      },
+      {
+        "file": "sent_102",
+        "scoreq_mos": 2.791
+      },
+      {
+        "file": "sent_103",
+        "scoreq_mos": 2.971
+      },
+      {
+        "file": "sent_104",
+        "scoreq_mos": 2.727
+      },
+      {
+        "file": "sent_105",
+        "scoreq_mos": 3.307
+      },
+      {
+        "file": "sent_106",
+        "scoreq_mos": 2.799
+      },
+      {
+        "file": "sent_107",
+        "scoreq_mos": 3.653
+      },
+      {
+        "file": "sent_108",
+        "scoreq_mos": 3.575
+      },
+      {
+        "file": "sent_109",
+        "scoreq_mos": 3.233
+      },
+      {
+        "file": "sent_110",
+        "scoreq_mos": 3.942
+      },
+      {
+        "file": "sent_111",
+        "scoreq_mos": 3.441
+      },
+      {
+        "file": "sent_112",
+        "scoreq_mos": 3.289
+      },
+      {
+        "file": "sent_113",
+        "scoreq_mos": 2.725
+      },
+      {
+        "file": "sent_114",
+        "scoreq_mos": 2.699
+      },
+      {
+        "file": "sent_115",
+        "scoreq_mos": 3.024
+      },
+      {
+        "file": "sent_116",
+        "scoreq_mos": 3.187
+      },
+      {
+        "file": "sent_117",
+        "scoreq_mos": 2.747
+      },
+      {
+        "file": "sent_118",
+        "scoreq_mos": 2.976
+      },
+      {
+        "file": "sent_119",
+        "scoreq_mos": 2.656
+      },
+      {
+        "file": "sent_120",
+        "scoreq_mos": 2.283
+      },
+      {
+        "file": "sent_121",
+        "scoreq_mos": 3.451
+      },
+      {
+        "file": "sent_122",
+        "scoreq_mos": 2.776
+      },
+      {
+        "file": "sent_123",
+        "scoreq_mos": 2.996
+      },
+      {
+        "file": "sent_124",
+        "scoreq_mos": 3.243
+      },
+      {
+        "file": "sent_125",
+        "scoreq_mos": 3.04
+      },
+      {
+        "file": "sent_126",
+        "scoreq_mos": 3.244
+      },
+      {
+        "file": "sent_137",
+        "scoreq_mos": 2.68
+      },
+      {
+        "file": "sent_138",
+        "scoreq_mos": 2.634
+      },
+      {
+        "file": "sent_139",
+        "scoreq_mos": 2.83
+      },
+      {
+        "file": "sent_140",
+        "scoreq_mos": 2.634
+      },
+      {
+        "file": "sent_141",
+        "scoreq_mos": 2.931
+      },
+      {
+        "file": "sent_142",
+        "scoreq_mos": 2.719
+      },
+      {
+        "file": "sent_143",
+        "scoreq_mos": 3.419
+      },
+      {
+        "file": "sent_144",
+        "scoreq_mos": 2.789
+      },
+      {
+        "file": "sent_145",
+        "scoreq_mos": 3.212
+      },
+      {
+        "file": "sent_146",
+        "scoreq_mos": 3.285
+      },
+      {
+        "file": "sent_147",
+        "scoreq_mos": 2.17
+      },
+      {
+        "file": "sent_148",
+        "scoreq_mos": 2.284
+      },
+      {
+        "file": "sent_149",
+        "scoreq_mos": 3.408
+      },
+      {
+        "file": "sent_150",
+        "scoreq_mos": 2.654
+      },
+      {
+        "file": "sent_151",
+        "scoreq_mos": 3.098
+      },
+      {
+        "file": "sent_152",
+        "scoreq_mos": 3.188
+      },
+      {
+        "file": "sent_153",
+        "scoreq_mos": 2.498
+      },
+      {
+        "file": "sent_154",
+        "scoreq_mos": 2.862
+      },
+      {
+        "file": "sent_155",
+        "scoreq_mos": 3.19
+      },
+      {
+        "file": "sent_156",
+        "scoreq_mos": 3.172
+      },
+      {
+        "file": "sent_157",
+        "scoreq_mos": 3.268
+      },
+      {
+        "file": "sent_158",
+        "scoreq_mos": 2.931
+      },
+      {
+        "file": "sent_159",
+        "scoreq_mos": 3.071
+      },
+      {
+        "file": "sent_160",
+        "scoreq_mos": 2.486
+      },
+      {
+        "file": "sent_161",
+        "scoreq_mos": 2.735
+      },
+      {
+        "file": "sent_162",
+        "scoreq_mos": 3.191
+      },
+      {
+        "file": "sent_163",
+        "scoreq_mos": 3.046
+      },
+      {
+        "file": "sent_164",
+        "scoreq_mos": 3.5
+      },
+      {
+        "file": "sent_165",
+        "scoreq_mos": 3.352
+      },
+      {
+        "file": "sent_166",
+        "scoreq_mos": 2.762
+      },
+      {
+        "file": "sent_167",
+        "scoreq_mos": 3.269
+      },
+      {
+        "file": "sent_168",
+        "scoreq_mos": 3.042
+      },
+      {
+        "file": "sent_169",
+        "scoreq_mos": 3.195
+      },
+      {
+        "file": "sent_170",
+        "scoreq_mos": 2.744
+      },
+      {
+        "file": "sent_171",
+        "scoreq_mos": 2.8
+      },
+      {
+        "file": "sent_172",
+        "scoreq_mos": 2.859
+      },
+      {
+        "file": "sent_173",
+        "scoreq_mos": 3.148
+      },
+      {
+        "file": "sent_174",
+        "scoreq_mos": 2.443
+      }
+    ],
+    "avg_mos": 3.023,
+    "n_scored": 164,
+    "n_errors": 0
+  },
+  "human": {
+    "scores": [],
+    "avg_mos": 0,
+    "n_scored": 0,
+    "n_errors": 164
+  },
+  "piper": {
+    "scores": [
+      {
+        "file": "sent_001",
+        "scoreq_mos": 3.383
+      },
+      {
+        "file": "sent_002",
+        "scoreq_mos": 3.781
+      },
+      {
+        "file": "sent_003",
+        "scoreq_mos": 2.728
+      },
+      {
+        "file": "sent_004",
+        "scoreq_mos": 3.268
+      },
+      {
+        "file": "sent_005",
+        "scoreq_mos": 3.511
+      },
+      {
+        "file": "sent_006",
+        "scoreq_mos": 4.117
+      },
+      {
+        "file": "sent_007",
+        "scoreq_mos": 3.825
+      },
+      {
+        "file": "sent_008",
+        "scoreq_mos": 3.702
+      },
+      {
+        "file": "sent_009",
+        "scoreq_mos": 3.974
+      },
+      {
+        "file": "sent_010",
+        "scoreq_mos": 3.906
+      },
+      {
+        "file": "sent_011",
+        "scoreq_mos": 2.912
+      },
+      {
+        "file": "sent_012",
+        "scoreq_mos": 3.816
+      },
+      {
+        "file": "sent_013",
+        "scoreq_mos": 3.473
+      },
+      {
+        "file": "sent_014",
+        "scoreq_mos": 4.207
+      },
+      {
+        "file": "sent_015",
+        "scoreq_mos": 3.285
+      },
+      {
+        "file": "sent_016",
+        "scoreq_mos": 3.45
+      },
+      {
+        "file": "sent_017",
+        "scoreq_mos": 3.034
+      },
+      {
+        "file": "sent_018",
+        "scoreq_mos": 3.599
+      },
+      {
+        "file": "sent_019",
+        "scoreq_mos": 3.454
+      },
+      {
+        "file": "sent_020",
+        "scoreq_mos": 3.56
+      },
+      {
+        "file": "sent_021",
+        "scoreq_mos": 3.915
+      },
+      {
+        "file": "sent_022",
+        "scoreq_mos": 3.464
+      },
+      {
+        "file": "sent_023",
+        "scoreq_mos": 3.482
+      },
+      {
+        "file": "sent_024",
+        "scoreq_mos": 3.203
+      },
+      {
+        "file": "sent_025",
+        "scoreq_mos": 3.56
+      },
+      {
+        "file": "sent_026",
+        "scoreq_mos": 2.906
+      },
+      {
+        "file": "sent_027",
+        "scoreq_mos": 3.383
+      },
+      {
+        "file": "sent_028",
+        "scoreq_mos": 3.328
+      },
+      {
+        "file": "sent_029",
+        "scoreq_mos": 3.626
+      },
+      {
+        "file": "sent_030",
+        "scoreq_mos": 3.35
+      },
+      {
+        "file": "sent_031",
+        "scoreq_mos": 3.47
+      },
+      {
+        "file": "sent_032",
+        "scoreq_mos": 2.512
+      },
+      {
+        "file": "sent_033",
+        "scoreq_mos": 3.985
+      },
+      {
+        "file": "sent_034",
+        "scoreq_mos": 3.651
+      },
+      {
+        "file": "sent_035",
+        "scoreq_mos": 3.68
+      },
+      {
+        "file": "sent_036",
+        "scoreq_mos": 3.511
+      },
+      {
+        "file": "sent_037",
+        "scoreq_mos": 3.915
+      },
+      {
+        "file": "sent_038",
+        "scoreq_mos": 3.628
+      },
+      {
+        "file": "sent_039",
+        "scoreq_mos": 3.918
+      },
+      {
+        "file": "sent_040",
+        "scoreq_mos": 3.683
+      },
+      {
+        "file": "sent_041",
+        "scoreq_mos": 3.827
+      },
+      {
+        "file": "sent_042",
+        "scoreq_mos": 3.311
+      },
+      {
+        "file": "sent_043",
+        "scoreq_mos": 3.412
+      },
+      {
+        "file": "sent_044",
+        "scoreq_mos": 3.563
+      },
+      {
+        "file": "sent_045",
+        "scoreq_mos": 3.488
+      },
+      {
+        "file": "sent_046",
+        "scoreq_mos": 3.458
+      },
+      {
+        "file": "sent_047",
+        "scoreq_mos": 3.265
+      },
+      {
+        "file": "sent_048",
+        "scoreq_mos": 3.89
+      },
+      {
+        "file": "sent_049",
+        "scoreq_mos": 3.783
+      },
+      {
+        "file": "sent_050",
+        "scoreq_mos": 3.131
+      },
+      {
+        "file": "sent_051",
+        "scoreq_mos": 3.265
+      },
+      {
+        "file": "sent_052",
+        "scoreq_mos": 3.258
+      },
+      {
+        "file": "sent_053",
+        "scoreq_mos": 3.458
+      },
+      {
+        "file": "sent_054",
+        "scoreq_mos": 3.642
+      },
+      {
+        "file": "sent_055",
+        "scoreq_mos": 4.294
+      },
+      {
+        "file": "sent_056",
+        "scoreq_mos": 3.592
+      },
+      {
+        "file": "sent_057",
+        "scoreq_mos": 4.089
+      },
+      {
+        "file": "sent_058",
+        "scoreq_mos": 4.186
+      },
+      {
+        "file": "sent_059",
+        "scoreq_mos": 3.896
+      },
+      {
+        "file": "sent_060",
+        "scoreq_mos": 3.086
+      },
+      {
+        "file": "sent_061",
+        "scoreq_mos": 3.78
+      },
+      {
+        "file": "sent_062",
+        "scoreq_mos": 3.423
+      },
+      {
+        "file": "sent_063",
+        "scoreq_mos": 3.001
+      },
+      {
+        "file": "sent_064",
+        "scoreq_mos": 3.525
+      },
+      {
+        "file": "sent_065",
+        "scoreq_mos": 3.624
+      },
+      {
+        "file": "sent_066",
+        "scoreq_mos": 3.08
+      },
+      {
+        "file": "sent_067",
+        "scoreq_mos": 4.157
+      },
+      {
+        "file": "sent_068",
+        "scoreq_mos": 3.178
+      },
+      {
+        "file": "sent_069",
+        "scoreq_mos": 3.732
+      },
+      {
+        "file": "sent_070",
+        "scoreq_mos": 3.659
+      },
+      {
+        "file": "sent_071",
+        "scoreq_mos": 3.52
+      },
+      {
+        "file": "sent_072",
+        "scoreq_mos": 3.292
+      },
+      {
+        "file": "sent_073",
+        "scoreq_mos": 3.971
+      },
+      {
+        "file": "sent_074",
+        "scoreq_mos": 3.226
+      },
+      {
+        "file": "sent_075",
+        "scoreq_mos": 3.667
+      },
+      {
+        "file": "sent_076",
+        "scoreq_mos": 4.085
+      },
+      {
+        "file": "sent_077",
+        "scoreq_mos": 3.715
+      },
+      {
+        "file": "sent_078",
+        "scoreq_mos": 3.868
+      },
+      {
+        "file": "sent_079",
+        "scoreq_mos": 3.106
+      },
+      {
+        "file": "sent_080",
+        "scoreq_mos": 3.167
+      },
+      {
+        "file": "sent_081",
+        "scoreq_mos": 3.821
+      },
+      {
+        "file": "sent_082",
+        "scoreq_mos": 4.07
+      },
+      {
+        "file": "sent_083",
+        "scoreq_mos": 4.076
+      },
+      {
+        "file": "sent_084",
+        "scoreq_mos": 3.648
+      },
+      {
+        "file": "sent_085",
+        "scoreq_mos": 3.571
+      },
+      {
+        "file": "sent_086",
+        "scoreq_mos": 3.482
+      },
+      {
+        "file": "sent_087",
+        "scoreq_mos": 3.24
+      },
+      {
+        "file": "sent_088",
+        "scoreq_mos": 2.902
+      },
+      {
+        "file": "sent_089",
+        "scoreq_mos": 3.281
+      },
+      {
+        "file": "sent_090",
+        "scoreq_mos": 3.152
+      },
+      {
+        "file": "sent_091",
+        "scoreq_mos": 3.401
+      },
+      {
+        "file": "sent_092",
+        "scoreq_mos": 3.597
+      },
+      {
+        "file": "sent_093",
+        "scoreq_mos": 4.16
+      },
+      {
+        "file": "sent_094",
+        "scoreq_mos": 3.752
+      },
+      {
+        "file": "sent_095",
+        "scoreq_mos": 3.423
+      },
+      {
+        "file": "sent_096",
+        "scoreq_mos": 3.971
+      },
+      {
+        "file": "sent_097",
+        "scoreq_mos": 2.842
+      },
+      {
+        "file": "sent_098",
+        "scoreq_mos": 3.053
+      },
+      {
+        "file": "sent_099",
+        "scoreq_mos": 2.677
+      },
+      {
+        "file": "sent_100",
+        "scoreq_mos": 3.398
+      },
+      {
+        "file": "sent_101",
+        "scoreq_mos": 3.862
+      },
+      {
+        "file": "sent_102",
+        "scoreq_mos": 3.311
+      },
+      {
+        "file": "sent_103",
+        "scoreq_mos": 3.281
+      },
+      {
+        "file": "sent_104",
+        "scoreq_mos": 3.474
+      },
+      {
+        "file": "sent_105",
+        "scoreq_mos": 4.052
+      },
+      {
+        "file": "sent_106",
+        "scoreq_mos": 3.377
+      },
+      {
+        "file": "sent_107",
+        "scoreq_mos": 3.524
+      },
+      {
+        "file": "sent_108",
+        "scoreq_mos": 3.72
+      },
+      {
+        "file": "sent_109",
+        "scoreq_mos": 3.784
+      },
+      {
+        "file": "sent_110",
+        "scoreq_mos": 3.721
+      },
+      {
+        "file": "sent_111",
+        "scoreq_mos": 3.773
+      },
+      {
+        "file": "sent_112",
+        "scoreq_mos": 3.992
+      },
+      {
+        "file": "sent_113",
+        "scoreq_mos": 2.547
+      },
+      {
+        "file": "sent_114",
+        "scoreq_mos": 3.486
+      },
+      {
+        "file": "sent_115",
+        "scoreq_mos": 3.676
+      },
+      {
+        "file": "sent_116",
+        "scoreq_mos": 3.493
+      },
+      {
+        "file": "sent_117",
+        "scoreq_mos": 3.107
+      },
+      {
+        "file": "sent_118",
+        "scoreq_mos": 3.458
+      },
+      {
+        "file": "sent_119",
+        "scoreq_mos": 3.44
+      },
+      {
+        "file": "sent_120",
+        "scoreq_mos": 3.127
+      },
+      {
+        "file": "sent_121",
+        "scoreq_mos": 3.646
+      },
+      {
+        "file": "sent_122",
+        "scoreq_mos": 3.454
+      },
+      {
+        "file": "sent_123",
+        "scoreq_mos": 2.967
+      },
+      {
+        "file": "sent_124",
+        "scoreq_mos": 3.395
+      },
+      {
+        "file": "sent_125",
+        "scoreq_mos": 4.041
+      },
+      {
+        "file": "sent_126",
+        "scoreq_mos": 3.478
+      },
+      {
+        "file": "sent_137",
+        "scoreq_mos": 3.511
+      },
+      {
+        "file": "sent_138",
+        "scoreq_mos": 3.795
+      },
+      {
+        "file": "sent_139",
+        "scoreq_mos": 3.718
+      },
+      {
+        "file": "sent_140",
+        "scoreq_mos": 3.636
+      },
+      {
+        "file": "sent_141",
+        "scoreq_mos": 3.833
+      },
+      {
+        "file": "sent_142",
+        "scoreq_mos": 3.492
+      },
+      {
+        "file": "sent_143",
+        "scoreq_mos": 3.814
+      },
+      {
+        "file": "sent_144",
+        "scoreq_mos": 3.838
+      },
+      {
+        "file": "sent_145",
+        "scoreq_mos": 3.586
+      },
+      {
+        "file": "sent_146",
+        "scoreq_mos": 3.699
+      },
+      {
+        "file": "sent_147",
+        "scoreq_mos": 2.479
+      },
+      {
+        "file": "sent_148",
+        "scoreq_mos": 2.631
+      },
+      {
+        "file": "sent_149",
+        "scoreq_mos": 2.221
+      },
+      {
+        "file": "sent_150",
+        "scoreq_mos": 3.525
+      },
+      {
+        "file": "sent_151",
+        "scoreq_mos": 3.515
+      },
+      {
+        "file": "sent_152",
+        "scoreq_mos": 3.298
+      },
+      {
+        "file": "sent_153",
+        "scoreq_mos": 3.226
+      },
+      {
+        "file": "sent_154",
+        "scoreq_mos": 2.885
+      },
+      {
+        "file": "sent_155",
+        "scoreq_mos": 2.532
+      },
+      {
+        "file": "sent_156",
+        "scoreq_mos": 3.111
+      },
+      {
+        "file": "sent_157",
+        "scoreq_mos": 2.57
+      },
+      {
+        "file": "sent_158",
+        "scoreq_mos": 3.184
+      },
+      {
+        "file": "sent_159",
+        "scoreq_mos": 3.346
+      },
+      {
+        "file": "sent_160",
+        "scoreq_mos": 3.428
+      },
+      {
+        "file": "sent_161",
+        "scoreq_mos": 3.022
+      },
+      {
+        "file": "sent_162",
+        "scoreq_mos": 3.736
+      },
+      {
+        "file": "sent_163",
+        "scoreq_mos": 3.154
+      },
+      {
+        "file": "sent_164",
+        "scoreq_mos": 3.952
+      },
+      {
+        "file": "sent_165",
+        "scoreq_mos": 3.347
+      },
+      {
+        "file": "sent_166",
+        "scoreq_mos": 3.34
+      },
+      {
+        "file": "sent_167",
+        "scoreq_mos": 3.625
+      },
+      {
+        "file": "sent_168",
+        "scoreq_mos": 3.453
+      },
+      {
+        "file": "sent_169",
+        "scoreq_mos": 3.268
+      },
+      {
+        "file": "sent_170",
+        "scoreq_mos": 3.821
+      },
+      {
+        "file": "sent_171",
+        "scoreq_mos": 2.911
+      },
+      {
+        "file": "sent_172",
+        "scoreq_mos": 2.689
+      },
+      {
+        "file": "sent_173",
+        "scoreq_mos": 2.873
+      },
+      {
+        "file": "sent_174",
+        "scoreq_mos": 2.967
+      },
+      {
+        "file": "sent_175",
+        "scoreq_mos": 3.535
+      },
+      {
+        "file": "sent_176",
+        "scoreq_mos": 4.112
+      },
+      {
+        "file": "sent_177",
+        "scoreq_mos": 3.211
+      },
+      {
+        "file": "sent_178",
+        "scoreq_mos": 3.779
+      },
+      {
+        "file": "sent_179",
+        "scoreq_mos": 3.624
+      },
+      {
+        "file": "sent_180",
+        "scoreq_mos": 2.87
+      },
+      {
+        "file": "sent_181",
+        "scoreq_mos": 3.401
+      },
+      {
+        "file": "sent_182",
+        "scoreq_mos": 3.584
+      },
+      {
+        "file": "sent_183",
+        "scoreq_mos": 3.659
+      },
+      {
+        "file": "sent_184",
+        "scoreq_mos": 3.139
+      },
+      {
+        "file": "sent_185",
+        "scoreq_mos": 3.774
+      },
+      {
+        "file": "sent_186",
+        "scoreq_mos": 3.447
+      },
+      {
+        "file": "sent_187",
+        "scoreq_mos": 3.435
+      },
+      {
+        "file": "sent_188",
+        "scoreq_mos": 3.415
+      },
+      {
+        "file": "sent_189",
+        "scoreq_mos": 4.005
+      },
+      {
+        "file": "sent_190",
+        "scoreq_mos": 3.716
+      },
+      {
+        "file": "sent_191",
+        "scoreq_mos": 3.423
+      },
+      {
+        "file": "sent_192",
+        "scoreq_mos": 4.64
+      },
+      {
+        "file": "sent_193",
+        "scoreq_mos": 3.783
+      },
+      {
+        "file": "sent_194",
+        "scoreq_mos": 3.709
+      },
+      {
+        "file": "sent_195",
+        "scoreq_mos": 3.04
+      },
+      {
+        "file": "sent_196",
+        "scoreq_mos": 3.607
+      },
+      {
+        "file": "sent_197",
+        "scoreq_mos": 3.199
+      },
+      {
+        "file": "sent_198",
+        "scoreq_mos": 3.354
+      },
+      {
+        "file": "sent_199",
+        "scoreq_mos": 4.225
+      },
+      {
+        "file": "sent_200",
+        "scoreq_mos": 2.818
+      },
+      {
+        "file": "sent_201",
+        "scoreq_mos": 3.737
+      },
+      {
+        "file": "sent_202",
+        "scoreq_mos": 3.053
+      },
+      {
+        "file": "sent_203",
+        "scoreq_mos": 3.967
+      }
+    ],
+    "avg_mos": 3.486,
+    "n_scored": 193,
+    "n_errors": 0
+  },
+  "tingting_asmita": {
+    "scores": [
+      {
+        "file": "sent_001",
+        "scoreq_mos": 4.141
+      },
+      {
+        "file": "sent_002",
+        "scoreq_mos": 4.209
+      },
+      {
+        "file": "sent_003",
+        "scoreq_mos": 4.473
+      },
+      {
+        "file": "sent_004",
+        "scoreq_mos": 4.136
+      },
+      {
+        "file": "sent_005",
+        "scoreq_mos": 4.927
+      },
+      {
+        "file": "sent_006",
+        "scoreq_mos": 4.309
+      },
+      {
+        "file": "sent_007",
+        "scoreq_mos": 4.619
+      },
+      {
+        "file": "sent_008",
+        "scoreq_mos": 3.622
+      },
+      {
+        "file": "sent_009",
+        "scoreq_mos": 4.254
+      },
+      {
+        "file": "sent_010",
+        "scoreq_mos": 4.629
+      },
+      {
+        "file": "sent_011",
+        "scoreq_mos": 4.441
+      },
+      {
+        "file": "sent_012",
+        "scoreq_mos": 4.35
+      },
+      {
+        "file": "sent_013",
+        "scoreq_mos": 3.478
+      },
+      {
+        "file": "sent_014",
+        "scoreq_mos": 4.669
+      },
+      {
+        "file": "sent_015",
+        "scoreq_mos": 4.332
+      },
+      {
+        "file": "sent_016",
+        "scoreq_mos": 4.598
+      },
+      {
+        "file": "sent_017",
+        "scoreq_mos": 3.849
+      },
+      {
+        "file": "sent_018",
+        "scoreq_mos": 4.279
+      },
+      {
+        "file": "sent_019",
+        "scoreq_mos": 4.157
+      },
+      {
+        "file": "sent_020",
+        "scoreq_mos": 4.112
+      },
+      {
+        "file": "sent_021",
+        "scoreq_mos": 4.1
+      },
+      {
+        "file": "sent_022",
+        "scoreq_mos": 3.705
+      },
+      {
+        "file": "sent_023",
+        "scoreq_mos": 4.106
+      },
+      {
+        "file": "sent_024",
+        "scoreq_mos": 3.478
+      },
+      {
+        "file": "sent_025",
+        "scoreq_mos": 4.291
+      },
+      {
+        "file": "sent_026",
+        "scoreq_mos": 3.759
+      },
+      {
+        "file": "sent_027",
+        "scoreq_mos": 3.789
+      },
+      {
+        "file": "sent_028",
+        "scoreq_mos": 4.24
+      },
+      {
+        "file": "sent_029",
+        "scoreq_mos": 3.79
+      },
+      {
+        "file": "sent_030",
+        "scoreq_mos": 4.23
+      },
+      {
+        "file": "sent_031",
+        "scoreq_mos": 4.223
+      },
+      {
+        "file": "sent_032",
+        "scoreq_mos": 3.712
+      },
+      {
+        "file": "sent_033",
+        "scoreq_mos": 4.283
+      },
+      {
+        "file": "sent_034",
+        "scoreq_mos": 3.889
+      },
+      {
+        "file": "sent_035",
+        "scoreq_mos": 4.097
+      },
+      {
+        "file": "sent_036",
+        "scoreq_mos": 4.223
+      },
+      {
+        "file": "sent_037",
+        "scoreq_mos": 3.757
+      },
+      {
+        "file": "sent_038",
+        "scoreq_mos": 4.511
+      },
+      {
+        "file": "sent_039",
+        "scoreq_mos": 4.824
+      },
+      {
+        "file": "sent_040",
+        "scoreq_mos": 4.164
+      },
+      {
+        "file": "sent_041",
+        "scoreq_mos": 4.158
+      },
+      {
+        "file": "sent_042",
+        "scoreq_mos": 3.977
+      },
+      {
+        "file": "sent_043",
+        "scoreq_mos": 3.458
+      },
+      {
+        "file": "sent_044",
+        "scoreq_mos": 4.357
+      },
+      {
+        "file": "sent_045",
+        "scoreq_mos": 3.518
+      },
+      {
+        "file": "sent_046",
+        "scoreq_mos": 4.628
+      },
+      {
+        "file": "sent_047",
+        "scoreq_mos": 4.249
+      },
+      {
+        "file": "sent_048",
+        "scoreq_mos": 4.303
+      },
+      {
+        "file": "sent_049",
+        "scoreq_mos": 4.215
+      },
+      {
+        "file": "sent_050",
+        "scoreq_mos": 4.663
+      },
+      {
+        "file": "sent_051",
+        "scoreq_mos": 3.832
+      },
+      {
+        "file": "sent_052",
+        "scoreq_mos": 3.845
+      },
+      {
+        "file": "sent_053",
+        "scoreq_mos": 4.233
+      },
+      {
+        "file": "sent_054",
+        "scoreq_mos": 4.749
+      },
+      {
+        "file": "sent_055",
+        "scoreq_mos": 4.218
+      },
+      {
+        "file": "sent_056",
+        "scoreq_mos": 4.27
+      },
+      {
+        "file": "sent_057",
+        "scoreq_mos": 4.607
+      },
+      {
+        "file": "sent_058",
+        "scoreq_mos": 4.194
+      },
+      {
+        "file": "sent_059",
+        "scoreq_mos": 4.141
+      },
+      {
+        "file": "sent_060",
+        "scoreq_mos": 4.008
+      },
+      {
+        "file": "sent_061",
+        "scoreq_mos": 3.806
+      },
+      {
+        "file": "sent_062",
+        "scoreq_mos": 4.434
+      },
+      {
+        "file": "sent_063",
+        "scoreq_mos": 4.351
+      },
+      {
+        "file": "sent_064",
+        "scoreq_mos": 3.795
+      },
+      {
+        "file": "sent_065",
+        "scoreq_mos": 4.213
+      },
+      {
+        "file": "sent_066",
+        "scoreq_mos": 3.777
+      },
+      {
+        "file": "sent_067",
+        "scoreq_mos": 4.418
+      },
+      {
+        "file": "sent_068",
+        "scoreq_mos": 4.349
+      },
+      {
+        "file": "sent_069",
+        "scoreq_mos": 4.827
+      },
+      {
+        "file": "sent_070",
+        "scoreq_mos": 4.22
+      },
+      {
+        "file": "sent_071",
+        "scoreq_mos": 4.177
+      },
+      {
+        "file": "sent_072",
+        "scoreq_mos": 4.198
+      },
+      {
+        "file": "sent_073",
+        "scoreq_mos": 4.153
+      },
+      {
+        "file": "sent_074",
+        "scoreq_mos": 4.214
+      },
+      {
+        "file": "sent_075",
+        "scoreq_mos": 4.566
+      },
+      {
+        "file": "sent_076",
+        "scoreq_mos": 4.569
+      },
+      {
+        "file": "sent_077",
+        "scoreq_mos": 4.792
+      },
+      {
+        "file": "sent_078",
+        "scoreq_mos": 4.398
+      },
+      {
+        "file": "sent_079",
+        "scoreq_mos": 3.31
+      },
+      {
+        "file": "sent_080",
+        "scoreq_mos": 4.898
+      },
+      {
+        "file": "sent_081",
+        "scoreq_mos": 4.457
+      },
+      {
+        "file": "sent_082",
+        "scoreq_mos": 3.741
+      },
+      {
+        "file": "sent_083",
+        "scoreq_mos": 4.049
+      },
+      {
+        "file": "sent_084",
+        "scoreq_mos": 4.543
+      },
+      {
+        "file": "sent_085",
+        "scoreq_mos": 4.733
+      },
+      {
+        "file": "sent_086",
+        "scoreq_mos": 4.584
+      },
+      {
+        "file": "sent_087",
+        "scoreq_mos": 4.004
+      },
+      {
+        "file": "sent_088",
+        "scoreq_mos": 3.817
+      },
+      {
+        "file": "sent_089",
+        "scoreq_mos": 4.466
+      },
+      {
+        "file": "sent_090",
+        "scoreq_mos": 4.577
+      },
+      {
+        "file": "sent_091",
+        "scoreq_mos": 4.689
+      },
+      {
+        "file": "sent_092",
+        "scoreq_mos": 4.329
+      },
+      {
+        "file": "sent_093",
+        "scoreq_mos": 4.326
+      },
+      {
+        "file": "sent_094",
+        "scoreq_mos": 4.324
+      },
+      {
+        "file": "sent_095",
+        "scoreq_mos": 4.356
+      },
+      {
+        "file": "sent_096",
+        "scoreq_mos": 4.269
+      },
+      {
+        "file": "sent_097",
+        "scoreq_mos": 3.929
+      },
+      {
+        "file": "sent_098",
+        "scoreq_mos": 4.482
+      },
+      {
+        "file": "sent_099",
+        "scoreq_mos": 3.786
+      },
+      {
+        "file": "sent_100",
+        "scoreq_mos": 3.903
+      },
+      {
+        "file": "sent_101",
+        "scoreq_mos": 4.312
+      },
+      {
+        "file": "sent_102",
+        "scoreq_mos": 4.53
+      },
+      {
+        "file": "sent_103",
+        "scoreq_mos": 4.55
+      },
+      {
+        "file": "sent_104",
+        "scoreq_mos": 4.104
+      },
+      {
+        "file": "sent_105",
+        "scoreq_mos": 4.778
+      },
+      {
+        "file": "sent_106",
+        "scoreq_mos": 4.42
+      },
+      {
+        "file": "sent_107",
+        "scoreq_mos": 4.149
+      },
+      {
+        "file": "sent_108",
+        "scoreq_mos": 4.488
+      },
+      {
+        "file": "sent_109",
+        "scoreq_mos": 4.664
+      },
+      {
+        "file": "sent_110",
+        "scoreq_mos": 4.114
+      },
+      {
+        "file": "sent_111",
+        "scoreq_mos": 2.105
+      },
+      {
+        "file": "sent_112",
+        "scoreq_mos": 4.039
+      },
+      {
+        "file": "sent_113",
+        "scoreq_mos": 3.292
+      },
+      {
+        "file": "sent_114",
+        "scoreq_mos": 4.508
+      },
+      {
+        "file": "sent_115",
+        "scoreq_mos": 3.766
+      },
+      {
+        "file": "sent_116",
+        "scoreq_mos": 4.21
+      },
+      {
+        "file": "sent_117",
+        "scoreq_mos": 4.318
+      },
+      {
+        "file": "sent_118",
+        "scoreq_mos": 4.157
+      },
+      {
+        "file": "sent_119",
+        "scoreq_mos": 4.082
+      },
+      {
+        "file": "sent_120",
+        "scoreq_mos": 3.733
+      },
+      {
+        "file": "sent_121",
+        "scoreq_mos": 3.853
+      },
+      {
+        "file": "sent_122",
+        "scoreq_mos": 4.24
+      },
+      {
+        "file": "sent_123",
+        "scoreq_mos": 4.306
+      },
+      {
+        "file": "sent_124",
+        "scoreq_mos": 4.233
+      },
+      {
+        "file": "sent_125",
+        "scoreq_mos": 3.86
+      },
+      {
+        "file": "sent_126",
+        "scoreq_mos": 4.458
+      },
+      {
+        "file": "sent_137",
+        "scoreq_mos": 4.08
+      },
+      {
+        "file": "sent_138",
+        "scoreq_mos": 4.191
+      },
+      {
+        "file": "sent_139",
+        "scoreq_mos": 3.941
+      },
+      {
+        "file": "sent_140",
+        "scoreq_mos": 4.191
+      },
+      {
+        "file": "sent_142",
+        "scoreq_mos": 4.476
+      },
+      {
+        "file": "sent_143",
+        "scoreq_mos": 4.617
+      },
+      {
+        "file": "sent_144",
+        "scoreq_mos": 4.582
+      },
+      {
+        "file": "sent_145",
+        "scoreq_mos": 4.477
+      },
+      {
+        "file": "sent_146",
+        "scoreq_mos": 4.515
+      },
+      {
+        "file": "sent_147",
+        "scoreq_mos": 3.817
+      },
+      {
+        "file": "sent_148",
+        "scoreq_mos": 2.502
+      },
+      {
+        "file": "sent_149",
+        "scoreq_mos": 4.852
+      },
+      {
+        "file": "sent_150",
+        "scoreq_mos": 4.202
+      },
+      {
+        "file": "sent_151",
+        "scoreq_mos": 3.897
+      },
+      {
+        "file": "sent_152",
+        "scoreq_mos": 3.97
+      },
+      {
+        "file": "sent_153",
+        "scoreq_mos": 3.97
+      },
+      {
+        "file": "sent_154",
+        "scoreq_mos": 4.02
+      },
+      {
+        "file": "sent_155",
+        "scoreq_mos": 3.555
+      },
+      {
+        "file": "sent_156",
+        "scoreq_mos": 3.916
+      },
+      {
+        "file": "sent_157",
+        "scoreq_mos": 3.555
+      },
+      {
+        "file": "sent_158",
+        "scoreq_mos": 3.213
+      },
+      {
+        "file": "sent_159",
+        "scoreq_mos": 4.484
+      },
+      {
+        "file": "sent_160",
+        "scoreq_mos": 4.928
+      },
+      {
+        "file": "sent_161",
+        "scoreq_mos": 3.37
+      },
+      {
+        "file": "sent_162",
+        "scoreq_mos": 3.683
+      },
+      {
+        "file": "sent_163",
+        "scoreq_mos": 3.811
+      },
+      {
+        "file": "sent_164",
+        "scoreq_mos": 4.386
+      },
+      {
+        "file": "sent_165",
+        "scoreq_mos": 4.118
+      },
+      {
+        "file": "sent_166",
+        "scoreq_mos": 4.763
+      },
+      {
+        "file": "sent_167",
+        "scoreq_mos": 3.9
+      },
+      {
+        "file": "sent_168",
+        "scoreq_mos": 3.696
+      },
+      {
+        "file": "sent_169",
+        "scoreq_mos": 4.108
+      },
+      {
+        "file": "sent_170",
+        "scoreq_mos": 4.474
+      },
+      {
+        "file": "sent_171",
+        "scoreq_mos": 4.044
+      },
+      {
+        "file": "sent_172",
+        "scoreq_mos": 4.099
+      },
+      {
+        "file": "sent_173",
+        "scoreq_mos": 4.259
+      },
+      {
+        "file": "sent_174",
+        "scoreq_mos": 4.053
+      },
+      {
+        "file": "sent_175",
+        "scoreq_mos": 4.207
+      },
+      {
+        "file": "sent_176",
+        "scoreq_mos": 4.118
+      },
+      {
+        "file": "sent_177",
+        "scoreq_mos": 3.715
+      },
+      {
+        "file": "sent_178",
+        "scoreq_mos": 4.317
+      },
+      {
+        "file": "sent_179",
+        "scoreq_mos": 3.964
+      },
+      {
+        "file": "sent_180",
+        "scoreq_mos": 3.545
+      },
+      {
+        "file": "sent_181",
+        "scoreq_mos": 4.588
+      },
+      {
+        "file": "sent_182",
+        "scoreq_mos": 4.132
+      },
+      {
+        "file": "sent_183",
+        "scoreq_mos": 3.98
+      },
+      {
+        "file": "sent_184",
+        "scoreq_mos": 4.004
+      },
+      {
+        "file": "sent_185",
+        "scoreq_mos": 4.612
+      },
+      {
+        "file": "sent_186",
+        "scoreq_mos": 3.859
+      },
+      {
+        "file": "sent_187",
+        "scoreq_mos": 3.845
+      },
+      {
+        "file": "sent_188",
+        "scoreq_mos": 4.394
+      },
+      {
+        "file": "sent_189",
+        "scoreq_mos": 4.212
+      },
+      {
+        "file": "sent_190",
+        "scoreq_mos": 4.203
+      },
+      {
+        "file": "sent_191",
+        "scoreq_mos": 4.086
+      },
+      {
+        "file": "sent_192",
+        "scoreq_mos": 3.858
+      },
+      {
+        "file": "sent_193",
+        "scoreq_mos": 3.993
+      },
+      {
+        "file": "sent_194",
+        "scoreq_mos": 4.059
+      },
+      {
+        "file": "sent_195",
+        "scoreq_mos": 4.041
+      },
+      {
+        "file": "sent_196",
+        "scoreq_mos": 4.009
+      },
+      {
+        "file": "sent_197",
+        "scoreq_mos": 4.758
+      },
+      {
+        "file": "sent_198",
+        "scoreq_mos": 4.042
+      },
+      {
+        "file": "sent_199",
+        "scoreq_mos": 4.491
+      },
+      {
+        "file": "sent_200",
+        "scoreq_mos": 4.368
+      },
+      {
+        "file": "sent_201",
+        "scoreq_mos": 4.428
+      },
+      {
+        "file": "sent_202",
+        "scoreq_mos": 4.571
+      },
+      {
+        "file": "sent_203",
+        "scoreq_mos": 4.576
+      }
+    ],
+    "avg_mos": 4.168,
+    "n_scored": 192,
+    "n_errors": 0
+  },
+  "tingting_sambriddhi": {
+    "scores": [
+      {
+        "file": "sent_001",
+        "scoreq_mos": 3.994
+      },
+      {
+        "file": "sent_002",
+        "scoreq_mos": 4.313
+      },
+      {
+        "file": "sent_003",
+        "scoreq_mos": 4.101
+      },
+      {
+        "file": "sent_004",
+        "scoreq_mos": 4.165
+      },
+      {
+        "file": "sent_005",
+        "scoreq_mos": 4.203
+      },
+      {
+        "file": "sent_006",
+        "scoreq_mos": 3.187
+      },
+      {
+        "file": "sent_007",
+        "scoreq_mos": 4.749
+      },
+      {
+        "file": "sent_008",
+        "scoreq_mos": 4.269
+      },
+      {
+        "file": "sent_009",
+        "scoreq_mos": 4.343
+      },
+      {
+        "file": "sent_010",
+        "scoreq_mos": 3.876
+      },
+      {
+        "file": "sent_011",
+        "scoreq_mos": 4.004
+      },
+      {
+        "file": "sent_012",
+        "scoreq_mos": 4.585
+      },
+      {
+        "file": "sent_013",
+        "scoreq_mos": 2.947
+      },
+      {
+        "file": "sent_014",
+        "scoreq_mos": 4.705
+      },
+      {
+        "file": "sent_015",
+        "scoreq_mos": 4.21
+      },
+      {
+        "file": "sent_016",
+        "scoreq_mos": 4.525
+      },
+      {
+        "file": "sent_017",
+        "scoreq_mos": 3.683
+      },
+      {
+        "file": "sent_018",
+        "scoreq_mos": 4.575
+      },
+      {
+        "file": "sent_019",
+        "scoreq_mos": 3.732
+      },
+      {
+        "file": "sent_020",
+        "scoreq_mos": 4.187
+      },
+      {
+        "file": "sent_021",
+        "scoreq_mos": 4.134
+      },
+      {
+        "file": "sent_022",
+        "scoreq_mos": 3.633
+      },
+      {
+        "file": "sent_023",
+        "scoreq_mos": 3.633
+      },
+      {
+        "file": "sent_024",
+        "scoreq_mos": 3.637
+      },
+      {
+        "file": "sent_025",
+        "scoreq_mos": 3.188
+      },
+      {
+        "file": "sent_026",
+        "scoreq_mos": 2.676
+      },
+      {
+        "file": "sent_027",
+        "scoreq_mos": 3.489
+      },
+      {
+        "file": "sent_028",
+        "scoreq_mos": 3.484
+      },
+      {
+        "file": "sent_029",
+        "scoreq_mos": 3.387
+      },
+      {
+        "file": "sent_030",
+        "scoreq_mos": 4.465
+      },
+      {
+        "file": "sent_031",
+        "scoreq_mos": 4.18
+      },
+      {
+        "file": "sent_032",
+        "scoreq_mos": 3.85
+      },
+      {
+        "file": "sent_033",
+        "scoreq_mos": 4.184
+      },
+      {
+        "file": "sent_034",
+        "scoreq_mos": 4.252
+      },
+      {
+        "file": "sent_035",
+        "scoreq_mos": 3.726
+      },
+      {
+        "file": "sent_036",
+        "scoreq_mos": 4.797
+      },
+      {
+        "file": "sent_037",
+        "scoreq_mos": 4.208
+      },
+      {
+        "file": "sent_038",
+        "scoreq_mos": 3.986
+      },
+      {
+        "file": "sent_039",
+        "scoreq_mos": 4.427
+      },
+      {
+        "file": "sent_040",
+        "scoreq_mos": 4.327
+      },
+      {
+        "file": "sent_041",
+        "scoreq_mos": 3.699
+      },
+      {
+        "file": "sent_042",
+        "scoreq_mos": 3.238
+      },
+      {
+        "file": "sent_043",
+        "scoreq_mos": 3.481
+      },
+      {
+        "file": "sent_044",
+        "scoreq_mos": 3.704
+      },
+      {
+        "file": "sent_046",
+        "scoreq_mos": 4.529
+      },
+      {
+        "file": "sent_047",
+        "scoreq_mos": 4.042
+      },
+      {
+        "file": "sent_048",
+        "scoreq_mos": 4.18
+      },
+      {
+        "file": "sent_049",
+        "scoreq_mos": 4.418
+      },
+      {
+        "file": "sent_050",
+        "scoreq_mos": 4.322
+      },
+      {
+        "file": "sent_051",
+        "scoreq_mos": 3.822
+      },
+      {
+        "file": "sent_052",
+        "scoreq_mos": 4.103
+      },
+      {
+        "file": "sent_053",
+        "scoreq_mos": 4.341
+      },
+      {
+        "file": "sent_054",
+        "scoreq_mos": 4.431
+      },
+      {
+        "file": "sent_055",
+        "scoreq_mos": 4.726
+      },
+      {
+        "file": "sent_056",
+        "scoreq_mos": 4.302
+      },
+      {
+        "file": "sent_057",
+        "scoreq_mos": 4.621
+      },
+      {
+        "file": "sent_058",
+        "scoreq_mos": 4.433
+      },
+      {
+        "file": "sent_059",
+        "scoreq_mos": 3.823
+      },
+      {
+        "file": "sent_060",
+        "scoreq_mos": 3.814
+      },
+      {
+        "file": "sent_061",
+        "scoreq_mos": 3.833
+      },
+      {
+        "file": "sent_062",
+        "scoreq_mos": 4.319
+      },
+      {
+        "file": "sent_063",
+        "scoreq_mos": 2.985
+      },
+      {
+        "file": "sent_064",
+        "scoreq_mos": 3.801
+      },
+      {
+        "file": "sent_065",
+        "scoreq_mos": 3.913
+      },
+      {
+        "file": "sent_066",
+        "scoreq_mos": 3.675
+      },
+      {
+        "file": "sent_067",
+        "scoreq_mos": 4.481
+      },
+      {
+        "file": "sent_068",
+        "scoreq_mos": 4.622
+      },
+      {
+        "file": "sent_069",
+        "scoreq_mos": 4.637
+      },
+      {
+        "file": "sent_070",
+        "scoreq_mos": 4.335
+      },
+      {
+        "file": "sent_071",
+        "scoreq_mos": 3.641
+      },
+      {
+        "file": "sent_072",
+        "scoreq_mos": 4.328
+      },
+      {
+        "file": "sent_073",
+        "scoreq_mos": 4.411
+      },
+      {
+        "file": "sent_074",
+        "scoreq_mos": 4.076
+      },
+      {
+        "file": "sent_075",
+        "scoreq_mos": 4.926
+      },
+      {
+        "file": "sent_076",
+        "scoreq_mos": 4.544
+      },
+      {
+        "file": "sent_077",
+        "scoreq_mos": 4.618
+      },
+      {
+        "file": "sent_078",
+        "scoreq_mos": 4.305
+      },
+      {
+        "file": "sent_079",
+        "scoreq_mos": 4.084
+      },
+      {
+        "file": "sent_080",
+        "scoreq_mos": 4.637
+      },
+      {
+        "file": "sent_081",
+        "scoreq_mos": 4.632
+      },
+      {
+        "file": "sent_082",
+        "scoreq_mos": 4.134
+      },
+      {
+        "file": "sent_083",
+        "scoreq_mos": 3.753
+      },
+      {
+        "file": "sent_084",
+        "scoreq_mos": 4.538
+      },
+      {
+        "file": "sent_085",
+        "scoreq_mos": 4.607
+      },
+      {
+        "file": "sent_086",
+        "scoreq_mos": 3.116
+      },
+      {
+        "file": "sent_087",
+        "scoreq_mos": 3.76
+      },
+      {
+        "file": "sent_088",
+        "scoreq_mos": 3.904
+      },
+      {
+        "file": "sent_089",
+        "scoreq_mos": 3.395
+      },
+      {
+        "file": "sent_090",
+        "scoreq_mos": 4.138
+      },
+      {
+        "file": "sent_091",
+        "scoreq_mos": 4.387
+      },
+      {
+        "file": "sent_092",
+        "scoreq_mos": 3.815
+      },
+      {
+        "file": "sent_093",
+        "scoreq_mos": 4.06
+      },
+      {
+        "file": "sent_094",
+        "scoreq_mos": 4.081
+      },
+      {
+        "file": "sent_095",
+        "scoreq_mos": 4.058
+      },
+      {
+        "file": "sent_096",
+        "scoreq_mos": 4.129
+      },
+      {
+        "file": "sent_097",
+        "scoreq_mos": 3.913
+      },
+      {
+        "file": "sent_098",
+        "scoreq_mos": 4.597
+      },
+      {
+        "file": "sent_099",
+        "scoreq_mos": 3.916
+      },
+      {
+        "file": "sent_100",
+        "scoreq_mos": 3.801
+      },
+      {
+        "file": "sent_101",
+        "scoreq_mos": 4.141
+      },
+      {
+        "file": "sent_102",
+        "scoreq_mos": 3.981
+      },
+      {
+        "file": "sent_103",
+        "scoreq_mos": 4.571
+      },
+      {
+        "file": "sent_104",
+        "scoreq_mos": 4.316
+      },
+      {
+        "file": "sent_105",
+        "scoreq_mos": 3.942
+      },
+      {
+        "file": "sent_106",
+        "scoreq_mos": 4.45
+      },
+      {
+        "file": "sent_107",
+        "scoreq_mos": 3.854
+      },
+      {
+        "file": "sent_108",
+        "scoreq_mos": 4.448
+      },
+      {
+        "file": "sent_109",
+        "scoreq_mos": 3.325
+      },
+      {
+        "file": "sent_110",
+        "scoreq_mos": 4.888
+      },
+      {
+        "file": "sent_111",
+        "scoreq_mos": 3.021
+      },
+      {
+        "file": "sent_112",
+        "scoreq_mos": 4.365
+      },
+      {
+        "file": "sent_113",
+        "scoreq_mos": 2.472
+      },
+      {
+        "file": "sent_114",
+        "scoreq_mos": 4.139
+      },
+      {
+        "file": "sent_115",
+        "scoreq_mos": 3.834
+      },
+      {
+        "file": "sent_116",
+        "scoreq_mos": 4.32
+      },
+      {
+        "file": "sent_117",
+        "scoreq_mos": 3.867
+      },
+      {
+        "file": "sent_118",
+        "scoreq_mos": 4.644
+      },
+      {
+        "file": "sent_119",
+        "scoreq_mos": 4.065
+      },
+      {
+        "file": "sent_120",
+        "scoreq_mos": 3.546
+      },
+      {
+        "file": "sent_121",
+        "scoreq_mos": 4.468
+      },
+      {
+        "file": "sent_122",
+        "scoreq_mos": 3.954
+      },
+      {
+        "file": "sent_123",
+        "scoreq_mos": 3.497
+      },
+      {
+        "file": "sent_124",
+        "scoreq_mos": 3.529
+      },
+      {
+        "file": "sent_125",
+        "scoreq_mos": 4.62
+      },
+      {
+        "file": "sent_126",
+        "scoreq_mos": 4.352
+      },
+      {
+        "file": "sent_137",
+        "scoreq_mos": 3.69
+      },
+      {
+        "file": "sent_138",
+        "scoreq_mos": 4.603
+      },
+      {
+        "file": "sent_139",
+        "scoreq_mos": 4.544
+      },
+      {
+        "file": "sent_140",
+        "scoreq_mos": 4.603
+      },
+      {
+        "file": "sent_141",
+        "scoreq_mos": 3.504
+      },
+      {
+        "file": "sent_142",
+        "scoreq_mos": 4.141
+      },
+      {
+        "file": "sent_143",
+        "scoreq_mos": 4.336
+      },
+      {
+        "file": "sent_144",
+        "scoreq_mos": 4.296
+      },
+      {
+        "file": "sent_145",
+        "scoreq_mos": 4.541
+      },
+      {
+        "file": "sent_146",
+        "scoreq_mos": 4.649
+      },
+      {
+        "file": "sent_147",
+        "scoreq_mos": 3.513
+      },
+      {
+        "file": "sent_148",
+        "scoreq_mos": 0.265
+      },
+      {
+        "file": "sent_149",
+        "scoreq_mos": 3.521
+      },
+      {
+        "file": "sent_150",
+        "scoreq_mos": 4.328
+      },
+      {
+        "file": "sent_151",
+        "scoreq_mos": 4.092
+      },
+      {
+        "file": "sent_152",
+        "scoreq_mos": 3.815
+      },
+      {
+        "file": "sent_153",
+        "scoreq_mos": 4.155
+      },
+      {
+        "file": "sent_154",
+        "scoreq_mos": 4.197
+      },
+      {
+        "file": "sent_155",
+        "scoreq_mos": 3.189
+      },
+      {
+        "file": "sent_156",
+        "scoreq_mos": 3.991
+      },
+      {
+        "file": "sent_157",
+        "scoreq_mos": 3.189
+      },
+      {
+        "file": "sent_158",
+        "scoreq_mos": 4.245
+      },
+      {
+        "file": "sent_159",
+        "scoreq_mos": 4.508
+      },
+      {
+        "file": "sent_160",
+        "scoreq_mos": 4.343
+      },
+      {
+        "file": "sent_161",
+        "scoreq_mos": 3.228
+      },
+      {
+        "file": "sent_162",
+        "scoreq_mos": 4.452
+      },
+      {
+        "file": "sent_163",
+        "scoreq_mos": 3.928
+      },
+      {
+        "file": "sent_164",
+        "scoreq_mos": 5.162
+      },
+      {
+        "file": "sent_165",
+        "scoreq_mos": 4.168
+      },
+      {
+        "file": "sent_166",
+        "scoreq_mos": 4.658
+      },
+      {
+        "file": "sent_167",
+        "scoreq_mos": 4.51
+      },
+      {
+        "file": "sent_168",
+        "scoreq_mos": 3.446
+      },
+      {
+        "file": "sent_169",
+        "scoreq_mos": 3.705
+      },
+      {
+        "file": "sent_170",
+        "scoreq_mos": 3.897
+      },
+      {
+        "file": "sent_171",
+        "scoreq_mos": 3.787
+      },
+      {
+        "file": "sent_172",
+        "scoreq_mos": 4.211
+      },
+      {
+        "file": "sent_173",
+        "scoreq_mos": 4.183
+      },
+      {
+        "file": "sent_174",
+        "scoreq_mos": 4.294
+      },
+      {
+        "file": "sent_175",
+        "scoreq_mos": 4.465
+      },
+      {
+        "file": "sent_176",
+        "scoreq_mos": 4.139
+      },
+      {
+        "file": "sent_177",
+        "scoreq_mos": 3.987
+      },
+      {
+        "file": "sent_178",
+        "scoreq_mos": 4.235
+      },
+      {
+        "file": "sent_179",
+        "scoreq_mos": 4.151
+      },
+      {
+        "file": "sent_180",
+        "scoreq_mos": 3.922
+      },
+      {
+        "file": "sent_181",
+        "scoreq_mos": 3.102
+      },
+      {
+        "file": "sent_182",
+        "scoreq_mos": 4.472
+      },
+      {
+        "file": "sent_183",
+        "scoreq_mos": 3.327
+      },
+      {
+        "file": "sent_184",
+        "scoreq_mos": 2.004
+      },
+      {
+        "file": "sent_185",
+        "scoreq_mos": 4.042
+      },
+      {
+        "file": "sent_186",
+        "scoreq_mos": 4.356
+      },
+      {
+        "file": "sent_187",
+        "scoreq_mos": 4.576
+      },
+      {
+        "file": "sent_188",
+        "scoreq_mos": 4.084
+      },
+      {
+        "file": "sent_189",
+        "scoreq_mos": 3.322
+      },
+      {
+        "file": "sent_190",
+        "scoreq_mos": 4.501
+      },
+      {
+        "file": "sent_191",
+        "scoreq_mos": 3.759
+      },
+      {
+        "file": "sent_192",
+        "scoreq_mos": 4.893
+      },
+      {
+        "file": "sent_193",
+        "scoreq_mos": 4.341
+      },
+      {
+        "file": "sent_194",
+        "scoreq_mos": 4.109
+      },
+      {
+        "file": "sent_195",
+        "scoreq_mos": 4.471
+      },
+      {
+        "file": "sent_196",
+        "scoreq_mos": 4.21
+      },
+      {
+        "file": "sent_197",
+        "scoreq_mos": 4.996
+      },
+      {
+        "file": "sent_198",
+        "scoreq_mos": 3.258
+      },
+      {
+        "file": "sent_199",
+        "scoreq_mos": 4.451
+      },
+      {
+        "file": "sent_200",
+        "scoreq_mos": 4.16
+      },
+      {
+        "file": "sent_201",
+        "scoreq_mos": 4.173
+      },
+      {
+        "file": "sent_202",
+        "scoreq_mos": 4.327
+      },
+      {
+        "file": "sent_203",
+        "scoreq_mos": 4.476
+      }
+    ],
+    "avg_mos": 4.051,
+    "n_scored": 192,
+    "n_errors": 0
+  },
+  "tingting_subina": {
+    "scores": [
+      {
+        "file": "sent_001",
+        "scoreq_mos": 4.047
+      },
+      {
+        "file": "sent_002",
+        "scoreq_mos": 4.585
+      },
+      {
+        "file": "sent_003",
+        "scoreq_mos": 4.421
+      },
+      {
+        "file": "sent_004",
+        "scoreq_mos": 4.359
+      },
+      {
+        "file": "sent_005",
+        "scoreq_mos": 4.309
+      },
+      {
+        "file": "sent_006",
+        "scoreq_mos": 4.667
+      },
+      {
+        "file": "sent_007",
+        "scoreq_mos": 4.483
+      },
+      {
+        "file": "sent_008",
+        "scoreq_mos": 4.048
+      },
+      {
+        "file": "sent_009",
+        "scoreq_mos": 4.391
+      },
+      {
+        "file": "sent_010",
+        "scoreq_mos": 4.716
+      },
+      {
+        "file": "sent_011",
+        "scoreq_mos": 4.576
+      },
+      {
+        "file": "sent_012",
+        "scoreq_mos": 4.552
+      },
+      {
+        "file": "sent_013",
+        "scoreq_mos": 3.859
+      },
+      {
+        "file": "sent_014",
+        "scoreq_mos": 4.701
+      },
+      {
+        "file": "sent_015",
+        "scoreq_mos": 4.258
+      },
+      {
+        "file": "sent_016",
+        "scoreq_mos": 4.755
+      },
+      {
+        "file": "sent_017",
+        "scoreq_mos": 3.805
+      },
+      {
+        "file": "sent_018",
+        "scoreq_mos": 4.642
+      },
+      {
+        "file": "sent_019",
+        "scoreq_mos": 4.479
+      },
+      {
+        "file": "sent_020",
+        "scoreq_mos": 4.181
+      },
+      {
+        "file": "sent_021",
+        "scoreq_mos": 3.799
+      },
+      {
+        "file": "sent_022",
+        "scoreq_mos": 4.282
+      },
+      {
+        "file": "sent_023",
+        "scoreq_mos": 4.149
+      },
+      {
+        "file": "sent_024",
+        "scoreq_mos": 3.735
+      },
+      {
+        "file": "sent_025",
+        "scoreq_mos": 4.03
+      },
+      {
+        "file": "sent_026",
+        "scoreq_mos": 4.076
+      },
+      {
+        "file": "sent_027",
+        "scoreq_mos": 3.701
+      },
+      {
+        "file": "sent_028",
+        "scoreq_mos": 4.174
+      },
+      {
+        "file": "sent_029",
+        "scoreq_mos": 4.637
+      },
+      {
+        "file": "sent_030",
+        "scoreq_mos": 3.715
+      },
+      {
+        "file": "sent_031",
+        "scoreq_mos": 4.312
+      },
+      {
+        "file": "sent_032",
+        "scoreq_mos": 3.659
+      },
+      {
+        "file": "sent_033",
+        "scoreq_mos": 4.545
+      },
+      {
+        "file": "sent_034",
+        "scoreq_mos": 3.72
+      },
+      {
+        "file": "sent_035",
+        "scoreq_mos": 4.607
+      },
+      {
+        "file": "sent_036",
+        "scoreq_mos": 4.335
+      },
+      {
+        "file": "sent_037",
+        "scoreq_mos": 4.37
+      },
+      {
+        "file": "sent_038",
+        "scoreq_mos": 4.556
+      },
+      {
+        "file": "sent_039",
+        "scoreq_mos": 4.308
+      },
+      {
+        "file": "sent_040",
+        "scoreq_mos": 4.093
+      },
+      {
+        "file": "sent_041",
+        "scoreq_mos": 4.103
+      },
+      {
+        "file": "sent_042",
+        "scoreq_mos": 4.138
+      },
+      {
+        "file": "sent_043",
+        "scoreq_mos": 4.038
+      },
+      {
+        "file": "sent_044",
+        "scoreq_mos": 4.074
+      },
+      {
+        "file": "sent_045",
+        "scoreq_mos": 4.54
+      },
+      {
+        "file": "sent_046",
+        "scoreq_mos": 4.52
+      },
+      {
+        "file": "sent_047",
+        "scoreq_mos": 4.724
+      },
+      {
+        "file": "sent_048",
+        "scoreq_mos": 4.394
+      },
+      {
+        "file": "sent_049",
+        "scoreq_mos": 4.292
+      },
+      {
+        "file": "sent_050",
+        "scoreq_mos": 4.448
+      },
+      {
+        "file": "sent_051",
+        "scoreq_mos": 4.523
+      },
+      {
+        "file": "sent_052",
+        "scoreq_mos": 4.335
+      },
+      {
+        "file": "sent_053",
+        "scoreq_mos": 4.025
+      },
+      {
+        "file": "sent_054",
+        "scoreq_mos": 4.646
+      },
+      {
+        "file": "sent_055",
+        "scoreq_mos": 4.401
+      },
+      {
+        "file": "sent_056",
+        "scoreq_mos": 4.36
+      },
+      {
+        "file": "sent_057",
+        "scoreq_mos": 4.571
+      },
+      {
+        "file": "sent_058",
+        "scoreq_mos": 4.452
+      },
+      {
+        "file": "sent_059",
+        "scoreq_mos": 4.148
+      },
+      {
+        "file": "sent_060",
+        "scoreq_mos": 4.08
+      },
+      {
+        "file": "sent_061",
+        "scoreq_mos": 3.781
+      },
+      {
+        "file": "sent_062",
+        "scoreq_mos": 4.547
+      },
+      {
+        "file": "sent_063",
+        "scoreq_mos": 4.522
+      },
+      {
+        "file": "sent_064",
+        "scoreq_mos": 4.262
+      },
+      {
+        "file": "sent_065",
+        "scoreq_mos": 3.91
+      },
+      {
+        "file": "sent_066",
+        "scoreq_mos": 3.989
+      },
+      {
+        "file": "sent_067",
+        "scoreq_mos": 4.518
+      },
+      {
+        "file": "sent_068",
+        "scoreq_mos": 4.821
+      },
+      {
+        "file": "sent_069",
+        "scoreq_mos": 4.655
+      },
+      {
+        "file": "sent_070",
+        "scoreq_mos": 3.586
+      },
+      {
+        "file": "sent_071",
+        "scoreq_mos": 4.669
+      },
+      {
+        "file": "sent_072",
+        "scoreq_mos": 4.66
+      },
+      {
+        "file": "sent_073",
+        "scoreq_mos": 4.343
+      },
+      {
+        "file": "sent_074",
+        "scoreq_mos": 4.058
+      },
+      {
+        "file": "sent_075",
+        "scoreq_mos": 4.68
+      },
+      {
+        "file": "sent_076",
+        "scoreq_mos": 4.352
+      },
+      {
+        "file": "sent_077",
+        "scoreq_mos": 4.662
+      },
+      {
+        "file": "sent_078",
+        "scoreq_mos": 4.382
+      },
+      {
+        "file": "sent_079",
+        "scoreq_mos": 4.15
+      },
+      {
+        "file": "sent_080",
+        "scoreq_mos": 4.681
+      },
+      {
+        "file": "sent_081",
+        "scoreq_mos": 4.374
+      },
+      {
+        "file": "sent_082",
+        "scoreq_mos": 4.521
+      },
+      {
+        "file": "sent_083",
+        "scoreq_mos": 4.284
+      },
+      {
+        "file": "sent_084",
+        "scoreq_mos": 4.582
+      },
+      {
+        "file": "sent_085",
+        "scoreq_mos": 5.133
+      },
+      {
+        "file": "sent_086",
+        "scoreq_mos": 4.263
+      },
+      {
+        "file": "sent_087",
+        "scoreq_mos": 4.087
+      },
+      {
+        "file": "sent_088",
+        "scoreq_mos": 4.19
+      },
+      {
+        "file": "sent_089",
+        "scoreq_mos": 4.135
+      },
+      {
+        "file": "sent_090",
+        "scoreq_mos": 4.413
+      },
+      {
+        "file": "sent_092",
+        "scoreq_mos": 4.486
+      },
+      {
+        "file": "sent_093",
+        "scoreq_mos": 4.415
+      },
+      {
+        "file": "sent_094",
+        "scoreq_mos": 4.336
+      },
+      {
+        "file": "sent_095",
+        "scoreq_mos": 3.743
+      },
+      {
+        "file": "sent_096",
+        "scoreq_mos": 4.533
+      },
+      {
+        "file": "sent_097",
+        "scoreq_mos": 4.387
+      },
+      {
+        "file": "sent_098",
+        "scoreq_mos": 4.149
+      },
+      {
+        "file": "sent_099",
+        "scoreq_mos": 4.012
+      },
+      {
+        "file": "sent_100",
+        "scoreq_mos": 4.463
+      },
+      {
+        "file": "sent_101",
+        "scoreq_mos": 4.298
+      },
+      {
+        "file": "sent_102",
+        "scoreq_mos": 4.589
+      },
+      {
+        "file": "sent_103",
+        "scoreq_mos": 4.64
+      },
+      {
+        "file": "sent_104",
+        "scoreq_mos": 4.243
+      },
+      {
+        "file": "sent_105",
+        "scoreq_mos": 4.438
+      },
+      {
+        "file": "sent_106",
+        "scoreq_mos": 4.659
+      },
+      {
+        "file": "sent_107",
+        "scoreq_mos": 4.571
+      },
+      {
+        "file": "sent_108",
+        "scoreq_mos": 4.373
+      },
+      {
+        "file": "sent_109",
+        "scoreq_mos": 4.118
+      },
+      {
+        "file": "sent_110",
+        "scoreq_mos": 4.307
+      },
+      {
+        "file": "sent_111",
+        "scoreq_mos": 3.703
+      },
+      {
+        "file": "sent_112",
+        "scoreq_mos": 3.512
+      },
+      {
+        "file": "sent_113",
+        "scoreq_mos": 3.505
+      },
+      {
+        "file": "sent_114",
+        "scoreq_mos": 4.357
+      },
+      {
+        "file": "sent_115",
+        "scoreq_mos": 4.5
+      },
+      {
+        "file": "sent_116",
+        "scoreq_mos": 4.402
+      },
+      {
+        "file": "sent_117",
+        "scoreq_mos": 3.703
+      },
+      {
+        "file": "sent_118",
+        "scoreq_mos": 4.254
+      },
+      {
+        "file": "sent_119",
+        "scoreq_mos": 4.135
+      },
+      {
+        "file": "sent_120",
+        "scoreq_mos": 3.83
+      },
+      {
+        "file": "sent_121",
+        "scoreq_mos": 3.907
+      },
+      {
+        "file": "sent_122",
+        "scoreq_mos": 4.267
+      },
+      {
+        "file": "sent_123",
+        "scoreq_mos": 3.311
+      },
+      {
+        "file": "sent_124",
+        "scoreq_mos": 4.331
+      },
+      {
+        "file": "sent_125",
+        "scoreq_mos": 4.497
+      },
+      {
+        "file": "sent_126",
+        "scoreq_mos": 4.628
+      },
+      {
+        "file": "sent_137",
+        "scoreq_mos": 3.783
+      },
+      {
+        "file": "sent_138",
+        "scoreq_mos": 4.568
+      },
+      {
+        "file": "sent_139",
+        "scoreq_mos": 4.243
+      },
+      {
+        "file": "sent_140",
+        "scoreq_mos": 4.568
+      },
+      {
+        "file": "sent_141",
+        "scoreq_mos": 4.349
+      },
+      {
+        "file": "sent_142",
+        "scoreq_mos": 4.208
+      },
+      {
+        "file": "sent_143",
+        "scoreq_mos": 5.046
+      },
+      {
+        "file": "sent_144",
+        "scoreq_mos": 4.366
+      },
+      {
+        "file": "sent_145",
+        "scoreq_mos": 4.257
+      },
+      {
+        "file": "sent_146",
+        "scoreq_mos": 4.617
+      },
+      {
+        "file": "sent_147",
+        "scoreq_mos": 3.831
+      },
+      {
+        "file": "sent_148",
+        "scoreq_mos": 2.575
+      },
+      {
+        "file": "sent_149",
+        "scoreq_mos": 5.233
+      },
+      {
+        "file": "sent_150",
+        "scoreq_mos": 4.23
+      },
+      {
+        "file": "sent_151",
+        "scoreq_mos": 4.058
+      },
+      {
+        "file": "sent_152",
+        "scoreq_mos": 4.012
+      },
+      {
+        "file": "sent_153",
+        "scoreq_mos": 3.895
+      },
+      {
+        "file": "sent_154",
+        "scoreq_mos": 4.007
+      },
+      {
+        "file": "sent_155",
+        "scoreq_mos": 4.479
+      },
+      {
+        "file": "sent_156",
+        "scoreq_mos": 4.719
+      },
+      {
+        "file": "sent_157",
+        "scoreq_mos": 4.479
+      },
+      {
+        "file": "sent_158",
+        "scoreq_mos": 3.937
+      },
+      {
+        "file": "sent_159",
+        "scoreq_mos": 4.26
+      },
+      {
+        "file": "sent_160",
+        "scoreq_mos": 4.029
+      },
+      {
+        "file": "sent_161",
+        "scoreq_mos": 4.359
+      },
+      {
+        "file": "sent_162",
+        "scoreq_mos": 4.256
+      },
+      {
+        "file": "sent_163",
+        "scoreq_mos": 4.209
+      },
+      {
+        "file": "sent_164",
+        "scoreq_mos": 4.594
+      },
+      {
+        "file": "sent_165",
+        "scoreq_mos": 3.879
+      },
+      {
+        "file": "sent_166",
+        "scoreq_mos": 4.458
+      },
+      {
+        "file": "sent_167",
+        "scoreq_mos": 4.146
+      },
+      {
+        "file": "sent_168",
+        "scoreq_mos": 4.095
+      },
+      {
+        "file": "sent_169",
+        "scoreq_mos": 4.25
+      },
+      {
+        "file": "sent_170",
+        "scoreq_mos": 4.134
+      },
+      {
+        "file": "sent_171",
+        "scoreq_mos": 4.273
+      },
+      {
+        "file": "sent_172",
+        "scoreq_mos": 4.168
+      },
+      {
+        "file": "sent_173",
+        "scoreq_mos": 3.864
+      },
+      {
+        "file": "sent_174",
+        "scoreq_mos": 4.182
+      },
+      {
+        "file": "sent_175",
+        "scoreq_mos": 4.284
+      },
+      {
+        "file": "sent_176",
+        "scoreq_mos": 3.894
+      },
+      {
+        "file": "sent_177",
+        "scoreq_mos": 3.938
+      },
+      {
+        "file": "sent_178",
+        "scoreq_mos": 4.358
+      },
+      {
+        "file": "sent_179",
+        "scoreq_mos": 3.936
+      },
+      {
+        "file": "sent_180",
+        "scoreq_mos": 4.33
+      },
+      {
+        "file": "sent_181",
+        "scoreq_mos": 4.728
+      },
+      {
+        "file": "sent_182",
+        "scoreq_mos": 4.285
+      },
+      {
+        "file": "sent_183",
+        "scoreq_mos": 4.44
+      },
+      {
+        "file": "sent_184",
+        "scoreq_mos": 3.634
+      },
+      {
+        "file": "sent_185",
+        "scoreq_mos": 4.479
+      },
+      {
+        "file": "sent_186",
+        "scoreq_mos": 4.398
+      },
+      {
+        "file": "sent_187",
+        "scoreq_mos": 4.223
+      },
+      {
+        "file": "sent_188",
+        "scoreq_mos": 4.32
+      },
+      {
+        "file": "sent_189",
+        "scoreq_mos": 4.183
+      },
+      {
+        "file": "sent_190",
+        "scoreq_mos": 4.364
+      },
+      {
+        "file": "sent_191",
+        "scoreq_mos": 3.72
+      },
+      {
+        "file": "sent_192",
+        "scoreq_mos": 4.403
+      },
+      {
+        "file": "sent_193",
+        "scoreq_mos": 4.073
+      },
+      {
+        "file": "sent_194",
+        "scoreq_mos": 4.197
+      },
+      {
+        "file": "sent_195",
+        "scoreq_mos": 3.459
+      },
+      {
+        "file": "sent_196",
+        "scoreq_mos": 4.126
+      },
+      {
+        "file": "sent_197",
+        "scoreq_mos": 4.73
+      },
+      {
+        "file": "sent_198",
+        "scoreq_mos": 4.189
+      },
+      {
+        "file": "sent_199",
+        "scoreq_mos": 4.856
+      },
+      {
+        "file": "sent_200",
+        "scoreq_mos": 4.35
+      },
+      {
+        "file": "sent_201",
+        "scoreq_mos": 4.465
+      },
+      {
+        "file": "sent_202",
+        "scoreq_mos": 4.067
+      },
+      {
+        "file": "sent_203",
+        "scoreq_mos": 4.269
+      }
+    ],
+    "avg_mos": 4.269,
+    "n_scored": 192,
+    "n_errors": 0
+  }
+}

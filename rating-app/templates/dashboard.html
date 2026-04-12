@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NepTTS Benchmark — Dashboard</title>
+<style>
+:root {
+    --text: #1a1a1a;
+    --text-secondary: #555;
+    --text-muted: #888;
+    --bg: #fafafa;
+    --surface: #fff;
+    --border: #e0e0e0;
+    --accent-soft: #f0f0f0;
+    --green: #27ae60;
+    --red: #c0392b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.page {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+}
+
+h1 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.subtitle {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+}
+
+/* Login */
+#login {
+    max-width: 320px;
+    margin: 80px auto;
+}
+
+#login label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+#login input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.9375rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    outline: none;
+    font-family: inherit;
+    margin-bottom: 16px;
+}
+
+#login input:focus { border-color: var(--text); }
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 11px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    background: var(--text);
+    color: #fff;
+}
+
+.btn:hover { opacity: 0.85; }
+
+#login .error {
+    font-size: 0.8125rem;
+    color: var(--red);
+    margin-top: 8px;
+    display: none;
+}
+
+/* Dashboard */
+#dashboard { display: none; }
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.stat-card .value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-card .label {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.section-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 32px;
+}
+
+th {
+    text-align: left;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    font-weight: 500;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    background: var(--accent-soft);
+}
+
+th.r, td.r { text-align: right; }
+
+td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--accent-soft);
+    font-variant-numeric: tabular-nums;
+}
+
+tr:last-child td { border-bottom: none; }
+
+/* Distribution bar */
+.dist-bar {
+    display: flex;
+    height: 14px;
+    border-radius: 3px;
+    overflow: hidden;
+    min-width: 120px;
+}
+
+.dist-bar .seg {
+    height: 100%;
+    transition: width 0.3s;
+}
+
+.dist-bar .s1 { background: #e74c3c; }
+.dist-bar .s2 { background: #e67e22; }
+.dist-bar .s3 { background: #f1c40f; }
+.dist-bar .s4 { background: #2ecc71; }
+.dist-bar .s5 { background: #3498db; }
+
+/* Completion bar */
+.completion-bar {
+    display: inline-block;
+    width: 60px;
+    height: 6px;
+    background: var(--accent-soft);
+    border-radius: 3px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.completion-bar .fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 3px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 1px 6px;
+    font-size: 0.625rem;
+    border-radius: 3px;
+    font-weight: 500;
+}
+
+.tag-done { background: #d5f5e3; color: #1e8449; }
+.tag-partial { background: #fef9e7; color: #b7950b; }
+.tag-new { background: var(--accent-soft); color: var(--text-muted); }
+
+.hidden { display: none; }
+
+@media (max-width: 600px) {
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="page">
+    <h1>NepTTS Benchmark</h1>
+    <div class="subtitle">Admin Dashboard</div>
+
+    <!-- Login -->
+    <div id="login">
+        <label for="pw">Password</label>
+        <input type="password" id="pw" placeholder="Enter admin password" autofocus>
+        <button class="btn" onclick="login()">View Dashboard</button>
+        <div class="error" id="login-error">Wrong password</div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard">
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="value" id="s-raters">-</div>
+                <div class="label">Raters</div>
+            </div>
+            <div class="stat-card">
+                <div class="value" id="s-ratings">-</div>
+                <div class="label">Ratings</div>
+            </div>
+            <div class="stat-card">
+                <div class="value" id="s-assigned">-</div>
+                <div class="label">Assigned</div>
+            </div>
+            <div class="stat-card">
+                <div class="value" id="s-completion">-</div>
+                <div class="label">Completion</div>
+            </div>
+        </div>
+
+        <div class="section-title">Systems</div>
+        <table>
+            <tr>
+                <th>System</th>
+                <th class="r">MOS</th>
+                <th class="r">Ratings</th>
+                <th class="r">Range</th>
+                <th>Distribution</th>
+            </tr>
+            <tbody id="sys-rows"></tbody>
+        </table>
+
+        <div class="section-title">Raters</div>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Native</th>
+                <th class="r">Progress</th>
+                <th>Scores by system</th>
+                <th>Joined</th>
+                <th></th>
+            </tr>
+            <tbody id="rater-rows"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+const BASE = window.location.pathname.replace(/\/$/, '').replace(/\/dashboard$/, '');
+let pw = '';
+
+document.getElementById('pw').addEventListener('keydown', e => {
+    if (e.key === 'Enter') login();
+});
+
+async function login() {
+    pw = document.getElementById('pw').value;
+    try {
+        const res = await fetch(`${BASE}/api/dashboard?password=${encodeURIComponent(pw)}`);
+        if (!res.ok) {
+            document.getElementById('login-error').style.display = 'block';
+            return;
+        }
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        render(await res.json());
+    } catch (e) {
+        document.getElementById('login-error').style.display = 'block';
+    }
+}
+
+function render(d) {
+    document.getElementById('s-raters').textContent = d.total_raters;
+    document.getElementById('s-ratings').textContent = d.total_ratings;
+    document.getElementById('s-assigned').textContent = d.total_assigned;
+    document.getElementById('s-completion').textContent = d.completion_pct + '%';
+
+    // Systems table
+    const sysRows = document.getElementById('sys-rows');
+    sysRows.innerHTML = '';
+    for (const sys of d.systems) {
+        const dist = d.distributions[sys.system_name] || {};
+        const total = Object.values(dist).reduce((a, b) => a + b, 0) || 1;
+        const bar = [1,2,3,4,5].map(s =>
+            `<div class="seg s${s}" style="width:${(dist[s]||0)/total*100}%"></div>`
+        ).join('');
+
+        sysRows.innerHTML += `<tr>
+            <td><strong>${sys.system_name}</strong></td>
+            <td class="r"><strong>${sys.mean_mos}</strong></td>
+            <td class="r">${sys.n_ratings}</td>
+            <td class="r">${sys.min_score}-${sys.max_score}</td>
+            <td><div class="dist-bar">${bar}</div></td>
+        </tr>`;
+    }
+
+    if (!d.systems.length) {
+        sysRows.innerHTML = '<tr><td colspan="5" style="color:var(--text-muted)">No ratings yet</td></tr>';
+    }
+
+    // Raters table
+    const raterRows = document.getElementById('rater-rows');
+    raterRows.innerHTML = '';
+    for (const r of d.raters) {
+        const pct = r.n_assigned ? Math.round(r.n_rated / r.n_assigned * 100) : 0;
+        const tag = pct >= 100 ? 'done' : pct > 0 ? 'partial' : 'new';
+        const tagText = pct >= 100 ? 'Done' : pct > 0 ? 'In progress' : 'Not started';
+
+        // Per-system scores
+        const scores = d.rater_scores[r.id] || {};
+        const scoreHtml = Object.entries(scores)
+            .map(([sys, avg]) => `<span style="margin-right:8px">${shortName(sys)} <strong>${avg}</strong></span>`)
+            .join('') || '<span style="color:var(--text-muted)">-</span>';
+
+        const date = new Date(r.created_at).toLocaleDateString('en', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
+
+        raterRows.innerHTML += `<tr>
+            <td><strong>${r.name}</strong></td>
+            <td>${r.native_speaker ? 'Yes' : 'No'}</td>
+            <td class="r">
+                <div class="completion-bar"><div class="fill" style="width:${pct}%"></div></div>
+                ${r.n_rated}/${r.n_assigned}
+                <span class="tag tag-${tag}">${tagText}</span>
+            </td>
+            <td style="font-size:0.75rem">${scoreHtml}</td>
+            <td style="font-size:0.75rem;color:var(--text-muted)">${date}</td>
+            <td><button onclick="deleteRater('${r.id}', '${r.name}')" style="padding:3px 8px;border:1px solid #e74c3c;border-radius:4px;background:none;color:#e74c3c;font-size:0.625rem;cursor:pointer">Delete</button></td>
+        </tr>`;
+    }
+
+    if (!d.raters.length) {
+        raterRows.innerHTML = '<tr><td colspan="5" style="color:var(--text-muted)">No raters yet</td></tr>';
+    }
+}
+
+async function deleteRater(raterId, name) {
+    if (!confirm(`Delete rater "${name}" and all their ratings?`)) return;
+    const res = await fetch(`${BASE}/api/dashboard/delete-rater?password=${encodeURIComponent(pw)}&rater_id=${raterId}`, {method: 'DELETE'});
+    if (res.ok) {
+        const data = await res.json();
+        alert(`Deleted ${data.ratings_deleted} ratings from "${name}"`);
+        login(); // refresh
+    } else {
+        alert('Failed to delete');
+    }
+}
+
+function shortName(sys) {
+    if (sys.startsWith('edge_tts/')) return sys.split('/')[1];
+    return sys;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "systems": {
+    "edge_tts/hemkala": {
+      "scoreq_mos": 3.737,
+      "chirp2_cer": 0.1695,
+      "mms_cer": 0.3009,
+      "xlsr_nepali_cer": 0.1612,
+      "whisper_small_cer": 0.457
+    },
+    "edge_tts/sagar": {
+      "scoreq_mos": 3.627,
+      "chirp2_cer": 0.1462,
+      "mms_cer": 0.279,
+      "xlsr_nepali_cer": 0.1485,
+      "whisper_small_cer": 0.6519
+    },
+    "elevenlabs": {
+      "scoreq_mos": 4.448,
+      "chirp2_cer": 0.1063,
+      "mms_cer": 0.2775,
+      "xlsr_nepali_cer": 0.2217,
+      "whisper_small_cer": 0.4699
+    },
+    "gemini": {
+      "scoreq_mos": 4.102,
+      "chirp2_cer": 0.1437,
+      "mms_cer": 0.2136,
+      "xlsr_nepali_cer": 0.1988,
+      "whisper_small_cer": 0.3715
+    },
+    "gtts": {
+      "scoreq_mos": 3.023,
+      "chirp2_cer": 0.4727,
+      "mms_cer": 0.5312,
+      "xlsr_nepali_cer": 0.279,
+      "whisper_small_cer": 0.5861
+    },
+    "piper": {
+      "scoreq_mos": 3.486,
+      "chirp2_cer": 0.186,
+      "mms_cer": 0.2911,
+      "xlsr_nepali_cer": 0.1675,
+      "whisper_small_cer": 0.471
+    },
+    "tingting_asmita": {
+      "scoreq_mos": 4.168,
+      "chirp2_cer": 0.1405,
+      "mms_cer": 0.2337,
+      "xlsr_nepali_cer": 0.1975,
+      "whisper_small_cer": 0.4836
+    },
+    "tingting_sambriddhi": {
+      "scoreq_mos": 4.051,
+      "chirp2_cer": 0.2164,
+      "mms_cer": 0.3129,
+      "xlsr_nepali_cer": 0.2345,
+      "whisper_small_cer": 0.5543
+    },
+    "tingting_subina": {
+      "scoreq_mos": 4.269,
+      "chirp2_cer": 0.1204,
+      "mms_cer": 0.1809,
+      "xlsr_nepali_cer": 0.1604,
+      "whisper_small_cer": 0.5142
+    }
+  }
+}

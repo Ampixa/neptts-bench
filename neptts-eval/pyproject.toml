@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "neptts-eval"
+version = "0.1.0"
+description = "Evaluation toolkit for Nepali TTS systems — NepTTS-Bench"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+authors = [
+    { name = "Bolne Team" },
+]
+keywords = ["nepali", "tts", "benchmark", "speech-synthesis", "evaluation", "mos"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "scoreq>=1.0.0",
+    "openai-whisper>=20231117",
+    "datasets>=2.14.0",
+    "click>=8.0",
+    "soundfile>=0.12.0",
+    "numpy>=1.22.0",
+]
+
+[project.optional-dependencies]
+mms = [
+    "transformers>=4.35.0",
+    "torch>=2.0.0",
+]
+indicmos = [
+    "torch>=2.0.0",
+    "torchaudio>=2.0.0",
+    "fairseq>=0.12.0",
+]
+all = [
+    "neptts-eval[mms]",
+    "neptts-eval[indicmos]",
+]
+dev = [
+    "pytest>=7.0",
+]
+
+[project.scripts]
+neptts-eval = "neptts_eval.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/bolne/neptts-eval"
+Dataset = "https://huggingface.co/datasets/bolne/neptts-bench"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/neptts_eval"]

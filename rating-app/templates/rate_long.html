@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NepTTS Benchmark — Rate Speech Quality</title>
+<style>
+:root {
+    --text: #1a1a1a;
+    --text-secondary: #555;
+    --text-muted: #888;
+    --bg: #fafafa;
+    --surface: #fff;
+    --border: #e0e0e0;
+    --accent: #1a1a1a;
+    --accent-soft: #f0f0f0;
+    --score-1: #c0392b;
+    --score-2: #d35400;
+    --score-3: #f39c12;
+    --score-4: #27ae60;
+    --score-5: #2980b9;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.page {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+}
+
+.header {
+    margin-bottom: 32px;
+}
+
+.header h1 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.header .subtitle {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* -- Registration -- */
+
+#register-screen h2 {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+#register-screen .desc {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+.field { margin-bottom: 16px; }
+
+.field label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.field input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.9375rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.15s;
+    font-family: inherit;
+}
+
+.field input[type="text"]:focus {
+    border-color: var(--text);
+}
+
+.check-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.check-field input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--text);
+}
+
+.check-field span {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+/* Time picker */
+.time-picker {
+    margin-bottom: 24px;
+}
+
+.time-options {
+    display: flex;
+    gap: 8px;
+}
+
+.time-opt {
+    flex: 1;
+    padding: 10px 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.12s;
+    font-family: inherit;
+}
+
+.time-opt:hover { border-color: #aaa; }
+
+.time-opt.active {
+    border-color: var(--text);
+    background: var(--text);
+    color: #fff;
+}
+
+.time-opt .mins {
+    font-size: 1.125rem;
+    font-weight: 600;
+    display: block;
+}
+
+.time-opt .label {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    opacity: 0.7;
+}
+
+.time-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 11px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.btn-dark {
+    background: var(--text);
+    color: #fff;
+}
+
+.btn-dark:hover { opacity: 0.85; }
+.btn-dark:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* -- Rating screen -- */
+
+.progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.progress-track {
+    flex: 1;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-track .fill {
+    height: 100%;
+    background: var(--text);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.progress-label {
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+/* Sentence text */
+.sentence-display {
+    text-align: center;
+    padding: 0 8px 8px;
+}
+
+.sentence-dev {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 4px;
+}
+
+.sentence-roman {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.player-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0 16px;
+}
+
+.play-ring {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    background: transparent;
+}
+
+.play-ring:hover { border-color: var(--text); }
+
+.play-ring.playing {
+    border-color: var(--text);
+    background: var(--text);
+}
+
+.play-ring svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--text);
+    transition: fill 0.15s;
+}
+
+.play-ring.playing svg { fill: #fff; }
+
+.play-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+.divider {
+    height: 1px;
+    background: var(--border);
+    margin: 4px 0 20px;
+}
+
+.scale-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.mos-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.mos-option {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.12s;
+    background: var(--surface);
+}
+
+.mos-option:hover { border-color: #aaa; }
+
+.mos-option .num {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.mos-option .tag {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+}
+
+.mos-option.sel-1 { border-color: var(--score-1); background: #fdf2f2; }
+.mos-option.sel-1 .num { color: var(--score-1); }
+.mos-option.sel-2 { border-color: var(--score-2); background: #fef5ee; }
+.mos-option.sel-2 .num { color: var(--score-2); }
+.mos-option.sel-3 { border-color: var(--score-3); background: #fefce8; }
+.mos-option.sel-3 .num { color: var(--score-3); }
+.mos-option.sel-4 { border-color: var(--score-4); background: #f0fdf4; }
+.mos-option.sel-4 .num { color: var(--score-4); }
+.mos-option.sel-5 { border-color: var(--score-5); background: #eff6ff; }
+.mos-option.sel-5 .num { color: var(--score-5); }
+
+.submit-row { margin-top: 24px; }
+
+/* -- Done screen -- */
+
+.done-screen { text-align: center; padding: 48px 0; }
+.done-screen h2 { font-size: 1.125rem; font-weight: 600; margin-bottom: 8px; }
+.done-screen p { font-size: 0.875rem; color: var(--text-secondary); }
+.done-screen .results-table {
+    margin-top: 24px;
+    text-align: left;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+}
+.done-screen .results-table th {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    font-weight: 500;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+}
+.done-screen .results-table td {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--accent-soft);
+}
+.done-screen .results-table td:last-child {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.hidden { display: none; }
+
+.kbd-hint {
+    text-align: center;
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    margin-top: 12px;
+}
+
+.kbd-hint kbd {
+    display: inline-block;
+    padding: 1px 5px;
+    font-family: inherit;
+    font-size: 0.625rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: var(--accent-soft);
+}
+</style>
+</head>
+<body>
+<div class="page">
+    <div class="header">
+        <h1>NepTTS Benchmark</h1>
+        <div class="subtitle">Speech quality evaluation</div>
+    </div>
+
+    <!-- Registration -->
+    <div id="register-screen">
+        <h2>Rate Nepali speech systems (Extended)</h2>
+        <p class="desc">
+            ~100 audio clips, ~20 minutes. Your ratings directly train a Nepali speech quality model. Thank you for your time.
+        </p>
+        <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="तपाईंको नाम">
+            <div style="font-size:0.6875rem;color:var(--text-muted);margin-top:4px">नाम नलेख्ने हो भने आफ्नो जातजाति लेख्नुहोस् (newar, chettri, mongol, etc.)</div>
+        </div>
+        <div class="check-field">
+            <input type="checkbox" id="native" checked>
+            <span>I am a native Nepali speaker</span>
+        </div>
+        <button class="btn btn-dark" onclick="register()">Begin (100 samples)</button>
+    </div>
+
+    <!-- Rating screen -->
+    <div id="rate-screen" class="hidden">
+        <div class="progress-row">
+            <div class="progress-track"><div class="fill" id="progress-fill"></div></div>
+            <div class="progress-label" id="progress-text">0 / 0</div>
+        </div>
+
+        <div class="sentence-display">
+            <div class="sentence-dev" id="sent-dev"></div>
+            <div class="sentence-roman" id="sent-roman"></div>
+        </div>
+
+        <div class="player-area">
+            <div class="play-ring" id="play-btn" onclick="togglePlay()">
+                <svg id="play-icon" viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
+            </div>
+            <div class="play-hint" id="play-count">Tap to listen</div>
+            <audio id="audio-player"></audio>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="scale-label">Quality</div>
+        <div class="mos-row" id="mos-row">
+            <div class="mos-option" onclick="selectScore(1)" data-score="1">
+                <span class="num">1</span><span class="tag">Bad</span>
+            </div>
+            <div class="mos-option" onclick="selectScore(2)" data-score="2">
+                <span class="num">2</span><span class="tag">Poor</span>
+            </div>
+            <div class="mos-option" onclick="selectScore(3)" data-score="3">
+                <span class="num">3</span><span class="tag">Fair</span>
+            </div>
+            <div class="mos-option" onclick="selectScore(4)" data-score="4">
+                <span class="num">4</span><span class="tag">Good</span>
+            </div>
+            <div class="mos-option" onclick="selectScore(5)" data-score="5">
+                <span class="num">5</span><span class="tag">Great</span>
+            </div>
+        </div>
+
+        <div class="kbd-hint">Press <kbd>1</kbd>-<kbd>5</kbd> to rate, <kbd>Space</kbd> to play, <kbd>Enter</kbd> to submit</div>
+
+        <div class="submit-row">
+            <button class="btn btn-dark" id="next-btn" onclick="submitAndNext()" disabled>Next</button>
+        </div>
+    </div>
+
+    <!-- Done screen -->
+    <div id="done-screen" class="hidden done-screen">
+        <h2>Thank you</h2>
+        <p>You have rated all assigned samples.</p>
+        <div id="done-stats"></div>
+    </div>
+</div>
+
+<script>
+const BASE = window.location.pathname.replace(/\/long-rating\/?$/, '');
+const playSvg = '<polygon points="8,5 19,12 8,19"/>';
+const pauseSvg = '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>';
+
+let raterId = null;
+let currentStimulus = null;
+let selectedScore = null;
+let playCount = 0;
+let chosenMinutes = 20; // ~100 samples
+const N_SYSTEMS = 5; // 4 TTS + 1 human
+
+const audio = document.getElementById('audio-player');
+const playBtn = document.getElementById('play-btn');
+const playIcon = document.getElementById('play-icon');
+
+audio.addEventListener('ended', () => {
+    playIcon.innerHTML = playSvg;
+    playBtn.classList.remove('playing');
+});
+
+document.addEventListener('keydown', (e) => {
+    if (!raterId) return;
+    if (e.key >= '1' && e.key <= '5') {
+        selectScore(parseInt(e.key));
+    } else if (e.key === ' ' && document.activeElement.tagName !== 'INPUT') {
+        e.preventDefault();
+        togglePlay();
+    } else if (e.key === 'Enter' && !document.getElementById('next-btn').disabled) {
+        submitAndNext();
+    }
+});
+
+function pickTime(mins, el) {
+    chosenMinutes = mins;
+    document.querySelectorAll('.time-opt').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    const approx = Math.floor((mins * 60) / 12);
+    document.getElementById('time-note').textContent = `~${approx} samples across all systems`;
+}
+
+async function register() {
+    const name = document.getElementById('name').value.trim();
+    if (!name) {
+        document.getElementById('name').focus();
+        return;
+    }
+
+    const native = document.getElementById('native').checked;
+    const res = await fetch(`${BASE}/api/raters`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            name,
+            native_speaker: native,
+            minutes: chosenMinutes,
+            device_info: navigator.userAgent,
+        }),
+    });
+    const data = await res.json();
+    raterId = data.rater_id;
+
+    document.getElementById('register-screen').classList.add('hidden');
+    document.getElementById('rate-screen').classList.remove('hidden');
+    loadNext();
+}
+
+async function loadNext() {
+    const res = await fetch(`${BASE}/api/next/${raterId}`);
+    const data = await res.json();
+
+    if (data.done) {
+        document.getElementById('rate-screen').classList.add('hidden');
+        document.getElementById('done-screen').classList.remove('hidden');
+
+        const rres = await fetch(`${BASE}/api/results`);
+        const results = await rres.json();
+        if (results.systems && results.systems.length) {
+            let html = `<table class="results-table"><tr><th>System</th><th style="text-align:right">MOS</th></tr>`;
+            for (const sys of results.systems) {
+                html += `<tr><td>${sys.system_name}</td><td style="text-align:right">${sys.mean_mos}</td></tr>`;
+            }
+            html += `</table>`;
+            document.getElementById('done-stats').innerHTML = html;
+        }
+        return;
+    }
+
+    currentStimulus = data;
+    selectedScore = null;
+    playCount = 0;
+
+    const pct = (data.progress / data.total * 100).toFixed(1);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = `${data.progress} / ${data.total}`;
+
+    // Show sentence text
+    document.getElementById('sent-dev').textContent = data.text_dev || '';
+    document.getElementById('sent-roman').textContent = data.text_roman || '';
+
+    audio.src = `${BASE}/api/audio/${data.system_name}/${data.sent_id}`;
+    playIcon.innerHTML = playSvg;
+    playBtn.classList.remove('playing');
+    document.getElementById('play-count').textContent = 'Tap to listen';
+
+    document.querySelectorAll('.mos-option').forEach(b => {
+        b.className = 'mos-option';
+    });
+    document.getElementById('next-btn').disabled = true;
+}
+
+function togglePlay() {
+    if (audio.paused) {
+        audio.play();
+        playIcon.innerHTML = pauseSvg;
+        playBtn.classList.add('playing');
+        playCount++;
+        document.getElementById('play-count').textContent =
+            playCount === 1 ? 'Played once' : `Played ${playCount} times`;
+    } else {
+        audio.pause();
+        playIcon.innerHTML = playSvg;
+        playBtn.classList.remove('playing');
+    }
+}
+
+function selectScore(score) {
+    selectedScore = score;
+    document.querySelectorAll('.mos-option').forEach(b => {
+        const s = parseInt(b.dataset.score);
+        b.className = s === score ? `mos-option sel-${s}` : 'mos-option';
+    });
+    document.getElementById('next-btn').disabled = playCount < 1;
+}
+
+async function submitAndNext() {
+    if (!selectedScore || !currentStimulus || playCount < 1) return;
+
+    const btn = document.getElementById('next-btn');
+    btn.disabled = true;
+
+    await fetch(`${BASE}/api/ratings`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            rater_id: raterId,
+            system_name: currentStimulus.system_name,
+            sent_id: currentStimulus.sent_id,
+            score: selectedScore,
+        }),
+    });
+
+    loadNext();
+}
+</script>
+</body>
+</html>

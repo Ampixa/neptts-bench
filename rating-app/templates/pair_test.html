@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NepTTS Benchmark — Pair Discrimination Test</title>
+<style>
+:root {
+    --text: #1a1a1a;
+    --text-secondary: #555;
+    --text-muted: #888;
+    --bg: #fafafa;
+    --surface: #fff;
+    --border: #e0e0e0;
+    --accent-soft: #f0f0f0;
+    --active: #1a1a1a;
+    --a-color: #2980b9;
+    --b-color: #8e44ad;
+    --green: #27ae60;
+    --red: #c0392b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.page {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+}
+
+.header h1 { font-size: 1.125rem; font-weight: 600; }
+.header .subtitle { font-size: 0.8125rem; color: var(--text-muted); margin-top: 2px; margin-bottom: 32px; }
+
+/* Registration */
+#register-screen h2 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 6px; }
+#register-screen .desc { font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 24px; }
+
+.field { margin-bottom: 16px; }
+.field label {
+    display: block; font-size: 0.75rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--text-muted); margin-bottom: 6px;
+}
+.field input[type="text"] {
+    width: 100%; padding: 10px 12px; font-size: 0.9375rem;
+    border: 1px solid var(--border); border-radius: 6px;
+    outline: none; font-family: inherit;
+}
+.field input:focus { border-color: var(--text); }
+
+.check-field { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+.check-field input { width: 16px; height: 16px; accent-color: var(--text); }
+.check-field span { font-size: 0.8125rem; color: var(--text-secondary); }
+
+.time-picker { margin-bottom: 24px; }
+.time-options { display: flex; gap: 8px; }
+.time-opt {
+    flex: 1; padding: 10px 0; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--surface); text-align: center; cursor: pointer; font-family: inherit;
+}
+.time-opt:hover { border-color: #aaa; }
+.time-opt.active { border-color: var(--text); background: var(--text); color: #fff; }
+.time-opt .mins { font-size: 1.125rem; font-weight: 600; display: block; }
+.time-opt .label { font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.03em; opacity: 0.7; }
+.time-note { font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; }
+
+.btn {
+    display: block; width: 100%; padding: 11px 0; border: none; border-radius: 6px;
+    font-size: 0.875rem; font-weight: 500; font-family: inherit; cursor: pointer;
+}
+.btn-dark { background: var(--text); color: #fff; }
+.btn-dark:hover { opacity: 0.85; }
+.btn-dark:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* Progress */
+.progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.progress-track { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.progress-track .fill { height: 100%; background: var(--text); border-radius: 2px; transition: width 0.3s; }
+.progress-label { font-size: 0.75rem; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+/* Pair card */
+.pair-sentences {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;
+}
+
+.sent-card {
+    padding: 16px; border-radius: 8px; text-align: center;
+}
+.sent-card.a { background: #ebf5fb; border: 1px solid #aed6f1; }
+.sent-card.b { background: #f4ecf7; border: 1px solid #d2b4de; }
+
+.sent-card .label {
+    font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.05em;
+    margin-bottom: 6px; font-weight: 600;
+}
+.sent-card.a .label { color: var(--a-color); }
+.sent-card.b .label { color: var(--b-color); }
+
+.sent-card .text-dev { font-size: 1.125rem; font-weight: 500; margin-bottom: 4px; }
+.sent-card .contrast {
+    font-weight: 700;
+    padding: 1px 4px;
+    border-radius: 4px;
+}
+.sent-card.a .contrast { background: #d4e6f1; color: var(--a-color); }
+.sent-card.b .contrast { background: #e8daef; color: var(--b-color); }
+
+.sent-card .play-circle {
+    width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; margin: 12px auto 0; background: transparent; transition: all 0.15s;
+}
+.sent-card .play-circle:hover { border-color: var(--text); }
+.sent-card .play-circle.playing { border-color: var(--text); background: var(--text); }
+.sent-card .play-circle svg { width: 18px; height: 18px; fill: var(--text); }
+.sent-card .play-circle.playing svg { fill: #fff; }
+
+.play-hint { font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-bottom: 20px; }
+
+.divider { height: 1px; background: var(--border); margin: 4px 0 20px; }
+
+.question { font-size: 0.875rem; font-weight: 500; text-align: center; margin-bottom: 16px; }
+
+.verdict-row { display: flex; gap: 10px; margin-bottom: 8px; }
+.verdict-btn {
+    flex: 1; padding: 14px 0; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--surface); font-size: 0.9375rem; font-weight: 600;
+    font-family: inherit; cursor: pointer; text-align: center; transition: all 0.12s;
+}
+.verdict-btn:hover { border-color: #aaa; }
+.verdict-btn.yes.selected { background: var(--green); color: #fff; border-color: var(--green); }
+.verdict-btn.no.selected { background: var(--red); color: #fff; border-color: var(--red); }
+
+.submit-row { margin-top: 20px; }
+
+/* Done */
+.done-screen { text-align: center; padding: 48px 0; }
+.done-screen h2 { font-size: 1.125rem; font-weight: 600; margin-bottom: 8px; }
+.done-screen p { font-size: 0.875rem; color: var(--text-secondary); }
+
+.hidden { display: none; }
+
+.kbd-hint {
+    text-align: center; font-size: 0.6875rem; color: var(--text-muted); margin-top: 12px;
+}
+.kbd-hint kbd {
+    padding: 1px 5px; font-family: inherit; font-size: 0.625rem;
+    border: 1px solid var(--border); border-radius: 3px; background: var(--accent-soft);
+}
+</style>
+</head>
+<body>
+<div class="page">
+    <div class="header">
+        <h1>NepTTS Benchmark</h1>
+        <div class="subtitle">Minimal pair discrimination test</div>
+    </div>
+
+    <!-- Registration -->
+    <div id="register-screen">
+        <h2>Can you hear the difference?</h2>
+        <p class="desc">
+            You will hear two similar Nepali sentences that differ by one key word.
+            For example: "<b>काम</b> राम्रो छ" vs "<b>खाम</b> पठायो" — can you hear the difference between <b>काम</b> and <b>खाम</b>?
+            <br><br>
+            Listen to both sentences and tell us if the highlighted words sound different.
+            About 5-10 minutes.
+        </p>
+        <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="तपाईंको नाम">
+        </div>
+        <div class="check-field">
+            <input type="checkbox" id="native" checked>
+            <span>I am a native Nepali speaker</span>
+        </div>
+        <div class="time-picker">
+            <label style="display:block;font-size:0.75rem;font-weight:500;text-transform:uppercase;letter-spacing:0.04em;color:var(--text-muted);margin-bottom:8px">How much time do you have?</label>
+            <div class="time-options">
+                <button class="time-opt" onclick="pickTime(5,this)" data-min="5"><span class="mins">5</span><span class="label">min</span></button>
+                <button class="time-opt active" onclick="pickTime(10,this)" data-min="10"><span class="mins">10</span><span class="label">min</span></button>
+                <button class="time-opt" onclick="pickTime(15,this)" data-min="15"><span class="mins">15</span><span class="label">min</span></button>
+            </div>
+            <div class="time-note" id="time-note">~40 pair comparisons</div>
+        </div>
+        <button class="btn btn-dark" onclick="register()">Begin</button>
+    </div>
+
+    <!-- Test screen -->
+    <div id="test-screen" class="hidden">
+        <div class="progress-row">
+            <div class="progress-track"><div class="fill" id="progress-fill"></div></div>
+            <div class="progress-label" id="progress-text">0 / 0</div>
+        </div>
+
+        <div class="pair-sentences">
+            <div class="sent-card a">
+                <div class="label">Sentence A</div>
+                <div class="text-dev" id="text-a"></div>
+                <button class="play-circle" id="play-a" onclick="playA()">
+                    <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
+                </button>
+            </div>
+            <div class="sent-card b">
+                <div class="label">Sentence B</div>
+                <div class="text-dev" id="text-b"></div>
+                <button class="play-circle" id="play-b" onclick="playB()">
+                    <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="play-hint" id="play-hint">Listen to both — do the <strong>highlighted words</strong> sound different?</div>
+
+        <div class="divider"></div>
+
+        <div class="question">Do the highlighted words sound different?</div>
+
+        <div class="verdict-row">
+            <button class="verdict-btn yes" id="btn-yes" onclick="selectVerdict(1)">Yes, different</button>
+            <button class="verdict-btn no" id="btn-no" onclick="selectVerdict(0)">No, same</button>
+        </div>
+
+        <div class="kbd-hint">
+            <kbd>A</kbd> play word A, <kbd>B</kbd> play word B, <kbd>Y</kbd> yes, <kbd>N</kbd> no, <kbd>Enter</kbd> next
+        </div>
+
+        <div class="submit-row">
+            <button class="btn btn-dark" id="next-btn" onclick="submitAndNext()" disabled>Next</button>
+        </div>
+    </div>
+
+    <!-- Done -->
+    <div id="done-screen" class="hidden done-screen">
+        <h2>Thank you</h2>
+        <p>You have completed the pair discrimination test.</p>
+    </div>
+</div>
+
+<script>
+const BASE = window.location.pathname.replace(/\/pairs\/?$/, '');
+const playSvg = '<polygon points="8,5 19,12 8,19"/>';
+const pauseSvg = '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>';
+
+let raterId = null;
+let assignments = [];
+let currentIdx = 0;
+let current = null;
+let verdict = null;
+let playedA = false;
+let playedB = false;
+let audioA = null;
+let audioB = null;
+let chosenMinutes = 10;
+
+function pickTime(mins, el) {
+    chosenMinutes = mins;
+    document.querySelectorAll('.time-opt').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    const approx = Math.floor(mins * 60 / 15);
+    document.getElementById('time-note').textContent = `~${approx} pair comparisons`;
+}
+
+async function register() {
+    const name = document.getElementById('name').value.trim();
+    if (!name) { document.getElementById('name').focus(); return; }
+
+    const res = await fetch(`${BASE}/api/pair-test/start`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            name, native_speaker: document.getElementById('native').checked,
+            minutes: chosenMinutes,
+        }),
+    });
+    const data = await res.json();
+    raterId = data.rater_id;
+    assignments = data.assignments;
+
+    document.getElementById('register-screen').classList.add('hidden');
+    document.getElementById('test-screen').classList.remove('hidden');
+    loadTrial();
+}
+
+function loadTrial() {
+    stopAll();
+    if (currentIdx >= assignments.length) {
+        document.getElementById('test-screen').classList.add('hidden');
+        document.getElementById('done-screen').classList.remove('hidden');
+        return;
+    }
+
+    current = assignments[currentIdx];
+    verdict = null;
+    playedA = false;
+    playedB = false;
+
+    const pct = (currentIdx / assignments.length * 100).toFixed(1);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = `${currentIdx} / ${assignments.length}`;
+
+    function highlightWord(text, word) {
+        if (!word) return text;
+        return text.replace(word, `<span class="contrast">${word}</span>`);
+    }
+    document.getElementById('text-a').innerHTML = highlightWord(current.text_a, current.word_a);
+    document.getElementById('text-b').innerHTML = highlightWord(current.text_b, current.word_b);
+    document.getElementById('play-hint').innerHTML = 'Listen to both — do the <strong>highlighted words</strong> sound different?';
+
+    document.getElementById('btn-yes').classList.remove('selected');
+    document.getElementById('btn-no').classList.remove('selected');
+    document.getElementById('next-btn').disabled = true;
+
+    document.getElementById('play-a').classList.remove('playing');
+    document.getElementById('play-b').classList.remove('playing');
+
+    audioA = new Audio(`${BASE}/api/audio/${current.system}/${current.sent_a}`);
+    audioB = new Audio(`${BASE}/api/audio/${current.system}/${current.sent_b}`);
+    audioA.onended = () => document.getElementById('play-a').classList.remove('playing');
+    audioB.onended = () => document.getElementById('play-b').classList.remove('playing');
+}
+
+function stopAll() {
+    if (audioA) audioA.pause();
+    if (audioB) audioB.pause();
+    document.getElementById('play-a')?.classList.remove('playing');
+    document.getElementById('play-b')?.classList.remove('playing');
+}
+
+function playA() {
+    stopAll();
+    document.getElementById('play-a').classList.add('playing');
+    audioA.currentTime = 0;
+    audioA.play();
+    playedA = true;
+    updateHint();
+}
+
+function playB() {
+    stopAll();
+    document.getElementById('play-b').classList.add('playing');
+    audioB.currentTime = 0;
+    audioB.play();
+    playedB = true;
+    updateHint();
+}
+
+function updateHint() {
+    if (playedA && playedB) {
+        document.getElementById('play-hint').textContent = 'Now decide — can you hear the difference?';
+    } else if (playedA) {
+        document.getElementById('play-hint').textContent = 'Now listen to Word B';
+    } else if (playedB) {
+        document.getElementById('play-hint').textContent = 'Now listen to Word A';
+    }
+}
+
+function selectVerdict(v) {
+    verdict = v;
+    document.getElementById('btn-yes').classList.toggle('selected', v === 1);
+    document.getElementById('btn-no').classList.toggle('selected', v === 0);
+    document.getElementById('next-btn').disabled = !(playedA && playedB);
+}
+
+async function submitAndNext() {
+    if (verdict === null || !current) return;
+
+    document.getElementById('next-btn').disabled = true;
+
+    await fetch(`${BASE}/api/pair-test/submit`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            rater_id: raterId,
+            system_name: current.system,
+            pair_id: current.pair_id,
+            sent_id_a: current.sent_a,
+            sent_id_b: current.sent_b,
+            can_distinguish: verdict,
+        }),
+    });
+
+    currentIdx++;
+    loadTrial();
+}
+
+document.addEventListener('keydown', (e) => {
+    if (!raterId) return;
+    if (e.key === 'a' || e.key === 'A') playA();
+    else if (e.key === 'b' || e.key === 'B') playB();
+    else if (e.key === 'y' || e.key === 'Y') selectVerdict(1);
+    else if (e.key === 'n' || e.key === 'N') selectVerdict(0);
+    else if (e.key === 'Enter' && !document.getElementById('next-btn').disabled) submitAndNext();
+});
+</script>
+</body>
+</html>
