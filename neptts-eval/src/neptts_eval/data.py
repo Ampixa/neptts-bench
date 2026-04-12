@@ -7,7 +7,7 @@ from pathlib import Path
 
 CACHE_DIR = Path.home() / ".cache" / "neptts-bench"
 SENTENCES_CACHE = CACHE_DIR / "sentences.json"
-HF_DATASET = "bolne/neptts-bench"
+HF_DATASET = "ampixa/neptts-bench"
 
 
 def load_sentences() -> dict[str, dict]:

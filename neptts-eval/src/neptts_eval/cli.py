@@ -1,7 +1,10 @@
 """CLI entry point for neptts-eval."""
 
 import json
+import subprocess
 import sys
+import tempfile
+from pathlib import Path
 
 import click
 
@@ -9,8 +12,11 @@ from . import __version__
 
 
 @click.command()
-@click.option("--wav_dir", "--wav-dir", required=True, type=click.Path(exists=True),
-              help="Directory containing sent_001.wav, sent_002.wav, etc.")
+@click.option("--tts-cmd", default=None,
+              help="Shell command to synthesize. Use {text} for input, {output} for output path. "
+                   "Example: \"python my_tts.py '{text}' -o '{output}'\"")
+@click.option("--wav-dir", "--wav_dir", default=None, type=click.Path(exists=True),
+              help="Directory with pre-generated audio (sent_001.wav, etc.). Alternative to --tts-cmd.")
 @click.option("--output", "-o", default="neptts_report.json",
               help="Output JSON report path (default: neptts_report.json)")
 @click.option("--system-name", default="my_system",
@@ -23,23 +29,43 @@ from . import __version__
 @click.option("--skip-asr", is_flag=True, help="Skip ASR round-trip evaluation")
 @click.option("--verbose", "-v", is_flag=True, help="Print progress")
 @click.version_option(version=__version__)
-def main(wav_dir, output, system_name, whisper_model, device, skip_scoreq, skip_asr, verbose):
+def main(tts_cmd, wav_dir, output, system_name, whisper_model, device, skip_scoreq, skip_asr, verbose):
     """Evaluate a Nepali TTS system against the NepTTS-Bench benchmark.
 
-    Place your TTS audio files (sent_001.wav, sent_002.wav, ...) in a directory
-    and run this tool to get SCOREQ MOS and ASR round-trip CER scores,
-    compared against 9 baseline systems.
-    """
-    from .data import discover_audio_files, load_sentences
+    Two modes:
 
-    # Discover files
-    audio_files = discover_audio_files(wav_dir)
-    click.echo(f"Found {len(audio_files)} audio files in {wav_dir}")
+    \b
+    1. Provide a TTS command (recommended):
+       neptts-eval --tts-cmd "python my_tts.py '{text}' -o '{output}'"
+
+    \b
+    2. Provide pre-generated audio:
+       neptts-eval --wav-dir ./my_outputs/
+
+    For mode 1, {text} is replaced with the Nepali sentence and {output}
+    with the output WAV path. The command is called for each benchmark sentence.
+    """
+    from .data import load_sentences
+
+    if not tts_cmd and not wav_dir:
+        click.echo("Error: provide either --tts-cmd or --wav-dir", err=True)
+        raise SystemExit(1)
 
     # Load sentences
     if verbose:
         click.echo("Loading benchmark sentences...")
     sentences = load_sentences()
+
+    # Get audio files
+    if tts_cmd:
+        click.echo(f"Generating audio with: {tts_cmd}")
+        audio_files = _generate_from_cmd(tts_cmd, sentences, verbose)
+        click.echo(f"Generated {len(audio_files)} audio files")
+    else:
+        from .data import discover_audio_files
+        audio_files = discover_audio_files(wav_dir)
+        click.echo(f"Found {len(audio_files)} audio files in {wav_dir}")
+
     matched = {sid: path for sid, path in audio_files.items() if sid in sentences}
     click.echo(f"Matched {len(matched)}/{len(audio_files)} files to benchmark sentences")
 
@@ -73,6 +99,50 @@ def main(wav_dir, output, system_name, whisper_model, device, skip_scoreq, skip_
 
     # Print comparison table
     print_table(report)
+
+
+def _generate_from_cmd(cmd_template: str, sentences: dict, verbose: bool) -> dict[str, Path]:
+    """Generate audio by calling a shell command for each sentence."""
+    output_dir = Path(tempfile.mkdtemp(prefix="neptts_"))
+
+    # Only benchmark sentences
+    bench = {sid: s for sid, s in sentences.items() if not sid.startswith("chirp_")}
+
+    audio_files = {}
+    errors = 0
+
+    for i, (sent_id, sent) in enumerate(sorted(bench.items())):
+        text = sent.get("text_dev", sent.get("text_devanagari", ""))
+        if not text:
+            continue
+
+        out_path = output_dir / f"{sent_id}.wav"
+
+        # Replace placeholders
+        cmd = cmd_template.replace("{text}", text).replace("{output}", str(out_path))
+
+        try:
+            result = subprocess.run(
+                cmd, shell=True, capture_output=True, text=True, timeout=30,
+            )
+            if out_path.exists() and out_path.stat().st_size > 100:
+                audio_files[sent_id] = out_path
+            elif result.returncode != 0:
+                errors += 1
+                if verbose and errors <= 3:
+                    click.echo(f"  Error {sent_id}: {result.stderr[:100]}", err=True)
+            else:
+                errors += 1
+        except subprocess.TimeoutExpired:
+            errors += 1
+            if verbose:
+                click.echo(f"  Timeout {sent_id}", err=True)
+
+        if verbose and (i + 1) % 20 == 0:
+            click.echo(f"  {i+1}/{len(bench)} ({len(audio_files)} ok, {errors} errors)")
+
+    click.echo(f"  Generated {len(audio_files)}/{len(bench)}, {errors} errors")
+    return audio_files
 
 
 if __name__ == "__main__":
