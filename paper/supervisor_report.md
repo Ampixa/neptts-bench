@@ -103,12 +103,42 @@ We trained the first Nepali-specific MOS predictor by fine-tuning IndicWav2Vec o
 - Collecting more pair discrimination ratings (54 so far, need 200+)
 - Recruiting more raters to improve MOS predictor (target: 10K ratings for Spearman 0.7+)
 
+### Commercial Application: AgentShakti
+
+This research directly feeds into **AgentShakti** (https://agentshakti.xyz) — a unified business communication platform we built that uses Nepali TTS for automated voice calls, SMS, and agent handoff. AgentShakti serves banking, healthcare, and telecom sectors in Nepal.
+
+The NepTTS-Bench findings directly inform which TTS system AgentShakti uses for outbound Nepali voice calls — selecting the system that native speakers rate highest ensures better customer experience.
+
 ### Future Work
 - Publish neptts-eval to PyPI
 - HuggingFace Spaces leaderboard
 - Improve MOS predictor with more data and autoresearch-style experimentation
 - Add more TTS systems (AI4Bharat IndicTTS, MMS-TTS)
 - Cross-dialect analysis (ratings by ethnic group / mother tongue)
+- Integration of NepaliMOS predictor into AgentShakti for real-time quality monitoring
+
+## Screenshots
+
+### Rating App — Registration
+![Rating Registration](../screenshots/01_rating_registration.png)
+
+### Admin Dashboard — 189 raters, 6,495 ratings
+![Dashboard](../screenshots/02_dashboard.png)
+
+### Voice Browser — Compare all systems
+![Voices](../screenshots/03_voices.png)
+
+### Minimal Pairs — Phonological contrast testing
+![Pairs](../screenshots/04_pairs.png)
+
+### Pair Discrimination Test — Structured listening test
+![Pair Test](../screenshots/05_pair_test.png)
+
+### GitHub Repository
+![GitHub](../screenshots/06_github.png)
+
+### HuggingFace Dataset
+![HuggingFace](../screenshots/07_huggingface.png)
 
 ## Timeline
 
