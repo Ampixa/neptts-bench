@@ -105,9 +105,11 @@ We trained the first Nepali-specific MOS predictor by fine-tuning IndicWav2Vec o
 
 ### Commercial Application: AgentShakti
 
-This research directly feeds into **AgentShakti** (https://agentshakti.xyz) — a unified business communication platform we built that uses Nepali TTS for automated voice calls, SMS, and agent handoff. AgentShakti serves banking, healthcare, and telecom sectors in Nepal.
+This research directly feeds into **AgentShakti** (https://agentshakti.xyz) — a unified business communication platform we built that uses Nepali TTS for automated voice calls, two-way SMS, and agent handoff. AgentShakti serves banking, healthcare, and telecom sectors in Nepal.
 
-The NepTTS-Bench findings directly inform which TTS system AgentShakti uses for outbound Nepali voice calls — selecting the system that native speakers rate highest ensures better customer experience.
+The NepTTS-Bench findings directly inform which TTS system AgentShakti uses for outbound Nepali voice calls — selecting the system that native speakers rate highest ensures better customer experience. The NepaliMOS predictor will enable real-time quality monitoring of generated speech in production.
+
+![AgentShakti](../screenshots/08_agentshakti.png)
 
 ### Future Work
 - Publish neptts-eval to PyPI
@@ -140,15 +142,3 @@ The NepTTS-Bench findings directly inform which TTS system AgentShakti uses for 
 ### HuggingFace Dataset
 ![HuggingFace](../screenshots/07_huggingface.png)
 
-## Timeline
-
-| Date | Milestone |
-|------|-----------|
-| Apr 7 | TTS generation complete (9 systems) |
-| Apr 8 | Rating app deployed, ASR evaluation complete |
-| Apr 9 | Added Chirp2 ASR, MMS, XLS-R metrics |
-| Apr 10 | Minimal pairs audit, sentence corrections |
-| Apr 11 | ElevenLabs v3, Gemini Nepali, pair discrimination test |
-| Apr 12 | 5,760 ratings, MOS predictor trained (Spearman 0.587) |
-| Apr 13 | GitHub repo + HuggingFace dataset published, neptts-eval package |
-| Ongoing | Collecting more ratings, preparing paper submission |
