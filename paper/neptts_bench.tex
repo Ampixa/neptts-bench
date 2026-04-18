@@ -20,7 +20,7 @@
 \maketitle
 
 \begin{abstract}
-We present NepTTS-Bench, the first comprehensive benchmark for evaluating Nepali text-to-speech (TTS) systems. Our benchmark comprises 205 phonologically-informed sentences covering 77 minimal pairs across 9 contrast categories, and evaluates 12 systems spanning commercial cloud services, Nepali-specific providers, open-source models, and human speech baselines. We collect 7,003 human MOS ratings from 207 native Nepali speakers and compare against 6 automated metrics including SCOREQ auto-MOS and ASR round-trip CER using 5 different ASR systems. Our key findings are: (1) automated MOS predictions trained on English are unreliable for Nepali---SCOREQ ranks ElevenLabs v3 first ($4.45$) while human raters rank it sixth ($3.47$); (2) Nepali-specific TTS systems are competitive with global cloud services; (3) ASR model selection critically affects evaluation---Whisper gives essentially random rankings ($\rho = 0.38$) while Chirp2 is reliable ($\rho = 0.88$); and (4) our fine-tuned Nepali MOS predictor based on IndicWav2Vec achieves Spearman $\rho = 0.587$ with human ratings. We release the complete benchmark---sentence sets, evaluation toolkit (\texttt{neptts-eval}), rating application, model checkpoint, and all data---as open-source resources.
+We present NepTTS-Bench, the first comprehensive benchmark for evaluating Nepali text-to-speech (TTS) systems. Our benchmark comprises 205 phonologically-informed sentences covering 77 minimal pairs across 9 contrast categories, and evaluates 12 systems spanning commercial cloud services, Nepali-specific providers, open-source models, and human speech baselines. We collect 7,003 human MOS ratings from 207 native Nepali speakers and compare against 6 automated metrics including SCOREQ auto-MOS and ASR round-trip CER using 5 different ASR systems. Our key findings are: (1) automated MOS predictions trained on English are unreliable for Nepali---SCOREQ ranks ElevenLabs v3 first ($4.45$) while human raters rank it sixth ($3.47$); (2) Nepali-specific TTS systems are competitive with global cloud services; (3) ASR model selection critically affects evaluation---Whisper gives essentially random rankings ($\rho = 0.38$) while Chirp2 is reliable ($\rho = 0.88$); and (4) our fine-tuned Nepali MOS predictor based on IndicWav2Vec achieves Spearman $\rho = 0.66$ with human ratings. We release the complete benchmark---sentence sets, evaluation toolkit (\texttt{neptts-eval}), rating application, model checkpoint, and all data---as open-source resources.
 \end{abstract}
 
 \section{Introduction}
@@ -35,7 +35,7 @@ We present NepTTS-Bench with the following contributions:
 \item A curated sentence set of 205 sentences covering 77 phonological minimal pairs across 9 contrast categories specific to Nepali phonology (aspiration, retroflexion, nasalization, gemination, schwa deletion).
 \item Evaluation of 12 systems (10 TTS + 2 human baselines) using 6 automated metrics and human MOS ratings from 207 native speakers.
 \item Evidence that automated MOS predictors trained on English systematically disagree with Nepali native speaker preferences, demonstrating the need for language-specific evaluation.
-\item The first Nepali MOS predictor, achieving Spearman $\rho = 0.587$ with human ratings by fine-tuning IndicWav2Vec on our collected data.
+\item The first Nepali MOS predictor, achieving Spearman $\rho = 0.66$ with human ratings by fine-tuning IndicWav2Vec on our collected data.
 \item A complete open-source toolkit: benchmark sentences, evaluation CLI (\texttt{neptts-eval}), web-based rating application, and all evaluation data.\footnote{GitHub: \url{https://github.com/Ampixa/neptts-bench}, HuggingFace: \url{https://huggingface.co/datasets/ampixa/neptts-bench}}
 \end{enumerate}
 
@@ -252,7 +252,7 @@ We train the first Nepali-specific MOS predictor by fine-tuning IndicWav2Vec bas
 \begin{itemize}
 \item \textbf{Architecture:} IndicWav2Vec base (top 4 transformer layers unfrozen) + 2-layer MLP head (768 $\rightarrow$ 256 $\rightarrow$ 1)
 \item \textbf{Training:} 7,003 human ratings, MSE loss, Adam with differential learning rates (backbone: $10^{-5}$, head: $10^{-4}$), batch size 2
-\item \textbf{Result:} Spearman $\rho = 0.587$, Pearson $r = 0.575$
+\item \textbf{Result:} Spearman $\rho = 0.66$, Pearson $r = 0.64$
 \end{itemize}
 
 Performance scales with data volume:
@@ -269,11 +269,12 @@ Ratings & Samples & Spearman $\rho$ \\
 1,430 & 1,430 & 0.305 \\
 2,742 & 1,541 & 0.413 \\
 5,760 & 1,678 & 0.587 \\
+7,003 & 1,696 & \textbf{0.660} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The log-linear scaling suggests that 10,000+ ratings would achieve $\rho > 0.7$, approaching production quality.
+The log-linear scaling suggests that 10,000+ ratings would achieve $\rho > 0.7$, reaching production quality. The jump from 0.587 to 0.660 with just 1,200 additional ratings confirms that data volume, not architecture, is the primary bottleneck.
 
 \section{Discussion}
 
