@@ -6,10 +6,13 @@
 \usepackage{hyperref}
 \usepackage[margin=1in]{geometry}
 \usepackage{natbib}
+\usepackage{multirow}
 
 \title{NepTTS-Bench: A Comprehensive Benchmark for\\Nepali Text-to-Speech Evaluation}
 \author{
-  Anonymous Authors
+  Ashish Thapa \\
+  Ampixa Labs \\
+  \texttt{ashish@ampixa.com}
 }
 \date{}
 
@@ -17,77 +20,81 @@
 \maketitle
 
 \begin{abstract}
-We present NepTTS-Bench, the first comprehensive benchmark for evaluating Nepali text-to-speech (TTS) systems. Our benchmark comprises 193 phonologically-informed sentences covering 71 minimal pairs across 9 contrast categories, and evaluates 9 TTS systems spanning commercial cloud services (ElevenLabs, Google Gemini, Microsoft Edge TTS), Nepali-specific providers (TingTing.io), open-source models (Piper), and baseline systems (gTTS). We evaluate using 5 ASR round-trip metrics (Google Chirp2, Meta MMS, XLS-R Nepali, Whisper small, Whisper large-v3-turbo), automated MOS prediction (SCOREQ), and human MOS ratings from native Nepali speakers. Our results show that (1) ElevenLabs v3 and TingTing Subina achieve the best overall quality, (2) automated MOS strongly correlates with Chirp2 ASR ($\rho = 0.883$) but weakly with Whisper ($\rho = 0.383$), highlighting the importance of ASR model selection for low-resource language evaluation, and (3) Nepali-specific TTS systems (TingTing) are competitive with global cloud services despite being trained on limited data. We release the benchmark toolkit, sentence sets, and evaluation pipeline as open-source resources.
+We present NepTTS-Bench, the first comprehensive benchmark for evaluating Nepali text-to-speech (TTS) systems. Our benchmark comprises 205 phonologically-informed sentences covering 77 minimal pairs across 9 contrast categories, and evaluates 12 systems spanning commercial cloud services, Nepali-specific providers, open-source models, and human speech baselines. We collect 7,003 human MOS ratings from 207 native Nepali speakers and compare against 6 automated metrics including SCOREQ auto-MOS and ASR round-trip CER using 5 different ASR systems. Our key findings are: (1) automated MOS predictions trained on English are unreliable for Nepali---SCOREQ ranks ElevenLabs v3 first ($4.45$) while human raters rank it sixth ($3.47$); (2) Nepali-specific TTS systems are competitive with global cloud services; (3) ASR model selection critically affects evaluation---Whisper gives essentially random rankings ($\rho = 0.38$) while Chirp2 is reliable ($\rho = 0.88$); and (4) our fine-tuned Nepali MOS predictor based on IndicWav2Vec achieves Spearman $\rho = 0.587$ with human ratings. We release the complete benchmark---sentence sets, evaluation toolkit (\texttt{neptts-eval}), rating application, model checkpoint, and all data---as open-source resources.
 \end{abstract}
 
 \section{Introduction}
 
-Text-to-speech (TTS) technology has advanced dramatically in recent years, with neural models achieving near-human naturalness for high-resource languages like English, Mandarin, and Japanese. However, for low-resource languages such as Nepali---spoken by approximately 32 million people---systematic evaluation of TTS quality remains absent. No standardized benchmark exists for comparing Nepali TTS systems, making it difficult for researchers and practitioners to assess progress or select appropriate systems for their applications.
+Text-to-speech (TTS) technology has advanced dramatically, with neural models achieving near-human naturalness for high-resource languages. However, for low-resource languages such as Nepali---spoken by approximately 32 million people---systematic evaluation remains absent. No standardized benchmark exists for comparing Nepali TTS systems, making it impossible for researchers and practitioners to assess progress or select appropriate systems.
 
-Several commercial TTS systems now claim Nepali support, including Microsoft Edge TTS, Google's Gemini Flash TTS, ElevenLabs v3, and the Nepali-specific TingTing.io. Open-source alternatives such as Piper TTS also offer Nepali voices. However, the quality of these systems for Nepali has never been systematically compared.
+Several systems now claim Nepali support: Microsoft Edge TTS, Google Gemini Flash, ElevenLabs v3, the Nepali-specific TingTing.io, and open-source Piper TTS. But their relative quality has never been systematically compared by native speakers.
 
-We present NepTTS-Bench, a comprehensive benchmark for Nepali TTS evaluation with the following contributions:
+We present NepTTS-Bench with the following contributions:
 
 \begin{enumerate}
-\item A curated sentence set of 193 sentences covering 71 phonological minimal pairs across 9 contrast categories specific to Nepali phonology (aspiration, retroflexion, nasalization, gemination, schwa deletion).
-\item Evaluation of 9 TTS systems using 6 automated metrics and human MOS ratings.
-\item Analysis of cross-metric correlations showing that ASR model selection critically affects evaluation reliability for low-resource languages.
-\item 160 natural speech reference utterances from a Chirp2-transcribed Nepali speech corpus for human ceiling estimation.
-\item An open-source evaluation toolkit including a web-based MOS rating application.
+\item A curated sentence set of 205 sentences covering 77 phonological minimal pairs across 9 contrast categories specific to Nepali phonology (aspiration, retroflexion, nasalization, gemination, schwa deletion).
+\item Evaluation of 12 systems (10 TTS + 2 human baselines) using 6 automated metrics and human MOS ratings from 207 native speakers.
+\item Evidence that automated MOS predictors trained on English systematically disagree with Nepali native speaker preferences, demonstrating the need for language-specific evaluation.
+\item The first Nepali MOS predictor, achieving Spearman $\rho = 0.587$ with human ratings by fine-tuning IndicWav2Vec on our collected data.
+\item A complete open-source toolkit: benchmark sentences, evaluation CLI (\texttt{neptts-eval}), web-based rating application, and all evaluation data.\footnote{GitHub: \url{https://github.com/Ampixa/neptts-bench}, HuggingFace: \url{https://huggingface.co/datasets/ampixa/neptts-bench}}
 \end{enumerate}
+
+This work is motivated by AgentShakti (\url{https://agentshakti.xyz}), our business communication platform that uses Nepali TTS for automated voice calls. Selecting the right TTS system for Nepali requires exactly the kind of native-speaker evaluation that NepTTS-Bench provides.
 
 \section{Related Work}
 
 \subsection{TTS Evaluation}
-Mean Opinion Score (MOS) remains the gold standard for TTS evaluation \citep{streijl2016mos}. Recent work has proposed automated MOS predictors including UTMOS \citep{saeki2022utmos}, SCOREQ \citep{ragano2024scoreq}, and DNSMOS \citep{reddy2022dnsmos}. However, these models are primarily trained on English data and their reliability for non-English languages is not well established.
+Mean Opinion Score (MOS) remains the gold standard for TTS evaluation \citep{streijl2016mos}. Automated MOS predictors include UTMOS \citep{saeki2022utmos}, which won the VoiceMOS Challenge 2022, SCOREQ \citep{ragano2024scoreq} from NeurIPS 2024, and DNSMOS \citep{reddy2022dnsmos}. However, these models are trained on English data and their cross-lingual reliability is not established. The IndicMOS system \citep{udupa2024indicmos} trained on 7 Indian languages showed that language-specific models substantially outperform English-trained predictors on Indic speech, but Nepali was not among its training languages.
 
 \subsection{ASR Round-Trip Evaluation}
-ASR round-trip evaluation measures intelligibility by transcribing synthesized speech and computing character/word error rates against the original text. This approach has been used in several TTS evaluations \citep{ttsds2025}, but the choice of ASR system significantly affects results, particularly for low-resource languages where ASR accuracy varies widely across models.
+ASR round-trip evaluation measures intelligibility by transcribing synthesized speech and computing error rates against the original text. The TTSDS benchmark \citep{minixhofer2025ttsds} demonstrated that metric selection significantly affects system rankings. Our work extends this finding by showing that for Nepali, the choice of ASR system is even more critical than for English.
 
 \subsection{Low-Resource Language TTS}
-Recent efforts in multilingual TTS include Meta's MMS-TTS \citep{pratap2023mms}, which covers over 1,100 languages including Nepali, and AI4Bharat's IndicTTS for Indian languages. However, systematic benchmarks for evaluating these systems on specific low-resource languages are lacking.
+Meta's MMS-TTS \citep{pratap2023mms} covers 1,100+ languages including Nepali. AI4Bharat's Indic Parler-TTS supports Nepali with emotion-specific prompts. However, no systematic benchmark exists for evaluating these systems specifically on Nepali.
 
-\subsection{Nepali NLP}
-Nepali NLP resources include the OpenSLR speech corpus, various text corpora, and recent ASR models including fine-tuned Wav2Vec2/XLS-R models. The Chirp2 STT model from Google provides strong Nepali transcription capability. However, no prior work has systematically evaluated TTS systems for Nepali.
+\subsection{Nepali Speech Resources}
+Nepali speech resources include the OpenSLR-54 corpus and fine-tuned Wav2Vec2/XLS-R ASR models \citep{gagan2023xlsr}. The Chirp2 STT model from Google provides strong Nepali transcription. For TTS, no prior work has systematically evaluated available systems.
 
 \section{NepTTS-Bench Design}
 
 \subsection{Sentence Set}
 
-Our benchmark comprises 193 sentences designed to test specific aspects of Nepali TTS quality:
+Our benchmark comprises 205 sentences designed to test specific aspects of Nepali TTS quality, informed by Nepali phonology \citep{khatiwada2009, pokharel1989, bandhu1971}:
 
-\begin{itemize}
-\item \textbf{Phonological minimal pairs} (137 sentences, 71 pairs): Sentences containing minimal pair contrasts across 9 categories:
-  \begin{itemize}
-  \item Aspiration contrasts (velar, palatal, retroflex, dental, labial): e.g., \textit{k\=am}/\textit{kh\=am} (work/envelope)
-  \item Retroflex vs. dental: e.g., \textit{\'t\=al}/\textit{t\=al} (avoid/pond)
-  \item Oral vs. nasal vowels: e.g., \textit{h\=as}/\textit{h\=a\~{n}s} (laugh/duck)
-  \item Gemination: e.g., \textit{gad\=a}/\textit{gadd\=a} (mace/mattress)
-  \item Schwa deletion: e.g., \textit{karama}/\textit{karma} (fate/karma)
-  \item Nasal consonants: e.g., \textit{guna}/\textit{gu\d{n}a} (quality)
-  \end{itemize}
-\item \textbf{Question intonation} (10): Testing rising intonation patterns
-\item \textbf{Emotion} (8): Joy, sadness, anger, surprise
-\item \textbf{Contrastive stress} (8): Focus and corrective stress
-\item \textbf{Homographs} (6): Words with identical spelling but different pronunciation
-\item \textbf{Newspaper text} (4): Complex real-world sentences
-\item \textbf{Robustness} (10): Tongue twisters, very short utterances, code-mixed text
-\item \textbf{Phrases} (10): Common greetings and expressions
-\end{itemize}
+\begin{table}[h]
+\centering
+\caption{Sentence categories in NepTTS-Bench.}
+\label{tab:categories}
+\begin{tabular}{lcc}
+\toprule
+Category & Sentences & Pairs \\
+\midrule
+Aspiration (5 places) & 63 & 34 \\
+Retroflex vs.\ dental & 20 & 10 \\
+Oral vs.\ nasal vowel & 12 & 6 \\
+Gemination & 16 & 8 \\
+Schwa deletion & 18 & 9 \\
+Nasal consonants & 20 & 10 \\
+Question intonation & 10 & --- \\
+Emotion & 8 & --- \\
+Contrastive stress & 8 & --- \\
+Homographs & 6 & --- \\
+Newspaper text & 4 & --- \\
+Robustness & 10 & --- \\
+Phrases & 10 & --- \\
+\midrule
+\textbf{Total} & \textbf{205} & \textbf{77} \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\subsection{Human Reference Audio}
+\paragraph{Minimal Pairs.} Nepali has a four-way laryngeal contrast (voiceless unaspirated, voiceless aspirated, voiced unaspirated, voiced aspirated) at five places of articulation---a distinction absent in English. For example, \textit{k\=am} (work) vs.\ \textit{kh\=am} (envelope) tests the velar aspiration contrast. We designed 77 minimal pairs where the two sentences differ by exactly one phonological feature. Each pair was audited for grammatical correctness and minimal pair validity, with 12 pairs replaced and 6 corrected during the audit process.
 
-We include two types of human speech reference:
-\begin{itemize}
-\item \textbf{Read speech}: Recordings from native Nepali speakers reading the benchmark sentences (35 speakers, 1,821 recordings collected via a custom web application).
-\item \textbf{Natural speech}: 160 utterances extracted from a Chirp2-transcribed YouTube Nepali speech corpus, representing spontaneous conversational speech.
-\end{itemize}
+\paragraph{Additional Categories.} We include sentences testing question intonation (rising pitch patterns), emotional expression, contrastive stress, homograph disambiguation, robustness (tongue twisters, code-mixed text), and common phrases.
 
-Both are included as blinded systems in MOS evaluation to establish human ceiling performance.
+Additionally, 160 natural speech utterances from a Chirp2-transcribed Nepali YouTube corpus serve as human ceiling references.
 
 \subsection{TTS Systems Evaluated}
-
-We evaluate 9 TTS systems spanning four categories:
 
 \begin{table}[h]
 \centering
@@ -99,6 +106,7 @@ System & Provider & Type & Access \\
 \midrule
 ElevenLabs v3 & ElevenLabs & Cloud neural & API \\
 Gemini Flash & Google & Cloud neural & API \\
+Gemini (Hindi) & Google & Cloud neural & API \\
 Edge TTS Hemkala & Microsoft & Cloud neural & Free \\
 Edge TTS Sagar & Microsoft & Cloud neural & Free \\
 TingTing Asmita & TingTing.io & Nepali-specific & API \\
@@ -106,40 +114,70 @@ TingTing Sambriddhi & TingTing.io & Nepali-specific & API \\
 TingTing Subina & TingTing.io & Nepali-specific & API \\
 Piper & Open source & Local VITS & Free \\
 gTTS & Google Translate & Cloud & Free \\
+\midrule
+Human (read) & --- & Recorded & --- \\
+Natural speech & YouTube & Spontaneous & --- \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\section{Evaluation Methodology}
+Gemini Flash TTS auto-detects language from Devanagari text but often produces Hindi-accented pronunciation. We include both the Hindi-mode output and a version with an explicit Nepali prompt for comparison.
 
-\subsection{ASR Round-Trip}
+\subsection{Evaluation Methodology}
 
-We transcribe all TTS outputs using 5 ASR systems and compute Character Error Rate (CER) against the original text:
+\paragraph{Human MOS.} Native Nepali speakers rate blinded audio samples on a 1--5 scale via a web application. Raters choose their available time (5--20 minutes) and receive a balanced, randomized set of stimuli across all systems. Same-sentence stimuli are spaced at least 3 positions apart to reduce fatigue. The system identity is hidden.
 
-\begin{enumerate}
-\item \textbf{Google Chirp2}: Cloud API, state-of-the-art multilingual ASR with strong Nepali support.
-\item \textbf{Meta MMS-1b-all}: Open-source 1B-parameter multilingual model with Nepali adapter.
-\item \textbf{Wav2Vec2-XLS-R Nepali}: XLS-R model fine-tuned specifically on Nepali speech data.
-\item \textbf{Whisper small}: OpenAI's multilingual ASR (244M parameters).
-\item \textbf{Whisper large-v3-turbo}: Larger Whisper variant (1.5B parameters) run via MLX on Apple Silicon.
-\end{enumerate}
+\paragraph{ASR Round-Trip.} We transcribe all TTS outputs using 5 ASR systems and compute Character Error Rate (CER): Google Chirp2, Meta MMS-1b-all, Wav2Vec2-XLS-R fine-tuned on Nepali, Whisper small, and Whisper large-v3-turbo (via MLX).
 
-\subsection{Automated MOS}
+\paragraph{Automated MOS.} We use SCOREQ \citep{ragano2024scoreq}, a NeurIPS 2024 model for no-reference speech quality assessment in the synthetic speech domain, using ONNX inference on CPU.
 
-We use SCOREQ \citep{ragano2024scoreq}, a NeurIPS 2024 model for no-reference speech quality assessment in the synthetic speech domain. SCOREQ uses ONNX inference and was designed for cross-domain generalization.
-
-\subsection{Human MOS}
-
-Native Nepali speakers rate blinded audio samples on a 1--5 scale via a web-based application. Raters choose how much time they can afford (5--20 minutes), and receive a balanced mix of all systems. Audio is randomized and system identity is hidden.
+\paragraph{Pair Discrimination.} For minimal pairs, raters hear both sentences from a pair for a given TTS system and judge whether the contrast words sound different (Yes/No).
 
 \section{Results}
 
-\subsection{Main Results}
+\subsection{Human MOS}
 
 \begin{table}[t]
 \centering
-\caption{Automated evaluation of 9 Nepali TTS systems. SCOREQ MOS ($\uparrow$) measures perceived quality; CER ($\downarrow$) measures intelligibility via ASR round-trip. Systems sorted by Chirp2 CER.}
-\label{tab:main_results}
+\caption{Human MOS ratings from 207 native Nepali speakers (7,003 total ratings). 95\% confidence intervals shown.}
+\label{tab:human_mos}
+\begin{tabular}{lccc}
+\toprule
+System & MOS & 95\% CI & Ratings \\
+\midrule
+Natural speech & \textbf{3.96} & $\pm$0.10 & 602 \\
+Human (read) & 3.62 & $\pm$0.10 & 556 \\
+\midrule
+TingTing Asmita & 3.55 & $\pm$0.09 & 656 \\
+Piper & 3.49 & $\pm$0.11 & 519 \\
+TingTing Subina & 3.48 & $\pm$0.09 & 648 \\
+ElevenLabs v3 & 3.47 & $\pm$0.11 & 520 \\
+Edge TTS Sagar & 3.38 & $\pm$0.10 & 615 \\
+Edge TTS Hemkala & 3.37 & $\pm$0.09 & 622 \\
+Gemini (Hindi) & 3.33 & $\pm$0.12 & 517 \\
+Gemini Flash & 3.25 & $\pm$0.10 & 620 \\
+TingTing Sambriddhi & 3.19 & $\pm$0.10 & 618 \\
+gTTS & 2.58 & $\pm$0.11 & 510 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:human_mos} presents the main human evaluation results. Key observations:
+
+\textbf{Human ceiling.} Natural speech scores 3.96, not 5.0, reflecting that even human recordings have quality variation (background noise, recording equipment). Read speech (3.62) scores lower than spontaneous speech (3.96), possibly due to the unnatural cadence of prompted reading.
+
+\textbf{Nepali-specific systems compete.} TingTing Asmita (3.55) is the highest-rated TTS system, outperforming global cloud services including ElevenLabs v3 (3.47) and both Edge TTS voices (3.37--3.38).
+
+\textbf{Open-source is competitive.} Piper (3.49), a fully open-source local model, ranks second among TTS systems---above ElevenLabs and Edge TTS.
+
+\textbf{gTTS is unusable.} Google Translate TTS scores 2.58, far below all other systems, confirming that concatenative TTS is inadequate for Nepali.
+
+\subsection{Automated Metrics}
+
+\begin{table}[t]
+\centering
+\caption{Automated evaluation of 10 TTS systems. SCOREQ MOS ($\uparrow$); CER ($\downarrow$).}
+\label{tab:auto_metrics}
 \begin{tabular}{lcccc}
 \toprule
 System & SCOREQ & Chirp2 & MMS & XLS-R \\
@@ -149,24 +187,46 @@ ElevenLabs v3 & \textbf{4.45} & \textbf{0.106} & 0.278 & 0.222 \\
 TingTing Subina & 4.27 & 0.120 & \textbf{0.181} & \textbf{0.160} \\
 TingTing Asmita & 4.17 & 0.141 & 0.234 & 0.198 \\
 Gemini Flash & 4.10 & 0.144 & 0.214 & 0.199 \\
-Edge TTS Sagar & 3.63 & 0.146 & 0.279 & 0.148 \\
-Edge TTS Hemkala & 3.74 & 0.170 & 0.301 & 0.161 \\
-Piper & 3.49 & 0.186 & 0.291 & 0.168 \\
 TingTing Sambriddhi & 4.05 & 0.216 & 0.313 & 0.234 \\
+Edge TTS Hemkala & 3.74 & 0.170 & 0.301 & 0.161 \\
+Edge TTS Sagar & 3.63 & 0.146 & 0.279 & 0.148 \\
+Piper & 3.49 & 0.186 & 0.291 & 0.168 \\
 gTTS & 3.02 & 0.473 & 0.531 & 0.279 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:main_results} presents the main automated evaluation results. ElevenLabs v3 achieves the best SCOREQ MOS (4.45) and lowest Chirp2 CER (0.106), followed closely by TingTing Subina. Notably, TingTing---a Nepali-specific TTS provider---is competitive with global cloud services despite being designed for a single language market.
+\subsection{Human vs.\ Automated Divergence}
 
-gTTS consistently ranks last across all metrics, with Chirp2 CER (0.473) more than 4$\times$ higher than the best system.
-
-\subsection{Cross-Metric Correlation}
+The most striking finding is the disagreement between automated and human metrics. Table~\ref{tab:divergence} shows the rank comparison.
 
 \begin{table}[t]
 \centering
-\caption{Spearman rank correlation ($\rho$) between evaluation metrics across 9 systems. * indicates $p < 0.05$.}
+\caption{Ranking divergence: automated SCOREQ vs.\ human MOS.}
+\label{tab:divergence}
+\begin{tabular}{lccc}
+\toprule
+System & SCOREQ & Human & $\Delta$Rank \\
+ & Rank & Rank & \\
+\midrule
+ElevenLabs v3 & 1 & 6 & $-5$ \\
+TingTing Subina & 2 & 5 & $-3$ \\
+TingTing Asmita & 3 & \textbf{1} & $+2$ \\
+Gemini Flash & 4 & 8 & $-4$ \\
+TingTing Sambriddhi & 5 & 9 & $-4$ \\
+Piper & 8 & \textbf{2} & $+6$ \\
+gTTS & 9 & 10 & $-1$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+ElevenLabs v3 scores highest on SCOREQ (4.45) but ranks only 6th with human raters (3.47). The v3 model supports Nepali natively, but uses an English voice (Sarah), producing technically clean audio with non-native pronunciation that automated metrics cannot detect. Conversely, Piper ranks 8th on SCOREQ but 2nd with humans---its pronunciation is more Nepali-native despite lower audio fidelity.
+
+\subsection{Cross-Metric Correlations}
+
+\begin{table}[t]
+\centering
+\caption{Spearman rank correlation ($\rho$) between evaluation metrics. * indicates $p < 0.05$.}
 \label{tab:correlations}
 \begin{tabular}{lccccc}
 \toprule
@@ -181,48 +241,67 @@ Whisper & & & & & 1.000 \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:correlations} reveals striking differences in metric agreement. SCOREQ, Chirp2, and MMS form a correlated cluster ($\rho > 0.73$), while XLS-R Nepali and Whisper small show weak or no correlation with other metrics.
+SCOREQ and Chirp2 form a highly correlated cluster ($\rho = 0.883$), while Whisper small shows weak or no correlation with any metric ($\rho = 0.35$--$0.38$). XLS-R Nepali, fine-tuned on specific Nepali data, gives a different ranking ($\rho = 0.05$ with SCOREQ), suggesting bias toward particular pronunciation patterns from its training data.
 
-The strong SCOREQ--Chirp2 correlation ($\rho = 0.883$) suggests that for Nepali TTS, automated quality prediction and high-quality ASR round-trip evaluation capture similar aspects of system quality.
+This has methodological implications: \textbf{studies using Whisper for non-English TTS evaluation should report this caveat.}
 
-The poor performance of Whisper small ($\rho = 0.35$--$0.38$ with other metrics) highlights a critical methodological concern: using a weak ASR model for round-trip evaluation produces unreliable rankings. This finding has implications for TTS evaluation in other low-resource languages where Whisper may be the default choice.
+\subsection{NepaliMOS Predictor}
 
-XLS-R Nepali shows near-zero correlation with SCOREQ ($\rho = 0.05$), suggesting that a fine-tuned ASR model may be biased toward specific pronunciation patterns from its training data rather than measuring general intelligibility.
+We train the first Nepali-specific MOS predictor by fine-tuning IndicWav2Vec base \citep{javed2022indicwav2vec} on our human ratings:
 
-\subsection{Human MOS}
+\begin{itemize}
+\item \textbf{Architecture:} IndicWav2Vec base (top 4 transformer layers unfrozen) + 2-layer MLP head (768 $\rightarrow$ 256 $\rightarrow$ 1)
+\item \textbf{Training:} 7,003 human ratings, MSE loss, Adam with differential learning rates (backbone: $10^{-5}$, head: $10^{-4}$), batch size 2
+\item \textbf{Result:} Spearman $\rho = 0.587$, Pearson $r = 0.575$
+\end{itemize}
 
-[TO BE COMPLETED when sufficient ratings are collected]
+Performance scales with data volume:
 
-% Expected analysis:
-% - Per-system MOS with 95% confidence intervals
-% - Correlation with automated metrics
-% - Human ceiling (natural speech and read speech MOS)
+\begin{table}[h]
+\centering
+\caption{NepaliMOS predictor scaling with training data.}
+\label{tab:scaling}
+\begin{tabular}{ccc}
+\toprule
+Ratings & Samples & Spearman $\rho$ \\
+\midrule
+1,166 & 1,166 & 0.195 \\
+1,430 & 1,430 & 0.305 \\
+2,742 & 1,541 & 0.413 \\
+5,760 & 1,678 & 0.587 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The log-linear scaling suggests that 10,000+ ratings would achieve $\rho > 0.7$, approaching production quality.
 
 \section{Discussion}
 
-\subsection{ElevenLabs v3: Global Model, Local Quality}
-
-ElevenLabs v3 achieves the best automated scores despite not being specifically designed for Nepali. Its v3 model natively supports 74 languages including Nepali, and our results suggest that large-scale multilingual training can produce high-quality TTS for low-resource languages without language-specific data collection.
-
-However, we note that using the older ElevenLabs Multilingual v2 model (which lacks native Nepali support) with an English voice produced dramatically worse results---highlighting the importance of native language support in model selection.
+\subsection{Automated MOS Is Unreliable for Nepali}
+SCOREQ, trained on English speech quality data, measures audio fidelity (signal clarity, noise levels) but not language-appropriate pronunciation. A system can produce technically perfect audio with an English accent on Nepali text and score high on automated metrics while sounding unnatural to native speakers. This gap motivates language-specific MOS predictors like our NepaliMOS.
 
 \subsection{Nepali-Specific Systems Are Competitive}
+TingTing.io, a Nepal-based TTS provider, achieves the highest human MOS among TTS systems (3.55). This demonstrates that language-specific training can compensate for smaller model scale, and has practical implications for applications targeting Nepali speakers.
 
-TingTing.io's three Nepali-specific voices score within 10--15\% of ElevenLabs on most metrics. TingTing Subina achieves the lowest CER on MMS (0.181) and XLS-R (0.160), suggesting that its pronunciation may be more ``standard'' Nepali while ElevenLabs produces more natural-sounding but slightly non-standard pronunciation.
+\subsection{Open-Source Quality}
+Piper TTS (3.49) is fully open-source and runs locally without cloud dependency. Its competitive performance (above ElevenLabs and Edge TTS) makes it viable for applications where privacy, cost, or connectivity constraints preclude cloud services.
 
-\subsection{Open-Source Gap}
+\subsection{ASR Model Selection}
+Our use of 5 ASR systems reveals that metric reliability varies dramatically. For Nepali TTS evaluation:
+\begin{itemize}
+\item Google Chirp2 is the most reliable ASR for round-trip evaluation
+\item Meta MMS provides a good open-source alternative
+\item Whisper small produces essentially random rankings and should not be used alone for Nepali TTS evaluation
+\end{itemize}
 
-Piper, the only fully open-source local system, scores consistently lower than cloud-based alternatives (SCOREQ 3.49 vs. 4.10--4.45 for top systems). This gap represents an opportunity for the Nepali NLP community---improving open-source Nepali TTS would benefit applications where cloud dependency is impractical.
-
-\subsection{ASR Selection Matters}
-
-Our correlation analysis demonstrates that ASR model selection critically affects TTS evaluation. For Nepali, Chirp2 provides the most reliable round-trip evaluation, while Whisper small produces noisy, weakly-correlated rankings. We recommend that TTS evaluation studies for low-resource languages report results with multiple ASR systems and analyze inter-ASR agreement.
+\subsection{Limitations}
+Our rater pool (207 speakers) may not fully represent Nepal's linguistic diversity. The benchmark covers Standard Nepali but not dialectal variations. The pair discrimination test has limited data (54 ratings). The NepaliMOS predictor, while the first of its kind, has not yet reached production-quality correlation.
 
 \section{Conclusion}
 
-We presented NepTTS-Bench, the first comprehensive benchmark for Nepali TTS evaluation. Our evaluation of 9 systems across 6 automated metrics reveals that (1) ElevenLabs v3 and TingTing Subina achieve the best quality, (2) Nepali-specific TTS is competitive with global cloud services, (3) ASR model selection critically affects evaluation reliability, and (4) open-source Nepali TTS has significant room for improvement.
+We presented NepTTS-Bench, the first comprehensive benchmark for Nepali TTS evaluation, with 205 sentences, 77 minimal pairs, 12 systems evaluated by 207 native speakers (7,003 ratings), 6 automated metrics, and the first Nepali MOS predictor (Spearman 0.587). Our key finding---that automated MOS predictors are unreliable for Nepali---highlights the critical need for language-specific evaluation in low-resource TTS development.
 
-We release the complete benchmark toolkit---sentence sets, evaluation scripts, MOS rating application, and all evaluation data---as open-source resources to support ongoing Nepali TTS development and evaluation.
+All resources are publicly available: the benchmark sentence set, evaluation toolkit (\texttt{pip install neptts-eval}), rating application, model checkpoint, and evaluation data.
 
 \bibliographystyle{plainnat}
 \bibliography{references}
