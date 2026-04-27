@@ -25,7 +25,7 @@ Evaluating text-to-speech (TTS) for Nepali requires probing phonological contras
 
 \section{Introduction}
 
-Text-to-speech (TTS) technology has advanced dramatically, with neural models achieving near-human naturalness for high-resource languages. However, for low-resource languages such as Nepali, which is spoken by approximately 32 million people, systematic evaluation remains absent. No standardized benchmark exists for comparing Nepali TTS systems, making it impossible for researchers and practitioners to assess progress or select appropriate systems.
+Text-to-speech (TTS) technology has advanced dramatically, with neural models achieving near-human naturalness for high-resource languages. However, for low-resource languages such as Nepali, with an L1 plus L2 speaker population on the order of tens of millions across Nepal, India, Bhutan, and the global diaspora, systematic TTS evaluation remains absent. No standardized benchmark exists for comparing Nepali TTS systems, making it impossible for researchers and practitioners to assess progress or select appropriate systems.
 
 Several systems now claim Nepali support: Microsoft Edge TTS, Google Gemini Flash, ElevenLabs v3, the Nepali-specific TingTing.io, and open-source Piper TTS. However, their relative quality has not been systematically compared by native speakers.
 
@@ -47,7 +47,7 @@ Mean Opinion Score (MOS) remains the gold standard for TTS evaluation \citep{str
 
 
 \subsection{ASR Round-Trip Evaluation}
-ASR round-trip evaluation measures intelligibility by transcribing synthesized speech and computing error rates against the original text. The TTSDS2 benchmark \citep{minixhofer2025ttsds} demonstrated that metric selection significantly affects system rankings. Our work extends this finding by showing that for Nepali, the choice of ASR system is even more critical than for English.
+ASR round-trip evaluation measures intelligibility by transcribing synthesized speech and computing error rates against the original text. The TTSDS2 benchmark \citep{minixhofer2025ttsds} demonstrated that metric selection significantly affects system rankings. Our work extends this finding to a low-resource Indic setting, where the choice of ASR drives Spearman $\rho$ between automated rankings and human MOS from $0.05$ (XLS-R Nepali) to $0.88$ (Chirp~2).
 
 \subsection{Low-Resource Language TTS}
 Meta's MMS-TTS \citep{pratap2023mms} covers 1,100+ languages including Nepali. AI4Bharat's Indic Parler-TTS supports Nepali with emotion-specific prompts. The FLEURS multilingual speech benchmark \citep{conneau2022fleurs} provides parallel utterances across 102 languages including Nepali but is oriented toward ASR and speech translation rather than TTS evaluation. No systematic TTS benchmark exists for evaluating Nepali TTS systems specifically.
@@ -156,7 +156,7 @@ gTTS & \texttt{gTTS}, \texttt{lang="ne"} & Google Translate TTS endpoint. MP3 ou
 
 \paragraph{Human MOS.} Native Nepali speakers rate blinded audio samples on a 1--5 scale via a web application. Raters choose their available time (5--20 minutes) and receive a balanced, randomized set of stimuli across all systems. Same-sentence stimuli are spaced at least 3 positions apart to reduce fatigue. The system identity is hidden.
 
-\paragraph{ASR Round-Trip.} We transcribe all TTS outputs using 5 ASR systems and compute Character Error Rate (CER) against normalized Devanagari reference text. The systems and their configurations are: \textbf{Google Chirp~2} via the Google Speech-to-Text v2 API with model \texttt{chirp\_2} and language code \texttt{ne-NP}; \textbf{Meta MMS-1b-all} (\texttt{facebook/mms-1b-all}) via Hugging Face transformers with the Nepali language adapter; \textbf{Wav2Vec2-XLS-R fine-tuned on Nepali} (\texttt{gagan3012/wav2vec2-xlsr-nepali}) with greedy CTC decoding; \textbf{Whisper small} (OpenAI \texttt{whisper}, model \texttt{small}) with \texttt{language="ne"}, \texttt{task="transcribe"}, fp32 inference on GPU; \textbf{Whisper large-v3-turbo} via MLX (Apple Silicon port) with the same Nepali language hint. Reference and hypothesis are NFC-normalized and stripped of common punctuation (Devanagari danda \texttt{।}, Latin punctuation) before edit-distance scoring. The Whisper-small evaluation script is committed at \texttt{scripts/eval\_asr\_roundtrip.py}; the per-system raw transcriptions and CER values for all five ASRs are released as JSON in \texttt{benchmark/results/}.
+\paragraph{ASR Round-Trip.} We transcribe all TTS outputs using 5 ASR systems and compute Character Error Rate (CER) against normalized Devanagari reference text. The systems and their configurations are: \textbf{Google Chirp~2} via the Google Speech-to-Text v2 API with model \texttt{chirp\_2} and language code \texttt{ne-NP}; \textbf{Meta MMS-1b-all} (\texttt{facebook/mms-1b-all}) via Hugging Face transformers with the Nepali language adapter; \textbf{Wav2Vec2-XLS-R fine-tuned on Nepali} (\texttt{gagan3012/wav2vec2-xlsr-nepali}) with greedy CTC decoding; \textbf{Whisper small} (OpenAI \texttt{whisper}, model \texttt{small}) with \texttt{language="ne"}, \texttt{task="transcribe"}, fp32 inference on GPU; \textbf{Whisper large-v3-turbo} via MLX (Apple Silicon port) with the same Nepali language hint. Reference and hypothesis are NFC-normalized and stripped of common punctuation (Devanagari danda U+0964 and Latin punctuation) before edit-distance scoring. The Whisper-small evaluation script is committed at \texttt{scripts/eval\_asr\_roundtrip.py}; the per-system raw transcriptions and CER values for all five ASRs are released as JSON in \texttt{benchmark/results/}.
 
 \paragraph{Automated MOS.} We use SCOREQ \citep{ragano2024scoreq}, a NeurIPS 2024 model for no-reference speech quality assessment in the synthetic speech domain, using ONNX inference on CPU.
 
@@ -345,7 +345,24 @@ Our use of 5 ASR systems reveals that metric reliability varies dramatically. Fo
 \end{itemize}
 
 \subsection{Limitations}
-Our rater pool of 207 speakers may not fully represent Nepal's linguistic diversity in geography, dialect, or L2 status; we treat ``native Nepali speaker'' as self-declared and do not collect demographic metadata in this version. The benchmark covers Standard Nepali stimuli only. The pair-discrimination subtask has only 54 total ratings (under one rating per minimal pair on average), so we do not draw statistical conclusions from it and retain it in the rating application for ongoing data collection. The NepaliMOS predictor reaches utterance-level $\rho = 0.66$ on a held-out validation split but has not been tested under leave-one-system-out cross-validation, which is the appropriate generalization test. We did not run UTMOS or DNSMOS, so the automated-MOS unreliability finding is established only for SCOREQ in our experiments. Several TTS configurations (Table~\ref{tab:tts_configs}) reflect the specific settings we used; alternative voice IDs, prompts, or generation parameters may yield meaningfully different results for the same provider.
+
+\paragraph{Rater pool and demographics.} Our rater pool of 207 speakers may not fully represent Nepal's linguistic diversity in geography, dialect, or L2 status. We treat ``native Nepali speaker'' as self-declared and do not collect demographic metadata in this version. The benchmark covers Standard Nepali stimuli only.
+
+\paragraph{Listening environment.} Raters used the web rating application from their own devices and we do not enforce headphones, ambient noise control, or volume calibration. Standard ITU-T P.808 crowd-MOS protocols would screen for these; this is a meaningful threat to the absolute MOS values, although the relative ranking should be more robust.
+
+\paragraph{Rater fatigue and order effects.} We space same-sentence stimuli at least three positions apart and randomize the within-rater stimulus order, but we do not analyze MOS drift across position-in-session. A non-trivial fraction of raters complete only the shorter session option (5 to 10 minutes) and longer sessions may exhibit rating compression toward the mean.
+
+\paragraph{Same-system bias.} TTS systems are blinded to raters by stripping system identifiers, but voice characteristics (pitch, accent, prosody) are themselves identifying. Raters who learn to recognize a voice may anchor subsequent ratings of that voice. We do not currently audit this.
+
+\paragraph{Statistical inference and inter-rater reliability.} Confidence intervals in Table~\ref{tab:human_mos} are normal-approximation Wald intervals on per-system means under independence assumptions. With 34 ratings per rater on average, this underestimates the true uncertainty. Inter-rater reliability (Krippendorff's $\alpha$, ICC) is not reported in this version. Both items are flagged in the Statistical Inference paragraph and are the most important methodological refinements for the next revision.
+
+\paragraph{NepaliMOS predictor.} The predictor reaches utterance-level $\rho = 0.66$ on a held-out validation split that is utterance-disjoint but not system-disjoint. Leave-one-system-out cross-validation is the appropriate generalization test and is left to future work.
+
+\paragraph{Pair discrimination.} The pair-discrimination subtask has only 54 total ratings (under one rating per minimal pair on average), so we do not draw statistical conclusions from it. We retain it in the rating application for ongoing data collection.
+
+\paragraph{Automated MOS scope.} We did not run UTMOS or DNSMOS, so the automated-MOS unreliability finding is established only for SCOREQ in our experiments. Whether the failure generalizes to other English-trained predictors is an open question.
+
+\paragraph{Configuration sensitivity.} Several TTS configurations in Table~\ref{tab:tts_configs} reflect the specific settings we used. Alternative voice IDs, prompts, or generation parameters may yield meaningfully different results for the same provider; our ranking claims are therefore conditional on these configurations and not on the providers in general.
 
 \section{Conclusion}
 
