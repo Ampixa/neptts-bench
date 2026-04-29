@@ -43,7 +43,7 @@ Mean Opinion Score (MOS) remains the gold standard for TTS evaluation \citep{str
 
 
 \subsection{ASR Round-Trip Evaluation}
-ASR round-trip evaluation measures intelligibility by transcribing synthesized speech and computing error rates against the original text. The TTSDS2 benchmark \citep{minixhofer2025ttsds} demonstrated that metric selection significantly affects system rankings. Our work extends this finding to a low-resource Indic setting, where the choice of ASR drives Spearman $\rho$ between automated rankings and human MOS from $0.05$ (XLS-R Nepali) to $0.88$ (Chirp~2).
+ASR round-trip evaluation measures intelligibility by transcribing synthesized speech and computing error rates against the original text. The TTSDS2 benchmark \citep{minixhofer2025ttsds} demonstrated that metric selection significantly affects system rankings. Our work extends this finding to a low-resource Indic setting, where the choice of ASR drives Spearman $\rho$ between automated rankings and human MOS from $0.17$ (Whisper-small) to $0.60$ (Chirp~2).
 
 \subsection{Low-Resource Language TTS}
 Meta's MMS-TTS \citep{pratap2023mms} covers 1,100+ languages including Nepali. AI4Bharat's Indic Parler-TTS supports Nepali with emotion-specific prompts. The FLEURS multilingual speech benchmark \citep{conneau2022fleurs} provides parallel utterances across 102 languages including Nepali but is oriented toward ASR and speech translation rather than TTS evaluation. No systematic TTS benchmark exists for evaluating Nepali TTS systems specifically.
@@ -129,20 +129,21 @@ Gemini Flash TTS auto-detects language from Devanagari text and tends to produce
 \centering
 \caption{TTS configurations evaluated. Output format and any deviation from API defaults are listed; unspecified parameters use the provider's defaults at the time of generation (April 2026).}
 \label{tab:tts_configs}
-\small
-\begin{tabular}{p{0.20\linewidth}p{0.34\linewidth}p{0.36\linewidth}}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{0.18\linewidth}p{0.38\linewidth}p{0.36\linewidth}}
 \toprule
 System & Model / Voice & Configuration notes \\
 \midrule
-ElevenLabs v3 & \texttt{eleven\_multilingual\_v2}, voice ``Sarah'' (\texttt{EXAVITQu4vr4xnSDxMaL}) & API defaults; ``Sarah'' is trained primarily on English. MP3 output. \\
+ElevenLabs v3 & \texttt{eleven\_multilingual\_v2}, voice ``Sarah'' & API defaults; ``Sarah'' is trained primarily on English. Voice ID in \texttt{scripts/generate\_elevenlabs\_tts.py}. MP3 output. \\
 Gemini Flash & \texttt{gemini-2.5-flash-preview-tts}, voice ``Kore'' & Prompt prefix names Nepali explicitly. 24~kHz mono PCM. \\
-Gemini (Hindi) & \texttt{gemini-2.5-flash-preview-tts}, voice ``Kore'' & Raw Devanagari with no language hint. 24~kHz mono PCM. \\
+Gemini (Hindi) & \texttt{gemini-2.5-flash-preview-tts}, voice ``Kore'' & Raw Devanagari, no language hint. 24~kHz mono PCM. \\
 Edge TTS Hemkala & \texttt{ne-NP-HemkalaNeural} & Microsoft Edge TTS defaults. MP3 output. \\
 Edge TTS Sagar & \texttt{ne-NP-SagarNeural} & Microsoft Edge TTS defaults. MP3 output. \\
-TingTing Asmita & \texttt{np\_ashmita} & TingTing.io \texttt{test-voice} API endpoint. MP3 output. \\
-TingTing Sambriddhi & \texttt{np\_sambriddhi} & TingTing.io \texttt{test-voice} API endpoint. MP3 output. \\
-TingTing Subina & \texttt{np\_subina} & TingTing.io \texttt{test-voice} API endpoint. MP3 output. \\
-Piper & Community Nepali Piper voice (VITS) & Local CPU inference at provider default sampling rate. \\
+TingTing Asmita & \texttt{np\_ashmita} & TingTing.io \texttt{test-voice} API. MP3 output. \\
+TingTing Sambriddhi & \texttt{np\_sambriddhi} & TingTing.io \texttt{test-voice} API. MP3 output. \\
+TingTing Subina & \texttt{np\_subina} & TingTing.io \texttt{test-voice} API. MP3 output. \\
+Piper & Community Nepali Piper voice (VITS) & Local CPU inference, default sampling rate. \\
 gTTS & \texttt{gTTS}, \texttt{lang="ne"} & Google Translate TTS endpoint. MP3 output. \\
 \bottomrule
 \end{tabular}
@@ -152,7 +153,15 @@ gTTS & \texttt{gTTS}, \texttt{lang="ne"} & Google Translate TTS endpoint. MP3 ou
 
 \paragraph{Human MOS.} Native Nepali speakers rate blinded audio samples on a 1--5 scale via a web application. Raters choose their available time (5--20 minutes) and receive a balanced, randomized set of stimuli across all systems. Same-sentence stimuli are spaced at least 3 positions apart to reduce fatigue. The system identity is hidden.
 
-\paragraph{ASR Round-Trip.} We transcribe all TTS outputs using 5 ASR systems and compute Character Error Rate (CER) against normalized Devanagari reference text. The systems and their configurations are: \textbf{Google Chirp~2} via the Google Speech-to-Text v2 API with model \texttt{chirp\_2} and language code \texttt{ne-NP}; \textbf{Meta MMS-1b-all} (\texttt{facebook/mms-1b-all}) via Hugging Face transformers with the Nepali language adapter; \textbf{Wav2Vec2-XLS-R fine-tuned on Nepali} (\texttt{gagan3012/wav2vec2-xlsr-nepali}) with greedy CTC decoding; \textbf{Whisper small} (OpenAI \texttt{whisper}, model \texttt{small}) with \texttt{language="ne"}, \texttt{task="transcribe"}, fp32 inference on GPU; \textbf{Whisper large-v3-turbo} via MLX (Apple Silicon port) with the same Nepali language hint. Reference and hypothesis are NFC-normalized and stripped of common punctuation (Devanagari danda U+0964 and Latin punctuation) before edit-distance scoring. The Whisper-small evaluation script is committed at \texttt{scripts/eval\_asr\_roundtrip.py}; the per-system raw transcriptions and CER values for all five ASRs are released as JSON in \texttt{benchmark/results/}.
+\paragraph{ASR Round-Trip.} We transcribe all TTS outputs with 5 ASR systems and compute Character Error Rate (CER) against normalized Devanagari reference text:
+\begin{itemize}
+\item \textbf{Google Chirp~2}: Speech-to-Text v2 API, model \texttt{chirp\_2}, language code \texttt{ne-NP}.
+\item \textbf{Meta MMS-1b-all}: \texttt{facebook/mms-1b-all} via Hugging Face transformers with the Nepali language adapter.
+\item \textbf{Wav2Vec2 XLS-R Nepali}: \texttt{gagan3012/wav2vec2-xlsr-nepali} with greedy CTC decoding.
+\item \textbf{Whisper-small}: OpenAI \texttt{whisper} model \texttt{small}, \texttt{language="ne"}, \texttt{task="transcribe"}, fp32 inference on GPU.
+\item \textbf{Whisper large-v3-turbo}: via MLX (Apple Silicon port) with the same Nepali language hint.
+\end{itemize}
+Reference and hypothesis are NFC-normalized and stripped of common punctuation (Devanagari danda U+0964 and Latin punctuation) before edit-distance scoring. The Whisper-small evaluation script is at \texttt{scripts/eval\_asr\_roundtrip.py}; per-system raw transcriptions and CER values for all five ASRs are released as JSON in \texttt{benchmark/results/}.
 
 \paragraph{Automated MOS.} We use SCOREQ \citep{ragano2024scoreq}, a NeurIPS 2024 model for no-reference speech quality assessment in the synthetic speech domain, using ONNX inference on CPU.
 
@@ -380,10 +389,7 @@ Across the five ASRs we tested, the Spearman correlation with human MOS ranges f
 
 We presented NepTTS-Bench, the first publicly available comprehensive benchmark for Nepali TTS evaluation, with 205 sentences, 77 minimal pairs, 12 systems evaluated by 207 native speakers (6{,}962 ratings, Krippendorff's $\alpha = 0.17$), 6 automated metrics, and the first Nepali MOS predictor (utterance-level Spearman $\rho = 0.66$ on a held-out validation split). Our key finding is that SCOREQ, the only English-trained automated MOS predictor we evaluate, misranks systems relative to human raters; whether this generalizes to UTMOS, DNSMOS, and other English-trained predictors is an open question for future work. The Krippendorff's $\alpha$ of $0.17$ also indicates substantial rater disagreement at the individual-rating level, limiting the precision with which the top-four TTS systems can be ordered. This highlights the critical need for language-specific evaluation, more controlled listening environments, and possibly forced-choice rating paradigms in low-resource TTS development.
 
-All resources are publicly available: the benchmark sentence set, evaluation toolkit (\texttt{pip install neptts-eval}), rating application, model checkpoint, and evaluation data.
-
-\section*{Conflicts of Interest and Independence Statement}
-The author is affiliated with Ampixa Labs, Kathmandu. Ampixa Labs has no commercial relationship with any of the TTS providers evaluated in this benchmark, including TingTing.io, ElevenLabs, Microsoft, Google, and the Piper community. No funding from any TTS provider was used in the preparation of this paper. The selection of evaluated systems, rater recruitment, stimulus design, and rating protocols were determined independently. The complete benchmark, evaluation toolkit, rating application, model checkpoint, and underlying rating data are released under permissive open-source licenses to allow independent verification of every claim.
+All resources are publicly available: the benchmark sentence set, evaluation toolkit (installable via \texttt{pip install neptts-eval}), rating application, model checkpoint, and evaluation data.
 
 \bibliographystyle{plainnat}
 \bibliography{references}
