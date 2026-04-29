@@ -316,8 +316,18 @@ def train(args):
             # Save best model
             out_path = Path(args.output_dir) / "neptts_mos_best.pt"
             out_path.parent.mkdir(parents=True, exist_ok=True)
+            # Save full state: head + any unfrozen backbone params, so
+            # inference can reproduce the val ρ from the saved artifact alone.
+            backbone_state = {
+                k: v for k, v in model.ssl_model.state_dict().items()
+                if any(p.requires_grad for n, p in model.ssl_model.named_parameters() if n == k or k.startswith(n.rsplit(".", 1)[0]))
+            } if args.unfreeze_layers > 0 else {}
+            # Simpler: save the whole ssl_model state dict if any unfreezing happened.
+            full_ssl = model.ssl_model.state_dict() if args.unfreeze_layers > 0 else None
             torch.save({
                 "head_state_dict": model.head.state_dict(),
+                "ssl_state_dict": full_ssl,
+                "unfreeze_layers": args.unfreeze_layers,
                 "hidden_dim": args.hidden_dim,
                 "val_loss": val_loss,
                 "spearman": spearman,

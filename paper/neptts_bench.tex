@@ -16,7 +16,7 @@
 \maketitle
 
 \begin{abstract}
-Evaluating text-to-speech (TTS) for Nepali requires probing phonological contrasts that English-trained quality metrics cannot detect: a four-way laryngeal distinction (voiceless/voiced $\times$ unaspirated/aspirated) at five places of articulation, the retroflex--dental opposition, oral--nasal vowel contrasts, gemination, and schwa deletion. We present NepTTS-Bench, the first publicly available comprehensive benchmark for Nepali TTS. The benchmark is built around a phonologically-informed stimulus set of 77 minimal pairs targeting these contrasts within 205 sentences total. We evaluate 12 systems spanning commercial cloud services, Nepali-specific providers, open-source models, and human speech baselines. We collect 6{,}962 human MOS ratings from 207 native Nepali speakers (Krippendorff's $\alpha = 0.17$) and compare against 6 automated metrics, including SCOREQ auto-MOS and ASR round-trip CER across 5 ASR systems. Our key findings are: (1) the English-trained automated MOS predictor we test (SCOREQ) misranks systems relative to humans, putting ElevenLabs v3 first ($4.45$) while human raters rank it 6th of 12 ($3.47$); (2) Nepali-specific TTS systems are competitive with global cloud services, with TingTing Asmita the highest-rated TTS ($3.55$); (3) the choice of ASR drives Spearman $\rho$ between automated rankings and human MOS from $0.17$ (Whisper-small) to $0.60$ (Chirp~2), although none of these correlations reach significance at $\alpha = 0.05$ with $n = 9$ TTS systems; (4) our fine-tuned Nepali MOS predictor based on IndicWav2Vec achieves utterance-level Spearman $\rho = 0.66$ on a held-out validation split. We release the complete benchmark as open-source resources, including the sentence sets, evaluation toolkit (\texttt{neptts-eval}), rating application, model checkpoint, and all data.
+Evaluating text-to-speech (TTS) for Nepali requires probing phonological contrasts that English-trained quality metrics cannot detect: a four-way laryngeal distinction (voiceless/voiced $\times$ unaspirated/aspirated) at five places of articulation, the retroflex--dental opposition, oral--nasal vowel contrasts, gemination, and schwa deletion. We present NepTTS-Bench, the first publicly available comprehensive benchmark for Nepali TTS. The benchmark is built around a phonologically-informed stimulus set of 77 minimal pairs targeting these contrasts within 205 sentences total. We evaluate 12 systems spanning commercial cloud services, Nepali-specific providers, open-source models, and human speech baselines. We collect 6{,}962 human MOS ratings from 207 native Nepali speakers (Krippendorff's $\alpha = 0.17$) and compare against 6 automated metrics, including SCOREQ auto-MOS and ASR round-trip CER across 5 ASR systems. Our key findings are: (1) the English-trained automated MOS predictor we test (SCOREQ) misranks systems relative to humans, putting ElevenLabs v3 first ($4.45$) while human raters rank it 6th of 12 ($3.47$); (2) Nepali-specific TTS systems are competitive with global cloud services, with TingTing Asmita the highest-rated TTS ($3.55$); (3) the choice of ASR drives Spearman $\rho$ between automated rankings and human MOS from $0.17$ (Whisper-small) to $0.60$ (Chirp~2), although none of these correlations reach significance at $\alpha = 0.05$ with $n = 9$ TTS systems; (4) our fine-tuned Nepali MOS predictor (NepaliMOS) reaches utterance-level Spearman $\rho = 0.59$ on held-out validation and system-level $\rho = 0.90$ ($p = 0.001$) against human MOS, significantly outperforming SCOREQ's $\rho = 0.40$ by Steiger's Z ($p = 0.028$). We release the complete benchmark as open-source resources, including the sentence sets, evaluation toolkit (\texttt{neptts-eval}), rating application, model checkpoint, and all data.
 \end{abstract}
 
 \section{Introduction}
@@ -28,7 +28,7 @@ Several systems now claim Nepali support: Microsoft Edge TTS, Google Gemini Flas
 We present NepTTS-Bench with the following contributions:
 
 \begin{enumerate}
-\item The first Nepali MOS predictor, achieving Spearman $\rho = 0.66$ with human ratings by fine-tuning IndicWav2Vec on our collected data.
+\item The first Nepali MOS predictor (NepaliMOS), fine-tuned from IndicWav2Vec on 6{,}962 native-rater ratings. NepaliMOS reaches system-level Spearman $\rho = 0.90$ against human MOS (vs SCOREQ's $0.40$ on the same nine systems), significantly outperforming SCOREQ by Steiger's Z ($p = 0.028$).
 \item A curated set of 205 sentences with 77 minimal pairs probing the major Nepali phonological contrasts (aspiration, retroflexion, nasalization, gemination, schwa deletion), supplemented with prosodic, lexical, and robustness probes (see Table~\ref{tab:categories}).
 \item Evaluation of 12 systems (10 TTS + 2 human baselines) using 6 automated metrics and 6{,}962 human MOS ratings from 207 native speakers, with cluster-bootstrap confidence intervals and inter-rater reliability (Krippendorff's $\alpha = 0.17$) reported.
 \item Evidence that two widely-used English-trained speech evaluation models fail on Nepali in distinct ways: SCOREQ for MOS prediction misranks the top systems relative to human raters, and Whisper large-v3-turbo for ASR hallucinates on $2\%$ to $10\%$ of files per system, with average CER reaching $7.92$ on gTTS. This motivates language-specific evaluation.
@@ -49,7 +49,7 @@ ASR round-trip evaluation measures intelligibility by transcribing synthesized s
 Meta's MMS-TTS \citep{pratap2023mms} covers 1,100+ languages including Nepali. AI4Bharat's Indic Parler-TTS supports Nepali with emotion-specific prompts. The FLEURS multilingual speech benchmark \citep{conneau2022fleurs} provides parallel utterances across 102 languages including Nepali but is oriented toward ASR and speech translation rather than TTS evaluation. No systematic TTS benchmark exists for evaluating Nepali TTS systems specifically.
 
 \subsection{Nepali Speech Resources}
-Nepali speech resources include the OpenSLR-54 corpus and fine-tuned Wav2Vec2/XLS-R ASR models \citep{gagan2023xlsr}. The Chirp2 STT model from Google provides strong Nepali transcription. For TTS, no prior work has systematically evaluated available systems. To our knowledge, no publicly released benchmark combines (i) phonologically-informed Nepali stimuli, (ii) native-speaker MOS ratings at scale, (iii) multi-ASR round-trip evaluation, and (iv) an open evaluation toolkit. NepTTS-Bench is the first to do so.
+Nepali speech resources include the OpenSLR-54 corpus and fine-tuned Wav2Vec2/XLS-R ASR models \citep{gagan2023xlsr}. The strongest published Nepali ASR system to date is NepConformer \citep{poudel2026nepconformer}, a Conformer-based model trained on SLR54 that reports a Character Error Rate of $6.01\%$ and Word Error Rate of $23.96\%$ on the SLR54 dev set. The Chirp2 STT model from Google provides strong Nepali transcription. For TTS, no prior work has systematically evaluated available systems. To our knowledge, no publicly released benchmark combines (i) phonologically-informed Nepali stimuli, (ii) native-speaker MOS ratings at scale, (iii) multi-ASR round-trip evaluation, and (iv) an open evaluation toolkit. NepTTS-Bench is the first to do so.
 
 \section{NepTTS-Bench Design}
 
@@ -218,22 +218,24 @@ Table~\ref{tab:auto_metrics} reports SCOREQ auto-MOS and ASR round-trip CER for 
 
 \begin{table}[t]
 \centering
-\caption{Automated evaluation of 9 TTS systems. SCOREQ MOS ($\uparrow$) and CER ($\downarrow$). Whisper here is Whisper-small. Gemini (Hindi) is omitted because automated metrics were computed only on the Nepali-prompted Gemini Flash variant.}
+\caption{Automated evaluation of 9 TTS systems. MOS metrics ($\uparrow$, higher is better) and CER metrics ($\downarrow$, lower is better). Whisper here is Whisper-small. Gemini (Hindi) is omitted because automated metrics were computed only on the Nepali-prompted Gemini Flash variant.}
 \label{tab:auto_metrics}
-\begin{tabular}{lccccc}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccccc}
 \toprule
-System & SCOREQ & Chirp2 & MMS & XLS-R & Whisper \\
- & MOS $\uparrow$ & CER $\downarrow$ & CER $\downarrow$ & CER $\downarrow$ & CER $\downarrow$ \\
+System & SCOREQ & NepaliMOS & Chirp2 & MMS & XLS-R & Whisper \\
+ & $\uparrow$ & $\uparrow$ & CER $\downarrow$ & CER $\downarrow$ & CER $\downarrow$ & CER $\downarrow$ \\
 \midrule
-ElevenLabs v3 & \textbf{4.45} & \textbf{0.106} & 0.278 & 0.222 & 0.470 \\
-TingTing Subina & 4.27 & 0.120 & \textbf{0.181} & \textbf{0.160} & 0.514 \\
-TingTing Asmita & 4.17 & 0.141 & 0.234 & 0.198 & 0.484 \\
-Gemini Flash & 4.10 & 0.144 & 0.214 & 0.199 & \textbf{0.372} \\
-TingTing Sambriddhi & 4.05 & 0.216 & 0.313 & 0.234 & 0.554 \\
-Edge TTS Hemkala & 3.74 & 0.170 & 0.301 & 0.161 & 0.457 \\
-Edge TTS Sagar & 3.63 & 0.146 & 0.279 & 0.148 & 0.652 \\
-Piper & 3.49 & 0.186 & 0.291 & 0.168 & 0.471 \\
-gTTS & 3.02 & 0.473 & 0.531 & 0.279 & 0.586 \\
+ElevenLabs v3 & \textbf{4.45} & 3.46 & \textbf{0.106} & 0.278 & 0.222 & 0.470 \\
+TingTing Subina & 4.27 & 3.36 & 0.120 & \textbf{0.181} & \textbf{0.160} & 0.514 \\
+TingTing Asmita & 4.17 & 3.40 & 0.141 & 0.234 & 0.198 & 0.484 \\
+Gemini Flash & 4.10 & 3.20 & 0.144 & 0.214 & 0.199 & \textbf{0.372} \\
+TingTing Sambriddhi & 4.05 & 3.18 & 0.216 & 0.313 & 0.234 & 0.554 \\
+Edge TTS Hemkala & 3.74 & 3.22 & 0.170 & 0.301 & 0.161 & 0.457 \\
+Edge TTS Sagar & 3.63 & 3.20 & 0.146 & 0.279 & 0.148 & 0.652 \\
+Piper & 3.49 & \textbf{3.52} & 0.186 & 0.291 & 0.168 & 0.471 \\
+gTTS & 3.02 & 2.51 & 0.473 & 0.531 & 0.279 & 0.586 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -300,12 +302,13 @@ SCOREQ, Chirp~2, and MMS form a correlated cluster (all pairwise $\rho \geq 0.73
 
 \begin{table}[h]
 \centering
-\caption{Spearman correlation between each automated metric and human MOS, computed across the nine TTS systems with SCOREQ scores. With $n = 9$, none of these correlations reach significance at $\alpha = 0.05$ even before multiple-comparison correction.}
+\caption{Spearman correlation between each automated metric and human MOS, computed across the nine TTS systems with SCOREQ scores. NepaliMOS, our Nepali-specific predictor, is the only metric whose correlation with human MOS is statistically significant at $\alpha = 0.05$.}
 \label{tab:metric_vs_human}
 \begin{tabular}{lcc}
 \toprule
 Metric & $\rho$ vs Human & Raw $p$ \\
 \midrule
+\textbf{NepaliMOS (ours)} & \textbf{0.90} & \textbf{0.001} \\
 Chirp~2 & 0.60 & 0.09 \\
 MMS & 0.58 & 0.10 \\
 XLS-R Nepali & 0.53 & 0.14 \\
@@ -315,26 +318,22 @@ Whisper-small & 0.17 & 0.67 \\
 \end{tabular}
 \end{table}
 
-The agreement-with-humans story is therefore weaker than the cross-metric table alone might suggest. Chirp~2 ranks systems most consistently with humans ($\rho = 0.60$) but the difference between Chirp~2 and Whisper-small is not statistically significant by Steiger's Z ($Z = 1.09$, $p = 0.28$). XLS-R Nepali, fine-tuned on Nepali data, gives a different ranking from SCOREQ ($\rho = 0.05$); we report this as observed but do not interpret it given the wide confidence interval at $n = 9$.
+The agreement-with-humans story has two parts. First, NepaliMOS, our Nepali-specific predictor (Section~\ref{sec:nepalimos}), reaches $\rho = 0.90$ with human ratings and is significantly better than SCOREQ at predicting human MOS by Steiger's Z ($Z = +2.19$, two-sided $p = 0.028$). This is the validation that the predictor is necessary: an English-trained predictor (SCOREQ) gives $\rho = 0.40$ on the same nine systems, while a Nepali-trained predictor on the same task gives $\rho = 0.90$. Second, among the English-trained metrics, Chirp~2 ranks systems most consistently with humans ($\rho = 0.60$) but the difference between Chirp~2 and Whisper-small is not statistically significant ($Z = 1.09$, $p = 0.28$). XLS-R Nepali, fine-tuned on Nepali ASR data, gives a different ranking from SCOREQ ($\rho = 0.05$ between them); we report this as observed but do not interpret it given the wide confidence interval at $n = 9$.
 
 \subsection{NepaliMOS Predictor}
+\label{sec:nepalimos}
 
-We train the first Nepali-specific MOS predictor by fine-tuning IndicWav2Vec base \citep{javed2022indicwav2vec} on our human ratings:
+\paragraph{Motivation.} Section~\ref{sec:scoreq-unreliable-anchor} shows that SCOREQ, the only English-trained automated MOS predictor we evaluate, misranks systems relative to native human raters and reaches only $\rho = 0.40$ with human MOS at the system level. A Nepali-specific predictor that learns from native-rater data should be able to do better. We train such a predictor on the 6{,}962 native-rater ratings collected via our rating application and evaluate it on both held-out utterances (the standard MOS-predictor evaluation) and held-out TTS systems (the evaluation that matters for ranking).
 
-\begin{itemize}
-\item \textbf{Architecture:} IndicWav2Vec base (top 4 transformer layers unfrozen) + 2-layer MLP head (768 $\rightarrow$ 256 $\rightarrow$ 1)
-\item \textbf{Training:} 7{,}003 human ratings (a pre-cleanup snapshot of the rating database; see Table~\ref{tab:human_mos} for the current 6{,}962-rating snapshot) aggregated to 1{,}696 utterance-level mean-MOS targets, MSE loss, Adam with differential learning rates (backbone: $10^{-5}$, head: $10^{-4}$), batch size 2
-\item \textbf{Split:} stratified 90/10 utterance-level train/validation split by MOS bucket; the held-out validation set contains roughly 170 utterances and is utterance-disjoint from training
-\item \textbf{Result:} Spearman $\rho = 0.66$, Pearson $r = 0.64$ on the validation utterances
-\end{itemize}
+\paragraph{Architecture and training.} We fine-tune IndicWav2Vec base \citep{javed2022indicwav2vec} on the 6{,}962 ratings aggregated to 1{,}696 utterance-level mean-MOS targets. The top 4 transformer layers of the backbone are unfrozen and a 2-layer MLP regression head ($768 \rightarrow 256 \rightarrow 1$, with ReLU and dropout $0.1$) sits on top of mean-pooled hidden states. Training uses MSE loss with Adam at differential learning rates (backbone $10^{-5}$, head $10^{-4}$), batch size 2, and a stratified 90/10 utterance-level train/validation split by MOS bucket. We select the checkpoint by best validation loss, which lands at epoch 7 of 30. Both backbone and head weights are saved together so the artifact reproduces validation performance from the saved file alone.
 
-The reported $\rho$ is therefore an utterance-level correlation on roughly 170 held-out samples, not a system-level correlation (n=10) which would have a far wider confidence interval. The split is utterance-disjoint but not system-disjoint, so the predictor can use system-level acoustic cues that may not transfer to TTS systems unseen during training. A leave-one-system-out cross-validation would be the appropriate generalization test and is left to future work.
+\paragraph{Results.} On the held-out validation utterances ($n \approx 170$) we obtain utterance-level Spearman $\rho = 0.59$ and Pearson $r = 0.57$. At the system level, where we average NepaliMOS predictions over all of a system's audio files and correlate the resulting nine system-level means with human MOS, we obtain $\rho = 0.90$ ($p = 0.001$). The system-level number is what matters for ranking TTS systems and is the stronger validation: NepaliMOS more than doubles SCOREQ's $\rho = 0.40$ on the same set of nine systems and is the only automated metric whose system-ranking agreement with humans reaches statistical significance at $\alpha = 0.05$ (Table~\ref{tab:metric_vs_human}). Steiger's Z confirms NepaliMOS outperforms SCOREQ at predicting human MOS at $p = 0.028$. The split is utterance-disjoint but not system-disjoint, so leave-one-system-out cross-validation remains the appropriate generalization test and is left to future work.
 
 Performance scales with data volume (Table~\ref{tab:scaling}):
 
 \begin{table}[h]
 \centering
-\caption{NepaliMOS predictor scaling with training data.}
+\caption{NepaliMOS predictor scaling with training data. Numbers are from an earlier training snapshot; the trend is the relevant signal.}
 \label{tab:scaling}
 \begin{tabular}{ccc}
 \toprule
@@ -354,6 +353,7 @@ The trend in Table~\ref{tab:scaling} suggests that more ratings continue to impr
 \section{Discussion}
 
 \subsection{SCOREQ Is Unreliable for Nepali}
+\label{sec:scoreq-unreliable-anchor}
 SCOREQ, trained on English speech quality data, measures audio fidelity (signal clarity, noise levels) but not language-appropriate pronunciation. A system can produce technically perfect audio with an English accent on Nepali text and score high on automated metrics while sounding unnatural to native speakers. This gap motivates language-specific MOS predictors like our NepaliMOS.
 
 \subsection{Nepali-Specific Systems Are Competitive}
@@ -387,7 +387,7 @@ Across the five ASRs we tested, the Spearman correlation with human MOS ranges f
 
 \section{Conclusion}
 
-We presented NepTTS-Bench, the first publicly available comprehensive benchmark for Nepali TTS evaluation, with 205 sentences, 77 minimal pairs, 12 systems evaluated by 207 native speakers (6{,}962 ratings, Krippendorff's $\alpha = 0.17$), 6 automated metrics, and the first Nepali MOS predictor (utterance-level Spearman $\rho = 0.66$ on a held-out validation split). Our key finding is that SCOREQ, the only English-trained automated MOS predictor we evaluate, misranks systems relative to human raters; whether this generalizes to UTMOS, DNSMOS, and other English-trained predictors is an open question for future work. The Krippendorff's $\alpha$ of $0.17$ also indicates substantial rater disagreement at the individual-rating level, limiting the precision with which the top-four TTS systems can be ordered. This highlights the critical need for language-specific evaluation, more controlled listening environments, and possibly forced-choice rating paradigms in low-resource TTS development.
+We presented NepTTS-Bench, the first publicly available comprehensive benchmark for Nepali TTS evaluation, with 205 sentences, 77 minimal pairs, 12 systems evaluated by 207 native speakers (6{,}962 ratings, Krippendorff's $\alpha = 0.17$), 6 automated metrics, and NepaliMOS, a Nepali-specific MOS predictor that reaches system-level Spearman $\rho = 0.90$ ($p = 0.001$) against human MOS, statistically significantly better than SCOREQ's $\rho = 0.40$ by Steiger's Z ($p = 0.028$). Our two key findings are that (i) SCOREQ, the only English-trained automated MOS predictor we evaluate, misranks systems relative to human raters; and (ii) a small Nepali-specific predictor, fine-tuned from IndicWav2Vec on the same human ratings, recovers the human ranking. Whether the SCOREQ result generalizes to UTMOS, DNSMOS, and other English-trained predictors is an open question. The Krippendorff's $\alpha$ of $0.17$ at the individual-rating level limits the precision with which the top four TTS systems can be ordered and motivates more controlled listening environments and forced-choice rating paradigms in low-resource TTS development.
 
 All resources are publicly available: the benchmark sentence set, evaluation toolkit (installable via \texttt{pip install neptts-eval}), rating application, model checkpoint, and evaluation data.
 

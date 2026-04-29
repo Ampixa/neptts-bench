@@ -122,6 +122,8 @@ multi = json.load(open(RESULTS / "asr_results_multi.json"))
 mms = {k: v["avg_cer"] for k, v in multi["mms"].items()}
 xlsr = {k: v["avg_cer"] for k, v in multi["xlsr_nepali"].items()}
 whisper_small = load_summary(RESULTS / "asr_roundtrip.json")
+nepalimos_raw = json.load(open(RESULTS / "nepalimos_predictions.json"))["per_system"]
+nepalimos = {k: v["mean"] for k, v in nepalimos_raw.items()}
 
 # Map TTS audio dir name to human MOS system_name
 DIR_TO_SYS = {
@@ -139,10 +141,11 @@ DIR_TO_SYS = {
 # Build aligned vectors over TTS-9 systems
 tts_systems = list(DIR_TO_SYS.keys())
 human_v = []
-metric_vecs = {"SCOREQ": [], "Chirp2": [], "MMS": [], "XLS-R": [], "Whisper-small": []}
+metric_vecs = {"SCOREQ": [], "NepaliMOS": [], "Chirp2": [], "MMS": [], "XLS-R": [], "Whisper-small": []}
 for s in tts_systems:
     human_v.append(human_mos[DIR_TO_SYS[s]])
     metric_vecs["SCOREQ"].append(scoreq.get(s) if scoreq.get(s) is not None else scoreq.get("human"))
+    metric_vecs["NepaliMOS"].append(nepalimos.get(s))
     metric_vecs["Chirp2"].append(chirp2.get(s))
     metric_vecs["MMS"].append(mms.get(s))
     metric_vecs["XLS-R"].append(xlsr.get(s))
@@ -151,16 +154,15 @@ for s in tts_systems:
 print()
 print("Per-metric Spearman rho vs human MOS (n=9 TTS systems):")
 metric_results = {}
+mos_metrics = {"SCOREQ", "NepaliMOS"}  # higher = better
 for name, vec in metric_vecs.items():
     if any(v is None for v in vec):
         print(f"  {name}: missing data, skipping")
         continue
-    # CER metrics: lower = better, so invert sign for rho with human MOS (higher = better)
-    if name == "SCOREQ":
+    if name in mos_metrics:
         rho, p = spearmanr(human_v, vec)
     else:
-        # Higher CER = worse = lower MOS expected, so we expect negative rho with raw CER.
-        # Negate CER so that the rho matches the conventional "agreement with human ranking".
+        # CER metrics: lower = better. Negate for rho convention (higher = more agreement).
         rho, p = spearmanr(human_v, [-v for v in vec])
     metric_results[name] = (rho, p, vec)
     print(f"  {name:<14} rho = {rho:+.4f}   p = {p:.4f}   n = {len(vec)}")
