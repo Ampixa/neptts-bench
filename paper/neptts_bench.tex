@@ -149,6 +149,32 @@ gTTS & \texttt{gTTS}, \texttt{lang="ne"} & Google Translate TTS endpoint. MP3 ou
 \end{tabular}
 \end{table}
 
+\paragraph{Audio characteristics.} The TTS-9 set comprises 1{,}729 utterances totaling $53.4$ minutes of audio (Table~\ref{tab:audio_stats}). File counts vary by system because some providers skip or fail on subsets of the 205 input sentences (notably Edge TTS and gTTS, which decline a small set of stimuli). Median utterance length differs substantially across systems, from $1.18$~s (TingTing Sambriddhi) to $2.23$~s (Edge TTS Hemkala), reflecting differences in speaking rate rather than content; all systems received the same 205 input sentences.
+
+\begin{table}[h]
+\centering
+\caption{Audio duration statistics per TTS system over the 205 stimuli. All durations in seconds; \textit{Total} in minutes.}
+\label{tab:audio_stats}
+\footnotesize
+\begin{tabular}{lrrrrrr}
+\toprule
+System & $n$ & Total & Median & Mean & Min & Max \\
+\midrule
+Edge TTS Hemkala       & 176 &  6.9 & 2.23 & 2.35 & 1.32 & 7.46 \\
+Edge TTS Sagar         & 176 &  6.8 & 2.21 & 2.31 & 1.39 & 6.98 \\
+gTTS                   & 176 &  6.7 & 2.11 & 2.28 & 0.74 & 8.42 \\
+Gemini Flash           & 201 &  7.0 & 2.01 & 2.10 & 0.69 & 7.41 \\
+Piper                  & 191 &  5.3 & 1.51 & 1.67 & 0.44 & 6.93 \\
+TingTing Asmita        & 202 &  4.9 & 1.33 & 1.46 & 0.26 & 5.59 \\
+TingTing Sambriddhi    & 202 &  4.4 & 1.18 & 1.31 & 0.21 & 5.96 \\
+TingTing Subina        & 202 &  5.4 & 1.44 & 1.60 & 0.34 & 5.62 \\
+ElevenLabs v3          & 203 &  6.0 & 1.72 & 1.78 & 0.52 & 6.27 \\
+\midrule
+\textbf{TTS-9 combined} & \textbf{1{,}729} & \textbf{53.4} & \textbf{1.72} & \textbf{1.85} & \textbf{0.21} & \textbf{8.42} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Evaluation Methodology}
 
 \paragraph{Human MOS.} Native Nepali speakers rate blinded audio samples on a 1--5 scale via a web application. Raters choose their available time (5--20 minutes) and receive a balanced, randomized set of stimuli across all systems. Same-sentence stimuli are spaced at least 3 positions apart to reduce fatigue. The system identity is hidden.
