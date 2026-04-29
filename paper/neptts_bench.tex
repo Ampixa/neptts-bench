@@ -16,7 +16,7 @@
 \maketitle
 
 \begin{abstract}
-Evaluating text-to-speech (TTS) for Nepali requires probing phonological contrasts that English-trained quality metrics cannot detect: a four-way laryngeal distinction (voiceless/voiced $\times$ unaspirated/aspirated) at five places of articulation, the retroflex--dental opposition, oral--nasal vowel contrasts, gemination, and schwa deletion. We present NepTTS-Bench, the first publicly available comprehensive benchmark for Nepali TTS. The benchmark is built around a phonologically-informed stimulus set of 77 minimal pairs targeting these contrasts within 205 sentences total. We evaluate 12 systems spanning commercial cloud services, Nepali-specific providers, open-source models, and human speech baselines. We collect 6{,}962 human MOS ratings from 207 native Nepali speakers (Krippendorff's $\alpha = 0.17$) and compare against 6 automated metrics, including SCOREQ auto-MOS and ASR round-trip CER across 5 ASR systems. Our key findings are: (1) the English-trained automated MOS predictor we test (SCOREQ) misranks systems relative to humans, putting ElevenLabs v3 first ($4.45$) while human raters rank it 6th of 12 ($3.47$); (2) Nepali-specific TTS systems are competitive with global cloud services, with TingTing Asmita the highest-rated TTS ($3.55$); (3) the choice of ASR drives Spearman $\rho$ between automated rankings and human MOS from $0.17$ (Whisper-small) to $0.60$ (Chirp~2), although none of these correlations reach significance at $\alpha = 0.05$ with $n = 9$ TTS systems; (4) our fine-tuned Nepali MOS predictor (NepaliMOS) reaches utterance-level Spearman $\rho = 0.59$ on held-out validation and system-level $\rho = 0.90$ ($p = 0.001$) against human MOS, significantly outperforming SCOREQ's $\rho = 0.40$ by Steiger's Z ($p = 0.028$). We release the complete benchmark as open-source resources, including the sentence sets, evaluation toolkit (\texttt{neptts-eval}), rating application, model checkpoint, and all data.
+Evaluating text-to-speech (TTS) for Nepali requires probing phonological contrasts that English-trained quality metrics cannot detect: a four-way laryngeal distinction (voiceless/voiced $\times$ unaspirated/aspirated) at five places of articulation, the retroflex--dental opposition, oral--nasal vowel contrasts, gemination, and schwa deletion. We present NepTTS-Bench, the first publicly available comprehensive benchmark for Nepali TTS. The benchmark is built around a phonologically-informed stimulus set of 77 minimal pairs targeting these contrasts within 205 sentences total. We evaluate 12 systems spanning commercial cloud services, Nepali-specific providers, open-source models, and human speech baselines. We collect 6{,}962 human MOS ratings from 207 native Nepali speakers (Krippendorff's $\alpha = 0.17$) and compare against 7 automated metrics, including SCOREQ auto-MOS and ASR round-trip CER across 6 ASR systems (Chirp~2, MMS, XLS-R Nepali, Whisper-small, Whisper large-v2, and Whisper large-v3-turbo). Our key findings are: (1) the English-trained automated MOS predictor we test (SCOREQ) misranks systems relative to humans, putting ElevenLabs v3 first ($4.45$) while human raters rank it 6th of 12 ($3.47$); (2) Nepali-specific TTS systems are competitive with global cloud services, with TingTing Asmita the highest-rated TTS ($3.55$); (3) the choice of ASR drives Spearman $\rho$ between automated rankings and human MOS from $0.17$ (Whisper-small) to $0.60$ (Chirp~2), although none of these correlations reach significance at $\alpha = 0.05$ with $n = 9$ TTS systems; (4) our fine-tuned Nepali MOS predictor (NepaliMOS) reaches utterance-level Spearman $\rho = 0.59$ on held-out validation and system-level $\rho = 0.90$ ($p = 0.001$) against human MOS, significantly outperforming SCOREQ's $\rho = 0.40$ by Steiger's Z ($p = 0.028$). We release the complete benchmark as open-source resources, including the sentence sets, evaluation toolkit (\texttt{neptts-eval}), rating application, model checkpoint, and all data.
 \end{abstract}
 
 \section{Introduction}
@@ -185,9 +185,10 @@ ElevenLabs v3          & 203 &  6.0 & 1.72 & 1.78 & 0.52 & 6.27 \\
 \item \textbf{Meta MMS-1b-all}: \texttt{facebook/mms-1b-all} via Hugging Face transformers with the Nepali language adapter.
 \item \textbf{Wav2Vec2 XLS-R Nepali}: \texttt{gagan3012/wav2vec2-xlsr-nepali} with greedy CTC decoding.
 \item \textbf{Whisper-small}: OpenAI \texttt{whisper} model \texttt{small}, \texttt{language="ne"}, \texttt{task="transcribe"}, fp32 inference on GPU.
-\item \textbf{Whisper large-v3-turbo}: via MLX (Apple Silicon port) with the same Nepali language hint.
+\item \textbf{Whisper large-v2}: via \texttt{faster-whisper} (CTranslate2 backend), \texttt{int8\_float16}, beam size 5, no previous-text conditioning, single GPU. Chosen over large-v3-turbo because of the latter's hallucination on Nepali (Section~\ref{sec:whisper-large}).
+\item \textbf{Whisper large-v3-turbo}: via MLX (Apple Silicon port) with the same Nepali language hint. Reported as a negative finding only.
 \end{itemize}
-Reference and hypothesis are NFC-normalized and stripped of common punctuation (Devanagari danda U+0964 and Latin punctuation) before edit-distance scoring. The Whisper-small evaluation script is at \texttt{scripts/eval\_asr\_roundtrip.py}; per-system raw transcriptions and CER values for all five ASRs are released as JSON in \texttt{benchmark/results/}.
+Reference and hypothesis are NFC-normalized and stripped of common punctuation (Devanagari danda U+0964 and Latin punctuation) before edit-distance scoring. The Whisper-small evaluation script is at \texttt{scripts/eval\_asr\_roundtrip.py} and the Whisper large-v2 script is at \texttt{scripts/eval\_whisper\_large\_v2.py}; per-system raw transcriptions and CER values for all six ASRs are released as JSON in \texttt{benchmark/results/}.
 
 \paragraph{Automated MOS.} We use SCOREQ \citep{ragano2024scoreq}, a NeurIPS 2024 model for no-reference speech quality assessment in the synthetic speech domain, using ONNX inference on CPU.
 
@@ -240,28 +241,28 @@ Table~\ref{tab:human_mos} presents the main human evaluation results. Key observ
 
 \subsection{Automated Metrics}
 
-Table~\ref{tab:auto_metrics} reports SCOREQ auto-MOS and ASR round-trip CER for our 10 TTS systems across four of the five ASRs we evaluated. Whisper large-v3-turbo is excluded from the per-system table; we discuss its failure mode in Section~\ref{sec:whisper-large}.
+Table~\ref{tab:auto_metrics} reports SCOREQ auto-MOS and ASR round-trip CER for our 10 TTS systems across five of the six ASRs we evaluated. Whisper large-v3-turbo is excluded from the per-system table because of severe hallucination; we discuss its failure mode in Section~\ref{sec:whisper-large}. Whisper large-v2, evaluated via the \texttt{faster-whisper} CTranslate2 backend at \texttt{int8\_float16} on a single GPU, is reported as the stable Whisper-class baseline.
 
 \begin{table}[t]
 \centering
-\caption{Automated evaluation of 9 TTS systems. MOS metrics ($\uparrow$, higher is better) and CER metrics ($\downarrow$, lower is better). Whisper here is Whisper-small. Gemini (Hindi) is omitted because automated metrics were computed only on the Nepali-prompted Gemini Flash variant.}
+\caption{Automated evaluation of 9 TTS systems. MOS metrics ($\uparrow$, higher is better) and CER metrics ($\downarrow$, lower is better). Whisper-s denotes Whisper-small, Whisper-l2 denotes Whisper large-v2 (faster-whisper, int8\_float16). Whisper large-v3-turbo is excluded; see Section~\ref{sec:whisper-large}. Gemini (Hindi) is omitted because automated metrics were computed only on the Nepali-prompted Gemini Flash variant.}
 \label{tab:auto_metrics}
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lcccccc}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lccccccc}
 \toprule
-System & SCOREQ & NepaliMOS & Chirp2 & MMS & XLS-R & Whisper \\
- & $\uparrow$ & $\uparrow$ & CER $\downarrow$ & CER $\downarrow$ & CER $\downarrow$ & CER $\downarrow$ \\
+System & SCOREQ & NepaliMOS & Chirp2 & MMS & XLS-R & Whisper-s & Whisper-l2 \\
+ & $\uparrow$ & $\uparrow$ & CER $\downarrow$ & CER $\downarrow$ & CER $\downarrow$ & CER $\downarrow$ & CER $\downarrow$ \\
 \midrule
-ElevenLabs v3 & \textbf{4.45} & 3.46 & \textbf{0.106} & 0.278 & 0.222 & 0.470 \\
-TingTing Subina & 4.27 & 3.36 & 0.120 & \textbf{0.181} & \textbf{0.160} & 0.514 \\
-TingTing Asmita & 4.17 & 3.40 & 0.141 & 0.234 & 0.198 & 0.484 \\
-Gemini Flash & 4.10 & 3.20 & 0.144 & 0.214 & 0.199 & \textbf{0.372} \\
-TingTing Sambriddhi & 4.05 & 3.18 & 0.216 & 0.313 & 0.234 & 0.554 \\
-Edge TTS Hemkala & 3.74 & 3.22 & 0.170 & 0.301 & 0.161 & 0.457 \\
-Edge TTS Sagar & 3.63 & 3.20 & 0.146 & 0.279 & 0.148 & 0.652 \\
-Piper & 3.49 & \textbf{3.52} & 0.186 & 0.291 & 0.168 & 0.471 \\
-gTTS & 3.02 & 2.51 & 0.473 & 0.531 & 0.279 & 0.586 \\
+ElevenLabs v3 & \textbf{4.45} & 3.46 & \textbf{0.106} & 0.278 & 0.222 & 0.470 & \textbf{0.256} \\
+TingTing Subina & 4.27 & 3.36 & 0.120 & \textbf{0.181} & \textbf{0.160} & 0.514 & 0.296 \\
+TingTing Asmita & 4.17 & 3.40 & 0.141 & 0.234 & 0.198 & 0.484 & 0.368 \\
+Gemini Flash & 4.10 & 3.20 & 0.144 & 0.214 & 0.199 & \textbf{0.372} & 0.294 \\
+TingTing Sambriddhi & 4.05 & 3.18 & 0.216 & 0.313 & 0.234 & 0.554 & 0.356 \\
+Edge TTS Hemkala & 3.74 & 3.22 & 0.170 & 0.301 & 0.161 & 0.457 & 0.369 \\
+Edge TTS Sagar & 3.63 & 3.20 & 0.146 & 0.279 & 0.148 & 0.652 & 0.399 \\
+Piper & 3.49 & \textbf{3.52} & 0.186 & 0.291 & 0.168 & 0.471 & 0.365 \\
+gTTS & 3.02 & 2.51 & 0.473 & 0.531 & 0.279 & 0.586 & 0.481 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -296,12 +297,12 @@ ElevenLabs v3 scores highest on SCOREQ (4.45) but humans rank it 4th among the n
 
 \paragraph{Gemini Flash: clean to Whisper, lukewarm to humans.} A complementary divergence appears for Gemini Flash, which posts the lowest Whisper-small CER of any TTS system (0.372) yet a human MOS of only $3.25$ (4th of nine). At the utterance level within Gemini Flash, the rank correlation between mean MOS and Whisper-small CER is essentially zero ($\rho = +0.02$, $n = 160$, $p = 0.78$); the same correlation is weakly negative for most other systems, as expected, and only zero/positive for Gemini and gTTS. Whisper-small recovers the phoneme stream more accurately from Gemini Flash than from any other system, which is consistent with crisp segmental articulation; nevertheless, native raters find the result less natural than several systems on which CER is much higher. The most plausible interpretation is that Gemini Flash produces phonemically clean speech with cadence, intonation, or voice-quality characteristics that humans rate down but ASR is robust to. This is a different failure mode from the ElevenLabs case (clean English-accented audio): both expose categories of quality that round-trip CER alone cannot probe.
 
-\subsection{Whisper Large-v3-Turbo Hallucinates on Nepali}
+\subsection{Whisper Variants on Nepali}
 \label{sec:whisper-large}
 
-We additionally evaluated Whisper large-v3-turbo (via MLX) as our fifth ASR. Its outputs are dominated by sporadic but extreme hallucinations: across the nine TTS systems, between $2\%$ and $10\%$ of files have $\text{CER} > 1.0$ (the hypothesis is longer than the reference), with maximum CER reaching $186$ on Edge TTS Hemkala and $1{,}115$ on gTTS. Average CER is therefore highly skewed: $7.92$ on gTTS and $2.29$ on Edge TTS Hemkala, against $0.22$ to $0.64$ on the remaining systems. Median CER, by contrast, falls in $0.15$ to $0.44$ on every system, comparable to or worse than Whisper-small. Manual inspection confirms repeated tokens and inserted phrases unrelated to the input audio in the high-CER files.
+\paragraph{Large-v3-turbo hallucinates.} We initially evaluated Whisper large-v3-turbo (via MLX) as our fifth ASR. Its outputs are dominated by sporadic but extreme hallucinations: across the nine TTS systems, between $2\%$ and $10\%$ of files have $\text{CER} > 1.0$ (the hypothesis is longer than the reference), with maximum CER reaching $186$ on Edge TTS Hemkala and $1{,}115$ on gTTS. Average CER is therefore highly skewed: $7.92$ on gTTS and $2.29$ on Edge TTS Hemkala, against $0.22$ to $0.64$ on the remaining systems. Median CER, by contrast, falls in $0.15$ to $0.44$ on every system, comparable to or worse than Whisper-small. Manual inspection confirms repeated tokens and inserted phrases unrelated to the input audio in the high-CER files. This is a meaningful negative finding. Whisper large-v3-turbo is widely used as a default ASR in research pipelines, and its hallucination behavior on Nepali extends beyond the simple unreliability we observe for Whisper-small. Per-system averages computed naively over hallucinated runs are misleading. We therefore exclude it from per-system reporting and recommend that future low-resource speech evaluations characterize ASR hallucination rate before relying on round-trip CER.
 
-This is a meaningful negative finding. Whisper large-v3-turbo is widely used as a default ASR in research pipelines, and its hallucination behavior on Nepali extends beyond the simple unreliability we observe for Whisper-small ($\rho = 0.38$ in Table~\ref{tab:correlations}). Per-system averages computed naively over hallucinated runs are misleading. For low-resource Nepali TTS evaluation, Whisper large-v3-turbo should be used only with hallucination filtering. We exclude it from per-system reporting and recommend that future low-resource speech evaluations characterize ASR hallucination rate before relying on round-trip CER.
+\paragraph{Large-v2 is stable but not closer to humans.} As a stable Whisper-class baseline we ran Whisper large-v2 (via \texttt{faster-whisper}, \texttt{int8\_float16}, single GPU) on all 1{,}729 TTS-9 utterances. Hallucination is substantially less severe: between $1.6\%$ and $6.1\%$ of files per system have $\text{CER} > 1.0$, no system reaches the catastrophic $7.92$ average that v3-turbo posts on gTTS, and worst-case CER over the entire run stays bounded. Per-system average CER falls in $0.256$ to $0.481$, roughly $30\%$ lower than Whisper-small, consistent with the larger model being a stronger ASR. Despite this, large-v2's correlation with human MOS is $\rho = 0.22$ ($p = 0.58$, $n = 9$), only marginally better than Whisper-small's $\rho = 0.17$ and far below Chirp~2's $\rho = 0.60$ (Table~\ref{tab:metric_vs_human}). Crucially, large-v2 does correlate well with the SCOREQ--Chirp~2--MMS ``clean fidelity'' cluster (Table~\ref{tab:correlations}), with $\rho = 0.78$ against SCOREQ. The reading is that more capable Whisper models give more accurate transcripts and align better with English-trained quality predictors, but \emph{neither} Whisper variant is a reliable proxy for native-speaker MOS judgments on Nepali. For ASR-based round-trip evaluation, Chirp~2 (a Nepali-aware ASR) remains the strongest English-domain choice, and a Nepali-specific MOS predictor (Section~\ref{sec:nepalimos}) is the only metric we evaluate that statistically significantly tracks human MOS.
 
 \subsection{Cross-Metric Correlations}
 
@@ -309,22 +310,24 @@ Table~\ref{tab:correlations} reports pairwise Spearman correlations among the fi
 
 \begin{table}[t]
 \centering
-\caption{Spearman rank correlation ($\rho$) between automated metrics across $n = 9$ TTS systems. * indicates Benjamini--Hochberg-adjusted $p < 0.05$. CER metrics are negated so that higher values mean ``more agreement with the others''.}
+\caption{Spearman rank correlation ($\rho$) between automated metrics across $n = 9$ TTS systems. * indicates Benjamini--Hochberg-adjusted $p < 0.05$. CER metrics are negated so that higher values mean ``more agreement with the others''. Whisper-s is Whisper-small; Whisper-l2 is Whisper large-v2.}
 \label{tab:correlations}
-\begin{tabular}{lccccc}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccccc}
 \toprule
- & SCOREQ & Chirp2 & MMS & XLS-R & Whisper \\
+ & SCOREQ & Chirp2 & MMS & XLS-R & Whisper-s & Whisper-l2 \\
 \midrule
-SCOREQ & 1.000 & 0.883* & 0.733 & 0.050 & 0.383 \\
-Chirp2 & & 1.000 & 0.867* & 0.350 & 0.367 \\
-MMS & & & 1.000 & 0.450 & 0.350 \\
-XLS-R & & & & 1.000 & $-$0.033 \\
-Whisper & & & & & 1.000 \\
+SCOREQ     & 1.000 & 0.883* & 0.733  & 0.050 & 0.383     & 0.783 \\
+Chirp2     &       & 1.000  & 0.867* & 0.350 & 0.367     & 0.633 \\
+MMS        &       &        & 1.000  & 0.450 & 0.350     & 0.600 \\
+XLS-R      &       &        &        & 1.000 & $-$0.033  & $-$0.133 \\
+Whisper-s  &       &        &        &       & 1.000     & 0.567 \\
+Whisper-l2 &       &        &        &       &           & 1.000 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-SCOREQ, Chirp~2, and MMS form a correlated cluster (all pairwise $\rho \geq 0.73$, with SCOREQ--Chirp~2 and Chirp~2--MMS surviving BH correction at FDR $0.05$). Whisper-small and XLS-R Nepali sit outside this cluster, with weak or no correlation to any other metric ($\rho \leq 0.45$).
+SCOREQ, Chirp~2, and MMS form a correlated cluster (all pairwise $\rho \geq 0.73$, with SCOREQ--Chirp~2 and Chirp~2--MMS surviving BH correction at FDR $0.05$). Whisper large-v2 sits adjacent to this cluster ($\rho = 0.78$ with SCOREQ, $0.63$ with Chirp~2, $0.60$ with MMS), suggesting that its system ranking tracks ``clean fidelity'' judgments. Whisper-small and XLS-R Nepali sit outside the cluster, with weak or no correlation to any other metric ($\rho \leq 0.45$); Whisper-small and Whisper large-v2 themselves correlate at only $\rho = 0.57$, indicating that the two Whisper sizes do not produce equivalent system rankings.
 
 \paragraph{Agreement with human MOS.} The cross-metric table above shows automated agreement, not agreement with human ratings. Table~\ref{tab:metric_vs_human} reports each metric's Spearman correlation against human MOS over the same nine TTS systems.
 
@@ -341,6 +344,7 @@ Chirp~2 & 0.60 & 0.09 \\
 MMS & 0.58 & 0.10 \\
 XLS-R Nepali & 0.53 & 0.14 \\
 SCOREQ & 0.40 & 0.29 \\
+Whisper large-v2 & 0.22 & 0.58 \\
 Whisper-small & 0.17 & 0.67 \\
 \bottomrule
 \end{tabular}
@@ -391,7 +395,7 @@ TingTing.io, a Nepal-based TTS provider, achieves the highest human MOS among TT
 Piper TTS (3.50) is fully open-source and runs locally without cloud dependency. Its competitive performance, statistically indistinguishable from ElevenLabs and Edge TTS within our CIs, makes it viable for applications where privacy, cost, or connectivity constraints preclude cloud services.
 
 \subsection{ASR Model Selection}
-Across the five ASRs we tested, the Spearman correlation with human MOS ranges from $\rho = 0.17$ (Whisper-small) to $\rho = 0.60$ (Chirp~2), with MMS at $0.58$ and XLS-R Nepali at $0.53$ (Table~\ref{tab:metric_vs_human}). With $n = 9$ TTS systems, none of these correlations reach significance at $\alpha = 0.05$ and Steiger's Z test confirms that we cannot statistically distinguish Chirp~2's agreement with humans from Whisper-small's ($Z = 1.09$, $p = 0.28$). The differences are nonetheless practically meaningful: Chirp~2 places ElevenLabs and gTTS in roughly the right human-rank slots, while Whisper-small does not. Combined with Whisper large-v3-turbo's hallucination behavior (Section~\ref{sec:whisper-large}), our recommendation for Nepali TTS evaluation is: Chirp~2 or MMS as the primary ASR, with Whisper avoided unless paired with hallucination filtering.
+Across the six ASRs we tested, the Spearman correlation with human MOS ranges from $\rho = 0.17$ (Whisper-small) to $\rho = 0.60$ (Chirp~2), with MMS at $0.58$, XLS-R Nepali at $0.53$, and Whisper large-v2 at $0.22$ (Table~\ref{tab:metric_vs_human}). With $n = 9$ TTS systems, none of these correlations reach significance at $\alpha = 0.05$ and Steiger's Z test confirms that we cannot statistically distinguish Chirp~2's agreement with humans from Whisper-small's ($Z = 1.09$, $p = 0.28$). The differences are nonetheless practically meaningful: Chirp~2 places ElevenLabs and gTTS in roughly the right human-rank slots, while neither Whisper variant does. Whisper large-v2 produces stable, hallucination-free transcripts (unlike v3-turbo) and lower per-system CERs than Whisper-small, but its system ranking does not move materially closer to human judgments. Combined with Whisper large-v3-turbo's hallucination behavior (Section~\ref{sec:whisper-large}), our recommendation for Nepali TTS evaluation is: Chirp~2 or MMS as the primary ASR, Whisper large-v2 if a Whisper-class baseline is required, and Whisper large-v3-turbo avoided unless paired with hallucination filtering.
 
 \subsection{Limitations}
 
