@@ -27,9 +27,13 @@ from . import __version__
               help="Device for Whisper: cpu or cuda (default: cpu)")
 @click.option("--skip-scoreq", is_flag=True, help="Skip SCOREQ MOS evaluation")
 @click.option("--skip-asr", is_flag=True, help="Skip ASR round-trip evaluation")
+@click.option("--skip-nepalimos", is_flag=True, help="Skip NepaliMOS evaluation")
+@click.option("--nepalimos-ckpt", default=None, type=click.Path(),
+              help="Local NepaliMOS checkpoint path (default: download from HF ampixa/neptts-bench).")
 @click.option("--verbose", "-v", is_flag=True, help="Print progress")
 @click.version_option(version=__version__)
-def main(tts_cmd, wav_dir, output, system_name, whisper_model, device, skip_scoreq, skip_asr, verbose):
+def main(tts_cmd, wav_dir, output, system_name, whisper_model, device,
+         skip_scoreq, skip_asr, skip_nepalimos, nepalimos_ckpt, verbose):
     """Evaluate a Nepali TTS system against the NepTTS-Bench benchmark.
 
     Two modes:
@@ -71,6 +75,7 @@ def main(tts_cmd, wav_dir, output, system_name, whisper_model, device, skip_scor
 
     scoreq_results = None
     asr_results = None
+    nepalimos_results = None
 
     # SCOREQ
     if not skip_scoreq:
@@ -78,6 +83,15 @@ def main(tts_cmd, wav_dir, output, system_name, whisper_model, device, skip_scor
         from .scoreq_eval import evaluate_scoreq
         scoreq_results = evaluate_scoreq(audio_files, verbose=verbose)
         click.echo(f"  SCOREQ MOS: {scoreq_results['avg_mos']:.2f} ({scoreq_results['n_scored']} files)")
+
+    # NepaliMOS (Nepali-specific predictor; system-level rho_human=0.90 in the paper)
+    if not skip_nepalimos:
+        click.echo("\nRunning NepaliMOS auto-MOS...")
+        from .nepalimos_eval import evaluate_nepalimos
+        nepalimos_results = evaluate_nepalimos(
+            audio_files, verbose=verbose, ckpt_path=nepalimos_ckpt, device=device,
+        )
+        click.echo(f"  NepaliMOS: {nepalimos_results['avg_mos']:.2f} ({nepalimos_results['n_scored']} files)")
 
     # ASR round-trip
     if not skip_asr:
@@ -90,7 +104,10 @@ def main(tts_cmd, wav_dir, output, system_name, whisper_model, device, skip_scor
 
     # Generate report
     from .report import generate_report, print_table
-    report = generate_report(scoreq_results, asr_results, len(audio_files), system_name)
+    report = generate_report(
+        scoreq_results, asr_results, len(audio_files), system_name,
+        nepalimos_results=nepalimos_results,
+    )
 
     # Save
     with open(output, "w") as f:
