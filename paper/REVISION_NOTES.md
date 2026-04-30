@@ -51,6 +51,18 @@ The training data count is now honest: 6,962 native-rater ratings in the current
 
 Tab 2 means shifted by ≤0.02 with the corrected snapshot. The headline ranking is unchanged.
 
+## NepaliMOS motivation and overfitting controls (Rupak review, 2026-04-29)
+
+Rupak Ghimire flagged §4.6 as a likely reviewer objection: "How do you manage the overfitting issue with only 7K training samples?" and "If we are not using NepaliMOS, what is the point of mentioning it?" The first concern is addressed in §4.6 itself; the second is closed by `513a2a1` which applies NepaliMOS to Tab 5 and Tab 7 (system-level ρ_human = 0.90 vs SCOREQ's 0.40).
+
+§4.6 NepaliMOS Predictor expanded:
+
+- **Motivation** rewritten. The earlier paragraph said "SCOREQ misranks systems → we train a Nepali-specific predictor." The new version names the representation gap explicitly: SCOREQ is trained on English speech-quality data and learns audio-fidelity features (signal cleanness, codec artifacts, additive noise) that are largely orthogonal to Nepali phonology (four-way laryngeal contrast, retroflex/dental opposition, schwa deletion). The same gap is expected to apply to UTMOS and DNSMOS, both English-trained. This frames why a small Nepali-supervised predictor is the right intervention rather than just a stronger general-purpose predictor.
+- **New paragraph "Capacity and overfitting controls"** between Architecture/training and Results. Inventories the controls: 28.5M trainable parameters (top 4 of 12 transformer layers + 197K head) out of 95.0M backbone params total, differential LR (backbone 10⁻⁵, head 10⁻⁴), dropout 0.1 in the head, batch size 2 as implicit regularization, stratified 90/10 split by integer MOS bucket, and best-validation-loss checkpoint selection across 30 epochs (selects epoch 7; validation loss does not improve in the remaining 23 epochs, so the early-stopping criterion is binding). Two empirical signals support the no-memorization conclusion: (i) utterance-level Spearman ρ = 0.59 on n = 167 held-out utterances unseen during training (a memorizing model would predict near the training-set mean and yield ρ ≈ 0); (ii) the scaling table shows monotonic improvement in ρ as ratings grow from 1,166 to 7,003 with the same architecture, consistent with extracting more signal from more data rather than fitting noise.
+- Param counts verified directly from the saved checkpoint (`model/checkpoints/neptts_mos_best.pt`): SSL backbone 95,044,608; top 4 encoder layers 28,351,488; head 197,121; trainable total 28,548,609; best epoch 7; n_train 1,530; n_val 167; val MSE 0.5804 (RMSE 0.762); val Spearman 0.589 (rounds to 0.59 in paper).
+
+A train-vs-validation loss curve figure is the natural complement and is filed as future work; the current training script does not log per-epoch losses to disk and re-running on the GTX 1650 (4 GB) is tight at this batch size. The prose case (held-out ρ on unseen utterances + monotonic data-scaling) carries the no-overfit argument without the figure.
+
 ## Methodological additions
 
 - §3.2 TTS configuration table (`tab:tts_configs`) with explicit voice IDs, model versions, prompt strings, and output formats for all 10 TTS systems. Lekhnath had asked about Gemini-Hindi vs Gemini Flash specifically; this is now nailed down: Gemini Flash uses a Nepali-naming prompt prefix, Gemini (Hindi) uses raw Devanagari with no language hint. Both run `gemini-2.5-flash-preview-tts` voice "Kore". The audio sets are distinct (verified against the original `gemini/` and `gemini_hindi/` directories at `~/gt/bolne/crew/bolne/benchmark/data/tts_outputs/`).
