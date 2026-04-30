@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "neptts-eval"
-version = "0.1.0"
+version = "0.2.0"
 description = "Evaluation toolkit for Nepali TTS systems — NepTTS-Bench"
 readme = "README.md"
 license = "MIT"
