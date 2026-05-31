@@ -6,13 +6,15 @@ Inputs:
   - benchmark/results/asr_results_chirp2.json
   - benchmark/results/asr_results_multi.json (mms + xlsr_nepali)
   - benchmark/results/asr_roundtrip.json (whisper-small)
+  - benchmark/results/asr_roundtrip_large_v2.json (whisper large-v2)
+  - benchmark/results/asr_roundtrip_conformer.json (Conformer CTC-BPE)
 
 Outputs (printed):
   1. Per-system human MOS with cluster-bootstrap 95% CIs (clustered by rater)
   2. Krippendorff's alpha (interval) across raters
   3. Spearman rho for each automated metric vs human MOS
-  4. Steiger's Z test for whether rho(Chirp2 vs Human) significantly differs from rho(Whisper-small vs Human)
-  5. Benjamini-Hochberg-corrected p-values for the cross-metric correlation table
+  4. Steiger's Z tests for dependent metric-vs-human correlations
+  5. Benjamini-Hochberg-corrected p-values for the metric-vs-human and cross-metric tables
 """
 import json
 import math
@@ -122,6 +124,8 @@ multi = json.load(open(RESULTS / "asr_results_multi.json"))
 mms = {k: v["avg_cer"] for k, v in multi["mms"].items()}
 xlsr = {k: v["avg_cer"] for k, v in multi["xlsr_nepali"].items()}
 whisper_small = load_summary(RESULTS / "asr_roundtrip.json")
+whisper_large_v2 = load_summary(RESULTS / "asr_roundtrip_large_v2.json")
+conformer = load_summary(RESULTS / "asr_roundtrip_conformer.json")
 nepalimos_raw = json.load(open(RESULTS / "nepalimos_predictions.json"))["per_system"]
 nepalimos = {k: v["mean"] for k, v in nepalimos_raw.items()}
 
@@ -141,7 +145,16 @@ DIR_TO_SYS = {
 # Build aligned vectors over TTS-9 systems
 tts_systems = list(DIR_TO_SYS.keys())
 human_v = []
-metric_vecs = {"SCOREQ": [], "NepaliMOS": [], "Chirp2": [], "MMS": [], "XLS-R": [], "Whisper-small": []}
+metric_vecs = {
+    "SCOREQ": [],
+    "NepaliMOS": [],
+    "Chirp2": [],
+    "MMS": [],
+    "XLS-R": [],
+    "Conformer": [],
+    "Whisper-small": [],
+    "Whisper large-v2": [],
+}
 for s in tts_systems:
     human_v.append(human_mos[DIR_TO_SYS[s]])
     metric_vecs["SCOREQ"].append(scoreq.get(s) if scoreq.get(s) is not None else scoreq.get("human"))
@@ -149,7 +162,9 @@ for s in tts_systems:
     metric_vecs["Chirp2"].append(chirp2.get(s))
     metric_vecs["MMS"].append(mms.get(s))
     metric_vecs["XLS-R"].append(xlsr.get(s))
+    metric_vecs["Conformer"].append(conformer.get(s))
     metric_vecs["Whisper-small"].append(whisper_small.get(s))
+    metric_vecs["Whisper large-v2"].append(whisper_large_v2.get(s))
 
 print()
 print("Per-metric Spearman rho vs human MOS (n=9 TTS systems):")
@@ -166,6 +181,14 @@ for name, vec in metric_vecs.items():
         rho, p = spearmanr(human_v, [-v for v in vec])
     metric_results[name] = (rho, p, vec)
     print(f"  {name:<14} rho = {rho:+.4f}   p = {p:.4f}   n = {len(vec)}")
+
+metric_pvals = [p for _, p, _ in metric_results.values() if not np.isnan(p)]
+metric_names_for_p = [name for name, (_, p, _) in metric_results.items() if not np.isnan(p)]
+if metric_pvals:
+    metric_adj = false_discovery_control(metric_pvals, method="bh")
+    print("  BH-adjusted p-values:")
+    for name, ap in zip(metric_names_for_p, metric_adj):
+        print(f"    {name:<14} BH p = {ap:.4f}")
 
 # ---------- 5. Steiger's Z for rho(Chirp2) vs rho(Whisper-small) ----------
 def steiger_z(r12, r13, r23, n):
@@ -194,11 +217,27 @@ from scipy.stats import norm
 p_two = 2 * (1 - norm.cdf(abs(z)))
 print(f"  Steiger's Z = {z:+.4f}, two-sided p = {p_two:.4f}")
 
+# r12 = rho(human, NepaliMOS), r13 = rho(human, SCOREQ), r23 = rho(NepaliMOS, SCOREQ)
+nepalimos_vec = metric_vecs["NepaliMOS"]
+scoreq_vec = metric_vecs["SCOREQ"]
+r12 = spearmanr(human_v, nepalimos_vec)[0]
+r13 = spearmanr(human_v, scoreq_vec)[0]
+r23 = spearmanr(nepalimos_vec, scoreq_vec)[0]
+
+print()
+print("Steiger's Z (NepaliMOS vs SCOREQ, both vs human MOS):")
+print(f"  r(human, NepaliMOS) = {r12:+.4f}")
+print(f"  r(human, SCOREQ)    = {r13:+.4f}")
+print(f"  r(NepaliMOS, SCOREQ)= {r23:+.4f}")
+z = steiger_z(r12, r13, r23, n=9)
+p_two = 2 * (1 - norm.cdf(abs(z)))
+print(f"  Steiger's Z = {z:+.4f}, two-sided p = {p_two:.4f}")
+
 # ---------- 6. BH correction across the cross-metric correlation panel ----------
 print()
 print("Cross-metric correlation table (TTS-9):")
 print("  SCOREQ orientation: higher = better; CER metrics negated so higher = better.")
-metric_names = ["SCOREQ", "Chirp2", "MMS", "XLS-R", "Whisper-small"]
+metric_names = ["SCOREQ", "Chirp2", "MMS", "XLS-R", "Conformer", "Whisper-small", "Whisper large-v2"]
 mvecs = {}
 for n in metric_names:
     if not metric_vecs.get(n): continue
@@ -207,9 +246,6 @@ for n in metric_names:
         mvecs[n] = list(metric_vecs[n])
     else:
         mvecs[n] = [-v for v in metric_vecs[n]]
-
-# Also include human as a metric column
-mvecs["Human"] = list(human_v)
 
 names = list(mvecs.keys())
 print(f"{'pair':<35} {'rho':>8} {'raw p':>10} {'BH p':>10}")

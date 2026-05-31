@@ -1,8 +1,8 @@
-"""Run NepaliMOS predictor on all TTS audio and write per-system mean scores.
+"""Run NepaliMOS predictor on TTS audio and write per-system mean scores.
 
 Inputs:
-  - Checkpoint: model/checkpoints/neptts_mos_v9_best.pt (downloaded from
-    huggingface.co/datasets/ampixa/neptts-bench/resolve/main/model/neptts_mos_v9_best.pt)
+  - Checkpoint: model/checkpoints/neptts_mos_best.pt (full fine-tuned state,
+    also hosted at huggingface.co/datasets/ampixa/neptts-bench)
   - Audio root: /home/cdjk/gt/bolne/crew/bolne/benchmark/data/tts_outputs/
 
 Output: benchmark/results/nepalimos_predictions.json
@@ -12,13 +12,12 @@ Output: benchmark/results/nepalimos_predictions.json
 """
 import json
 import sys
-from collections import defaultdict
+import argparse
 from pathlib import Path
 
 import numpy as np
 import torch
 import torch.nn as nn
-from huggingface_hub import hf_hub_download
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "model"))
@@ -41,6 +40,20 @@ SYSTEMS = [
 ]
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--checkpoint", type=Path, default=CKPT)
+    parser.add_argument("--audio-root", type=Path, default=AUDIO_ROOT)
+    parser.add_argument("--output", type=Path, default=OUT)
+    parser.add_argument(
+        "--systems",
+        nargs="+",
+        default=SYSTEMS,
+        help="System directories relative to --audio-root.",
+    )
+    return parser.parse_args()
 
 
 def load_audio(path: Path, target_sr: int = 16000) -> torch.Tensor:
@@ -94,11 +107,12 @@ def build_ssl():
 
 
 def main():
+    args = parse_args()
     print(f"Device: {DEVICE}")
     ssl = build_ssl().to(DEVICE)
     model = NepaliMOSPredictor(ssl).to(DEVICE)
 
-    state = torch.load(str(CKPT), map_location=DEVICE, weights_only=False)
+    state = torch.load(str(args.checkpoint), map_location=DEVICE, weights_only=False)
     head_key = "head_state_dict" if "head_state_dict" in state else "head"
     model.head.load_state_dict(state[head_key])
     if state.get("ssl_state_dict"):
@@ -115,8 +129,8 @@ def main():
     per_system = {}
 
     with torch.no_grad():
-        for sys_name in SYSTEMS:
-            d = AUDIO_ROOT / sys_name
+        for sys_name in args.systems:
+            d = args.audio_root / sys_name
             if not d.exists():
                 print(f"  SKIP {sys_name} (no dir)")
                 continue
@@ -142,9 +156,9 @@ def main():
             per_file[sys_name] = file_preds
             print(f"mean={per_system[sys_name]['mean']:.3f} n={len(scores)}")
 
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps({"per_system": per_system, "per_file": per_file}, indent=2))
-    print(f"\nWrote: {OUT}")
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps({"per_system": per_system, "per_file": per_file}, indent=2))
+    print(f"\nWrote: {args.output}")
 
 
 if __name__ == "__main__":
