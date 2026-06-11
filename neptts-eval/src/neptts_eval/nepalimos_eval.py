@@ -125,7 +125,7 @@ def evaluate_nepalimos(
     import torch
     from huggingface_hub import hf_hub_download
 
-    if device is None:
+    if device is None or device == "auto":
         device = "cuda" if torch.cuda.is_available() else "cpu"
 
     if ckpt_path is None:

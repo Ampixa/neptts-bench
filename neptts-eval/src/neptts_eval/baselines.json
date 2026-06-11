@@ -72,6 +72,11 @@
       "mms_cer": 0.1809,
       "xlsr_nepali_cer": 0.1604,
       "whisper_small_cer": 0.5142
+    },
+    "chatterbox_nepali_lora": {
+      "scoreq_mos": 4.168,
+      "nepalimos": 2.934,
+      "whisper_small_cer": 0.4884
     }
   }
 }

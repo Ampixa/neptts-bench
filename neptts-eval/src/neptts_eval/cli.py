@@ -23,17 +23,19 @@ from . import __version__
               help="Name for your system in the report")
 @click.option("--whisper-model", default="small",
               help="Whisper model size: tiny, base, small, medium (default: small)")
-@click.option("--device", default="cpu",
-              help="Device for Whisper: cpu or cuda (default: cpu)")
+@click.option("--device", default="auto",
+              help="Device for Whisper/NepaliMOS: auto, cpu, or cuda (default: auto — uses CUDA when available)")
 @click.option("--skip-scoreq", is_flag=True, help="Skip SCOREQ MOS evaluation")
 @click.option("--skip-asr", is_flag=True, help="Skip ASR round-trip evaluation")
 @click.option("--skip-nepalimos", is_flag=True, help="Skip NepaliMOS evaluation")
+@click.option("--make-baseline", is_flag=True,
+              help="Persist this system's metrics into baselines.json so future runs compare against it")
 @click.option("--nepalimos-ckpt", default=None, type=click.Path(),
               help="Local NepaliMOS checkpoint path (default: download from HF ampixa/neptts-bench).")
 @click.option("--verbose", "-v", is_flag=True, help="Print progress")
 @click.version_option(version=__version__)
 def main(tts_cmd, wav_dir, output, system_name, whisper_model, device,
-         skip_scoreq, skip_asr, skip_nepalimos, nepalimos_ckpt, verbose):
+         skip_scoreq, skip_asr, skip_nepalimos, make_baseline, nepalimos_ckpt, verbose):
     """Evaluate a Nepali TTS system against the NepTTS-Bench benchmark.
 
     Two modes:
@@ -113,6 +115,12 @@ def main(tts_cmd, wav_dir, output, system_name, whisper_model, device,
     with open(output, "w") as f:
         json.dump(report, f, indent=2)
     click.echo(f"\nReport saved to {output}")
+
+    # Optionally persist this system as a baseline for future comparisons
+    if make_baseline:
+        from .report import save_to_baselines
+        metrics = save_to_baselines(report)
+        click.echo(f"Added '{system_name}' to baselines.json: {metrics}")
 
     # Print comparison table
     print_table(report)

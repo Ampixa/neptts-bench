@@ -88,7 +88,7 @@ def generate_benchmark_audio(
 
 
 def benchmark(fn=None, *, system_name="my_system", output="neptts_report.json",
-              skip_scoreq=False, skip_asr=False, verbose=True):
+              skip_scoreq=False, skip_asr=False, verbose=True, device="auto"):
     """Decorator to benchmark a TTS function.
 
     Usage:
@@ -129,7 +129,7 @@ def benchmark(fn=None, *, system_name="my_system", output="neptts_report.json",
         if not skip_asr:
             print("\nRunning Whisper ASR round-trip...")
             from .asr_eval import evaluate_whisper
-            asr_results = evaluate_whisper(audio_files, sentences, verbose=verbose)
+            asr_results = evaluate_whisper(audio_files, sentences, device=device, verbose=verbose)
             print(f"  Whisper CER: {asr_results['avg_cer']:.3f}")
 
         report = generate_report(scoreq_results, asr_results, len(audio_files), system_name)

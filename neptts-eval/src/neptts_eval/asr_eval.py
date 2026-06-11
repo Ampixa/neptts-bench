@@ -12,21 +12,28 @@ def evaluate_whisper(
     audio_files: dict[str, Path],
     sentences: dict[str, dict],
     model_size: str = "small",
-    device: str = "cpu",
+    device: str = "auto",
     verbose: bool = False,
 ) -> dict:
     """Run Whisper ASR round-trip on audio files.
 
     Returns per-file CER/WER and aggregates by category.
+
+    device: "auto" (default) uses CUDA when available, else CPU; pass "cpu" or
+    "cuda" to force. The model is loaded on CPU then moved to GPU as fp32, since
+    Whisper fp16 produces NaN on some GPUs (e.g. GTX 1650).
     """
     import whisper
+    import torch
+
+    if device == "auto":
+        device = "cuda" if torch.cuda.is_available() else "cpu"
 
     if verbose:
-        print(f"  Loading Whisper {model_size}...", file=sys.stderr)
+        print(f"  Loading Whisper {model_size} on {device}...", file=sys.stderr)
 
     model = whisper.load_model(model_size, device="cpu")
     if device == "cuda":
-        import torch
         model = model.to("cuda").float()
 
     results = {}
