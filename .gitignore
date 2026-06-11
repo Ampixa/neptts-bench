@@ -28,3 +28,7 @@ node_modules/
 state.json
 CLAUDE.md
 CLAUDE.local.md
+
+for_stt_test/
+./*.json
+./*.py

@@ -14,6 +14,34 @@ def load_baselines() -> dict:
         return json.load(f)
 
 
+def save_to_baselines(report: dict, path: Path = BASELINES_PATH) -> dict:
+    """Persist an evaluated system's metrics into baselines.json.
+
+    Pulls the user system's row out of the report's comparison table (the entry
+    whose "system" matches report["system"]) and writes it under
+    baselines["systems"][system_name], overwriting any existing entry for that
+    name. Only the metric fields are stored (the "system" key is the dict key).
+    Returns the stored metric dict.
+    """
+    system_name = report["system"]
+    user_entry = next(
+        (e for e in report.get("comparison", []) if e.get("system") == system_name),
+        None,
+    )
+    if user_entry is None:
+        raise ValueError(f"No comparison row for system {system_name!r} in report")
+
+    metrics = {k: v for k, v in user_entry.items() if k != "system"}
+
+    baselines = load_baselines()
+    baselines.setdefault("systems", {})[system_name] = metrics
+    with open(path, "w") as f:
+        json.dump(baselines, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+
+    return metrics
+
+
 def generate_report(
     scoreq_results: dict | None,
     asr_results: dict | None,
