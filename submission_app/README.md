@@ -92,3 +92,29 @@ Portal name: **Ampixa Benchmarks Arena**. Intended production origin: `https://a
 - GitHub OAuth callback: `https://ampixa.benchmarks.cloud/api/auth/github/callback`
 
 The local preview remains on port 5193. These settings document the deployment target; they do not configure DNS, TLS, GitHub OAuth credentials or deploy the service.
+
+
+### Reviewer-local evaluation
+
+In the reviewer screen, choose **Download evaluation package**. It includes the original
+manifest, all WAVs, and an evaluation-job.json binding the submission ID, benchmark and
+audio digest. It is available only to authenticated administrators.
+
+On an evaluation machine, check out the same repository revision as the server, install
+FFmpeg and `submission_app/requirements-worker.txt`, then run:
+
+```sh
+python -m submission_app.offline --package evaluation-SUBMISSION_ID.zip --output results.json
+```
+
+This runs the existing Whisper small CPU evaluator locally. No production worker or
+GitHub Actions job is required. Upload results.json with **Upload evaluation results**.
+The server requires all prompt scores, finite nonnegative CER/WER, consistent macro
+averages, matching audio/submission/benchmark identity and a self-consistent publishable
+profile. Import is admin-only and bounded to 2 MiB. Published, rejected, actively evaluated
+and already-reviewed jobs cannot be overwritten. Approval remains a separate action.
+
+These are consistency checks, not cryptographic proof of honest inference. An authenticated
+reviewer is trusted to run the pinned evaluator and inspect provenance before approval.
+Audio hashes bind results to a package but do not authenticate how scores were produced.
+Different evaluator profiles remain separate on the leaderboard. No human MOS is inferred.

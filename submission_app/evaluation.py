@@ -70,7 +70,13 @@ def validate_report(report, expected_profile):
                 raise ValueError("Invalid evaluator metric.")
     for metric in ("cer", "wer"):
         mean = sum(v[metric] for v in results.values()) / len(results)
-        if abs(mean - report.get(metric, -1)) > 1e-8:
+        aggregate = report.get(metric)
+        if (
+            isinstance(aggregate, bool)
+            or not isinstance(aggregate, (int, float))
+            or not math.isfinite(aggregate)
+            or abs(mean - aggregate) > 1e-8
+        ):
             raise ValueError("Report aggregate does not match per-sentence results.")
 
 
