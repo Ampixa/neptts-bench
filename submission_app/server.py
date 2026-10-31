@@ -16,6 +16,7 @@ from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
+from starlette.background import BackgroundTask
 
 from .auth import install_auth
 from .contract import (
@@ -26,6 +27,7 @@ from .contract import (
     validate_archive,
 )
 from .evaluation import validate_report
+from .offline import validate_import
 from .storage import db, event, initialize, unpack
 
 STATIC = Path(__file__).parent / "static"
@@ -35,7 +37,9 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
     if len(password) < 12:
         raise ValueError("Set NEPTTS_ADMIN_PASSWORD to at least 12 characters.")
     initialize(root)
-    app = FastAPI(title="Ampixa Benchmarks Arena submissions", docs_url=None, redoc_url=None)
+    app = FastAPI(
+        title="Ampixa Benchmarks Arena submissions", docs_url=None, redoc_url=None
+    )
     app.state.root = root
     sessions = {}
     upload_gate = asyncio.Semaphore(2)
@@ -320,6 +324,84 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
                 "SELECT * FROM submissions ORDER BY created DESC"
             ).fetchall()
         return [unpack(x) for x in rows]
+
+    @app.get("/api/admin/submissions/{sid}/package", dependencies=[Depends(admin)])
+    def evaluation_package(sid: str):
+        with db(root) as c:
+            row = c.execute("SELECT * FROM submissions WHERE id=?", (sid,)).fetchone()
+        if not row:
+            raise HTTPException(404)
+        d = unpack(row)
+        work = Path(tempfile.mkdtemp(prefix="reviewer-export-"))
+        path = work / "evaluation.zip"
+        try:
+            with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
+                z.writestr("submission.json", json.dumps(d["manifest"]))
+                z.writestr(
+                    "evaluation-job.json",
+                    json.dumps(
+                        {
+                            "submission_id": sid,
+                            "benchmark": BENCHMARK,
+                            "audio_sha256": row["audio_sha256"],
+                        }
+                    ),
+                )
+                for sent_id, info in d["validation"]["per_file"].items():
+                    audio = root / "uploads" / sid / f"{sent_id}.wav"
+                    if hashlib.sha256(audio.read_bytes()).hexdigest() != info["sha256"]:
+                        raise HTTPException(409, "Stored audio integrity check failed.")
+                    z.write(audio, f"audio/{sent_id}.wav")
+            return FileResponse(
+                path,
+                filename=f"evaluation-{sid}.zip",
+                media_type="application/zip",
+                background=BackgroundTask(shutil.rmtree, work),
+                headers={"Cache-Control": "no-store"},
+            )
+        except Exception:
+            shutil.rmtree(work, ignore_errors=True)
+            raise
+
+    @app.post("/api/admin/submissions/{sid}/results", dependencies=[Depends(admin)])
+    async def import_results(sid: str, request: Request):
+        raw = bytearray()
+        async for chunk in request.stream():
+            raw.extend(chunk)
+            if len(raw) > 2 * 1024**2:
+                raise HTTPException(413, "Result JSON must be at most 2 MiB.")
+        try:
+            payload = json.loads(raw)
+        except (ValueError, UnicodeDecodeError):
+            raise HTTPException(422, "Upload a valid result JSON file.") from None
+        with db(root) as c:
+            c.execute("BEGIN IMMEDIATE")
+            row = c.execute("SELECT * FROM submissions WHERE id=?", (sid,)).fetchone()
+            if not row:
+                raise HTTPException(404)
+            if row["state"] not in ("validated", "evaluation_failed", "queued"):
+                raise HTTPException(
+                    409,
+                    "Results can only be imported before evaluation/review completes.",
+                )
+            try:
+                report = validate_import(payload, sid, row["audio_sha256"])
+            except (ValueError, TypeError, AttributeError, KeyError) as error:
+                raise HTTPException(422, str(error)) from None
+            message = "Reviewer-uploaded evaluation passed consistency checks. Awaiting approval."
+            c.execute(
+                "UPDATE submissions SET state='awaiting_review',report=?,profile=?,progress=?,message=?,updated=? WHERE id=?",
+                (
+                    json.dumps(report, allow_nan=False),
+                    report["profile"]["id"],
+                    len(SENTENCES),
+                    message,
+                    time.time(),
+                    sid,
+                ),
+            )
+            event(c, sid, "awaiting_review", message)
+        return {"id": sid, "state": "awaiting_review"}
 
     class Decision(BaseModel):
         action: str = Field(pattern="^(queue|approve|reject)$")
