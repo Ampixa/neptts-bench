@@ -20,7 +20,7 @@ PRs run the lightweight backend tests, lint and JS syntax checks. Merges to `mai
 
 ## DNS and HTTPS
 
-Canonical domain: `voices.benchmarks.cloud`. Point its A record at the VM. Install `nginx.conf` as a separate site, validate with `nginx -t`, then reload Nginx (do not restart unrelated units). Before a certificate exists, serve only the ACME challenge location and return 503 elsewhere; do not expose logins over HTTP.
+Canonical domain: `ampixa.benchmarks.cloud`. Point its A record at the VM. Install `nginx.conf` as a separate site, validate with `nginx -t`, then reload Nginx (do not restart unrelated units). Before a certificate exists, serve only the ACME challenge location and return 503 elsewhere; do not expose logins over HTTP.
 
 After DNS resolves, run `sudo bash enable-https.sh <VM-public-IPv4>`. It verifies DNS, obtains the certificate using the existing account, validates the dedicated TLS site, reloads Nginx and installs a renewal hook.
 
@@ -28,8 +28,8 @@ Use the existing Certbot account to issue a webroot certificate using `/var/www/
 
 ## Authentication and launch
 
-Set `NEPTTS_ORIGIN=https://voices.benchmarks.cloud`, `NEPTTS_GITHUB_CLIENT_ID`, and `NEPTTS_GITHUB_CLIENT_SECRET` in the protected environment file. OAuth callback is `https://voices.benchmarks.cloud/api/auth/github/callback`. Restart only Arena. Until OAuth is configured, the public leaderboard works but uploads are closed. GitHub sign-in does not confer reviewer rights. Retrieve the generated admin password directly on the VM, never in CI logs.
+Set `NEPTTS_ORIGIN=https://ampixa.benchmarks.cloud`, `NEPTTS_GITHUB_CLIENT_ID`, and `NEPTTS_GITHUB_CLIENT_SECRET` in the protected environment file. OAuth callback is `https://ampixa.benchmarks.cloud/api/auth/github/callback`. Restart only Arena. Until OAuth is configured, the public leaderboard works but uploads are closed. GitHub sign-in does not confer reviewer rights. Retrieve the generated admin password directly on the VM, never in CI logs.
 
 Before accepting public uploads, decide retention and configure regular off-host backups. Stop only Arena and its evaluator for a consistent backup of `/var/lib/ampixa-arena` plus the protected environment file. Keep backups encrypted/private. Application rollback does not roll back SQLite migrations; current ownership migration is additive. Future schema changes require a backup/compatibility plan.
 
-The ampixa.com navigation entry should be an ordinary external link to `https://voices.benchmarks.cloud` labelled **Ampixa Benchmarks Arena**. No rewrite or redirect of the entire ampixa.com site is intended.
+The ampixa.com navigation entry should be an ordinary external link to `https://ampixa.benchmarks.cloud` labelled **Ampixa Benchmarks Arena**. No rewrite or redirect of the entire ampixa.com site is intended.

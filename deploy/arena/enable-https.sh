@@ -5,27 +5,27 @@ set -euo pipefail
 python3 - "$1" <<'PY'
 import socket,sys
 expected = sys.argv[1]
-addresses = {x[4][0] for x in socket.getaddrinfo('voices.benchmarks.cloud', 80, proto=socket.IPPROTO_TCP)}
+addresses = {x[4][0] for x in socket.getaddrinfo('ampixa.benchmarks.cloud', 80, proto=socket.IPPROTO_TCP)}
 if addresses != {expected}:
     raise SystemExit('DNS must resolve only to the expected VM before certificate issuance.')
 PY
 certbot certonly --webroot -w /var/www/ampixa-arena-acme \
-  --cert-name voices.benchmarks.cloud -d voices.benchmarks.cloud --non-interactive
+  --cert-name ampixa.benchmarks.cloud -d ampixa.benchmarks.cloud --non-interactive
 config=/etc/nginx/sites-available/ampixa-arena
 backup=$(mktemp)
 cp "$config" "$backup"
 cat > "$config" <<'CONF'
 server {
     listen 80;
-    server_name voices.benchmarks.cloud;
+    server_name ampixa.benchmarks.cloud;
     location /.well-known/acme-challenge/ { root /var/www/ampixa-arena-acme; }
-    location / { return 301 https://voices.benchmarks.cloud$request_uri; }
+    location / { return 301 https://ampixa.benchmarks.cloud$request_uri; }
 }
 server {
     listen 443 ssl;
-    server_name voices.benchmarks.cloud;
-    ssl_certificate /etc/letsencrypt/live/voices.benchmarks.cloud/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/voices.benchmarks.cloud/privkey.pem;
+    server_name ampixa.benchmarks.cloud;
+    ssl_certificate /etc/letsencrypt/live/ampixa.benchmarks.cloud/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/ampixa.benchmarks.cloud/privkey.pem;
     ssl_protocols TLSv1.2 TLSv1.3;
     location / {
         client_max_body_size 150m;
@@ -40,6 +40,24 @@ server {
     }
 }
 CONF
+if [[ -f /etc/letsencrypt/live/voices.benchmarks.cloud/fullchain.pem ]]; then
+cat >> "$config" <<'ALIAS'
+server {
+    listen 80;
+    server_name voices.benchmarks.cloud;
+    location /.well-known/acme-challenge/ { root /var/www/ampixa-arena-acme; }
+    location / { return 301 https://ampixa.benchmarks.cloud$request_uri; }
+}
+server {
+    listen 443 ssl;
+    server_name voices.benchmarks.cloud;
+    ssl_certificate /etc/letsencrypt/live/voices.benchmarks.cloud/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/voices.benchmarks.cloud/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    return 301 https://ampixa.benchmarks.cloud$request_uri;
+}
+ALIAS
+fi
 if ! nginx -t; then
     cp "$backup" "$config"
     rm "$backup"
@@ -53,5 +71,5 @@ cat > /etc/letsencrypt/renewal-hooks/deploy/ampixa-arena-reload <<'HOOK'
 /usr/sbin/nginx -t && /usr/bin/systemctl reload nginx
 HOOK
 chmod 755 /etc/letsencrypt/renewal-hooks/deploy/ampixa-arena-reload
-curl -fsS https://voices.benchmarks.cloud/api/benchmark >/dev/null
+curl -fsS https://ampixa.benchmarks.cloud/api/benchmark >/dev/null
 echo 'Arena HTTPS verified.'

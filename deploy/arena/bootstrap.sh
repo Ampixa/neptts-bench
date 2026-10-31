@@ -14,7 +14,7 @@ if [[ ! -f /etc/ampixa-arena/environment ]]; then
   python3 - <<'PY'
 import secrets
 from pathlib import Path
-Path('/etc/ampixa-arena/environment').write_text('NEPTTS_ORIGIN=https://voices.benchmarks.cloud\nNEPTTS_ADMIN_PASSWORD='+secrets.token_urlsafe(40)+'\n')
+Path('/etc/ampixa-arena/environment').write_text('NEPTTS_ORIGIN=https://ampixa.benchmarks.cloud\nNEPTTS_ADMIN_PASSWORD='+secrets.token_urlsafe(40)+'\n')
 PY
 fi
 install -o root -g root -m 755 receive.py /usr/local/bin/ampixa-arena-receive
