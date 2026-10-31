@@ -1,6 +1,6 @@
-# Ampixa Arena (local implementation)
+# Ampixa Benchmarks Arena (local implementation)
 
-Ampixa Arena hosts NepTTS-Bench as its first benchmark. It is a separate FastAPI application for audio submissions, server-owned evaluation, private tracking and admin-approved publication. It does not change or deploy the existing `rating-app` service. No submissions or models are sent to an external evaluation API.
+Ampixa Benchmarks Arena hosts NepTTS-Bench as its first benchmark. It is a separate FastAPI application for audio submissions, server-owned evaluation, private tracking and admin-approved publication. It does not change or deploy the existing `rating-app` service. No submissions or models are sent to an external evaluation API.
 
 ## Run locally
 
@@ -82,3 +82,13 @@ Set `NEPTTS_GITHUB_CLIENT_ID` and `NEPTTS_GITHUB_CLIENT_SECRET` in the server en
 The authorization-code flow uses single-use, ten-minute state bound to an HttpOnly browser cookie plus PKCE S256. No repository or email scopes are requested. Provider access tokens are used only to obtain the public GitHub ID/login and are not retained. Hashed Arena sessions persist in SQLite for seven days, with HttpOnly/SameSite cookies (Secure on HTTPS). Logout revokes the current session. Reviewer login remains separate: GitHub login does not grant admin rights. Account IDs are not included in public leaderboard reports.
 
 OAuth callback and account isolation tests use a mocked GitHub HTTP provider, including cross-browser callback rejection, replay, expiry, persistence, logout and owner-only audio. A real GitHub OAuth consent round trip still requires operator-provided app credentials. See [GitHub's authorization flow](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps).
+
+## Production domain
+
+Portal name: **Ampixa Benchmarks Arena**. Intended production origin: `https://ampixa.benchmarks.cloud`.
+
+- `NEPTTS_ORIGIN=https://ampixa.benchmarks.cloud`
+- GitHub OAuth App homepage: `https://ampixa.benchmarks.cloud`
+- GitHub OAuth callback: `https://ampixa.benchmarks.cloud/api/auth/github/callback`
+
+The local preview remains on port 5193. These settings document the deployment target; they do not configure DNS, TLS, GitHub OAuth credentials or deploy the service.

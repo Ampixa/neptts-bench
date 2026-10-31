@@ -35,7 +35,7 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
     if len(password) < 12:
         raise ValueError("Set NEPTTS_ADMIN_PASSWORD to at least 12 characters.")
     initialize(root)
-    app = FastAPI(title="Ampixa Arena submissions", docs_url=None, redoc_url=None)
+    app = FastAPI(title="Ampixa Benchmarks Arena submissions", docs_url=None, redoc_url=None)
     app.state.root = root
     sessions = {}
     upload_gate = asyncio.Semaphore(2)
