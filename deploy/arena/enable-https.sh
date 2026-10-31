@@ -71,5 +71,5 @@ cat > /etc/letsencrypt/renewal-hooks/deploy/ampixa-arena-reload <<'HOOK'
 /usr/sbin/nginx -t && /usr/bin/systemctl reload nginx
 HOOK
 chmod 755 /etc/letsencrypt/renewal-hooks/deploy/ampixa-arena-reload
-curl -fsS https://ampixa.benchmarks.cloud/api/benchmark >/dev/null
+curl --retry 5 --retry-delay 1 --retry-all-errors -fsS https://ampixa.benchmarks.cloud/api/benchmark >/dev/null
 echo 'Arena HTTPS verified.'
