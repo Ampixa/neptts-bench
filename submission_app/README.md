@@ -43,7 +43,7 @@ The helper refuses to overwrite an existing archive. Uploads are capped at 150 M
 
 ## Review and publication
 
-1. Successful validation returns a random private receipt token. The browser stores it locally and offers a private tracking link; retain it because there is no account recovery/email flow yet.
+1. GitHub sign-in is required to upload. Submissions belong to the immutable GitHub user ID and appear under My submissions across browsers. Successful validation returns a random private receipt token. The browser stores it locally and offers a private tracking link; retain it for optional bearer-link access. Earlier anonymous receipts remain valid, but are not automatically claimed by an account.
 2. The reviewer reads declarations, can listen to protected audio and queues evaluation.
 3. The worker verifies stored audio hashes, evaluates the full set and requires finite metrics for every prompt. Any failure leaves the entry unpublished.
 4. The reviewer supplies a note and approves or rejects. Only an approved result appears on the public API/leaderboard.
@@ -67,8 +67,18 @@ Tests cover the full upload → queue → evaluate → approve → public-report
 
 ## Before deployment / suggested PR scope
 
-One PR for the contract, portal, worker and tests is the coherent first change. Review locally first; no existing production service needs replacing. Deploy behind HTTPS with the configured public origin, a request-body cap, edge throttling, operator-managed credentials, backed-up private storage and a separately supervised worker with time/memory/disk budgets. Decide the submission retention policy and receipt recovery mechanism before accepting external submissions. Add named reviewer accounts if review responsibility is shared.
+One PR for the contract, portal, worker and tests is the coherent first change. Review locally first; no existing production service needs replacing. Deploy behind HTTPS with the configured public origin, a request-body cap, edge throttling, operator-managed credentials, backed-up private storage and a separately supervised worker with time/memory/disk budgets. Decide the submission retention policy and legacy receipt recovery mechanism before accepting external submissions. Add named reviewer accounts if review responsibility is shared.
 
 The benchmark split, ASR choice and ranking policy need research sign-off. In particular, the repository itself documents weaknesses in Whisper for Nepali; this implementation makes the metric explicit rather than calling it an overall quality ranking. Existing full NepaliMOS weights are not silently substituted with a public head-only model. Production evaluator choices can change without changing the upload contract, provided they receive distinct profile identities.
 
 Ampixa wordmark: copied from the organization's `https://ampixa.com/assets/wordmark.svg` for its own benchmark portal. The UI does not embed the separately licensed Devanagari website wordmark.
+
+## GitHub sign-in setup
+
+Create a dedicated GitHub OAuth App with homepage set to the Arena origin and callback exactly `<NEPTTS_ORIGIN>/api/auth/github/callback`. For local testing, use `http://127.0.0.1:5193/api/auth/github/callback`; use a separate OAuth app for production HTTPS.
+
+Set `NEPTTS_GITHUB_CLIENT_ID` and `NEPTTS_GITHUB_CLIENT_SECRET` in the server environment, along with `NEPTTS_ORIGIN`, and restart the web service. Never commit the secret. Until configured, upload is closed and the UI explains that sign-in is awaiting setup. No mock login or bypass is exposed.
+
+The authorization-code flow uses single-use, ten-minute state bound to an HttpOnly browser cookie plus PKCE S256. No repository or email scopes are requested. Provider access tokens are used only to obtain the public GitHub ID/login and are not retained. Hashed Arena sessions persist in SQLite for seven days, with HttpOnly/SameSite cookies (Secure on HTTPS). Logout revokes the current session. Reviewer login remains separate: GitHub login does not grant admin rights. Account IDs are not included in public leaderboard reports.
+
+OAuth callback and account isolation tests use a mocked GitHub HTTP provider, including cross-browser callback rejection, replay, expiry, persistence, logout and owner-only audio. A real GitHub OAuth consent round trip still requires operator-provided app credentials. See [GitHub's authorization flow](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps).

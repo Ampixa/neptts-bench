@@ -17,6 +17,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
+from .auth import install_auth
 from .contract import (
     BENCHMARK,
     MAX_ARCHIVE,
@@ -56,6 +57,8 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
                 )
             c.execute("DELETE FROM rate_limits WHERE start<?", (now - 86400,))
 
+    current_user, require_user = install_auth(app, root, origin, rate)
+
     @app.middleware("http")
     async def guards(request, call_next):
         if request.method not in ("GET", "HEAD", "OPTIONS"):
@@ -94,6 +97,9 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
 
     def authorized_row(sid, request):
         row = row_for(sid)
+        identity = current_user(request)
+        if identity and row["owner_id"] == identity["github_id"]:
+            return row
         token = request.headers.get("x-submission-token", "")
         if not secrets.compare_digest(
             hashlib.sha256(token.encode()).hexdigest(), row["token_hash"]
@@ -126,6 +132,8 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
 
     @app.post("/api/submissions", status_code=201)
     async def submit(request: Request):
+        identity = require_user(request)
+        rate("upload-user:" + identity["github_id"], 10)
         rate("upload:" + request.client.host, 10)
         if request.headers.get("content-type", "").split(";")[0] != "application/zip":
             raise HTTPException(415, "Upload a ZIP archive.")
@@ -173,7 +181,7 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
                         )
                     shutil.move(str(work / "audio"), target)
                     c.execute(
-                        "INSERT INTO submissions(id,token_hash,created,updated,state,manifest,validation,audio_sha256,message) VALUES(?,?,?,?,?,?,?,?,?)",
+                        "INSERT INTO submissions(id,token_hash,created,updated,state,manifest,validation,audio_sha256,message,owner_id) VALUES(?,?,?,?,?,?,?,?,?,?)",
                         (
                             sid,
                             hashlib.sha256(token.encode()).hexdigest(),
@@ -184,6 +192,7 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
                             json.dumps(validation),
                             validation["audio_sha256"],
                             "Audio checks passed. Waiting for an evaluator to be assigned.",
+                            identity["github_id"],
                         ),
                     )
                     event(

@@ -34,8 +34,18 @@ def initialize(root):
         CREATE TABLE IF NOT EXISTS events (
           id INTEGER PRIMARY KEY, submission_id TEXT NOT NULL,
           time REAL NOT NULL, state TEXT NOT NULL, message TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS user_sessions (token_hash TEXT PRIMARY KEY, github_id TEXT NOT NULL, login TEXT NOT NULL, expires REAL NOT NULL);
+        CREATE TABLE IF NOT EXISTS oauth_states (state_hash TEXT PRIMARY KEY, binding_hash TEXT NOT NULL, verifier TEXT NOT NULL, expires REAL NOT NULL, callback TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS rate_limits (key TEXT PRIMARY KEY, start REAL NOT NULL, count INTEGER NOT NULL);
         """)
+
+        if "owner_id" not in {
+            r[1] for r in c.execute("PRAGMA table_info(submissions)")
+        }:
+            c.execute("ALTER TABLE submissions ADD COLUMN owner_id TEXT")
+        c.execute(
+            "CREATE INDEX IF NOT EXISTS submissions_owner ON submissions(owner_id)"
+        )
 
 
 def event(c, sid, state, message):

@@ -1,6 +1,7 @@
 import io
 import json
 import stat
+import time
 import zipfile
 
 import numpy as np
@@ -8,8 +9,10 @@ import pytest
 import soundfile as sf
 from fastapi.testclient import TestClient
 
+from submission_app.auth import digest
 from submission_app.contract import BENCHMARK, SENTENCES, template
 from submission_app.server import create_app
+from submission_app.storage import db
 from submission_app.worker import process_one
 
 
@@ -40,6 +43,12 @@ def app(tmp_path):
 def client(app):
     c = TestClient(app)
     c.headers["X-Neptts-Request"] = "submission"
+    with db(app.state.root) as conn:
+        conn.execute(
+            "INSERT OR REPLACE INTO user_sessions VALUES(?,?,?,?)",
+            (digest("test-user-session"), "123", "tester", time.time() + 3600),
+        )
+    c.cookies.set("arena_user", "test-user-session")
     return c
 
 
@@ -94,6 +103,7 @@ def test_upload_evaluate_approve_and_public_report(app):
     receipt = submit(c).json()
     sid, token = receipt["id"], receipt["token"]
     assert receipt["validation"]["files"] == len(SENTENCES) == 205
+    c.post("/api/auth/logout")
     assert c.get(f"/api/submissions/{sid}").status_code == 404
     assert (
         c.get(
