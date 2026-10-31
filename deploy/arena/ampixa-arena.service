@@ -1,0 +1,28 @@
+[Unit]
+Description=Ampixa Benchmarks Arena web API
+After=network.target
+
+[Service]
+User=ampixa-arena
+Group=ampixa-arena
+WorkingDirectory=/opt/ampixa-arena/current
+EnvironmentFile=/etc/ampixa-arena/environment
+Environment=NEPTTS_DATA=/var/lib/ampixa-arena
+Environment=NEPTTS_PORT=5193
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/ampixa-arena/current/.venv/bin/python -m submission_app.server
+Restart=on-failure
+RestartSec=5
+MemoryHigh=384M
+MemoryMax=512M
+CPUQuota=50%
+TasksMax=64
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/ampixa-arena
+
+[Install]
+WantedBy=multi-user.target
