@@ -28,3 +28,8 @@ node_modules/
 state.json
 CLAUDE.md
 CLAUDE.local.md
+
+# Local submission service state and development environment
+.local/
+.pytest_cache/
+.ruff_cache/

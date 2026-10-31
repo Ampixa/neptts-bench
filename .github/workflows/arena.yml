@@ -1,0 +1,52 @@
+name: Arena checks and deployment
+on:
+  pull_request:
+    paths: ['submission_app/**', 'benchmark/**', 'neptts-eval/**', 'deploy/arena/**', '.github/workflows/arena.yml']
+  push:
+    branches: [main]
+    paths: ['submission_app/**', 'benchmark/**', 'neptts-eval/**', 'deploy/arena/**', '.github/workflows/arena.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: arena-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r submission_app/requirements.txt pytest httpx ruff
+      - run: python -m pytest submission_app/tests -q
+      - run: ruff check submission_app
+      - run: node --check submission_app/static/app.js
+      - run: python -m py_compile deploy/arena/receive.py
+  deploy:
+    needs: checks
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: arena-production
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package source only
+        run: |
+          mkdir staging
+          cp -R submission_app benchmark neptts-eval staging/
+          find staging -type d -name __pycache__ -prune -exec rm -rf {} +
+          printf '%s\n' "$GITHUB_SHA" > staging/SOURCE_COMMIT
+          tar -cf arena.tar -C staging submission_app benchmark neptts-eval SOURCE_COMMIT
+      - name: Deploy isolated service
+        env:
+          ARENA_HOST: ${{ secrets.ARENA_HOST }}
+          ARENA_SSH_KEY: ${{ secrets.ARENA_SSH_KEY }}
+          ARENA_KNOWN_HOSTS: ${{ secrets.ARENA_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$ARENA_SSH_KEY" > ~/.ssh/arena
+          printf '%s\n' "$ARENA_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/arena ~/.ssh/known_hosts
+          ssh -i ~/.ssh/arena -o BatchMode=yes -o StrictHostKeyChecking=yes "ampixa-arena@$ARENA_HOST" "deploy $GITHUB_SHA" < arena.tar
