@@ -85,10 +85,10 @@ OAuth callback and account isolation tests use a mocked GitHub HTTP provider, in
 
 ## Production domain
 
-Portal name: **Ampixa Benchmarks Arena**. Intended production origin: `https://ampixa.benchmarks.cloud`.
+Portal name: **Ampixa Benchmarks Arena**. Intended production origin: `https://voices.benchmarks.cloud`.
 
-- `NEPTTS_ORIGIN=https://ampixa.benchmarks.cloud`
-- GitHub OAuth App homepage: `https://ampixa.benchmarks.cloud`
-- GitHub OAuth callback: `https://ampixa.benchmarks.cloud/api/auth/github/callback`
+- `NEPTTS_ORIGIN=https://voices.benchmarks.cloud`
+- GitHub OAuth App homepage: `https://voices.benchmarks.cloud`
+- GitHub OAuth callback: `https://voices.benchmarks.cloud/api/auth/github/callback`
 
 The local preview remains on port 5193. These settings document the deployment target; they do not configure DNS, TLS, GitHub OAuth credentials or deploy the service.
