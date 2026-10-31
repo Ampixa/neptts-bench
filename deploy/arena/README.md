@@ -22,6 +22,8 @@ PRs run the lightweight backend tests, lint and JS syntax checks. Merges to `mai
 
 Canonical domain: `ampixa.benchmarks.cloud`. Point its A record at the VM. Install `nginx.conf` as a separate site, validate with `nginx -t`, then reload Nginx (do not restart unrelated units). Before a certificate exists, serve only the ACME challenge location and return 503 elsewhere; do not expose logins over HTTP.
 
+After DNS resolves, run `sudo bash enable-https.sh <VM-public-IPv4>`. It verifies DNS, obtains the certificate using the existing account, validates the dedicated TLS site, reloads Nginx and installs a renewal hook.
+
 Use the existing Certbot account to issue a webroot certificate using `/var/www/ampixa-arena-acme`. Once issued, configure the HTTPS server with that certificate and the proxy settings from the template, and redirect HTTP to HTTPS. Install a successful-renewal hook that validates and reloads Nginx. Leave other hosts, ports and certificates unchanged.
 
 ## Authentication and launch
