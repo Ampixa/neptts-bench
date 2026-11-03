@@ -226,16 +226,18 @@ def test_new_upload_rejects_missing_generation_fields(app, missing):
     c = client(app)
     source = archive()
     result = io.BytesIO()
-    with zipfile.ZipFile(io.BytesIO(source)) as original:
-        with zipfile.ZipFile(result, "w", zipfile.ZIP_DEFLATED) as target:
-            for member in original.infolist():
-                data = original.read(member)
-                if member.filename == "submission.json":
-                    declaration = json.loads(data)
-                    for field in missing:
-                        declaration.pop(field)
-                    data = json.dumps(declaration).encode()
-                target.writestr(member, data)
+    with (
+        zipfile.ZipFile(io.BytesIO(source)) as original,
+        zipfile.ZipFile(result, "w", zipfile.ZIP_DEFLATED) as target,
+    ):
+        for member in original.infolist():
+            data = original.read(member)
+            if member.filename == "submission.json":
+                declaration = json.loads(data)
+                for field in missing:
+                    declaration.pop(field)
+                data = json.dumps(declaration).encode()
+            target.writestr(member, data)
     response = c.post(
         "/api/submissions",
         content=result.getvalue(),

@@ -1,5 +1,6 @@
 """Exercise the receiver with real local symlinks and mocked installation/service I/O."""
 
+import importlib.util
 import io
 import shutil
 import subprocess
@@ -71,11 +72,14 @@ def test_receiver_rolls_back_restart_and_health_failures(
     root_assignment = 'ROOT = Path("/opt/ampixa-arena")'
     assert source.count(root_assignment) == 1
     source = source.replace(root_assignment, f"ROOT = Path({str(tmp_path)!r})")
-    namespace = {"__name__": "__main__"}
+    script = tmp_path / "receive.py"
+    script.write_text(source)
+    spec = importlib.util.spec_from_file_location("receiver_probe", script)
+    module = importlib.util.module_from_spec(spec)
     try:
         if failure:
             with pytest.raises(SystemExit) as error:
-                exec(compile(source, str(RECEIVER), "exec"), namespace)
+                spec.loader.exec_module(module)
             message = str(error.value)
             assert (
                 "restart failed" if failure == "restart" else "Health check failed"
@@ -88,7 +92,7 @@ def test_receiver_rolls_back_restart_and_health_failures(
             else:
                 assert "no previous application to restore" in message
         else:
-            exec(compile(source, str(RECEIVER), "exec"), namespace)
+            spec.loader.exec_module(module)
         release = releases / SHA
         expected = previous if failure and has_previous else release
         assert (tmp_path / "current").resolve() == expected
@@ -99,5 +103,5 @@ def test_receiver_rolls_back_restart_and_health_failures(
             0 if failure == "restart" else 30 if failure == "health" else 1
         )
     finally:
-        if "lock" in namespace:
-            namespace["lock"].close()
+        if hasattr(module, "lock"):
+            module.lock.close()
