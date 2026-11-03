@@ -73,6 +73,12 @@ node --check submission_app/static/app.js
 
 Tests cover the full upload → queue → evaluate → approve → public-report flow; unauthorized access; failed/incomplete/development results; archive paths, duplicate paths, silence/stereo/missing IDs; exact benchmark identity; audio integrity; rejection; and cleanup. Fixture audio is synthetic test data, not a model-quality claim.
 
+The cross-revision offline regression creates a synthetic submission with the actual
+server at pre-change main commit `210dd973ca5ea80149fcccbe68c73ca8f203c624`, then exports,
+evaluates (with a deterministic scorer) and imports it using the current code. Run the
+tests from a Git checkout containing that commit; shallow clones need history fetched.
+CI checks out full history for this test. No production data or model downloads are used.
+
 ## Before deployment / suggested PR scope
 
 One PR for the contract, portal, worker and tests is the coherent first change. Review locally first; no existing production service needs replacing. Deploy behind HTTPS with the configured public origin, a request-body cap, edge throttling, operator-managed credentials, backed-up private storage and a separately supervised worker with time/memory/disk budgets. Decide the submission retention policy and legacy receipt recovery mechanism before accepting external submissions. Add named reviewer accounts if review responsibility is shared.
@@ -126,6 +132,13 @@ These are consistency checks, not cryptographic proof of honest inference. An au
 reviewer is trusted to run the pinned evaluator and inspect provenance before approval.
 Audio hashes bind results to a package but do not authenticate how scores were produced.
 Different evaluator profiles remain separate on the leaderboard. No human MOS is inferred.
+
+Reviewer packages exported from existing submissions may lack any or all of the five
+structured generation fields. Offline validation accepts those historical declarations
+without filling in defaults; incomplete declarations display as **Unknown / legacy**
+and remain excluded from the default single-take leaderboard. New uploads and the local
+submission packager still require all five fields. Audio, benchmark, consent and report
+integrity checks also apply to legacy packages.
 
 
 ## Judge calibration and comparison

@@ -104,7 +104,20 @@ def switch(path):
     )
 
 
-switch(release)
+def rollback(reason):
+    if previous:
+        try:
+            switch(previous)
+        except (subprocess.CalledProcessError, OSError) as error:
+            sys.exit(f"{reason}; rollback failed: {error}")
+        sys.exit(f"{reason}; previous application restored.")
+    sys.exit(f"{reason}; no previous application to restore.")
+
+
+try:
+    switch(release)
+except (subprocess.CalledProcessError, OSError) as error:
+    rollback(f"Application switch/restart failed: {error}")
 for _ in range(30):
     try:
         with urllib.request.urlopen(
@@ -117,9 +130,7 @@ for _ in range(30):
         pass
     time.sleep(2)
 else:
-    if previous:
-        switch(previous)
-    sys.exit("Health check failed; previous application restored if present.")
+    rollback("Health check failed")
 # Keep current and previous plus recent releases; never remove persistent data.
 releases = sorted(
     (ROOT / "releases").iterdir(), key=lambda p: p.stat().st_mtime, reverse=True

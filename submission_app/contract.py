@@ -58,6 +58,18 @@ class Manifest(BaseModel):
 
     @model_validator(mode="after")
     def selection_contract(self):
+        # ReviewerManifest preserves incomplete historical declarations as unknown.
+        if any(
+            value is None
+            for value in (
+                self.generation_mode,
+                self.candidate_count,
+                self.selector_model,
+                self.judge_family_used,
+                self.judge_family_details,
+            )
+        ):
+            return self
         if self.generation_mode == "single_take":
             if self.candidate_count != 1 or self.selector_model.lower() != "none":
                 raise ValueError("Single-take requires N=1 and selector_model='none'.")
@@ -89,6 +101,16 @@ class Manifest(BaseModel):
         if not v:
             raise ValueError("Permission to evaluate and publish scores is required.")
         return v
+
+
+class ReviewerManifest(Manifest):
+    """Read existing packages without inventing missing generation declarations."""
+
+    generation_mode: Literal["single_take", "best_of_n"] | None = None
+    candidate_count: int | None = Field(default=None, ge=1, le=10000, strict=True)
+    selector_model: str | None = Field(default=None, min_length=1, max_length=300)
+    judge_family_used: bool | None = Field(default=None, strict=True)
+    judge_family_details: str | None = Field(default=None, min_length=1, max_length=1000)
 
 
 def template():
@@ -142,7 +164,7 @@ def sentence_pack():
     return out.getvalue()
 
 
-def validate_archive(path: Path, destination: Path):
+def validate_archive(path: Path, destination: Path, *, reviewer_package=False):
     """Never extract paths supplied by the archive. Persist only fully validated WAVs."""
     expected = {f"audio/{sid}.wav" for sid in SENTENCES} | {"submission.json"}
     if path.stat().st_size > MAX_ARCHIVE:
@@ -179,7 +201,8 @@ def validate_archive(path: Path, destination: Path):
             raise ValueError(
                 f"Missing {len(missing)} required files: {', '.join(missing[:5])}"
             )
-        manifest = Manifest.model_validate_json(z.read("submission.json"))
+        schema = ReviewerManifest if reviewer_package else Manifest
+        manifest = schema.model_validate_json(z.read("submission.json"))
         digest = hashlib.sha256()
         total_seconds = 0.0
         details = {}
@@ -210,7 +233,7 @@ def validate_archive(path: Path, destination: Path):
                 total_seconds += duration
                 digest.update(sid.encode() + bytes.fromhex(sha))
             (destination / f"{sid}.wav").write_bytes(raw)
-    return manifest.model_dump(), {
+    return manifest.model_dump(exclude_unset=reviewer_package), {
         "files": len(details),
         "seconds": round(total_seconds, 3),
         "audio_sha256": digest.hexdigest(),

@@ -28,4 +28,10 @@ test('generation labels describe declared total attempts and preserve unknown le
   assert.equal(generationLabel({selection_policy: 'best-of-eight with retries'}), 'Unknown / legacy');
   assert.equal(generationLabel({generation_mode: 'single_take', candidate_count: 1}), 'Unknown / legacy');
   assert.equal(generationLabel({...declaration, generation_mode: 'single_take', candidate_count: 1, selector_model: 'none'}), 'Single-take · N=1');
+  const singleTake = {...declaration, generation_mode: 'single_take', candidate_count: 1, selector_model: 'none'};
+  for (const field of ['generation_mode', 'candidate_count', 'selector_model', 'judge_family_used', 'judge_family_details']) {
+    const legacy = {...singleTake};
+    delete legacy[field];
+    assert.equal(generationLabel(legacy), 'Unknown / legacy', field);
+  }
 });
