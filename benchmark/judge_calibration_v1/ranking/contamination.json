@@ -1,0 +1,2926 @@
+{
+  "public_audit_source": {
+    "path": "/mnt/wd_data/swar_contamination_audit_v1/results/text_matches.json",
+    "sha256": "81675c3bc188fa4e92dd4f7b80b13772d25b9676298057c9bf934bd8a139501e"
+  },
+  "n_queries": 205,
+  "existing_audit": {
+    "rasa": {
+      "source_rows": 31255,
+      "matching_queries_by_kind": {
+        "contain": 16,
+        "substring_n2": 13,
+        "jaccard": 4,
+        "exact_n1": 2,
+        "exact_n2": 2
+      },
+      "hits": [
+        {
+          "id": "sent_023",
+          "kinds": [
+            "contain"
+          ]
+        },
+        {
+          "id": "sent_053",
+          "kinds": [
+            "contain"
+          ]
+        },
+        {
+          "id": "sent_091",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_111",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_112",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_122",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_148",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_155",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_156",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_157",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_158",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "jaccard",
+            "exact_n1",
+            "exact_n2"
+          ]
+        },
+        {
+          "id": "sent_159",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_161",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_162",
+          "kinds": [
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_195",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_199",
+          "kinds": [
+            "contain"
+          ]
+        }
+      ]
+    },
+    "indicvoices_r": {
+      "source_rows": 42576,
+      "matching_queries_by_kind": {
+        "contain": 25,
+        "substring_n2": 21,
+        "jaccard": 3,
+        "exact_n1": 1,
+        "exact_n2": 1
+      },
+      "hits": [
+        {
+          "id": "sent_003",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_027",
+          "kinds": [
+            "contain"
+          ]
+        },
+        {
+          "id": "sent_037",
+          "kinds": [
+            "contain"
+          ]
+        },
+        {
+          "id": "sent_053",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_066",
+          "kinds": [
+            "contain"
+          ]
+        },
+        {
+          "id": "sent_088",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_111",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_112",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_113",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_116",
+          "kinds": [
+            "jaccard",
+            "contain"
+          ]
+        },
+        {
+          "id": "sent_122",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_155",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_156",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_157",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_158",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "exact_n1",
+            "exact_n2",
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_159",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_160",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_161",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_162",
+          "kinds": [
+            "contain",
+            "jaccard",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_163",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_190",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_191",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_195",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_206",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_211",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        }
+      ]
+    },
+    "indicvoices": {
+      "source_rows": 249422,
+      "matching_queries_by_kind": {
+        "contain": 39,
+        "substring_n2": 33,
+        "jaccard": 16,
+        "exact_n2": 8,
+        "exact_n1": 6
+      },
+      "hits": [
+        {
+          "id": "sent_003",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_023",
+          "kinds": [
+            "contain"
+          ]
+        },
+        {
+          "id": "sent_024",
+          "kinds": [
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_026",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_027",
+          "kinds": [
+            "contain"
+          ]
+        },
+        {
+          "id": "sent_036",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_037",
+          "kinds": [
+            "contain",
+            "jaccard",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_053",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_064",
+          "kinds": [
+            "contain"
+          ]
+        },
+        {
+          "id": "sent_066",
+          "kinds": [
+            "contain"
+          ]
+        },
+        {
+          "id": "sent_088",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_091",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_093",
+          "kinds": [
+            "contain"
+          ]
+        },
+        {
+          "id": "sent_105",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_109",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_110",
+          "kinds": [
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_111",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_112",
+          "kinds": [
+            "jaccard",
+            "contain",
+            "substring_n2",
+            "exact_n2"
+          ]
+        },
+        {
+          "id": "sent_113",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_116",
+          "kinds": [
+            "jaccard",
+            "contain"
+          ]
+        },
+        {
+          "id": "sent_118",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_122",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_124",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_148",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_149",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_155",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "exact_n1",
+            "exact_n2",
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_156",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "exact_n1",
+            "exact_n2",
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_157",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "exact_n1",
+            "exact_n2",
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_158",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_159",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_160",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_161",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_162",
+          "kinds": [
+            "contain",
+            "jaccard",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_163",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "jaccard",
+            "exact_n2"
+          ]
+        },
+        {
+          "id": "sent_190",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_191",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_195",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_206",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_207",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_211",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        }
+      ]
+    },
+    "openslr": {
+      "source_rows": 159969,
+      "matching_queries_by_kind": {
+        "contain": 14,
+        "substring_n2": 13,
+        "jaccard": 15,
+        "exact_n1": 4,
+        "exact_n2": 6
+      },
+      "hits": [
+        {
+          "id": "sent_026",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_056",
+          "kinds": [
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_059",
+          "kinds": [
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_068",
+          "kinds": [
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_073",
+          "kinds": [
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_088",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_105",
+          "kinds": [
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_111",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_112",
+          "kinds": [
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_144",
+          "kinds": [
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_155",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_156",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "exact_n1",
+            "exact_n2",
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_157",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_158",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "exact_n1",
+            "exact_n2",
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_159",
+          "kinds": [
+            "contain"
+          ]
+        },
+        {
+          "id": "sent_160",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "exact_n1",
+            "exact_n2",
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_161",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_162",
+          "kinds": [
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_163",
+          "kinds": [
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_188",
+          "kinds": [
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_195",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_207",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_211",
+          "kinds": [
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        }
+      ]
+    },
+    "fleurs_ne_np": {
+      "source_rows": 4363,
+      "matching_queries_by_kind": {
+        "contain": 4,
+        "substring_n2": 4
+      },
+      "hits": [
+        {
+          "id": "sent_109",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_111",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_158",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_161",
+          "kinds": [
+            "contain",
+            "substring_n2"
+          ]
+        }
+      ]
+    },
+    "swar_repo": {
+      "source_rows": 705577,
+      "matching_queries_by_kind": {
+        "exact_n1": 203,
+        "exact_n2": 203,
+        "jaccard": 203,
+        "contain": 203,
+        "substring_n2": 203
+      },
+      "hits": [
+        {
+          "id": "sent_001",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_002",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_003",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_004",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_005",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_006",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_007",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_008",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_009",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_010",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_011",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_012",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_013",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_014",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_015",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_016",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_017",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_018",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_019",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_020",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_021",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_022",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_023",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_024",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_025",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_026",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_027",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_028",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_029",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_030",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_031",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_032",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_033",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_034",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_035",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_036",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_037",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_038",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_039",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_040",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_041",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_042",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_043",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_044",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_045",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_046",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_047",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_048",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_049",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_050",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_051",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_052",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_053",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_054",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_055",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_056",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_057",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_058",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_059",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_060",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_061",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_062",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_063",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_064",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_065",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_066",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_067",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_068",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_069",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_070",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_071",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_072",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_073",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_074",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_075",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_076",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_077",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_078",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_079",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_080",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_081",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_082",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_083",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_084",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_085",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_086",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_087",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_088",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_089",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_090",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_091",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_092",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_093",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_094",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_095",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_096",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_097",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_098",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_099",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_100",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_101",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_102",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_103",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_104",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_105",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_106",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_107",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_108",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_109",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_110",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_111",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_112",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_113",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_114",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_115",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_116",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_117",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_118",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_119",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_120",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_121",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_122",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_123",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_124",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_125",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_126",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_137",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_138",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_139",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_140",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_141",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_142",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_143",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_144",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_145",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_146",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_147",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_148",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_149",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_150",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_153",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_154",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_155",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_156",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_157",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_158",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_159",
+          "kinds": [
+            "jaccard",
+            "exact_n1",
+            "exact_n2",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_160",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_161",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_162",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_163",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_164",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_165",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_166",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_167",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_168",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_169",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_170",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_171",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_172",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_173",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_174",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_175",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_176",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_177",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_178",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_179",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_180",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_181",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_182",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_183",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_184",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_185",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_186",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_187",
+          "kinds": [
+            "jaccard",
+            "exact_n1",
+            "exact_n2",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_188",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_189",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_190",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_191",
+          "kinds": [
+            "jaccard",
+            "exact_n1",
+            "exact_n2",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_192",
+          "kinds": [
+            "jaccard",
+            "exact_n1",
+            "exact_n2",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_193",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_194",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_195",
+          "kinds": [
+            "contain",
+            "substring_n2",
+            "exact_n1",
+            "exact_n2",
+            "jaccard"
+          ]
+        },
+        {
+          "id": "sent_196",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_197",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_198",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_199",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_200",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_201",
+          "kinds": [
+            "jaccard",
+            "contain",
+            "exact_n1",
+            "exact_n2",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_202",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_203",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_204",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_205",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_206",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_207",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_208",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_209",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_210",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_211",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_212",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_213",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_214",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        },
+        {
+          "id": "sent_215",
+          "kinds": [
+            "exact_n1",
+            "exact_n2",
+            "jaccard",
+            "contain",
+            "substring_n2"
+          ]
+        }
+      ]
+    }
+  },
+  "common_voice17": {
+    "rows": 1446,
+    "unique_normalized": 703,
+    "hits": [],
+    "inputs": {
+      "train.tsv": {
+        "path": "/mnt/wd_data/tts_eval_suite_v1/sources/cv17_ne_np/files/transcript/ne-NP/train.tsv",
+        "sha256": "694e3f384067e61190e6accac98e7e2d07b30cbfbe304abc8e1096f15879a60d"
+      },
+      "dev.tsv": {
+        "path": "/mnt/wd_data/tts_eval_suite_v1/sources/cv17_ne_np/files/transcript/ne-NP/dev.tsv",
+        "sha256": "9522889922ea9b3832460a33ee67a1cb1aaa3ec8d9207b331dd20c9476bb279b"
+      },
+      "test.tsv": {
+        "path": "/mnt/wd_data/tts_eval_suite_v1/sources/cv17_ne_np/files/transcript/ne-NP/test.tsv",
+        "sha256": "a8fa2570023d84b2801fa91d043471091749c19f22241e67a6ad23e41e39e049"
+      },
+      "validated.tsv": {
+        "path": "/mnt/wd_data/tts_eval_suite_v1/sources/cv17_ne_np/files/transcript/ne-NP/validated.tsv",
+        "sha256": "b4758e5b526a314be31bc18964236d735f5eae2a499e0c29144d7280b1458b1c"
+      }
+    }
+  },
+  "methods": {
+    "existing_audit": "Existing audit n1/n2 exact, substring and 5gram matches; original code/source hashes in source README",
+    "common_voice": "NFC lowercase letters/marks/numbers only; exact and >=15-character containment"
+  },
+  "limitations": "Finite pinned public text snapshots only; matches of short common phrases do not establish memorization; absence does not establish training or speaker exclusion. FLEURS/Rasa reference source exposure and public benchmark tuning remain confounds."
+}

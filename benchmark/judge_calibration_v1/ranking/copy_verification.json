@@ -1,0 +1,11 @@
+{
+  "utc": "2026-11-03T18:54:51.238659+00:00",
+  "n": 1025,
+  "verified_bytes": 193499932,
+  "method": "Every destination SHA256 equals source SHA256 independently verified against synthesis receipt on ubuntu",
+  "manifest_sha256": "a440d4e2c68c6ed72eb47a91cdd20f4aa69aa63f0885ba4d396a0619558b0e18",
+  "free_bytes": 31535575040,
+  "source": "ubuntu:/mnt/wd_data/swar_headtohead_v1/runs/primary",
+  "destination": "/Users/k2/bench2/arena_judges_v1/ranking/input",
+  "not_on_hf": true
+}

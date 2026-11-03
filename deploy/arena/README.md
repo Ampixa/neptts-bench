@@ -12,7 +12,7 @@ Prerequisites: Ubuntu 24.04, Python 3.12 with venv, Nginx, Certbot and SSH. Run 
 restrict,command="/usr/local/bin/ampixa-arena-receive" ssh-ed25519 ...
 ```
 
-The key can invoke only `deploy <40-character commit SHA>`. The receiver bounds and validates a source archive, builds a web-only venv as the unprivileged user, switches the release and restarts only Arena. A failed health check restores the prior application if one exists. Five recent releases are kept. Bootstrap/receiver/unit changes require an operator install; the ordinary application deployment cannot overwrite root-owned deployment controls.
+The key can invoke only `deploy <40-character commit SHA>`. The receiver bounds and validates a source archive, builds a web-only venv as the unprivileged user, switches the release and restarts only Arena. A failed restart or health check restores the prior application and attempts its restart if one exists. Rollback restart failures and the absence of a prior release are reported explicitly. Five recent releases are kept. Bootstrap/receiver/unit changes require an operator install; the ordinary application deployment cannot overwrite root-owned deployment controls. In particular, the restart-failure rollback fix requires an operator to reinstall `receive.py` as `/usr/local/bin/ampixa-arena-receive` on the VM; merging the application PR alone does not activate it.
 
 Set up a GitHub environment named `arena-production`. Store `ARENA_HOST`, `ARENA_SSH_KEY` (dedicated private key), and `ARENA_KNOWN_HOSTS` (verified host key; never use runtime ssh-keyscan as trust) as environment secrets. No VM IP or credentials belong in the workflow.
 

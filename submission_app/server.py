@@ -28,6 +28,7 @@ from .contract import (
 )
 from .evaluation import validate_report
 from .offline import validate_import
+from .profiles import judge_profiles, selection_group
 from .storage import db, event, initialize, unpack
 
 STATIC = Path(__file__).parent / "static"
@@ -243,8 +244,18 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
             root / "uploads" / sid / f"{sent_id}.wav", media_type="audio/wav"
         )
 
+    @app.get("/api/historical-study")
+    def historical_study():
+        return json.loads((Path(__file__).parent / "study_snapshot.json").read_text())
+
+    @app.get("/api/judge-profiles")
+    def profiles():
+        return {"schema_version": 1, "profiles": judge_profiles()}
+
     @app.get("/api/leaderboard")
-    def leaderboard():
+    def leaderboard(selection: str = "single_take", profile: str | None = None):
+        if selection not in ("single_take", "best_of_n", "unknown", "all"):
+            raise HTTPException(422, "Unknown selection filter.")
         with db(root) as c:
             rows = c.execute(
                 "SELECT * FROM submissions WHERE state='published' ORDER BY created DESC"
@@ -252,6 +263,11 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
         entries = []
         for row in rows:
             d = unpack(row)
+            group = selection_group(d["manifest"])
+            if selection != "all" and selection != group:
+                continue
+            if profile is not None and d["profile"] != profile:
+                continue
             entries.append(
                 {
                     k: d[k]
@@ -265,7 +281,13 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
                     )
                 }
             )
-        return {"benchmark": BENCHMARK, "entries": entries}
+        return {
+            "benchmark": BENCHMARK,
+            "entries": entries,
+            "selection": selection,
+            "profile": profile,
+            "total_approved": len(rows),
+        }
 
     @app.get("/api/leaderboard/{sid}/report")
     def report(sid: str):

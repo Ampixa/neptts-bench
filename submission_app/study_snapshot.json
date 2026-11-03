@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "provenance": {
+    "creator": "Codex GPT-6 family /root/arena_profiles",
+    "created_utc": "2026-11-03T18:43:46.083532+00:00",
+    "original_host": "owner Mac",
+    "original_path": "/Users/cdjk/github/neptts-bench/submission_app/study_snapshot.json",
+    "purpose": "Render the paper human-MOS table separately from current arena ASR scores",
+    "owner": "Ampixa / Arbiter nenglish-73",
+    "status": "reference",
+    "last_review": "2026-11-03T18:43:46.083532+00:00",
+    "next_review": "2026-11-11",
+    "deletion_condition": "Superseded by reviewed historical study/filter snapshot",
+    "reproduction": "Extract Table human_mos from the SHA256-pinned paper; read counts from documentation_scopes_v1.json; no raw rating rows accessed",
+    "known_duplicates": "Source aggregate table in paper and root README; repository/feature branch copies",
+    "hf": "NOT on HF",
+    "licence_usage": "Repository MIT documentation; no audio or private rater rows"
+  },
+  "source": {
+    "path": "paper/neptts_bench.tex",
+    "sha256": "095e07b5cac06ff9d45650bfeedeb88f17b46a8ea34af608aa75b56508bd0bc3",
+    "revision": "eb65bfd060304daf8a606b966f211bee3e876d2e",
+    "date": "2026-05-31",
+    "url": "https://github.com/Ampixa/neptts-bench/blob/eb65bfd060304daf8a606b966f211bee3e876d2e/paper/neptts_bench.tex"
+  },
+  "counts": {
+    "source": "paper/neptts_bench.tex Table human_mos",
+    "ratings": 6962,
+    "contributing_self_declared_native_speakers": 180,
+    "native_registrations": 207,
+    "tts_systems": 10,
+    "human_baselines": 2,
+    "confidence_interval": "95% rater-cluster bootstrap, 2000 resamples; copied reported results, not re-estimated"
+  },
+  "ci_method": "95% rater-cluster bootstrap, 2000 resamples; copied reported results, not re-estimated",
+  "limitations": "Copied reported aggregates, not a new analysis of private rating rows. Top-four TTS confidence intervals overlap; no unique winner is established. Individual-rater agreement alpha=0.17. Configurations and prompt coverage differ from the current 205-prompt submission contract.",
+  "human_baselines": [
+    {
+      "name": "Natural speech",
+      "mos": 3.95,
+      "ci95": [
+        3.79,
+        4.15
+      ],
+      "ratings": 597
+    },
+    {
+      "name": "Human (read)",
+      "mos": 3.64,
+      "ci95": [
+        3.44,
+        3.82
+      ],
+      "ratings": 552
+    }
+  ],
+  "systems": [
+    {
+      "name": "TingTing Asmita",
+      "mos": 3.55,
+      "ci95": [
+        3.27,
+        3.88
+      ],
+      "ratings": 651
+    },
+    {
+      "name": "Piper",
+      "mos": 3.5,
+      "ci95": [
+        3.31,
+        3.69
+      ],
+      "ratings": 515
+    },
+    {
+      "name": "TingTing Subina",
+      "mos": 3.47,
+      "ci95": [
+        3.24,
+        3.79
+      ],
+      "ratings": 644
+    },
+    {
+      "name": "ElevenLabs v3",
+      "mos": 3.47,
+      "ci95": [
+        3.28,
+        3.66
+      ],
+      "ratings": 516
+    },
+    {
+      "name": "Edge TTS Sagar",
+      "mos": 3.38,
+      "ci95": [
+        3.02,
+        3.77
+      ],
+      "ratings": 609
+    },
+    {
+      "name": "Edge TTS Hemkala",
+      "mos": 3.37,
+      "ci95": [
+        3.1,
+        3.67
+      ],
+      "ratings": 619
+    },
+    {
+      "name": "Gemini (Hindi)",
+      "mos": 3.34,
+      "ci95": [
+        3.15,
+        3.53
+      ],
+      "ratings": 514
+    },
+    {
+      "name": "Gemini Flash",
+      "mos": 3.25,
+      "ci95": [
+        2.9,
+        3.68
+      ],
+      "ratings": 618
+    },
+    {
+      "name": "TingTing Sambriddhi",
+      "mos": 3.2,
+      "ci95": [
+        2.91,
+        3.55
+      ],
+      "ratings": 617
+    },
+    {
+      "name": "gTTS",
+      "mos": 2.6,
+      "ci95": [
+        2.38,
+        2.83
+      ],
+      "ratings": 510
+    }
+  ]
+}

@@ -82,7 +82,7 @@ def main():
                     if member.file_size > 8 * 1024**2:
                         raise ValueError("Oversized package member.")
                     target.writestr(member, source.read(member))
-        _, validation = validate_archive(bundle, temp / "audio")
+        _, validation = validate_archive(bundle, temp / "audio", reviewer_package=True)
         if (
             job.get("audio_sha256") != validation["audio_sha256"]
             or job.get("benchmark") != BENCHMARK

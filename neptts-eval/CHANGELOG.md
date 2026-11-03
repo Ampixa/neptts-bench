@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased — documentation reconciliation (2026-11-04)
+
+- Document installation from this repository's `neptts-eval/` source directory.
+- Correct the checkpoint-default description: the loader selects the v9
+  head-only state, not the full-state candidate. Public full-state file metadata
+  exists; tensor/config compatibility and score calibration remain unverified
+  in this change. No checkpoint default was switched.
+- Distinguish the 205 synthesis prompts / 160 natural references from historical
+  rating and predictor-training scopes; replace the obsolete 193-prompt usage.
+- Source checkouts load their versioned `benchmark/sentences.json` before any
+  stale user cache, independently of working directory. Download failures retain
+  their original cause when no source/cache fallback is available.
+
 ## 0.2.0 — 2026-04-30
 
 ### Added
@@ -24,8 +37,10 @@
 
 ### Changed
 
-- Default checkpoint downloads from huggingface.co/datasets/ampixa/neptts-bench
-  at `model/neptts_mos_best.pt` (full fine-tuned, head + ssl_state_dict).
+- Correction (2026-11-04): the implementation defaults to
+  `model/neptts_mos_v9_best.pt` (head only) from the dataset repository
+  `ampixa/neptts-bench`. The previous entry claiming a full-state default was
+  incorrect. Full-state checkpoints require an explicit verified local override.
 
 ## 0.1.0
 

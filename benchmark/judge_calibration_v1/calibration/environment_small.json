@@ -1,0 +1,24 @@
+{
+  "created_utc": "2026-11-03T18:59:41.161591+00:00",
+  "creator": "Codex /root arena_judges_v1",
+  "python": "3.12.13 (main, Apr 14 2026, 14:33:40) [Clang 22.1.3 ]",
+  "platform": "macOS-14.6-arm64-arm-64bit",
+  "architecture": "arm64",
+  "ffmpeg_path": "/opt/homebrew/Cellar/ffmpeg/8.1/bin/ffmpeg",
+  "ffmpeg_sha256": "b3ddd221cc3e2755b260e854683c0d39c0d2822c7b3037ea9771cf42c046e982",
+  "ffmpeg_version": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with Apple clang version 16.0.0 (clang-1600.0.26.6)\nconfiguration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-openssl --enable-videotoolbox --enable-audiotoolbox --enable-neon\nlibavutil      60. 26.100 / 60. 26.100\nlibavcodec     62. 28.100 / 62. 28.100\nlibavformat    62. 12.100 / 62. 12.100\nlibavdevice    62.  3.100 / 62.  3.100\nlibavfilter    11. 14.100 / 11. 14.100\nlibswscale      9.  5.100 /  9.  5.100\nlibswresample   6.  3.100 /  6.  3.100\n\nExiting with exit code 0\n",
+  "packages": {
+    "torch": "2.14.1",
+    "numpy": "2.4.6",
+    "openai-whisper": "20250625",
+    "tiktoken": "0.14.0",
+    "numba": "0.68.1"
+  },
+  "limitation": "Historical profile omits FFmpeg binary, platform and transitive dependency versions; exact declared source/settings/packages/weights reproduction does not prove cross-host bitwise transcript equality",
+  "owner": "Ampixa / Arbiter nenglish-73",
+  "status": "reference",
+  "next_review": "2026-11-10",
+  "hf": "NOT on HF",
+  "consumer": "Arena exact-declared-profile calibration review",
+  "licence_usage": "Model/upstream software terms; no audio or transcripts in this receipt"
+}

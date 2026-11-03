@@ -1,0 +1,224 @@
+{
+  "created_utc": "2026-11-03T19:19:06.090933+00:00",
+  "systems": {
+    "swar": {
+      "n_prompts": 205,
+      "model_receipt_sha256": "24379f8cfa6f0b532d2ddf780207fdd68ea909e67dc69a5c6eda2d5580487845",
+      "items_receipt_sha256": "d109214a0860d878b655597c43c71e91c0504c604897ff064313b80c361e7c2b",
+      "model": "Aarjan/swar/podvoices_ema.pt",
+      "model_revision": null,
+      "settings": {
+        "nfe_step": 16,
+        "cfg_strength": 2.0,
+        "seed": 0,
+        "remove_silence": true,
+        "pace": "prompt matched; Rasa preset 1.166",
+        "frontend": "clone.to_model_text(chars)"
+      },
+      "n_selection_candidates_per_prompt": null,
+      "selector": "not recorded as a selector",
+      "lora_weights_sha256": null,
+      "retry_counts": {
+        "unrecorded": 205
+      }
+    },
+    "vox2_beat1": {
+      "n_prompts": 205,
+      "model_receipt_sha256": "01edc9c1e147fa1e07a278a62eab9b06655d041c1abc919e0a8223be0c3ab2f1",
+      "items_receipt_sha256": "a0b8d742345812343c43455261aa9de18b452638d58a535f15d264a0afadd47a",
+      "model": "openbmb/VoxCPM2",
+      "model_revision": "32279effe8c19989596f05d353d1447f51d9e915",
+      "settings": {
+        "cfg_value": 2.0,
+        "inference_timesteps": 10,
+        "min_len": 2,
+        "max_len": 4096,
+        "normalize": false,
+        "denoise": false,
+        "retry_badcase": true,
+        "retry_badcase_max_times": 3,
+        "retry_badcase_ratio_threshold": 6.0,
+        "seed": 0,
+        "optimize": true,
+        "design_prefix": null,
+        "cloning_inputs": "prompt_wav_path=ref, prompt_text=ref transcript, reference_wav_path=ref"
+      },
+      "n_selection_candidates_per_prompt": 8,
+      "selector": "lowest LONG1C (streaming c16 export, CPU) CER vs target text; ties -> lower seed; no MMS, no ECAPA",
+      "lora_weights_sha256": "ec5eb16fda2781bd410a21dbd063d944b203f9218e07937ebf7d807fad03e287",
+      "retry_counts": {
+        "unrecorded": 205
+      },
+      "recorded_selection_candidates": 1640,
+      "candidates_with_changed_seed_used": 39,
+      "seed_used_delta_counts": {
+        "0": 1601,
+        "1": 16,
+        "2": 23
+      },
+      "total_generation_attempts": "not fully reconstructed; eight recorded selection candidates do not include all internal retries",
+      "checkpoint_frozen_metadata": {
+        "attempt": 1,
+        "registered": "VXN1-BEAT (nenglish DECISIONS 0e15eb0), frozen bench run 1 of max 3",
+        "frozen_utc": "2026-11-02T21:46:28Z",
+        "system": "vox2_lora:/mnt/a2/vxn1/ckpt/full/step_0003500",
+        "lora_weights_sha256": "ec5eb16fda2781bd410a21dbd063d944b203f9218e07937ebf7d807fad03e287",
+        "cfg": {
+          "mode": "ultimate",
+          "cfg_value": 3.0,
+          "inference_timesteps": 10,
+          "retry": true,
+          "retry_max": 3,
+          "ratio": 1.0,
+          "trim_ref": true,
+          "end_punct": false
+        },
+        "n": 8,
+        "selection": "lowest LONG1C (streaming c16 export, CPU) CER vs target text; ties -> lower seed; no MMS, no ECAPA",
+        "dev_basis": {
+          "dev_sha256": "88a54642933e77d6f1dfe447d2410d3992ea4363135c4c88768477b3ea18fe65",
+          "single_take_mean_cer_noisy_clean_cloning": [
+            28.56,
+            23.76,
+            10.78
+          ],
+          "single_take_cos": [
+            0.543,
+            0.628,
+            0.703
+          ],
+          "best_of_8_same_cfg_without_trim_mean_cer": [
+            19.04,
+            19.89,
+            7.63
+          ],
+          "why": "best LONG1C CER among settings with DEV cloning cos ~>= .70 (VM guard); cfg3 without trim cos .678; cfg2.5 cos .706 but higher CER; cfg2+trim cos .716 but CER 29.5/25.8/12.8"
+        }
+      }
+    },
+    "vox2_beat2": {
+      "n_prompts": 205,
+      "model_receipt_sha256": "377d6ceabe1a25bb926c5e0a644f90f8b4cadccb557c8a1c370fa1ba17e3a7a7",
+      "items_receipt_sha256": "545be8b9d57fd9238994bd63a3c90dd8d466d1f391cdf3d572c994abb04d27cc",
+      "model": "openbmb/VoxCPM2",
+      "model_revision": "32279effe8c19989596f05d353d1447f51d9e915",
+      "settings": {
+        "cfg_value": 2.0,
+        "inference_timesteps": 10,
+        "min_len": 2,
+        "max_len": 4096,
+        "normalize": false,
+        "denoise": false,
+        "retry_badcase": true,
+        "retry_badcase_max_times": 3,
+        "retry_badcase_ratio_threshold": 6.0,
+        "seed": 0,
+        "optimize": true,
+        "design_prefix": null,
+        "cloning_inputs": "prompt_wav_path=ref, prompt_text=ref transcript, reference_wav_path=ref"
+      },
+      "n_selection_candidates_per_prompt": 8,
+      "selector": "lowest LONG1C (streaming c16 export, CPU) CER vs target text; ties -> lower seed; no MMS, no ECAPA",
+      "lora_weights_sha256": "21193c16dd1de8c5794450ba33adcad2277e337f3a2734711fece75093383e55",
+      "retry_counts": {
+        "unrecorded": 205
+      },
+      "recorded_selection_candidates": 1640,
+      "candidates_with_changed_seed_used": 53,
+      "seed_used_delta_counts": {
+        "0": 1587,
+        "1": 20,
+        "2": 33
+      },
+      "total_generation_attempts": "not fully reconstructed; eight recorded selection candidates do not include all internal retries",
+      "checkpoint_frozen_metadata": {
+        "attempt": 2,
+        "registered": "VXN1-BEAT frozen bench run 2 of max 3; nenglish DECISIONS 21457f0 (Arbiter, owner direction) + 268fec7 sweep",
+        "frozen_utc": "2026-11-03T06:07:10Z",
+        "system": "vox2_lora:/mnt/a2/vxn1/ckpt/d2/step_0002500",
+        "lora_weights_sha256": "21193c16dd1de8c5794450ba33adcad2277e337f3a2734711fece75093383e55",
+        "cfg": {
+          "mode": "ultimate",
+          "cfg_value": 3.0,
+          "inference_timesteps": 10,
+          "retry": true,
+          "retry_max": 3,
+          "ratio": 1.0,
+          "trim_ref": true,
+          "end_punct": false
+        },
+        "n": 8,
+        "selection": "lowest LONG1C (streaming c16 export, CPU) CER vs target text; ties -> lower seed; no MMS, no ECAPA",
+        "basis": {
+          "rule": "21457f0: d2 step_0002500 + attempt1 inference policy unchanged",
+          "dev_single_take_mean_cer_noisy_clean_cloning": [
+            26.05,
+            26.97,
+            11.27
+          ],
+          "dev_ecapa_cos": [
+            0.533,
+            0.614,
+            0.683
+          ],
+          "note": "Selected by the Arbiter registration, not by the amendment-4 DEV rule (that rule is still being computed; the sweep table is in PROGRESS). ECAPA cos values are a logged bench-model exposure, not used by run_beat.py."
+        },
+        "attempt1_sha256": "e0054372fee7032dbab45752beaa0ddb621e3b7640f4bd8dc27525b9ed044981"
+      }
+    },
+    "cosy3_elx_neutral": {
+      "n_prompts": 205,
+      "model_receipt_sha256": "6a15cedfee97ea6abb89fed8cb9fad106e94e9730740de51a91ab4486ee919db",
+      "items_receipt_sha256": "e78b01f279fe55f6252793f1f462173ee6c90c7e399beab188120865d72ef2c9",
+      "model": "FunAudioLLM/Fun-CosyVoice3-0.5B-2512",
+      "model_revision": "29e01c4e8d000f4bcd70751be16fa94bf3d85a18",
+      "settings": {
+        "mode": "inference_instruct2",
+        "stream": false,
+        "text_frontend": false,
+        "speed": 1.0,
+        "gap_ms": 140,
+        "fade_s": 0.015,
+        "seed": 0,
+        "normalize": "elitexp generate.normalize",
+        "split": "elitexp generate.sentences",
+        "reference_transcript_used": false
+      },
+      "n_selection_candidates_per_prompt": null,
+      "selector": "not recorded as a selector",
+      "lora_weights_sha256": null,
+      "retry_counts": {
+        "unrecorded": 205
+      }
+    },
+    "vox2_clone": {
+      "n_prompts": 205,
+      "model_receipt_sha256": "6109941285b227ddd68cda008de757f329b79a82bfdda3286ed4ae4b51307308",
+      "items_receipt_sha256": "cfad3037a10b8b506658e1544025c05d085295dad7e3dd91e46089f2daf38470",
+      "model": "openbmb/VoxCPM2",
+      "model_revision": "32279effe8c19989596f05d353d1447f51d9e915",
+      "settings": {
+        "cfg_value": 2.0,
+        "inference_timesteps": 10,
+        "min_len": 2,
+        "max_len": 4096,
+        "normalize": false,
+        "denoise": false,
+        "retry_badcase": true,
+        "retry_badcase_max_times": 3,
+        "retry_badcase_ratio_threshold": 6.0,
+        "seed": 0,
+        "optimize": true,
+        "design_prefix": null,
+        "cloning_inputs": "prompt_wav_path=ref, prompt_text=ref transcript, reference_wav_path=ref"
+      },
+      "n_selection_candidates_per_prompt": null,
+      "selector": "not recorded as a selector",
+      "lora_weights_sha256": null,
+      "retry_counts": {
+        "0": 205
+      }
+    }
+  },
+  "limitations": "These are different saved model/checkpoint/generation conditions, not a causal selection ablation. Recorded retry/seed fields are reported as observed; missing fields are not treated as proof of no retries or no judge-family training."
+}

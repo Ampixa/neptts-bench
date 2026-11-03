@@ -31,7 +31,15 @@ The worker serializes jobs, runs CPU inference with two Torch threads, and holds
 
 The service selects the 205 `sent_NNN` synthesis records in the checked-in `benchmark/sentences.json`, excluding 160 natural-speech references. IDs are not consecutive. The complete sentence content is hashed into the benchmark ID; old or mismatched manifests fail validation. This is a proposed new submission split, not a claim to reproduce the historical study subset. Freeze/review this split before production launch.
 
-Download `/api/benchmark/pack` for the exact prompts, manifest template and instructions. A submission ZIP contains only `submission.json` and `audio/<sentence-id>.wav` for every required prompt. Audio must be mono PCM16 WAV, 16–48 kHz, 0.2–30 seconds. No missing IDs, extra files, duplicate ZIP paths, links, encrypted entries or silence. Metadata declares model version, voice, generation settings, post-processing, selection/retries, training overlap and permission to evaluate/publish. Do not upload model weights, keys or personal reference recordings.
+Download `/api/benchmark/pack` for the exact prompts, manifest template and instructions. A submission ZIP contains only `submission.json` and `audio/<sentence-id>.wav` for every required prompt. Audio must be mono PCM16 WAV, 16–48 kHz, 0.2–30 seconds. No missing IDs, extra files, duplicate ZIP paths, links, encrypted entries or silence. Metadata declares model version, voice, generation settings, post-processing, selection/retries, training overlap and permission to evaluate/publish. The manifest additionally requires:
+
+- `generation_mode`: `single_take` or `best_of_n`.
+- `candidate_count`: integer N, the maximum total generation attempts per prompt, including retries and discarded failures (1 for single-take; at least 2 for best-of-N). This is not merely the selection-pool size.
+- `selector_model`: `none` for single-take; name/version of the selector, or `manual` for human selection.
+- `judge_family_used`: explicit boolean disclosing judge-family models used for selection, filtering or reinforcement learning.
+- `judge_family_details`: which model families and uses, or an explicit statement that none were used.
+
+Single-take means exactly one generation attempt per prompt, including attempts that fail or are discarded. Regenerating a failed or unsatisfactory prompt makes the run ineligible for single-take, even if only one waveform per prompt is submitted. Best-of-N declares the maximum number of attempts per prompt as N, counting failed/discarded candidates and retries; `selection_policy` must explain selection, retries and any per-prompt variation in counts. Disclose the selection-pool size separately from total generation attempts: for example, eight candidates reaching a selector after twelve attempts means N=12, not N=8. The UI labels this as “Best-of-N · max 12 attempts/prompt.” Validation checks declaration structure and consistency; it cannot verify how many attempts actually ran. Re-downloading the same generated file without another inference attempt does not add a candidate. These declarations are submitter-reported; reviewer approval is not execution attestation. The leaderboard defaults to single-take declarations. Legacy submissions without the structured fields remain `unknown`, even if their old free text says “single take”; users can select them explicitly. Do not upload model weights, keys or personal reference recordings.
 
 To validate/package locally without evaluation models:
 
@@ -64,6 +72,12 @@ node --check submission_app/static/app.js
 ```
 
 Tests cover the full upload → queue → evaluate → approve → public-report flow; unauthorized access; failed/incomplete/development results; archive paths, duplicate paths, silence/stereo/missing IDs; exact benchmark identity; audio integrity; rejection; and cleanup. Fixture audio is synthetic test data, not a model-quality claim.
+
+The cross-revision offline regression creates a synthetic submission with the actual
+server at pre-change main commit `210dd973ca5ea80149fcccbe68c73ca8f203c624`, then exports,
+evaluates (with a deterministic scorer) and imports it using the current code. Run the
+tests from a Git checkout containing that commit; shallow clones need history fetched.
+CI checks out full history for this test. No production data or model downloads are used.
 
 ## Before deployment / suggested PR scope
 
@@ -118,3 +132,26 @@ These are consistency checks, not cryptographic proof of honest inference. An au
 reviewer is trusted to run the pinned evaluator and inspect provenance before approval.
 Audio hashes bind results to a package but do not authenticate how scores were produced.
 Different evaluator profiles remain separate on the leaderboard. No human MOS is inferred.
+
+Reviewer packages exported from existing submissions may lack any or all of the five
+structured generation fields. Offline validation accepts those historical declarations
+without filling in defaults; incomplete declarations display as **Unknown / legacy**
+and remain excluded from the default single-take leaderboard. New uploads and the local
+submission packager still require all five fields. Audio, benchmark, consent and report
+integrity checks also apply to legacy packages.
+
+
+## Judge calibration and comparison
+
+`GET /api/judge-profiles` returns the checked-in aggregate catalog in `benchmark/judge_calibration_v1/calibration_public.json`. The UI gives each exact profile its own tab and ranking, showing PV-read / Fresh real-speech CER, confidence intervals, loanword policy and qualification limits. Missing calibration remains explicitly pending; no number is inferred from a related recognizer. The historical Whisper-small profile is labelled **uncalibrated for spontaneous Nepali**, with measured calibration when available.
+
+Calibration metadata is separate from the evaluator identity. This change intentionally preserves the bytes of `evaluation.py`, whose hash participates in historical profile IDs. Catalog entries do not enable a new evaluator or authorize an arbitrary imported scorer: worker/offline execution and import still support the existing pinned Whisper-small contract only. LONG1C and MMS catalog entries describe calibration evidence; runnable public profiles need separately pinned evaluator integration. The call-trained DISTILL-32M v2 is calibrated locally only. Its weights are not uploaded, and a public 32M judge profile depends on the owner's publication decision.
+
+`GET /api/leaderboard` defaults to `selection=single_take`. Explicit alternatives are `best_of_n`, `unknown` and `all`; `profile=<exact-id>` restricts results to one evaluator identity. The API returns `total_approved` before filtering. Scores returned across profiles have no common rank; the UI sorts only within the selected exact ID. Human MOS remains a separate historical study.
+
+
+## Historical study snapshot
+
+`study_snapshot.json` is a compact source-derived aggregate artifact used by `/api/historical-study` and the UI. Its self-documenting provenance records creator, source hash/revision/date, purpose, owner, review/retention status, reproduction, known duplicate aggregate locations, HF exclusion and usage. It contains the 12 rows of the checked-in paper's human-MOS table (10 TTS systems and 2 human baselines), copied reported 95% rater-bootstrap intervals and counts from `neptts-eval/documentation_scopes_v1.json`; no private rating rows were accessed or re-estimated. The UI dates and links this historical table separately from current ASR submissions. Top-four intervals overlap, so the display does not establish a unique winner.
+
+Snapshot bytes: 3759; SHA256: `e0028fdca4aa06e73bec5ee04fc1146223fd9b0f9c457b14ce59d734cd714423`. Retain as the current historical display input until superseded by a reviewed study/filter snapshot; last reviewed 2026-11-03, next review 2026-11-11. Source/Git history provides code and documentation revision provenance; this compact JSON is NOT an audio/model backup.

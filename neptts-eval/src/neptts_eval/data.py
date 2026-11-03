@@ -10,40 +10,46 @@ SENTENCES_CACHE = CACHE_DIR / "sentences.json"
 HF_DATASET = "ampixa/neptts-bench"
 
 
-def load_sentences() -> dict[str, dict]:
-    """Load benchmark sentences. Downloads from HF on first run."""
-    # Try cache first
-    if SENTENCES_CACHE.exists():
-        with open(SENTENCES_CACHE) as f:
-            sents = json.load(f)
-        return {s["sent_id"]: s for s in sents}
+# Source installs keep the versioned prompt bank independent of the caller's cwd.
+SOURCE_ROOT = Path(__file__).resolve().parents[3]
+SOURCE_SENTENCES = SOURCE_ROOT / "benchmark" / "sentences.json"
+LEGACY_SOURCE_SENTENCES = SOURCE_ROOT / "benchmark" / "data" / "sentences_fixed.json"
 
-    # Try HuggingFace
+
+def _read_sentences(path: Path) -> dict[str, dict]:
+    with path.open(encoding="utf-8") as f:
+        sentences = json.load(f)
+    return {sentence["sent_id"]: sentence for sentence in sentences}
+
+
+def load_sentences() -> dict[str, dict]:
+    """Load versioned source prompts first, then cache, then Hugging Face."""
+    if SOURCE_SENTENCES.is_file():
+        return _read_sentences(SOURCE_SENTENCES)
+    if SENTENCES_CACHE.is_file():
+        return _read_sentences(SENTENCES_CACHE)
+
     try:
         from datasets import load_dataset
-        ds = load_dataset(HF_DATASET, "sentences", split="train")
-        sents = [dict(row) for row in ds]
+        dataset = load_dataset(HF_DATASET, "sentences", split="train")
+        sentences = [dict(row) for row in dataset]
         CACHE_DIR.mkdir(parents=True, exist_ok=True)
-        with open(SENTENCES_CACHE, "w", encoding="utf-8") as f:
-            json.dump(sents, f, ensure_ascii=False, indent=2)
-        return {s["sent_id"]: s for s in sents}
-    except Exception:
-        pass
+        with SENTENCES_CACHE.open("w", encoding="utf-8") as f:
+            json.dump(sentences, f, ensure_ascii=False, indent=2)
+        return {sentence["sent_id"]: sentence for sentence in sentences}
+    except Exception as exc:
+        # Preserve the network/dependency/decoding cause if no fallback exists.
+        hf_error = exc
 
-    # Try local fallback (if run from repo)
-    for p in [
-        Path("benchmark/data/sentences_fixed.json"),
-        Path(__file__).parent.parent.parent.parent / "benchmark" / "data" / "sentences_fixed.json",
-    ]:
-        if p.exists():
-            with open(p) as f:
-                sents = json.load(f)
-            return {s["sent_id"]: s for s in sents}
+    if LEGACY_SOURCE_SENTENCES.is_file():
+        return _read_sentences(LEGACY_SOURCE_SENTENCES)
 
     raise FileNotFoundError(
-        "Could not load benchmark sentences. Run 'pip install datasets' and ensure internet access, "
-        "or place sentences_fixed.json in ~/.cache/neptts-bench/"
-    )
+        f"Could not load benchmark sentences from the source checkout, {SENTENCES_CACHE}, "
+        f"or Hugging Face dataset {HF_DATASET} ({type(hf_error).__name__}). "
+        "Install from the source checkout with benchmark/sentences.json, "
+        "or restore a verified sentences.json cache and check Hugging Face access."
+    ) from hf_error
 
 
 def discover_audio_files(wav_dir: str | Path) -> dict[str, Path]:

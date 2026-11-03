@@ -1,0 +1,14 @@
+{
+  "utc": "2026-11-03T19:12:49.544494+00:00",
+  "creator": "Codex /root arena_judges_v1",
+  "tokens": 4096,
+  "bpe_pieces": 4096,
+  "all_token_ids_match_pinned_bpe": true,
+  "tokens_sha256": "424bddc0b38d961991b7717b9c5424918cd2d4c58f2810db182675b1a49d2105",
+  "bpe_sha256": "efef2f02304881a9a5aa269aec829b9ee1ba1ada0ff48f1f2d3feae7fb51394f",
+  "owner": "Ampixa / Arbiter nenglish-73",
+  "status": "reference",
+  "next_review": "2026-11-10",
+  "hf": "NOT on HF",
+  "consumer": "D32 streaming token identity verification; no vocabulary or audio in this receipt"
+}
