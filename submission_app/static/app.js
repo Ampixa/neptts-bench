@@ -4,7 +4,7 @@ const label = s => s.replaceAll('_',' ').replace(/^./,c=>c.toUpperCase());
 const stamp = t => new Date(t*1000).toLocaleString();
 const chip = s => `<span class="chip ${s==='published'?'green':s.includes('failed')||s==='rejected'?'red':s==='awaiting_review'?'amber':''}">${esc(label(s))}</span>`;
 const api = async (url, options={}) => {const r=await fetch(url,{...options,headers:{'X-Neptts-Request':'submission',...(options.body&&typeof options.body==='string'?{'Content-Type':'application/json'}:{}),...options.headers}});const data=await r.json();if(!r.ok)throw new Error(typeof data.detail==='string'?data.detail:'Check the submitted fields.');return data;};
-let benchmark, track='study', selectedProfile='', selectionFilter='single_take', timer, currentAudio;
+let benchmark, track='study', selectedProfile='', selectionFilter='all', timer, currentAudio;
 let revealLeaderboard = false;
 const receipts=()=>{try{return JSON.parse(localStorage.getItem('neptts-receipts')||'[]')}catch{return []}};
 const toast=text=>{const el=$('#toast');el.textContent=text;el.hidden=false;setTimeout(()=>el.hidden=true,4000)};
