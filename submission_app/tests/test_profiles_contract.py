@@ -124,7 +124,7 @@ def test_default_single_take_and_explicit_profile_filter(tmp_path):
 def test_profile_catalog_is_aggregate_and_does_not_change_report_identity(
     tmp_path, monkeypatch
 ):
-    import submission_app.profiles as profiles
+    from submission_app import profiles
 
     catalog = tmp_path / "calibration.json"
     profile = {
@@ -192,7 +192,7 @@ def test_upload_metadata_cannot_choose_judge_or_inject_scores(field):
 
 
 def test_report_metadata_cannot_override_checked_in_calibration(tmp_path, monkeypatch):
-    import submission_app.profiles as profiles
+    from submission_app import profiles
 
     catalog = tmp_path / "calibration.json"
     trusted = {
