@@ -9,10 +9,11 @@ import re
 import stat
 import zipfile
 from pathlib import Path
+from typing import Literal
 
 import numpy as np
 import soundfile as sf
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "benchmark/sentences.json"
@@ -42,8 +43,29 @@ class Manifest(BaseModel):
     generation_settings: str = Field(min_length=1, max_length=1500)
     post_processing: str = Field(min_length=1, max_length=500)
     selection_policy: str = Field(min_length=1, max_length=500)
+    generation_mode: Literal["single_take", "best_of_n"]
+    candidate_count: int = Field(
+        ge=1,
+        le=10000,
+        strict=True,
+        description="Maximum total generation attempts per prompt, including retries and discarded failures; not merely the selection-pool size.",
+    )
+    selector_model: str = Field(min_length=1, max_length=300)
+    judge_family_used: bool = Field(strict=True)
+    judge_family_details: str = Field(min_length=1, max_length=1000)
     training_overlap: str = Field(min_length=1, max_length=500)
     permission_to_evaluate_and_publish: bool
+
+    @model_validator(mode="after")
+    def selection_contract(self):
+        if self.generation_mode == "single_take":
+            if self.candidate_count != 1 or self.selector_model.lower() != "none":
+                raise ValueError("Single-take requires N=1 and selector_model='none'.")
+        elif self.candidate_count < 2 or self.selector_model.lower() == "none":
+            raise ValueError(
+                "Best-of-N requires N >= 2; disclose the selector model or manual selection."
+            )
+        return self
 
     @field_validator("benchmark")
     @classmethod
@@ -79,7 +101,12 @@ def template():
         "voice": "voice-name",
         "generation_settings": "seed, temperature and all inference settings",
         "post_processing": "none",
-        "selection_policy": "One generation per sentence; no cherry-picking",
+        "selection_policy": "Exactly one generation attempt per prompt; no retries, discarded failures or cherry-picking. N counts all attempts, not just selection candidates.",
+        "generation_mode": "single_take",
+        "candidate_count": 1,
+        "selector_model": "none",
+        "judge_family_used": False,
+        "judge_family_details": "No judge-family model used for selection, filtering or RL",
         "training_overlap": "Declare any training on these benchmark sentences, or unknown",
         "permission_to_evaluate_and_publish": False,
     }
@@ -101,6 +128,14 @@ def sentence_pack():
             "No missing or extra IDs, silence, symlinks, executable files or directories inside audio.\n"
             "Do not include reference recordings, personal data, secrets or model weights.\n"
             "Declare your voice, generation settings, post-processing, retries and training overlap.\n"
+            "Required: generation_mode (single_take or best_of_n), candidate_count (N), selector_model,\n"
+            "judge_family_used (boolean), and judge_family_details covering selection, filtering and RL.\n"
+            "Single-take means exactly one generation attempt per prompt, N=1 and selector_model=none.\n"
+            "Count failed/discarded attempts and retries; regenerated failures are not single-take.\n"
+            "Best-of-N requires N>=2; N is the maximum attempted per prompt, including failures/discards.\n"
+            "N counts all generation attempts, not merely candidates reaching the selector.\n"
+            "State selection-pool size separately from total attempts, plus per-prompt variation/retries.\n"
+            "Disclose any manual selector in selection_policy.\n"
             "Use audio you may submit for evaluation. Uploaded audio stays private to reviewers;\n"
             "approved model metadata, scores and report are public. Human MOS is a separate study.\n",
         )

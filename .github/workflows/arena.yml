@@ -20,9 +20,11 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r submission_app/requirements.txt pytest httpx ruff
-      - run: python -m pytest submission_app/tests -q
+      - run: python -m pytest submission_app/tests neptts-eval/tests -q
       - run: ruff check submission_app
       - run: node --check submission_app/static/app.js
+      - run: node --check submission_app/static/ranking.js
+      - run: node --test submission_app/tests/ranking.test.cjs
       - run: python -m py_compile deploy/arena/receive.py
   deploy:
     needs: checks

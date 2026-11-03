@@ -1,92 +1,69 @@
 # neptts-eval
 
-Evaluate any Nepali TTS system against the [NepTTS-Bench](https://github.com/Ampixa/neptts-bench) benchmark.
+Source-installable research evaluator for [NepTTS-Bench](https://github.com/Ampixa/neptts-bench). The CLI produces a local report with SCOREQ, Whisper CER/WER and optional NepaliMOS, compared with nine saved TTS baselines. An arena submission uses the separate [reviewer workflow](../submission_app/README.md).
 
-## Install
+## Install from source
+
+Use Python 3.12 and install FFmpeg for audio decoding:
 
 ```bash
-pip install neptts-eval
+git clone https://github.com/Ampixa/neptts-bench.git
+cd neptts-bench
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ./neptts-eval
+neptts-eval --help
 ```
+
+A bare PyPI package name is not the supported install route documented here. Keep the checkout and record `git rev-parse HEAD` with results. The source loader can read the checked-in `benchmark/sentences.json` from another working directory after this local install. The versioned source prompt bank takes precedence over an existing `~/.cache/neptts-bench/sentences.json`; an unrelated working directory cannot replace it. Outside a source checkout, the loader uses that cache, then Hugging Face when no cache exists. A failed download retains its cause in the final error if no legacy source fallback exists.
 
 ## Usage
 
-### Option 1: Point to your TTS command (recommended)
+For pre-generated audio:
 
 ```bash
-neptts-eval --tts-cmd "python my_tts.py '{text}' -o '{output}'" --system-name "my_tts"
+neptts-eval --wav-dir ./my_outputs/ --system-name "my_tts" --skip-nepalimos
 ```
 
-The tool calls your command for each of 193 benchmark sentences, replacing `{text}` with the Nepali sentence and `{output}` with the output WAV path.
-
-### Option 2: Python decorator
-
-```python
-from neptts_eval import benchmark
-
-@benchmark(system_name="my_tts")
-def synthesize(text: str) -> bytes:
-    # Your TTS code here
-    return audio_bytes  # WAV/MP3 bytes
-```
-
-### Option 3: Python API
-
-```python
-from neptts_eval import generate_benchmark_audio
-from neptts_eval.data import load_sentences
-from neptts_eval.scoreq_eval import evaluate_scoreq
-
-sentences = load_sentences()
-audio_files = generate_benchmark_audio(my_tts_function, sentences)
-results = evaluate_scoreq(audio_files)
-print(f"SCOREQ MOS: {results['avg_mos']:.2f}")
-```
-
-### Option 4: Pre-generated audio directory
+Use the exact `sent_NNN.wav` IDs in [`benchmark/sentences.json`](../benchmark/sentences.json); the 205 synthesis IDs are not consecutive. The file also contains 160 natural references, for 365 total records. The command-generation mode excludes those references:
 
 ```bash
+neptts-eval --tts-cmd "python my_tts.py '{text}' -o '{output}'" \
+  --system-name "my_tts" --skip-nepalimos
+```
+
+The CLI invokes the supplied command for each synthesis prompt. This research CLI does not enforce the arena's full-coverage or generation-declaration contract. [Release scopes](RELEASE_SCOPE.md) distinguish current prompts from historical study counts.
+
+## Metrics and checkpoint choice
+
+- **SCOREQ:** no-reference auto-MOS baseline; its score is not a native-listener rating.
+- **Whisper:** small model by default, Nepali transcription and normalized CER/WER. Judge choice and normalization affect rankings; see the arena's calibrated judge profiles.
+- **NepaliMOS (optional):** Nepali-trained MOS predictor. Same-panel system-level ρ = 0.90 does not establish held-out system ranking. The saved LOSO artifact has pooled utterance ρ = 0.429 and native-human system-mean ρ = −0.394 (10 systems, p = 0.260).
+
+The base install omits NepaliMOS dependencies, so pass `--skip-nepalimos` or install the extra from the repository root:
+
+```bash
+python -m pip install -e './neptts-eval[nepalimos]'
 neptts-eval --wav-dir ./my_outputs/ --system-name "my_tts"
 ```
 
-Files should be named `sent_001.wav`, `sent_002.wav`, etc.
+The **actual default is `model/neptts_mos_v9_best.pt`**, a head-only state (~791 KB), from the Hugging Face **dataset** `ampixa/neptts-bench`. Inference also downloads the `SYSPIN/IndicMOS` vanilla IndicWav2Vec backbone. Its scale differs from the full-model baselines in `baselines.json`; that comparison is not a calibration check.
 
-## What it measures
-
-- **NepaliMOS** auto-MOS prediction (Nepali-specific, fine-tuned from IndicWav2Vec; system-level rho=0.90 vs human MOS in the paper, vs SCOREQ's 0.40)
-- **SCOREQ** auto-MOS prediction (English-trained baseline, no GPU needed)
-- **Whisper** ASR round-trip CER/WER (intelligibility)
-- Comparison against 9 baseline Nepali TTS systems
-
-NepaliMOS requires the optional `nepalimos` extra:
+The dataset publicly lists a full-state candidate, `model/neptts_mos_best.pt` (~381 MB). Its public tensor/config compatibility and score calibration have not been verified in this change. To select an independently verified local checkpoint:
 
 ```bash
-pip install "neptts-eval[nepalimos]"
+neptts-eval --wav-dir ./my_outputs/ \
+  --nepalimos-ckpt /path/to/verified_checkpoint.pt
 ```
 
-The first run downloads the public head-only checkpoint (~800 KB) plus the IndicWav2Vec base backbone (~360 MB) from HuggingFace. To reproduce the paper's full fine-tuned predictor (the one whose system-level rho=0.90 was reported), pass the full checkpoint via `--nepalimos-ckpt /path/to/neptts_mos_best.pt` or the `NEPALIMOS_CKPT` env var.
+`--nepalimos-ckpt` takes precedence over `NEPALIMOS_CKPT`, followed by the v9 default. See the [model README](../model/README.md) for pinned metadata, hashes and reproduction limits. This change corrects documentation; it does not switch defaults or claim that the public full-state candidate reproduces the paper.
 
-## Output
+## Output and comparison limits
 
-JSON report with scores + ranking against baselines (sorted by NepaliMOS):
-
-```
-==============================================================================
-NepTTS-Bench Evaluation Report
-==============================================================================
-  NepaliMOS:   3.47
-  SCOREQ MOS:  3.85
-  Whisper CER: 0.142
-
-Rank  System                     NepMOS  SCOREQ   Chirp2      MMS  Whisper
-------------------------------------------------------------------------------
-1     piper                        3.52    3.49    0.186    0.291    0.471
-2     my_tts                       3.47    3.85       -        -    0.142 <<
-3     elevenlabs                   3.46    4.45    0.106    0.278    0.470
-...
-```
+The default output is `neptts_report.json`, containing per-file metrics, aggregates and saved-baseline comparisons. Use `--output PATH` to change it. The printed table sorts by NepaliMOS when available and SCOREQ otherwise; scores from different checkpoint/judge profiles need separate interpretation. Neither auto-MOS nor ASR CER alone establishes overall TTS quality.
 
 ## Links
 
-- [NepTTS-Bench GitHub](https://github.com/Ampixa/neptts-bench)
-- [Dataset on HuggingFace](https://huggingface.co/datasets/ampixa/neptts-bench)
-- [Rate Nepali TTS](https://tts.ampixa.com/rating)
+- [Repository](https://github.com/Ampixa/neptts-bench)
+- [Dataset on Hugging Face](https://huggingface.co/datasets/ampixa/neptts-bench)
+- [Human study and current counts](../README.md)

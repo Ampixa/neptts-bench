@@ -1,7 +1,8 @@
 """NepaliMOS auto-MOS evaluation.
 
 NepaliMOS is a Nepali-specific MOS predictor, fine-tuned from IndicWav2Vec base
-on 6,962 native-rater MOS scores collected via the NepTTS-Bench rating app.
+on matched utterance-level targets from the NepTTS-Bench rating app.
+The paper distinguishes the 6,962-rating study from predictor-training coverage.
 On the paper's TTS-9 panel it reaches system-level Spearman rho=0.90 against
 human MOS, vs SCOREQ's rho=0.40 (Steiger's Z, p=0.028).
 
@@ -14,11 +15,12 @@ Checkpoints (hosted at huggingface.co/datasets/ampixa/neptts-bench):
   - model/neptts_mos_v9_best.pt  - head only (~800 KB), public default.
     The backbone reverts to vanilla IndicWav2Vec, so predictions are
     on a different scale than the paper's full fine-tuned model.
-  - model/neptts_mos_best.pt     - full state (~381 MB), reproduces
-    paper baselines exactly. Currently not public; pass via
-    --nepalimos-ckpt or NEPALIMOS_CKPT env var.
+  - model/neptts_mos_best.pt     - public full-state candidate (~381 MB).
+    Pass a locally verified file via --nepalimos-ckpt or NEPALIMOS_CKPT.
+    Public tensor/config compatibility and score calibration must be verified
+    before treating it as reproduction of the paper baselines.
 
-Optional dep group: pip install neptts-eval[nepalimos]
+Optional dep group from source: pip install "./neptts-eval[nepalimos]"
   Adds: torch, torchaudio, s3prl, huggingface_hub, soundfile.
 """
 
@@ -39,9 +41,9 @@ MAX_SAMPLES = 16000 * 15
 def _build_predictor(ckpt_path: str, device: str):
     """Construct the NepaliMOSPredictor and load weights.
 
-    The checkpoint stores both the fine-tuned backbone (ssl_state_dict) and
-    the regression head (head_state_dict). We load both so the artifact
-    reproduces the paper's validation rho from the saved file alone.
+    Load the regression head and, when present, the fine-tuned backbone.
+    A head-only checkpoint retains the vanilla backbone and has a different
+    prediction scale; this loader alone does not establish calibration.
     """
     import torch
     import torch.nn as nn

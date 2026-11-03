@@ -1,0 +1,4850 @@
+{
+  "created_utc": "2026-11-03T19:59:53Z",
+  "seed": 20261104,
+  "bootstrap_draws": 10000,
+  "normalization_manifest_sha256": "67d30baf75129d68eac255a904202081b4cdea5778206171ad9cd1a7ecac57f5",
+  "normalization_source_pins": [
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/swar/frontend/__init__.py",
+      "sha256": "86030d8daebbba0407330fe96d450ff22109f09ad9ee482ac4453c89d2c27fe0"
+    },
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/swar/frontend/english.py",
+      "sha256": "64c1df6f45bb570819a90878224edcdee623378d05306036a4af2c6a03043f64"
+    },
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/swar/frontend/english_fix.py",
+      "sha256": "1b4c40a8ca66881a68ac3db8dbd242ae54ab1fcac9786fe76210929ee945f7d8"
+    },
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/swar/frontend/g2p.py",
+      "sha256": "fbd2d67574c8af0aa53e0bd2b3c6117be736987727773788d53aef5b358ff59d"
+    },
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/swar/frontend/normalize.py",
+      "sha256": "7e251f6ce39f35971d7a38d4b0b3b464b67b9724b568a3fdf25185ba3433b7b2"
+    },
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/swar/frontend/pron.py",
+      "sha256": "c18575dca11ee61f595cc97125165de981b4619de9f4ef3626d328b146fc139c"
+    },
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/swar/frontend/romanize.py",
+      "sha256": "6259d0055360ab8cb1f53c6abea04ef202ee77bd5da1e8accf1f72c0998a0e1e"
+    },
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/swar/data/loanwords.tsv",
+      "sha256": "12e60d7abca1c5f6df901e77f8ff3b33a31558b0090c60cdcb203b4c8dd50ef9"
+    },
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/swar/data/cmudict.dict.gz",
+      "sha256": "22fa821495811a78b406e4a81cca773a2939fd38e7b973b87dabcf4f5197f7d9"
+    },
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/swar/data/cmudict.LICENSE",
+      "sha256": "bd4ce8e44170a5f9f481310ca85c51de3c4f851a65e679b40e603b143bd3542a"
+    },
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/swar/data/ne_wordfreq.tsv.gz",
+      "sha256": "066793f1b8493c39084c146843a0c095f278d892da3d726dce3608ca4bafe705"
+    },
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/swar/data/lexicons/ampixa/loanwords_latin.tsv",
+      "sha256": "21cfd0abc71b8016a05002a8034fc779baed8962181c5366558fad792d573214"
+    },
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/swar/data/lexicons/google/lexicon.tsv",
+      "sha256": "a9f616db4ecc35ecde4e519e1438c5501d8574b3623d43370fb0089a31ea8a83"
+    },
+    {
+      "path": "/mnt/wd_data/tts_eval_suite_v1/code/suite_common.py",
+      "sha256": "03d5904d1b5b911971b547ccaa7d7588c6e5993880b152f3013e8b7b2890b226"
+    },
+    {
+      "path": "/mnt/wd_data/swar_headtohead_v1/repos/cloning-bench/nepali_norm.py",
+      "sha256": "670e1d5b557009efbb53ba6c12e494c5746f4ce8fe0dcf2060b176cdb67cb160"
+    }
+  ],
+  "bootstrap_unit": "paired prompt; conditional on fixed system, reference voice and saved synthesis take",
+  "analysis_sha256": "e705b19e66c1a21642ee102a42f6648d10ae55073b34f4ed540185654cdf086b",
+  "normalizations": [
+    "suite_raw",
+    "legacy_transliterated",
+    "arena_raw"
+  ],
+  "conditions": {
+    "fleurs": {
+      "n_prompts": 205,
+      "n_systems": 5,
+      "bootstrap_groups": 205,
+      "policies": {
+        "suite_raw": {
+          "aggregates": {
+            "whisper_small": {
+              "swar": {
+                "mean_sentence_cer_percent": 138.90283992375532,
+                "ci95_mean_sentence": [
+                  71.3343601591113,
+                  238.73826371203234
+                ],
+                "corpus_cer_percent": 92.14932747735384,
+                "ci95_corpus": [
+                  66.08034918719852,
+                  122.10464955362697
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 159.35335620530884,
+                "ci95_mean_sentence": [
+                  85.69075495264711,
+                  251.85408146198483
+                ],
+                "corpus_cer_percent": 93.24732363436728,
+                "ci95_corpus": [
+                  68.40345555999208,
+                  121.7875793661513
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 170.12989162003916,
+                "ci95_mean_sentence": [
+                  93.78090177301401,
+                  266.6458106174764
+                ],
+                "corpus_cer_percent": 99.3961021136426,
+                "ci95_corpus": [
+                  73.10532744619458,
+                  129.2104840830519
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 129.63217676756082,
+                "ci95_mean_sentence": [
+                  70.15978142329759,
+                  208.1483306148973
+                ],
+                "corpus_cer_percent": 76.55778204776283,
+                "ci95_corpus": [
+                  56.45228919646838,
+                  100.46614215502188
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 184.03537142161684,
+                "ci95_mean_sentence": [
+                  128.45829979564684,
+                  257.38420001682834
+                ],
+                "corpus_cer_percent": 155.1194070820752,
+                "ci95_corpus": [
+                  118.86151613226119,
+                  195.832029152029
+                ]
+              }
+            },
+            "mms": {
+              "swar": {
+                "mean_sentence_cer_percent": 17.21252233692658,
+                "ci95_mean_sentence": [
+                  14.041770219610669,
+                  20.528273613701923
+                ],
+                "corpus_cer_percent": 13.313203403788087,
+                "ci95_corpus": [
+                  10.866785655517182,
+                  16.13878198769132
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 20.758765929925023,
+                "ci95_mean_sentence": [
+                  17.68146999842523,
+                  24.033028790975887
+                ],
+                "corpus_cer_percent": 18.391435629975295,
+                "ci95_corpus": [
+                  15.50851499238658,
+                  21.65826330865924
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 19.085100234951284,
+                "ci95_mean_sentence": [
+                  15.97549418336482,
+                  22.385723688377773
+                ],
+                "corpus_cer_percent": 15.811144660993687,
+                "ci95_corpus": [
+                  13.265580729112012,
+                  18.59605827966855
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 17.970028308664222,
+                "ci95_mean_sentence": [
+                  15.290361716867668,
+                  20.837817676064024
+                ],
+                "corpus_cer_percent": 16.277793027724403,
+                "ci95_corpus": [
+                  13.860864313073336,
+                  18.967050266696145
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 50.481302896273036,
+                "ci95_mean_sentence": [
+                  39.97572927509755,
+                  63.93352276377559
+                ],
+                "corpus_cer_percent": 42.38265166071919,
+                "ci95_corpus": [
+                  33.440792151396316,
+                  53.622921193437286
+                ]
+              }
+            },
+            "long1c": {
+              "swar": {
+                "mean_sentence_cer_percent": 7.4873791157748215,
+                "ci95_mean_sentence": [
+                  5.309466094833871,
+                  9.961784778529907
+                ],
+                "corpus_cer_percent": 6.505627230304694,
+                "ci95_corpus": [
+                  4.784542019588018,
+                  8.42861145310624
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 3.334914629516314,
+                "ci95_mean_sentence": [
+                  2.409761706993632,
+                  4.386687957424516
+                ],
+                "corpus_cer_percent": 3.6233873181443865,
+                "ci95_corpus": [
+                  2.628831628048529,
+                  4.716724416663594
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 4.086491726304771,
+                "ci95_mean_sentence": [
+                  2.9497091959417094,
+                  5.388644402926344
+                ],
+                "corpus_cer_percent": 4.391984628053802,
+                "ci95_corpus": [
+                  3.1489851423063113,
+                  5.824177911225265
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 8.419841510564291,
+                "ci95_mean_sentence": [
+                  6.5933273198285525,
+                  10.373210359376039
+                ],
+                "corpus_cer_percent": 8.207521273675543,
+                "ci95_corpus": [
+                  6.262067032629731,
+                  10.387821832111456
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 34.113034223258865,
+                "ci95_mean_sentence": [
+                  24.38941759438652,
+                  46.39930272371957
+                ],
+                "corpus_cer_percent": 28.767499313752403,
+                "ci95_corpus": [
+                  20.87501236231472,
+                  39.08564749097062
+                ]
+              }
+            },
+            "d32_streaming": {
+              "swar": {
+                "mean_sentence_cer_percent": 13.028060654487014,
+                "ci95_mean_sentence": [
+                  10.664886634293541,
+                  15.46492757669474
+                ],
+                "corpus_cer_percent": 12.544606093878672,
+                "ci95_corpus": [
+                  10.146888839753041,
+                  15.140966224158076
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 19.927408657967646,
+                "ci95_mean_sentence": [
+                  16.74690062976876,
+                  23.390967831669883
+                ],
+                "corpus_cer_percent": 20.010979961570136,
+                "ci95_corpus": [
+                  16.840015330110496,
+                  23.384224195489345
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 23.097743914492238,
+                "ci95_mean_sentence": [
+                  19.014640516527756,
+                  27.73426824654382
+                ],
+                "corpus_cer_percent": 20.532528136151523,
+                "ci95_corpus": [
+                  17.383500356862886,
+                  23.99247716281569
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 20.135790789663133,
+                "ci95_mean_sentence": [
+                  16.51863844717427,
+                  24.100496199392058
+                ],
+                "corpus_cer_percent": 19.214932747735382,
+                "ci95_corpus": [
+                  16.066798351651663,
+                  22.58742169701165
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 51.52368090878407,
+                "ci95_mean_sentence": [
+                  43.67050393194663,
+                  60.62499098108983
+                ],
+                "corpus_cer_percent": 46.03348888278891,
+                "ci95_corpus": [
+                  39.046741946629204,
+                  54.44829597571157
+                ]
+              }
+            },
+            "d32_full": {
+              "swar": {
+                "mean_sentence_cer_percent": 9.010595850281748,
+                "ci95_mean_sentence": [
+                  7.296113062643483,
+                  10.857870473550516
+                ],
+                "corpus_cer_percent": 8.674169640406259,
+                "ci95_corpus": [
+                  7.0995914418854635,
+                  10.379742939346531
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 10.321209028829855,
+                "ci95_mean_sentence": [
+                  8.4779505666175,
+                  12.319953062370136
+                ],
+                "corpus_cer_percent": 10.430963491627779,
+                "ci95_corpus": [
+                  8.632169376477972,
+                  12.380959236559582
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 11.175901979690552,
+                "ci95_mean_sentence": [
+                  9.148603184141342,
+                  13.310609013051778
+                ],
+                "corpus_cer_percent": 12.023057919297283,
+                "ci95_corpus": [
+                  9.540911720577764,
+                  14.678970452746453
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 11.204271645487987,
+                "ci95_mean_sentence": [
+                  9.07032973447994,
+                  13.476847812989282
+                ],
+                "corpus_cer_percent": 11.556409552566565,
+                "ci95_corpus": [
+                  9.297488106812972,
+                  13.968988084107096
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 35.32117246399992,
+                "ci95_mean_sentence": [
+                  28.531767542805614,
+                  43.309180240472166
+                ],
+                "corpus_cer_percent": 31.457589898435355,
+                "ci95_corpus": [
+                  25.582640952544192,
+                  38.61705615222819
+                ]
+              }
+            }
+          },
+          "ranks": {
+            "whisper_small": [
+              "cosy3_elx_neutral",
+              "swar",
+              "vox2_beat1",
+              "vox2_beat2",
+              "vox2_clone"
+            ],
+            "mms": [
+              "swar",
+              "cosy3_elx_neutral",
+              "vox2_beat2",
+              "vox2_beat1",
+              "vox2_clone"
+            ],
+            "long1c": [
+              "vox2_beat1",
+              "vox2_beat2",
+              "swar",
+              "cosy3_elx_neutral",
+              "vox2_clone"
+            ],
+            "d32_streaming": [
+              "swar",
+              "vox2_beat1",
+              "cosy3_elx_neutral",
+              "vox2_beat2",
+              "vox2_clone"
+            ],
+            "d32_full": [
+              "swar",
+              "vox2_beat1",
+              "vox2_beat2",
+              "cosy3_elx_neutral",
+              "vox2_clone"
+            ]
+          },
+          "paired_system_contrasts": [
+            {
+              "judge": "whisper_small",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": -20.45051628155352,
+              "ci95_sentence_delta": [
+                -94.59114771339188,
+                39.23489891444519
+              ],
+              "corpus_delta_pp": -1.0979961570134407,
+              "ci95_corpus_delta": [
+                -29.07538823299883,
+                26.60517377903714
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -31.227051696283837,
+              "ci95_sentence_delta": [
+                -109.81694720252285,
+                34.92171336166503
+              ],
+              "corpus_delta_pp": -7.246774636288762,
+              "ci95_corpus_delta": [
+                -38.3342772799507,
+                23.89943113078844
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 9.270663156194502,
+              "ci95_sentence_delta": [
+                -42.17342368471944,
+                58.202153665151656
+              ],
+              "corpus_delta_pp": 15.591545429591008,
+              "ci95_corpus_delta": [
+                -13.076602871729524,
+                45.64708540484045
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -45.13253149786152,
+              "ci95_sentence_delta": [
+                -106.13974863525345,
+                17.245679853558
+              ],
+              "corpus_delta_pp": -62.97007960472138,
+              "ci95_corpus_delta": [
+                -109.14194946974423,
+                -19.868266414395542
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -10.776535414730319,
+              "ci95_sentence_delta": [
+                -60.19931865270117,
+                32.916814396679015
+              ],
+              "corpus_delta_pp": -6.148778479275322,
+              "ci95_corpus_delta": [
+                -35.206190714785784,
+                22.437768405473623
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 29.72117943774802,
+              "ci95_sentence_delta": [
+                -33.15105683792754,
+                102.94663088790242
+              ],
+              "corpus_delta_pp": 16.68954158660445,
+              "ci95_corpus_delta": [
+                -11.168762543683059,
+                45.994380919617875
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -24.682015216308002,
+              "ci95_sentence_delta": [
+                -93.66050327697953,
+                57.46422036300769
+              ],
+              "corpus_delta_pp": -61.872083447707936,
+              "ci95_corpus_delta": [
+                -104.23850325894298,
+                -21.227017557485777
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 40.49771485247834,
+              "ci95_sentence_delta": [
+                -12.341996419826614,
+                110.65992683996473
+              ],
+              "corpus_delta_pp": 22.83832006587977,
+              "ci95_corpus_delta": [
+                -4.536597864677886,
+                51.52295855762276
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -13.905479801577684,
+              "ci95_sentence_delta": [
+                -91.67985077662539,
+                74.81550057413935
+              ],
+              "corpus_delta_pp": -55.723304968432615,
+              "ci95_corpus_delta": [
+                -103.19831456025695,
+                -10.61494859831828
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -54.40319465405602,
+              "ci95_sentence_delta": [
+                -115.49497921021367,
+                9.657781813423396
+              ],
+              "corpus_delta_pp": -78.56162503431239,
+              "ci95_corpus_delta": [
+                -124.48398916245408,
+                -35.58670486208671
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": -3.5462435929984437,
+              "ci95_sentence_delta": [
+                -7.069803028485876,
+                0.012666818087639692
+              ],
+              "corpus_delta_pp": -5.0782322261872075,
+              "ci95_corpus_delta": [
+                -7.813447001801703,
+                -2.4028275471021194
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -1.872577898024705,
+              "ci95_sentence_delta": [
+                -4.65617292299388,
+                0.9426836845795016
+              ],
+              "corpus_delta_pp": -2.4979412572056,
+              "ci95_corpus_delta": [
+                -4.827823090368317,
+                -0.1955839932192909
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -0.7575059717376433,
+              "ci95_sentence_delta": [
+                -3.915976727622266,
+                2.5707107978455896
+              ],
+              "corpus_delta_pp": -2.964589623936316,
+              "ci95_corpus_delta": [
+                -5.467991627329099,
+                -0.4233521314873513
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -33.26878055934645,
+              "ci95_sentence_delta": [
+                -46.34771818987195,
+                -22.861404165898566
+              ],
+              "corpus_delta_pp": -29.069448256931103,
+              "ci95_corpus_delta": [
+                -39.910361875972946,
+                -20.62362293126976
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": 1.6736656949737387,
+              "ci95_sentence_delta": [
+                -1.5417779026303713,
+                4.836723354132358
+              ],
+              "corpus_delta_pp": 2.5802909689816076,
+              "ci95_corpus_delta": [
+                -0.0543637076711879,
+                5.20187724283983
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 2.7887376212608004,
+              "ci95_sentence_delta": [
+                -0.46376417252749574,
+                6.09056526938075
+              ],
+              "corpus_delta_pp": 2.1136426022508914,
+              "ci95_corpus_delta": [
+                -0.6530953551744625,
+                4.973128546870031
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -29.722536966348013,
+              "ci95_sentence_delta": [
+                -42.92255034822634,
+                -19.121240923105677
+              ],
+              "corpus_delta_pp": -23.991216030743896,
+              "ci95_corpus_delta": [
+                -34.74019334523355,
+                -15.46416287175588
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 1.1150719262870616,
+              "ci95_sentence_delta": [
+                -2.224792293620693,
+                4.551401802190147
+              ],
+              "corpus_delta_pp": -0.4666483667307162,
+              "ci95_corpus_delta": [
+                -3.2559770670724806,
+                2.44225076394194
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -31.39620266132175,
+              "ci95_sentence_delta": [
+                -44.93961626921308,
+                -20.69112100727514
+              ],
+              "corpus_delta_pp": -26.571506999725504,
+              "ci95_corpus_delta": [
+                -37.660458799385054,
+                -17.83372843252723
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -32.51127458760881,
+              "ci95_sentence_delta": [
+                -45.62794554332185,
+                -22.080741485728044
+              ],
+              "corpus_delta_pp": -26.104858632994787,
+              "ci95_corpus_delta": [
+                -37.0192938848824,
+                -17.540492735891217
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": 4.152464486258507,
+              "ci95_sentence_delta": [
+                2.1824130396147465,
+                6.4393319240745175
+              ],
+              "corpus_delta_pp": 2.8822399121603075,
+              "ci95_corpus_delta": [
+                1.5129934667399423,
+                4.44316410075943
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": 3.400887389470051,
+              "ci95_sentence_delta": [
+                1.379432820973354,
+                5.686887018500847
+              ],
+              "corpus_delta_pp": 2.1136426022508923,
+              "ci95_corpus_delta": [
+                0.6023603146209286,
+                3.739850814349727
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -0.9324623947894697,
+              "ci95_sentence_delta": [
+                -3.1857114388749097,
+                1.4480331018691615
+              ],
+              "corpus_delta_pp": -1.7018940433708485,
+              "ci95_corpus_delta": [
+                -3.629825766032651,
+                0.1962557517358621
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -26.625655107484043,
+              "ci95_sentence_delta": [
+                -38.840754802940566,
+                -16.63429644808634
+              ],
+              "corpus_delta_pp": -22.26187208344771,
+              "ci95_corpus_delta": [
+                -32.648609058424285,
+                -14.39614565136819
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -0.7515770967884565,
+              "ci95_sentence_delta": [
+                -1.6040170884561051,
+                -0.052695843968597465
+              ],
+              "corpus_delta_pp": -0.7685973099094152,
+              "ci95_corpus_delta": [
+                -1.6480484631711962,
+                -0.027886029849065956
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -5.084926881047977,
+              "ci95_sentence_delta": [
+                -6.755578160995097,
+                -3.573232573801343
+              ],
+              "corpus_delta_pp": -4.584133955531156,
+              "ci95_corpus_delta": [
+                -6.257149909572926,
+                -3.0972006361780147
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -30.778119593742552,
+              "ci95_sentence_delta": [
+                -43.04174486616366,
+                -20.9950878277716
+              ],
+              "corpus_delta_pp": -25.144111995608014,
+              "ci95_corpus_delta": [
+                -35.56561900024675,
+                -17.289197394561786
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -4.3333497842595206,
+              "ci95_sentence_delta": [
+                -6.008200828065494,
+                -2.727189382048559
+              ],
+              "corpus_delta_pp": -3.8155366456217408,
+              "ci95_corpus_delta": [
+                -5.413169058579295,
+                -2.3055359725235003
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -30.026542496954093,
+              "ci95_sentence_delta": [
+                -42.430144490337746,
+                -20.208150221369333
+              ],
+              "corpus_delta_pp": -24.3755146856986,
+              "ci95_corpus_delta": [
+                -34.787559712347075,
+                -16.41828434906659
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -25.693192712694575,
+              "ci95_sentence_delta": [
+                -38.23176032534008,
+                -15.67335546975937
+              ],
+              "corpus_delta_pp": -20.55997804007686,
+              "ci95_corpus_delta": [
+                -30.85016302161884,
+                -12.557937715403487
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": -6.8993480034806325,
+              "ci95_sentence_delta": [
+                -10.458033374063584,
+                -3.586114254345728
+              ],
+              "corpus_delta_pp": -7.466373867691464,
+              "ci95_corpus_delta": [
+                -10.934556722922261,
+                -4.1513562550887375
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -10.069683260005224,
+              "ci95_sentence_delta": [
+                -14.798637690696735,
+                -5.777149057742862
+              ],
+              "corpus_delta_pp": -7.987922042272851,
+              "ci95_corpus_delta": [
+                -11.532813816516457,
+                -4.602597621091358
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -7.107730135176119,
+              "ci95_sentence_delta": [
+                -11.03629369043333,
+                -3.5642815624600734
+              ],
+              "corpus_delta_pp": -6.67032665385671,
+              "ci95_corpus_delta": [
+                -9.730743049123529,
+                -3.6562191181314825
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -38.49562025429706,
+              "ci95_sentence_delta": [
+                -47.63340326550204,
+                -30.530454365398903
+              ],
+              "corpus_delta_pp": -33.48888278891024,
+              "ci95_corpus_delta": [
+                -41.81719302693251,
+                -26.45575702147822
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -3.1703352565245915,
+              "ci95_sentence_delta": [
+                -8.250824237353514,
+                1.5105753332239227
+              ],
+              "corpus_delta_pp": -0.5215481745813868,
+              "ci95_corpus_delta": [
+                -4.1966638696733245,
+                3.052623694706422
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -0.2083821316954868,
+              "ci95_sentence_delta": [
+                -4.769170827995321,
+                4.148140497778631
+              ],
+              "corpus_delta_pp": 0.7960472138347541,
+              "ci95_corpus_delta": [
+                -2.7898439875694385,
+                4.478820324254243
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -31.596272250816426,
+              "ci95_sentence_delta": [
+                -40.954894409032875,
+                -23.352988735985395
+              ],
+              "corpus_delta_pp": -26.022508921218773,
+              "ci95_corpus_delta": [
+                -34.43726207168147,
+                -18.900284746797368
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 2.9619531248291047,
+              "ci95_sentence_delta": [
+                -1.8607298706762234,
+                7.9537945651879784
+              ],
+              "corpus_delta_pp": 1.3175953884161409,
+              "ci95_corpus_delta": [
+                -2.664958336787994,
+                5.307129652739449
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -28.425936994291835,
+              "ci95_sentence_delta": [
+                -38.14375150047475,
+                -19.57689261713368
+              ],
+              "corpus_delta_pp": -25.500960746637386,
+              "ci95_corpus_delta": [
+                -33.92189767920965,
+                -18.419419314117405
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -31.38789011912094,
+              "ci95_sentence_delta": [
+                -40.62951348969859,
+                -23.34836554060184
+              ],
+              "corpus_delta_pp": -26.818556135053527,
+              "ci95_corpus_delta": [
+                -35.20885028949545,
+                -19.73880861076415
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": -1.3106131785481079,
+              "ci95_sentence_delta": [
+                -2.898042197688601,
+                0.32125276915700884
+              ],
+              "corpus_delta_pp": -1.75679385122152,
+              "ci95_corpus_delta": [
+                -3.4734475543445726,
+                -0.05414668864249372
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -2.1653061294088047,
+              "ci95_sentence_delta": [
+                -4.1202497980980155,
+                -0.2638043031198635
+              ],
+              "corpus_delta_pp": -3.3488882788910246,
+              "ci95_corpus_delta": [
+                -5.602068611410869,
+                -1.2366945862234444
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -2.1936757952062393,
+              "ci95_sentence_delta": [
+                -4.227849778099729,
+                -0.10212324108255547
+              ],
+              "corpus_delta_pp": -2.8822399121603066,
+              "ci95_corpus_delta": [
+                -5.121181367957947,
+                -0.7972551706613179
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -26.310576613718176,
+              "ci95_sentence_delta": [
+                -34.30597307174668,
+                -19.502792681442198
+              ],
+              "corpus_delta_pp": -22.783420258029096,
+              "ci95_corpus_delta": [
+                -29.784373917459483,
+                -16.98325907042226
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -0.8546929508606969,
+              "ci95_sentence_delta": [
+                -2.8425958518741203,
+                1.0582487520352977
+              ],
+              "corpus_delta_pp": -1.5920944276695046,
+              "ci95_corpus_delta": [
+                -3.9787867846181624,
+                0.5567780627874865
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -0.8830626166581315,
+              "ci95_sentence_delta": [
+                -2.7688706271921353,
+                0.9740341761927354
+              ],
+              "corpus_delta_pp": -1.1254460609387866,
+              "ci95_corpus_delta": [
+                -2.989194102534776,
+                0.742810726208282
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -24.999963435170066,
+              "ci95_sentence_delta": [
+                -33.06244187295113,
+                -18.00569783704003
+              ],
+              "corpus_delta_pp": -21.026626406807576,
+              "ci95_corpus_delta": [
+                -28.26337178104985,
+                -15.026963783238854
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -0.028369665797434607,
+              "ci95_sentence_delta": [
+                -2.201164249795723,
+                2.073155571803239
+              ],
+              "corpus_delta_pp": 0.46664836673071797,
+              "ci95_corpus_delta": [
+                -1.4614126975161548,
+                2.506132533731496
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -24.14527048430937,
+              "ci95_sentence_delta": [
+                -32.32135966102574,
+                -17.01338389798588
+              ],
+              "corpus_delta_pp": -19.43453197913807,
+              "ci95_corpus_delta": [
+                -26.78818412561988,
+                -13.29190405812433
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -24.116900818511937,
+              "ci95_sentence_delta": [
+                -32.30816304033458,
+                -17.107851480944774
+              ],
+              "corpus_delta_pp": -19.901180345868788,
+              "ci95_corpus_delta": [
+                -27.203739679456046,
+                -13.881962786460448
+              ]
+            }
+          ],
+          "judge_comparisons": [
+            {
+              "judge_a": "whisper_small",
+              "judge_b": "mms",
+              "kendall_tau_b": 0.6,
+              "ci95_tau": [
+                -0.2,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.043,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 121.69031758682874,
+                  "ci95_sentence_delta": [
+                    54.65273414373034,
+                    220.66002938068988
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 138.5945902753838,
+                  "ci95_sentence_delta": [
+                    66.04548957365813,
+                    230.29270072228746
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 151.04479138508788,
+                  "ci95_sentence_delta": [
+                    75.48474762451053,
+                    246.13240885675665
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 111.6621484588966,
+                  "ci95_sentence_delta": [
+                    53.06697669724751,
+                    188.88872688972447
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 133.5540685253438,
+                  "ci95_sentence_delta": [
+                    82.12382631546883,
+                    204.0607593728679
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "whisper_small",
+              "judge_b": "long1c",
+              "kendall_tau_b": 0.0,
+              "ci95_tau": [
+                -0.6,
+                0.8
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0068,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 131.4154608079805,
+                  "ci95_sentence_delta": [
+                    63.52516068290127,
+                    231.4016557907842
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 156.01844157579254,
+                  "ci95_sentence_delta": [
+                    82.43281851628498,
+                    248.81418744547244
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 166.0433998937344,
+                  "ci95_sentence_delta": [
+                    89.59815461959073,
+                    262.52966618133536
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 121.21233525699652,
+                  "ci95_sentence_delta": [
+                    61.20509551256814,
+                    200.20777518134173
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 149.92233719835798,
+                  "ci95_sentence_delta": [
+                    97.4039046239426,
+                    220.60601153019803
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "whisper_small",
+              "judge_b": "d32_streaming",
+              "kendall_tau_b": 0.6,
+              "ci95_tau": [
+                -0.2,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0468,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 125.87477926926832,
+                  "ci95_sentence_delta": [
+                    58.081095921447016,
+                    226.01222085530202
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 139.4259475473412,
+                  "ci95_sentence_delta": [
+                    65.8075847407734,
+                    232.4133234370647
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 147.03214770554692,
+                  "ci95_sentence_delta": [
+                    71.34953210177514,
+                    243.1779092633827
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 109.49638597789769,
+                  "ci95_sentence_delta": [
+                    49.97975978760994,
+                    186.87599953334302
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 132.51169051283279,
+                  "ci95_sentence_delta": [
+                    79.28655076006432,
+                    203.50399278846913
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "whisper_small",
+              "judge_b": "d32_full",
+              "kendall_tau_b": 0.4,
+              "ci95_tau": [
+                -0.4,
+                0.8
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.02,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 129.89224407347356,
+                  "ci95_sentence_delta": [
+                    62.14139313939789,
+                    229.7797227922861
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 149.032147176479,
+                  "ci95_sentence_delta": [
+                    75.25761420319274,
+                    242.0184883309771
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 158.9539896403486,
+                  "ci95_sentence_delta": [
+                    82.06176226090612,
+                    255.82280884866378
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 118.42790512207283,
+                  "ci95_sentence_delta": [
+                    58.72572587194269,
+                    196.9866123831429
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 148.71419895761693,
+                  "ci95_sentence_delta": [
+                    95.25432989102862,
+                    219.6549619806755
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "mms",
+              "judge_b": "long1c",
+              "kendall_tau_b": 0.0,
+              "ci95_tau": [
+                -0.2,
+                0.4
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0007,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 9.725143221151757,
+                  "ci95_sentence_delta": [
+                    6.413291452788738,
+                    13.21905475896351
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 17.423851300408707,
+                  "ci95_sentence_delta": [
+                    14.237546332448854,
+                    20.818304120541804
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 14.998608508646512,
+                  "ci95_sentence_delta": [
+                    11.638432715483138,
+                    18.422586928843902
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 9.550186798099931,
+                  "ci95_sentence_delta": [
+                    6.6198752334753665,
+                    12.67125933360156
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 16.36826867301417,
+                  "ci95_sentence_delta": [
+                    12.332833335067969,
+                    20.452174274751812
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "mms",
+              "judge_b": "d32_streaming",
+              "kendall_tau_b": 0.6,
+              "ci95_tau": [
+                0.2,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0512,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 4.184461682439565,
+                  "ci95_sentence_delta": [
+                    0.3669555184353815,
+                    8.19914518343195
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 0.8313572719573763,
+                  "ci95_sentence_delta": [
+                    -3.6037225846308023,
+                    5.457187796729819
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": -4.012643679540954,
+                  "ci95_sentence_delta": [
+                    -8.206348769653683,
+                    0.14238518052640795
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": -2.165762480998911,
+                  "ci95_sentence_delta": [
+                    -6.465725959532419,
+                    2.024379977900815
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": -1.042378012511037,
+                  "ci95_sentence_delta": [
+                    -7.5712498594739,
+                    6.332307809909164
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "mms",
+              "judge_b": "d32_full",
+              "kendall_tau_b": 0.4,
+              "ci95_tau": [
+                0.0,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0303,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 8.201926486644831,
+                  "ci95_sentence_delta": [
+                    5.005445166510988,
+                    11.653173409863033
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 10.437556901095167,
+                  "ci95_sentence_delta": [
+                    6.979867446935608,
+                    14.113963564609827
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 7.909198255260732,
+                  "ci95_sentence_delta": [
+                    4.17462929887364,
+                    11.855270933585583
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 6.765756663176235,
+                  "ci95_sentence_delta": [
+                    3.5943544220357575,
+                    10.125655370959961
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 15.160130432273114,
+                  "ci95_sentence_delta": [
+                    8.505492513002809,
+                    22.942568199534385
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "long1c",
+              "judge_b": "d32_streaming",
+              "kendall_tau_b": 0.4,
+              "ci95_tau": [
+                0.0,
+                0.6
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": -5.540681538712192,
+                  "ci95_sentence_delta": [
+                    -7.88636439584757,
+                    -3.098515094561373
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": -16.592494028451334,
+                  "ci95_sentence_delta": [
+                    -19.99314326815775,
+                    -13.401788689655078
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": -19.011252188187466,
+                  "ci95_sentence_delta": [
+                    -23.534845985377746,
+                    -14.957489145776805
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": -11.715949279098842,
+                  "ci95_sentence_delta": [
+                    -15.530239332929584,
+                    -8.33558629208736
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": -17.410646685525208,
+                  "ci95_sentence_delta": [
+                    -22.57849543645541,
+                    -11.747879102615366
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "long1c",
+              "judge_b": "d32_full",
+              "kendall_tau_b": 0.6,
+              "ci95_tau": [
+                0.0,
+                0.6
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0013,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": -1.523216734506926,
+                  "ci95_sentence_delta": [
+                    -3.3763937313065218,
+                    0.4887079484193486
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": -6.986294399313541,
+                  "ci95_sentence_delta": [
+                    -8.69353348789948,
+                    -5.325503965470125
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": -7.089410253385782,
+                  "ci95_sentence_delta": [
+                    -9.09574304231751,
+                    -5.211407939556927
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": -2.7844301349236957,
+                  "ci95_sentence_delta": [
+                    -4.7154568545328,
+                    -0.8551847167543226
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": -1.2081382407410572,
+                  "ci95_sentence_delta": [
+                    -6.461464718758879,
+                    5.023403685479178
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "d32_streaming",
+              "judge_b": "d32_full",
+              "kendall_tau_b": 0.8,
+              "ci95_tau": [
+                0.4,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.2319,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 4.017464804205266,
+                  "ci95_sentence_delta": [
+                    2.338993174248502,
+                    5.7369316549933815
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 9.606199629137791,
+                  "ci95_sentence_delta": [
+                    6.550167956662462,
+                    12.854817025191624
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 11.921841934801686,
+                  "ci95_sentence_delta": [
+                    7.931487494517302,
+                    16.449037489569392
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 8.931519144175146,
+                  "ci95_sentence_delta": [
+                    5.559439435147519,
+                    12.74084084459201
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 16.20250844478415,
+                  "ci95_sentence_delta": [
+                    12.15622283233479,
+                    20.369847503203847
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "legacy_transliterated": {
+          "aggregates": {
+            "whisper_small": {
+              "swar": {
+                "mean_sentence_cer_percent": 138.90283992375532,
+                "ci95_mean_sentence": [
+                  71.3343601591113,
+                  238.73826371203234
+                ],
+                "corpus_cer_percent": 92.14932747735384,
+                "ci95_corpus": [
+                  66.08034918719852,
+                  122.10464955362697
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 159.35335620530884,
+                "ci95_mean_sentence": [
+                  85.69075495264711,
+                  251.85408146198483
+                ],
+                "corpus_cer_percent": 93.24732363436728,
+                "ci95_corpus": [
+                  68.40345555999208,
+                  121.7875793661513
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 170.12989162003916,
+                "ci95_mean_sentence": [
+                  93.78090177301401,
+                  266.6458106174764
+                ],
+                "corpus_cer_percent": 99.3961021136426,
+                "ci95_corpus": [
+                  73.10532744619458,
+                  129.2104840830519
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 129.63217676756082,
+                "ci95_mean_sentence": [
+                  70.15978142329759,
+                  208.1483306148973
+                ],
+                "corpus_cer_percent": 76.55778204776283,
+                "ci95_corpus": [
+                  56.45228919646838,
+                  100.46614215502188
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 184.03537142161684,
+                "ci95_mean_sentence": [
+                  128.45829979564684,
+                  257.38420001682834
+                ],
+                "corpus_cer_percent": 155.1194070820752,
+                "ci95_corpus": [
+                  118.86151613226119,
+                  195.832029152029
+                ]
+              }
+            },
+            "mms": {
+              "swar": {
+                "mean_sentence_cer_percent": 17.21252233692658,
+                "ci95_mean_sentence": [
+                  14.041770219610669,
+                  20.528273613701923
+                ],
+                "corpus_cer_percent": 13.313203403788087,
+                "ci95_corpus": [
+                  10.866785655517182,
+                  16.13878198769132
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 20.758765929925023,
+                "ci95_mean_sentence": [
+                  17.68146999842523,
+                  24.033028790975887
+                ],
+                "corpus_cer_percent": 18.391435629975295,
+                "ci95_corpus": [
+                  15.50851499238658,
+                  21.65826330865924
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 19.085100234951284,
+                "ci95_mean_sentence": [
+                  15.97549418336482,
+                  22.385723688377773
+                ],
+                "corpus_cer_percent": 15.811144660993687,
+                "ci95_corpus": [
+                  13.265580729112012,
+                  18.59605827966855
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 17.970028308664222,
+                "ci95_mean_sentence": [
+                  15.290361716867668,
+                  20.837817676064024
+                ],
+                "corpus_cer_percent": 16.277793027724403,
+                "ci95_corpus": [
+                  13.860864313073336,
+                  18.967050266696145
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 50.481302896273036,
+                "ci95_mean_sentence": [
+                  39.97572927509755,
+                  63.93352276377559
+                ],
+                "corpus_cer_percent": 42.38265166071919,
+                "ci95_corpus": [
+                  33.440792151396316,
+                  53.622921193437286
+                ]
+              }
+            },
+            "long1c": {
+              "swar": {
+                "mean_sentence_cer_percent": 5.148282598608269,
+                "ci95_mean_sentence": [
+                  3.7228760032193664,
+                  6.7418836000405635
+                ],
+                "corpus_cer_percent": 4.3645347241284655,
+                "ci95_corpus": [
+                  3.3147348285760834,
+                  5.580193185943859
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 2.645976054391038,
+                "ci95_mean_sentence": [
+                  1.9792599915874964,
+                  3.3742926004348734
+                ],
+                "corpus_cer_percent": 2.8822399121603075,
+                "ci95_corpus": [
+                  2.1046502178933326,
+                  3.740112056207267
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 3.1868946836132617,
+                "ci95_mean_sentence": [
+                  2.366344543792502,
+                  4.13686778191421
+                ],
+                "corpus_cer_percent": 3.568487510293714,
+                "ci95_corpus": [
+                  2.580106084663814,
+                  4.700233943141928
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 6.8264175732279835,
+                "ci95_mean_sentence": [
+                  5.4324343742364265,
+                  8.348807568428283
+                ],
+                "corpus_cer_percent": 6.615426846006039,
+                "ci95_corpus": [
+                  5.083804384548001,
+                  8.314094335751523
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 32.08838515261541,
+                "ci95_mean_sentence": [
+                  22.546058785926988,
+                  44.19473778537878
+                ],
+                "corpus_cer_percent": 27.202854790008235,
+                "ci95_corpus": [
+                  19.401694016615355,
+                  37.43332010126402
+                ]
+              }
+            },
+            "d32_streaming": {
+              "swar": {
+                "mean_sentence_cer_percent": 10.967250006205967,
+                "ci95_mean_sentence": [
+                  8.99826410652542,
+                  13.038278523527518
+                ],
+                "corpus_cer_percent": 10.540763107329123,
+                "ci95_corpus": [
+                  8.550517802756378,
+                  12.684431152403597
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 16.67870675626585,
+                "ci95_mean_sentence": [
+                  14.089614446887564,
+                  19.513055047833255
+                ],
+                "corpus_cer_percent": 17.073840241559154,
+                "ci95_corpus": [
+                  14.333874488539315,
+                  20.0
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 19.21885370309822,
+                "ci95_mean_sentence": [
+                  16.137160168945005,
+                  22.44002907054089
+                ],
+                "corpus_cer_percent": 17.732637935767226,
+                "ci95_corpus": [
+                  15.06719491743727,
+                  20.57870066138127
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 17.25465842588037,
+                "ci95_mean_sentence": [
+                  14.44434987800171,
+                  20.357971668919895
+                ],
+                "corpus_cer_percent": 17.073840241559154,
+                "ci95_corpus": [
+                  14.36462028931384,
+                  19.931492722458678
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 46.88901594159756,
+                "ci95_mean_sentence": [
+                  39.39064063422646,
+                  55.833072242247525
+                ],
+                "corpus_cer_percent": 42.05325281361515,
+                "ci95_corpus": [
+                  35.43368832664455,
+                  50.167588448173774
+                ]
+              }
+            },
+            "d32_full": {
+              "swar": {
+                "mean_sentence_cer_percent": 7.76219876191105,
+                "ci95_mean_sentence": [
+                  6.302909423697771,
+                  9.30856475896364
+                ],
+                "corpus_cer_percent": 7.4663738676914635,
+                "ci95_corpus": [
+                  6.088586785694749,
+                  8.972022525760842
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 9.534624197521737,
+                "ci95_mean_sentence": [
+                  7.894098453241003,
+                  11.264762681535627
+                ],
+                "corpus_cer_percent": 9.6898160856437,
+                "ci95_corpus": [
+                  8.002366983725699,
+                  11.499600518983884
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 10.4712245433058,
+                "ci95_mean_sentence": [
+                  8.543847611633739,
+                  12.492654549800447
+                ],
+                "corpus_cer_percent": 11.281910513313203,
+                "ci95_corpus": [
+                  8.87288565726788,
+                  13.865779256794232
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 9.92967198453327,
+                "ci95_mean_sentence": [
+                  8.127312491295905,
+                  11.82573458171693
+                ],
+                "corpus_cer_percent": 10.458413395553116,
+                "ci95_corpus": [
+                  8.417031630470857,
+                  12.707063365319165
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 33.71931632555841,
+                "ci95_mean_sentence": [
+                  27.16181157169161,
+                  41.537592554135834
+                ],
+                "corpus_cer_percent": 30.33214383749657,
+                "ci95_corpus": [
+                  24.610976086491547,
+                  37.385577477997394
+                ]
+              }
+            }
+          },
+          "ranks": {
+            "whisper_small": [
+              "cosy3_elx_neutral",
+              "swar",
+              "vox2_beat1",
+              "vox2_beat2",
+              "vox2_clone"
+            ],
+            "mms": [
+              "swar",
+              "cosy3_elx_neutral",
+              "vox2_beat2",
+              "vox2_beat1",
+              "vox2_clone"
+            ],
+            "long1c": [
+              "vox2_beat1",
+              "vox2_beat2",
+              "swar",
+              "cosy3_elx_neutral",
+              "vox2_clone"
+            ],
+            "d32_streaming": [
+              "swar",
+              "vox2_beat1",
+              "cosy3_elx_neutral",
+              "vox2_beat2",
+              "vox2_clone"
+            ],
+            "d32_full": [
+              "swar",
+              "vox2_beat1",
+              "cosy3_elx_neutral",
+              "vox2_beat2",
+              "vox2_clone"
+            ]
+          },
+          "paired_system_contrasts": [
+            {
+              "judge": "whisper_small",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": -20.45051628155352,
+              "ci95_sentence_delta": [
+                -94.59114771339188,
+                39.23489891444519
+              ],
+              "corpus_delta_pp": -1.0979961570134407,
+              "ci95_corpus_delta": [
+                -29.07538823299883,
+                26.60517377903714
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -31.227051696283837,
+              "ci95_sentence_delta": [
+                -109.81694720252285,
+                34.92171336166503
+              ],
+              "corpus_delta_pp": -7.246774636288762,
+              "ci95_corpus_delta": [
+                -38.3342772799507,
+                23.89943113078844
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 9.270663156194502,
+              "ci95_sentence_delta": [
+                -42.17342368471944,
+                58.202153665151656
+              ],
+              "corpus_delta_pp": 15.591545429591008,
+              "ci95_corpus_delta": [
+                -13.076602871729524,
+                45.64708540484045
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -45.13253149786152,
+              "ci95_sentence_delta": [
+                -106.13974863525345,
+                17.245679853558
+              ],
+              "corpus_delta_pp": -62.97007960472138,
+              "ci95_corpus_delta": [
+                -109.14194946974423,
+                -19.868266414395542
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -10.776535414730319,
+              "ci95_sentence_delta": [
+                -60.19931865270117,
+                32.916814396679015
+              ],
+              "corpus_delta_pp": -6.148778479275322,
+              "ci95_corpus_delta": [
+                -35.206190714785784,
+                22.437768405473623
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 29.72117943774802,
+              "ci95_sentence_delta": [
+                -33.15105683792754,
+                102.94663088790242
+              ],
+              "corpus_delta_pp": 16.68954158660445,
+              "ci95_corpus_delta": [
+                -11.168762543683059,
+                45.994380919617875
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -24.682015216308002,
+              "ci95_sentence_delta": [
+                -93.66050327697953,
+                57.46422036300769
+              ],
+              "corpus_delta_pp": -61.872083447707936,
+              "ci95_corpus_delta": [
+                -104.23850325894298,
+                -21.227017557485777
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 40.49771485247834,
+              "ci95_sentence_delta": [
+                -12.341996419826614,
+                110.65992683996473
+              ],
+              "corpus_delta_pp": 22.83832006587977,
+              "ci95_corpus_delta": [
+                -4.536597864677886,
+                51.52295855762276
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -13.905479801577684,
+              "ci95_sentence_delta": [
+                -91.67985077662539,
+                74.81550057413935
+              ],
+              "corpus_delta_pp": -55.723304968432615,
+              "ci95_corpus_delta": [
+                -103.19831456025695,
+                -10.61494859831828
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -54.40319465405602,
+              "ci95_sentence_delta": [
+                -115.49497921021367,
+                9.657781813423396
+              ],
+              "corpus_delta_pp": -78.56162503431239,
+              "ci95_corpus_delta": [
+                -124.48398916245408,
+                -35.58670486208671
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": -3.5462435929984437,
+              "ci95_sentence_delta": [
+                -7.069803028485876,
+                0.012666818087639692
+              ],
+              "corpus_delta_pp": -5.0782322261872075,
+              "ci95_corpus_delta": [
+                -7.813447001801703,
+                -2.4028275471021194
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -1.872577898024705,
+              "ci95_sentence_delta": [
+                -4.65617292299388,
+                0.9426836845795016
+              ],
+              "corpus_delta_pp": -2.4979412572056,
+              "ci95_corpus_delta": [
+                -4.827823090368317,
+                -0.1955839932192909
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -0.7575059717376433,
+              "ci95_sentence_delta": [
+                -3.915976727622266,
+                2.5707107978455896
+              ],
+              "corpus_delta_pp": -2.964589623936316,
+              "ci95_corpus_delta": [
+                -5.467991627329099,
+                -0.4233521314873513
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -33.26878055934645,
+              "ci95_sentence_delta": [
+                -46.34771818987195,
+                -22.861404165898566
+              ],
+              "corpus_delta_pp": -29.069448256931103,
+              "ci95_corpus_delta": [
+                -39.910361875972946,
+                -20.62362293126976
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": 1.6736656949737387,
+              "ci95_sentence_delta": [
+                -1.5417779026303713,
+                4.836723354132358
+              ],
+              "corpus_delta_pp": 2.5802909689816076,
+              "ci95_corpus_delta": [
+                -0.0543637076711879,
+                5.20187724283983
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 2.7887376212608004,
+              "ci95_sentence_delta": [
+                -0.46376417252749574,
+                6.09056526938075
+              ],
+              "corpus_delta_pp": 2.1136426022508914,
+              "ci95_corpus_delta": [
+                -0.6530953551744625,
+                4.973128546870031
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -29.722536966348013,
+              "ci95_sentence_delta": [
+                -42.92255034822634,
+                -19.121240923105677
+              ],
+              "corpus_delta_pp": -23.991216030743896,
+              "ci95_corpus_delta": [
+                -34.74019334523355,
+                -15.46416287175588
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 1.1150719262870616,
+              "ci95_sentence_delta": [
+                -2.224792293620693,
+                4.551401802190147
+              ],
+              "corpus_delta_pp": -0.4666483667307162,
+              "ci95_corpus_delta": [
+                -3.2559770670724806,
+                2.44225076394194
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -31.39620266132175,
+              "ci95_sentence_delta": [
+                -44.93961626921308,
+                -20.69112100727514
+              ],
+              "corpus_delta_pp": -26.571506999725504,
+              "ci95_corpus_delta": [
+                -37.660458799385054,
+                -17.83372843252723
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -32.51127458760881,
+              "ci95_sentence_delta": [
+                -45.62794554332185,
+                -22.080741485728044
+              ],
+              "corpus_delta_pp": -26.104858632994787,
+              "ci95_corpus_delta": [
+                -37.0192938848824,
+                -17.540492735891217
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": 2.5023065442172308,
+              "ci95_sentence_delta": [
+                1.0921726312148627,
+                4.103626518856935
+              ],
+              "corpus_delta_pp": 1.482294811968158,
+              "ci95_corpus_delta": [
+                0.45551677788181044,
+                2.6322934560177274
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": 1.961387914995007,
+              "ci95_sentence_delta": [
+                0.44661663603932245,
+                3.6216916388225653
+              ],
+              "corpus_delta_pp": 0.7960472138347514,
+              "ci95_corpus_delta": [
+                -0.4769633538771862,
+                2.1282962746032226
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -1.6781349746197147,
+              "ci95_sentence_delta": [
+                -3.497801257346156,
+                0.20005212636791975
+              ],
+              "corpus_delta_pp": -2.2508921218775733,
+              "ci95_corpus_delta": [
+                -3.866635798333734,
+                -0.650746953341711
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -26.94010255400714,
+              "ci95_sentence_delta": [
+                -39.016945869247124,
+                -17.295899624603642
+              ],
+              "corpus_delta_pp": -22.83832006587977,
+              "ci95_corpus_delta": [
+                -32.986545356634565,
+                -15.063628465564534
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -0.5409186292222237,
+              "ci95_sentence_delta": [
+                -1.3707445885319054,
+                0.16013904468134751
+              ],
+              "corpus_delta_pp": -0.6862475981334066,
+              "ci95_corpus_delta": [
+                -1.509776544637429,
+                0.0
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -4.180441518836945,
+              "ci95_sentence_delta": [
+                -5.645432380650951,
+                -2.8145033478295716
+              ],
+              "corpus_delta_pp": -3.7331869338457313,
+              "ci95_corpus_delta": [
+                -5.095823655212146,
+                -2.480364387863878
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -29.44240909822437,
+              "ci95_sentence_delta": [
+                -41.64118842303136,
+                -19.87935848262642
+              ],
+              "corpus_delta_pp": -24.320614877847927,
+              "ci95_corpus_delta": [
+                -34.51234594744184,
+                -16.542479750327054
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -3.639522889614722,
+              "ci95_sentence_delta": [
+                -5.100779823369583,
+                -2.2061264938491947
+              ],
+              "corpus_delta_pp": -3.0469393357123247,
+              "ci95_corpus_delta": [
+                -4.4548902959563055,
+                -1.7098673413735874
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -28.901490469002148,
+              "ci95_sentence_delta": [
+                -41.125455556924884,
+                -19.30836070667078
+              ],
+              "corpus_delta_pp": -23.63436727971452,
+              "ci95_corpus_delta": [
+                -33.86305468726058,
+                -15.792104376054004
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -25.261967579387424,
+              "ci95_sentence_delta": [
+                -37.58470718436826,
+                -15.594046898346173
+              ],
+              "corpus_delta_pp": -20.587427944002197,
+              "ci95_corpus_delta": [
+                -30.861667241174256,
+                -12.725251325920238
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": -5.711456750059883,
+              "ci95_sentence_delta": [
+                -8.536629428891388,
+                -3.0129452903927696
+              ],
+              "corpus_delta_pp": -6.53307713423003,
+              "ci95_corpus_delta": [
+                -9.449978780334657,
+                -3.6907833051107444
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -8.251603696892252,
+              "ci95_sentence_delta": [
+                -11.760492012200755,
+                -4.945071995432236
+              ],
+              "corpus_delta_pp": -7.191874828438102,
+              "ci95_corpus_delta": [
+                -10.297855584602424,
+                -4.154508418062628
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -6.287408419674401,
+              "ci95_sentence_delta": [
+                -9.547514421201747,
+                -3.244193724629671
+              ],
+              "corpus_delta_pp": -6.53307713423003,
+              "ci95_corpus_delta": [
+                -9.364305800477908,
+                -3.7375627105134246
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -35.9217659353916,
+              "ci95_sentence_delta": [
+                -44.74936767486208,
+                -28.362129774520366
+              ],
+              "corpus_delta_pp": -31.51248970628603,
+              "ci95_corpus_delta": [
+                -39.58838250139364,
+                -24.877590370790312
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -2.540146946832369,
+              "ci95_sentence_delta": [
+                -6.30034762290683,
+                1.1002988058793306
+              ],
+              "corpus_delta_pp": -0.6587976942080722,
+              "ci95_corpus_delta": [
+                -3.805403059165882,
+                2.451363686456616
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -0.5759516696145184,
+              "ci95_sentence_delta": [
+                -4.1204746203036295,
+                2.8624028388435434
+              ],
+              "corpus_delta_pp": 0.0,
+              "ci95_corpus_delta": [
+                -3.1524619626161443,
+                3.222218073698919
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -30.210309185331713,
+              "ci95_sentence_delta": [
+                -39.35525292078275,
+                -22.432980727890065
+              ],
+              "corpus_delta_pp": -24.979412572056,
+              "ci95_corpus_delta": [
+                -33.082941991154556,
+                -18.205515811618167
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 1.9641952772178506,
+              "ci95_sentence_delta": [
+                -1.7832764117531525,
+                5.673923461683247
+              ],
+              "corpus_delta_pp": 0.6587976942080722,
+              "ci95_corpus_delta": [
+                -2.753096863858845,
+                4.077104192737363
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -27.670162238499344,
+              "ci95_sentence_delta": [
+                -36.98012889500842,
+                -19.710707305392706
+              ],
+              "corpus_delta_pp": -24.320614877847927,
+              "ci95_corpus_delta": [
+                -32.61321504200325,
+                -17.534643048940467
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -29.634357515717195,
+              "ci95_sentence_delta": [
+                -38.56850273456147,
+                -21.98375839351618
+              ],
+              "corpus_delta_pp": -24.979412572056,
+              "ci95_corpus_delta": [
+                -33.06286366808118,
+                -18.23866995971075
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": -1.7724254356106863,
+              "ci95_sentence_delta": [
+                -3.374852319181552,
+                -0.14358461250049054
+              ],
+              "corpus_delta_pp": -2.223442217952237,
+              "ci95_corpus_delta": [
+                -3.940475029199431,
+                -0.4821122526785347
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -2.7090257813947494,
+              "ci95_sentence_delta": [
+                -4.526790592468312,
+                -0.9392409629062604
+              ],
+              "corpus_delta_pp": -3.81553664562174,
+              "ci95_corpus_delta": [
+                -5.910295435794344,
+                -1.8396392213461332
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -2.1674732226222195,
+              "ci95_sentence_delta": [
+                -4.145159566063073,
+                -0.14849256917921688
+              ],
+              "corpus_delta_pp": -2.9920395278616523,
+              "ci95_corpus_delta": [
+                -5.161598353114361,
+                -0.9612335086856537
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -25.95711756364736,
+              "ci95_sentence_delta": [
+                -33.77575269492929,
+                -19.41041022236937
+              ],
+              "corpus_delta_pp": -22.865769969805108,
+              "ci95_corpus_delta": [
+                -29.81131480501581,
+                -17.196105783989744
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -0.936600345784063,
+              "ci95_sentence_delta": [
+                -2.856286733057572,
+                0.8872646014398863
+              ],
+              "corpus_delta_pp": -1.5920944276695028,
+              "ci95_corpus_delta": [
+                -3.932065657351966,
+                0.5014019230811887
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -0.3950477870115332,
+              "ci95_sentence_delta": [
+                -2.2298800976439006,
+                1.4306078087414982
+              ],
+              "corpus_delta_pp": -0.7685973099094152,
+              "ci95_corpus_delta": [
+                -2.6116657398739944,
+                1.0839625224608527
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -24.184692128036673,
+              "ci95_sentence_delta": [
+                -32.1137641779845,
+                -17.508366597362052
+              ],
+              "corpus_delta_pp": -20.642327751852868,
+              "ci95_corpus_delta": [
+                -27.778322135125048,
+                -14.795169370272653
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 0.5415525587725298,
+              "ci95_sentence_delta": [
+                -1.415242611303622,
+                2.5444293260416706
+              ],
+              "corpus_delta_pp": 0.8234971177600876,
+              "ci95_corpus_delta": [
+                -1.0226751606868707,
+                2.790129858968118
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -23.248091782252608,
+              "ci95_sentence_delta": [
+                -31.270236567808556,
+                -16.38696308609214
+              ],
+              "corpus_delta_pp": -19.050233324183367,
+              "ci95_corpus_delta": [
+                -26.289988162115474,
+                -13.057453677556698
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -23.789644341025138,
+              "ci95_sentence_delta": [
+                -31.846861043128794,
+                -17.003933076632006
+              ],
+              "corpus_delta_pp": -19.873730441943454,
+              "ci95_corpus_delta": [
+                -27.07698712669239,
+                -13.95602361914054
+              ]
+            }
+          ],
+          "judge_comparisons": [
+            {
+              "judge_a": "whisper_small",
+              "judge_b": "mms",
+              "kendall_tau_b": 0.6,
+              "ci95_tau": [
+                -0.2,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.043,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 121.69031758682874,
+                  "ci95_sentence_delta": [
+                    54.65273414373034,
+                    220.66002938068988
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 138.5945902753838,
+                  "ci95_sentence_delta": [
+                    66.04548957365813,
+                    230.29270072228746
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 151.04479138508788,
+                  "ci95_sentence_delta": [
+                    75.48474762451053,
+                    246.13240885675665
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 111.6621484588966,
+                  "ci95_sentence_delta": [
+                    53.06697669724751,
+                    188.88872688972447
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 133.5540685253438,
+                  "ci95_sentence_delta": [
+                    82.12382631546883,
+                    204.0607593728679
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "whisper_small",
+              "judge_b": "long1c",
+              "kendall_tau_b": 0.0,
+              "ci95_tau": [
+                -0.6,
+                0.8
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0048,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 133.75455732514706,
+                  "ci95_sentence_delta": [
+                    65.97423345880486,
+                    233.66258825289987
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 156.7073801509178,
+                  "ci95_sentence_delta": [
+                    83.02457823349607,
+                    249.22358457965385
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 166.94299693642589,
+                  "ci95_sentence_delta": [
+                    90.46230932568959,
+                    263.541984200954
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 122.80575919433284,
+                  "ci95_sentence_delta": [
+                    62.966612820547944,
+                    201.77450789914914
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 151.94698626900143,
+                  "ci95_sentence_delta": [
+                    99.47684445927068,
+                    222.40535912373332
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "whisper_small",
+              "judge_b": "d32_streaming",
+              "kendall_tau_b": 0.6,
+              "ci95_tau": [
+                -0.2,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0418,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 127.93558991754935,
+                  "ci95_sentence_delta": [
+                    59.98193799409301,
+                    227.89559372387836
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 142.674649449043,
+                  "ci95_sentence_delta": [
+                    68.91996070412054,
+                    235.4751447511349
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 150.91103791694093,
+                  "ci95_sentence_delta": [
+                    74.66124950881385,
+                    247.51542263863357
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 112.37751834168046,
+                  "ci95_sentence_delta": [
+                    52.606342127808254,
+                    190.830184248922
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 137.14635548001928,
+                  "ci95_sentence_delta": [
+                    84.00210257010988,
+                    208.18445051941887
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "whisper_small",
+              "judge_b": "d32_full",
+              "kendall_tau_b": 0.6,
+              "ci95_tau": [
+                -0.2,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0289,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 131.1406411618443,
+                  "ci95_sentence_delta": [
+                    63.482690497190646,
+                    230.95191362930942
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 149.8187320077871,
+                  "ci95_sentence_delta": [
+                    76.1076235760933,
+                    242.74039130347774
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 159.65866707673337,
+                  "ci95_sentence_delta": [
+                    82.98478689060887,
+                    256.50040767964134
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 119.70250478302755,
+                  "ci95_sentence_delta": [
+                    60.125339685223665,
+                    198.39477067465742
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 150.31605509605845,
+                  "ci95_sentence_delta": [
+                    96.72569451459563,
+                    221.2595609287905
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "mms",
+              "judge_b": "long1c",
+              "kendall_tau_b": 0.0,
+              "ci95_tau": [
+                -0.2,
+                0.4
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0004,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 12.06423973831831,
+                  "ci95_sentence_delta": [
+                    9.055567377927435,
+                    15.307609424371917
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 18.112789875533984,
+                  "ci95_sentence_delta": [
+                    15.040710712685769,
+                    21.379132849788988
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 15.898205551338023,
+                  "ci95_sentence_delta": [
+                    12.720558983789678,
+                    19.262868900807394
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 11.143610735436239,
+                  "ci95_sentence_delta": [
+                    8.40639888460896,
+                    14.083900607272456
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 18.392917743657627,
+                  "ci95_sentence_delta": [
+                    14.651550906487293,
+                    22.311201510220904
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "mms",
+              "judge_b": "d32_streaming",
+              "kendall_tau_b": 0.6,
+              "ci95_tau": [
+                0.2,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0431,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 6.245272330720612,
+                  "ci95_sentence_delta": [
+                    2.688817285190205,
+                    10.059998357918532
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 4.080059173659173,
+                  "ci95_sentence_delta": [
+                    0.02249909056097286,
+                    8.242488587351692
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": -0.133753468146935,
+                  "ci95_sentence_delta": [
+                    -3.693603846209002,
+                    3.593485216327796
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 0.7153698827838539,
+                  "ci95_sentence_delta": [
+                    -3.0295365088890605,
+                    4.417903795610654
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 3.5922869546754725,
+                  "ci95_sentence_delta": [
+                    -2.5943631241536735,
+                    10.622516238259053
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "mms",
+              "judge_b": "d32_full",
+              "kendall_tau_b": 0.6,
+              "ci95_tau": [
+                0.2,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0475,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 9.450323575015528,
+                  "ci95_sentence_delta": [
+                    6.312027951657122,
+                    12.827665548844083
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 11.224141732403286,
+                  "ci95_sentence_delta": [
+                    7.977249116981891,
+                    14.73721483657527
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 8.613875691645484,
+                  "ci95_sentence_delta": [
+                    4.9704342063487665,
+                    12.4662309821773
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 8.040356324130952,
+                  "ci95_sentence_delta": [
+                    5.0803271128245875,
+                    11.201887177832315
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 16.761986570714626,
+                  "ci95_sentence_delta": [
+                    10.230967589468163,
+                    24.54981062876624
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "long1c",
+              "judge_b": "d32_streaming",
+              "kendall_tau_b": 0.4,
+              "ci95_tau": [
+                0.0,
+                0.6
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": -5.8189674075976985,
+                  "ci95_sentence_delta": [
+                    -7.737387968852167,
+                    -3.983693362931502
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": -14.032730701874812,
+                  "ci95_sentence_delta": [
+                    -16.82947826654783,
+                    -11.47880827605904
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": -16.031959019484958,
+                  "ci95_sentence_delta": [
+                    -19.22258623472658,
+                    -12.993933214532003
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": -10.428240852652385,
+                  "ci95_sentence_delta": [
+                    -13.399021704480118,
+                    -7.777852293626176
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": -14.800630788982154,
+                  "ci95_sentence_delta": [
+                    -19.496916238119333,
+                    -9.53943297540536
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "long1c",
+              "judge_b": "d32_full",
+              "kendall_tau_b": 0.4,
+              "ci95_tau": [
+                0.0,
+                0.6
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0001,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": -2.6139161633027816,
+                  "ci95_sentence_delta": [
+                    -4.048419031400475,
+                    -1.1955896530990313
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": -6.888648143130698,
+                  "ci95_sentence_delta": [
+                    -8.454634606012982,
+                    -5.371326493960374
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": -7.284329859692538,
+                  "ci95_sentence_delta": [
+                    -9.265737911736398,
+                    -5.419486555183182
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": -3.1032544113052865,
+                  "ci95_sentence_delta": [
+                    -4.760720719453165,
+                    -1.4717161448717906
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": -1.6309311729430007,
+                  "ci95_sentence_delta": [
+                    -6.727492636202926,
+                    4.3869531880096435
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "d32_streaming",
+              "judge_b": "d32_full",
+              "kendall_tau_b": 1.0,
+              "ci95_tau": [
+                0.4,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.3363,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 3.205051244294917,
+                  "ci95_sentence_delta": [
+                    1.7685133778109223,
+                    4.687043763323978
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 7.144082558744113,
+                  "ci95_sentence_delta": [
+                    4.6444228863697115,
+                    9.795887604568955
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 8.74762915979242,
+                  "ci95_sentence_delta": [
+                    5.829038723995178,
+                    11.946215859630726
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 7.324986441347098,
+                  "ci95_sentence_delta": [
+                    4.746121039186824,
+                    10.257663213644356
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 13.169699616039154,
+                  "ci95_sentence_delta": [
+                    9.441103788776706,
+                    17.025172210292318
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "arena_raw": {
+          "aggregates": {
+            "whisper_small": {
+              "swar": {
+                "mean_sentence_cer_percent": 129.61081184298197,
+                "ci95_mean_sentence": [
+                  74.1230728035245,
+                  204.14719446121217
+                ],
+                "corpus_cer_percent": 96.65924276169265,
+                "ci95_corpus": [
+                  68.3378512730359,
+                  129.62151275943108
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 160.92110406922458,
+                "ci95_mean_sentence": [
+                  89.58637695826359,
+                  249.14852816532039
+                ],
+                "corpus_cer_percent": 99.10913140311804,
+                "ci95_corpus": [
+                  71.16867888222501,
+                  131.24145336605892
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 166.027244740533,
+                "ci95_mean_sentence": [
+                  94.51718600610644,
+                  254.15204899547248
+                ],
+                "corpus_cer_percent": 104.86796054724785,
+                "ci95_corpus": [
+                  75.97051218235359,
+                  137.37805362078072
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 129.00702402638,
+                "ci95_mean_sentence": [
+                  70.71420712907933,
+                  206.59711812479995
+                ],
+                "corpus_cer_percent": 78.68278714603882,
+                "ci95_corpus": [
+                  57.48402041838948,
+                  103.89583819301812
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 190.5832483578863,
+                "ci95_mean_sentence": [
+                  132.98741371788157,
+                  265.570433103122
+                ],
+                "corpus_cer_percent": 160.1336302895323,
+                "ci95_corpus": [
+                  122.60718368758437,
+                  201.8665052772699
+                ]
+              }
+            },
+            "mms": {
+              "swar": {
+                "mean_sentence_cer_percent": 16.792729240926736,
+                "ci95_mean_sentence": [
+                  13.779358471258126,
+                  19.945634963258506
+                ],
+                "corpus_cer_percent": 13.235762010817691,
+                "ci95_corpus": [
+                  10.721727392642782,
+                  16.15178570004259
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 20.9797412245229,
+                "ci95_mean_sentence": [
+                  17.853298179720635,
+                  24.293010911893106
+                ],
+                "corpus_cer_percent": 18.740057270124087,
+                "ci95_corpus": [
+                  15.721466487114695,
+                  22.236962102098776
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 19.01165995085236,
+                "ci95_mean_sentence": [
+                  15.891515825773787,
+                  22.35541053142275
+                ],
+                "corpus_cer_percent": 16.00381800827235,
+                "ci95_corpus": [
+                  13.310722676849881,
+                  18.969520382078755
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 17.96636444800635,
+                "ci95_mean_sentence": [
+                  15.245331682190818,
+                  20.904163957701314
+                ],
+                "corpus_cer_percent": 16.35380209990455,
+                "ci95_corpus": [
+                  13.887198761944124,
+                  19.19426959088985
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 50.86066632126241,
+                "ci95_mean_sentence": [
+                  40.274692982188576,
+                  64.33716205976435
+                ],
+                "corpus_cer_percent": 42.98440979955456,
+                "ci95_corpus": [
+                  33.87329343269465,
+                  54.3249294356876
+                ]
+              }
+            },
+            "long1c": {
+              "swar": {
+                "mean_sentence_cer_percent": 8.055878510926915,
+                "ci95_mean_sentence": [
+                  5.671190725849198,
+                  10.782321477522276
+                ],
+                "corpus_cer_percent": 7.063315303849825,
+                "ci95_corpus": [
+                  5.085277639883696,
+                  9.28761301499648
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 3.5740688313217186,
+                "ci95_mean_sentence": [
+                  2.56412159395605,
+                  4.751078712481308
+                ],
+                "corpus_cer_percent": 3.818008272351257,
+                "ci95_corpus": [
+                  2.7742749054224465,
+                  4.986924903494834
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 4.40247496239872,
+                "ci95_mean_sentence": [
+                  3.153552206277987,
+                  5.8442231840993815
+                ],
+                "corpus_cer_percent": 4.613426662424435,
+                "ci95_corpus": [
+                  3.327216261998871,
+                  6.071829449034089
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 8.961892299828584,
+                "ci95_mean_sentence": [
+                  7.008760755584465,
+                  11.070833621707871
+                ],
+                "corpus_cer_percent": 8.558701877187401,
+                "ci95_corpus": [
+                  6.5431600546802375,
+                  10.742851000653603
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 34.623484681238295,
+                "ci95_mean_sentence": [
+                  24.973778414429905,
+                  46.73602841214645
+                ],
+                "corpus_cer_percent": 28.985046134266625,
+                "ci95_corpus": [
+                  21.15732104677425,
+                  39.211805069176556
+                ]
+              }
+            },
+            "d32_streaming": {
+              "swar": {
+                "mean_sentence_cer_percent": 13.476651685895696,
+                "ci95_mean_sentence": [
+                  10.94602905931593,
+                  16.088351667241646
+                ],
+                "corpus_cer_percent": 13.044861597200127,
+                "ci95_corpus": [
+                  10.477373213238286,
+                  15.778715313320996
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 20.966278253606696,
+                "ci95_mean_sentence": [
+                  17.59521613397212,
+                  24.62606002333804
+                ],
+                "corpus_cer_percent": 20.521794463888003,
+                "ci95_corpus": [
+                  17.24022655247721,
+                  24.0305819173736
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 23.548857164652663,
+                "ci95_mean_sentence": [
+                  19.463200382238114,
+                  28.143425926258413
+                ],
+                "corpus_cer_percent": 20.903595291123132,
+                "ci95_corpus": [
+                  17.69010499522749,
+                  24.434255726938723
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 21.195283639988883,
+                "ci95_mean_sentence": [
+                  17.40378731105423,
+                  25.397055251981453
+                ],
+                "corpus_cer_percent": 20.044543429844097,
+                "ci95_corpus": [
+                  16.749252605221,
+                  23.546243797352897
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 52.46582653522551,
+                "ci95_mean_sentence": [
+                  44.42763437705174,
+                  61.656179321505725
+                ],
+                "corpus_cer_percent": 46.70696786509704,
+                "ci95_corpus": [
+                  39.549465340611675,
+                  55.331647340406185
+                ]
+              }
+            },
+            "d32_full": {
+              "swar": {
+                "mean_sentence_cer_percent": 9.226010967675307,
+                "ci95_mean_sentence": [
+                  7.4287601778133485,
+                  11.183912841722464
+                ],
+                "corpus_cer_percent": 8.972319440025453,
+                "ci95_corpus": [
+                  7.290415808963613,
+                  10.79022914233304
+                ]
+              },
+              "vox2_beat1": {
+                "mean_sentence_cer_percent": 10.849327875573866,
+                "ci95_mean_sentence": [
+                  8.93502564554847,
+                  12.906555674301794
+                ],
+                "corpus_cer_percent": 10.7858733693923,
+                "ci95_corpus": [
+                  8.954666006237211,
+                  12.742584405084612
+                ]
+              },
+              "vox2_beat2": {
+                "mean_sentence_cer_percent": 11.272849697307782,
+                "ci95_mean_sentence": [
+                  9.156123687284436,
+                  13.492997067207995
+                ],
+                "corpus_cer_percent": 11.89945911549475,
+                "ci95_corpus": [
+                  9.488540471824246,
+                  14.492829740591889
+                ]
+              },
+              "cosy3_elx_neutral": {
+                "mean_sentence_cer_percent": 11.70472132483158,
+                "ci95_mean_sentence": [
+                  9.392322274660128,
+                  14.18960847534847
+                ],
+                "corpus_cer_percent": 11.772192173083042,
+                "ci95_corpus": [
+                  9.517512656175523,
+                  14.141128422439301
+                ]
+              },
+              "vox2_clone": {
+                "mean_sentence_cer_percent": 35.566991025251696,
+                "ci95_mean_sentence": [
+                  28.74514021351485,
+                  43.597825593450814
+                ],
+                "corpus_cer_percent": 31.625835189309576,
+                "ci95_corpus": [
+                  25.748450130237117,
+                  38.837891990183394
+                ]
+              }
+            }
+          },
+          "ranks": {
+            "whisper_small": [
+              "cosy3_elx_neutral",
+              "swar",
+              "vox2_beat1",
+              "vox2_beat2",
+              "vox2_clone"
+            ],
+            "mms": [
+              "swar",
+              "cosy3_elx_neutral",
+              "vox2_beat2",
+              "vox2_beat1",
+              "vox2_clone"
+            ],
+            "long1c": [
+              "vox2_beat1",
+              "vox2_beat2",
+              "swar",
+              "cosy3_elx_neutral",
+              "vox2_clone"
+            ],
+            "d32_streaming": [
+              "swar",
+              "vox2_beat1",
+              "cosy3_elx_neutral",
+              "vox2_beat2",
+              "vox2_clone"
+            ],
+            "d32_full": [
+              "swar",
+              "vox2_beat1",
+              "vox2_beat2",
+              "cosy3_elx_neutral",
+              "vox2_clone"
+            ]
+          },
+          "paired_system_contrasts": [
+            {
+              "judge": "whisper_small",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": -31.31029222624261,
+              "ci95_sentence_delta": [
+                -94.32762899419443,
+                19.612698721499267
+              ],
+              "corpus_delta_pp": -2.449888641425389,
+              "ci95_corpus_delta": [
+                -34.05148012236265,
+                28.410773811141333
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -36.41643289755103,
+              "ci95_sentence_delta": [
+                -100.44694547280106,
+                19.114942379254643
+              ],
+              "corpus_delta_pp": -8.208717785555194,
+              "ci95_corpus_delta": [
+                -41.40211883216722,
+                25.40739513282286
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 0.6037878166019652,
+              "ci95_sentence_delta": [
+                -46.82065671668513,
+                42.572347212608854
+              ],
+              "corpus_delta_pp": 17.976455615653833,
+              "ci95_corpus_delta": [
+                -12.38851934303199,
+                50.42991975603817
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -60.97243651490433,
+              "ci95_sentence_delta": [
+                -118.84000786460773,
+                -1.8212813225881508
+              ],
+              "corpus_delta_pp": -63.47438752783965,
+              "ci95_corpus_delta": [
+                -111.86112816844346,
+                -17.715705227809686
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -5.106140671308424,
+              "ci95_sentence_delta": [
+                -59.735048987026495,
+                44.09069434123444
+              ],
+              "corpus_delta_pp": -5.758829144129805,
+              "ci95_corpus_delta": [
+                -38.00584385720814,
+                26.77099782782364
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 31.914080042844574,
+              "ci95_sentence_delta": [
+                -29.428835193060834,
+                99.51624952487188
+              ],
+              "corpus_delta_pp": 20.426344257079222,
+              "ci95_corpus_delta": [
+                -9.883704590663745,
+                52.231979737585114
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -29.66214428866172,
+              "ci95_sentence_delta": [
+                -96.95883611001608,
+                48.09284299464228
+              ],
+              "corpus_delta_pp": -61.024498886414264,
+              "ci95_corpus_delta": [
+                -105.88917755725583,
+                -17.33173996148608
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 37.020220714153,
+              "ci95_sentence_delta": [
+                -10.335566412121546,
+                93.83837466414293
+              ],
+              "corpus_delta_pp": 26.185173401209028,
+              "ci95_corpus_delta": [
+                -2.4260193840683533,
+                56.22870671556533
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -24.556003617353298,
+              "ci95_sentence_delta": [
+                -97.67023400508285,
+                56.31385774548778
+              ],
+              "corpus_delta_pp": -55.26566974228446,
+              "ci95_corpus_delta": [
+                -105.54099941182534,
+                -7.399712770806531
+              ]
+            },
+            {
+              "judge": "whisper_small",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -61.576224331506296,
+              "ci95_sentence_delta": [
+                -123.69661904164299,
+                2.6993379026545092
+              ],
+              "corpus_delta_pp": -81.45084314349349,
+              "ci95_corpus_delta": [
+                -128.62838874649978,
+                -36.698576540804225
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": -4.1870119835961646,
+              "ci95_sentence_delta": [
+                -7.501609520563326,
+                -0.8593531152960926
+              ],
+              "corpus_delta_pp": -5.504295259306396,
+              "ci95_corpus_delta": [
+                -8.227633060698121,
+                -2.864653198433272
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -2.2189307099256226,
+              "ci95_sentence_delta": [
+                -5.220765901395957,
+                0.7982985954971079
+              ],
+              "corpus_delta_pp": -2.7680559974546597,
+              "ci95_corpus_delta": [
+                -5.252790544977019,
+                -0.3822057196410807
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -1.173635207079613,
+              "ci95_sentence_delta": [
+                -4.202750834780824,
+                1.9821635551892705
+              ],
+              "corpus_delta_pp": -3.1180400890868576,
+              "ci95_corpus_delta": [
+                -5.552189593456537,
+                -0.6303044696504438
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -34.06793708033567,
+              "ci95_sentence_delta": [
+                -47.15271210648047,
+                -23.602379418832633
+              ],
+              "corpus_delta_pp": -29.74864778873687,
+              "ci95_corpus_delta": [
+                -40.53583217593314,
+                -21.28486958354626
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": 1.968081273670542,
+              "ci95_sentence_delta": [
+                -1.4101617457278321,
+                5.249625545088835
+              ],
+              "corpus_delta_pp": 2.736239261851736,
+              "ci95_corpus_delta": [
+                -0.033967084815141525,
+                5.514038801283446
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 3.0133767765165516,
+              "ci95_sentence_delta": [
+                -0.1617589492600464,
+                6.251370489042371
+              ],
+              "corpus_delta_pp": 2.3862551702195383,
+              "ci95_corpus_delta": [
+                -0.34933669949479346,
+                5.283040540958938
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -29.880925096739507,
+              "ci95_sentence_delta": [
+                -43.033119847690514,
+                -19.283035278306265
+              ],
+              "corpus_delta_pp": -24.244352529430476,
+              "ci95_corpus_delta": [
+                -35.05530672146453,
+                -15.641713851803404
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 1.0452955028460096,
+              "ci95_sentence_delta": [
+                -2.3847660509078508,
+                4.525251288401715
+              ],
+              "corpus_delta_pp": -0.3499840916321979,
+              "ci95_corpus_delta": [
+                -3.176239272397777,
+                2.5707303738634284
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -31.84900637041005,
+              "ci95_sentence_delta": [
+                -45.329334474871516,
+                -21.03503179416495
+              ],
+              "corpus_delta_pp": -26.98059179128221,
+              "ci95_corpus_delta": [
+                -38.24445961883089,
+                -18.18735322249675
+              ]
+            },
+            {
+              "judge": "mms",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -32.894301873256055,
+              "ci95_sentence_delta": [
+                -45.99216773219413,
+                -22.47187389696829
+              ],
+              "corpus_delta_pp": -26.630607699650014,
+              "ci95_corpus_delta": [
+                -37.67209673659059,
+                -18.020220170759703
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": 4.481809679605196,
+              "ci95_sentence_delta": [
+                2.337080091132762,
+                7.0130486281926885
+              ],
+              "corpus_delta_pp": 3.2453070314985677,
+              "ci95_corpus_delta": [
+                1.6546334871310824,
+                5.064523156216396
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": 3.6534035485281953,
+              "ci95_sentence_delta": [
+                1.4836346662429833,
+                6.1565203893122185
+              ],
+              "corpus_delta_pp": 2.4498886414253898,
+              "ci95_corpus_delta": [
+                0.8043198852022374,
+                4.236719272113247
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -0.9060137889016691,
+              "ci95_sentence_delta": [
+                -3.313444618967612,
+                1.6722666782053992
+              ],
+              "corpus_delta_pp": -1.4953865733375764,
+              "ci95_corpus_delta": [
+                -3.3224619309786627,
+                0.35251249531634576
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -26.56760617031138,
+              "ci95_sentence_delta": [
+                -38.74843642443937,
+                -16.678355102822014
+              ],
+              "corpus_delta_pp": -21.9217308304168,
+              "ci95_corpus_delta": [
+                -32.19333161440036,
+                -14.097585067071996
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -0.828406131077001,
+              "ci95_sentence_delta": [
+                -1.6834226376331987,
+                -0.09920460688114394
+              ],
+              "corpus_delta_pp": -0.7954183900731779,
+              "ci95_corpus_delta": [
+                -1.7156233065747208,
+                -0.030871587730811476
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -5.387823468506865,
+              "ci95_sentence_delta": [
+                -7.168993248067667,
+                -3.7532265995879923
+              ],
+              "corpus_delta_pp": -4.740693604836144,
+              "ci95_corpus_delta": [
+                -6.498965615266979,
+                -3.176494286411989
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -31.049415849916578,
+              "ci95_sentence_delta": [
+                -43.33305309682077,
+                -21.350075556371397
+              ],
+              "corpus_delta_pp": -25.167037861915368,
+              "ci95_corpus_delta": [
+                -35.47457462127335,
+                -17.41076801748359
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -4.559417337429864,
+              "ci95_sentence_delta": [
+                -6.34919046398819,
+                -2.8948982983855123
+              ],
+              "corpus_delta_pp": -3.945275214762966,
+              "ci95_corpus_delta": [
+                -5.630201522271054,
+                -2.3801062221050158
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -30.221009718839575,
+              "ci95_sentence_delta": [
+                -42.563748887146474,
+                -20.43359476150424
+              ],
+              "corpus_delta_pp": -24.37161947184219,
+              "ci95_corpus_delta": [
+                -34.72211236952552,
+                -16.4734352385522
+              ]
+            },
+            {
+              "judge": "long1c",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -25.66159238140971,
+              "ci95_sentence_delta": [
+                -38.0590411419103,
+                -15.766898349890365
+              ],
+              "corpus_delta_pp": -20.426344257079222,
+              "ci95_corpus_delta": [
+                -30.590979975005855,
+                -12.54732879625605
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": -7.489626567710999,
+              "ci95_sentence_delta": [
+                -11.270147381060866,
+                -3.964615009444357
+              ],
+              "corpus_delta_pp": -7.476932866687877,
+              "ci95_corpus_delta": [
+                -10.99362763621431,
+                -4.142221470505484
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -10.072205478756967,
+              "ci95_sentence_delta": [
+                -14.85768702831035,
+                -5.751556917180179
+              ],
+              "corpus_delta_pp": -7.858733693923005,
+              "ci95_corpus_delta": [
+                -11.511239629809761,
+                -4.430498544841929
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -7.718631954093187,
+              "ci95_sentence_delta": [
+                -11.86871516685711,
+                -3.935627548370283
+              ],
+              "corpus_delta_pp": -6.9996818326439705,
+              "ci95_corpus_delta": [
+                -10.182953912343692,
+                -3.8816108780852323
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -38.989174849329814,
+              "ci95_sentence_delta": [
+                -48.262028951610645,
+                -30.832667461588084
+              ],
+              "corpus_delta_pp": -33.66210626789692,
+              "ci95_corpus_delta": [
+                -42.181068695955105,
+                -26.491686547614876
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -2.5825789110459674,
+              "ci95_sentence_delta": [
+                -7.651640048644086,
+                2.1693674498296405
+              ],
+              "corpus_delta_pp": -0.38180082723512854,
+              "ci95_corpus_delta": [
+                -4.142066659755338,
+                3.286728229035921
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -0.22900538638218748,
+              "ci95_sentence_delta": [
+                -5.03693510562235,
+                4.417853805812524
+              ],
+              "corpus_delta_pp": 0.47725103404390623,
+              "ci95_corpus_delta": [
+                -3.251828186714396,
+                4.289372212438503
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -31.499548281618814,
+              "ci95_sentence_delta": [
+                -40.94204580502472,
+                -23.064027983526753
+              ],
+              "corpus_delta_pp": -26.18517340120904,
+              "ci95_corpus_delta": [
+                -34.72405257150157,
+                -18.972895153795427
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": 2.35357352466378,
+              "ci95_sentence_delta": [
+                -2.530367461381414,
+                7.220749087364928
+              ],
+              "corpus_delta_pp": 0.8590518612790348,
+              "ci95_corpus_delta": [
+                -3.266900746026596,
+                5.018739224529319
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -28.916969370572847,
+              "ci95_sentence_delta": [
+                -38.548199560469605,
+                -20.22639948197306
+              ],
+              "corpus_delta_pp": -25.80337257397391,
+              "ci95_corpus_delta": [
+                -34.29516423357664,
+                -18.65944648004874
+              ]
+            },
+            {
+              "judge": "d32_streaming",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -31.270542895236627,
+              "ci95_sentence_delta": [
+                -40.53952541061145,
+                -23.055671490517156
+              ],
+              "corpus_delta_pp": -26.662424435252944,
+              "ci95_corpus_delta": [
+                -35.174368770357304,
+                -19.50414311809156
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "swar",
+              "b": "vox2_beat1",
+              "sentence_delta_pp": -1.623316907898559,
+              "ci95_sentence_delta": [
+                -3.2808164568891622,
+                0.033513998975614495
+              ],
+              "corpus_delta_pp": -1.8135539293668472,
+              "ci95_corpus_delta": [
+                -3.4020677902975986,
+                -0.21385315687761003
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "swar",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -2.0468387296324746,
+              "ci95_sentence_delta": [
+                -3.9845154892225616,
+                -0.1614831245479187
+              ],
+              "corpus_delta_pp": -2.927139675469297,
+              "ci95_corpus_delta": [
+                -5.012306312307446,
+                -0.9724227242892394
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "swar",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -2.478710357156272,
+              "ci95_sentence_delta": [
+                -4.6860100465573,
+                -0.23966352106623134
+              ],
+              "corpus_delta_pp": -2.7998727330575885,
+              "ci95_corpus_delta": [
+                -4.698225837805772,
+                -0.8555000231312753
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "swar",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -26.340980057576388,
+              "ci95_sentence_delta": [
+                -34.347756208795566,
+                -19.42184170953571
+              ],
+              "corpus_delta_pp": -22.653515749284125,
+              "ci95_corpus_delta": [
+                -29.652438676438216,
+                -16.80600330728415
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat1",
+              "b": "vox2_beat2",
+              "sentence_delta_pp": -0.4235218217339156,
+              "ci95_sentence_delta": [
+                -2.458090260382527,
+                1.498918163424028
+              ],
+              "corpus_delta_pp": -1.1135857461024496,
+              "ci95_corpus_delta": [
+                -3.4949641876591873,
+                1.0285491605213406
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat1",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -0.8553934492577131,
+              "ci95_sentence_delta": [
+                -2.768602035446451,
+                1.0486791201132064
+              ],
+              "corpus_delta_pp": -0.9863188036907413,
+              "ci95_corpus_delta": [
+                -2.906657003359301,
+                0.9253551796845502
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat1",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -24.71766314967783,
+              "ci95_sentence_delta": [
+                -32.87256579276664,
+                -17.732454796272314
+              ],
+              "corpus_delta_pp": -20.839961819917278,
+              "ci95_corpus_delta": [
+                -28.069465561098514,
+                -14.882061355245435
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat2",
+              "b": "cosy3_elx_neutral",
+              "sentence_delta_pp": -0.4318716275237975,
+              "ci95_sentence_delta": [
+                -2.7210102593394483,
+                1.7664696286658021
+              ],
+              "corpus_delta_pp": 0.12726694241170833,
+              "ci95_corpus_delta": [
+                -1.849156999350383,
+                2.1561772662745082
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "vox2_beat2",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -24.294141327943912,
+              "ci95_sentence_delta": [
+                -32.54201030449438,
+                -17.108198508579097
+              ],
+              "corpus_delta_pp": -19.726376073814826,
+              "ci95_corpus_delta": [
+                -27.10118029567022,
+                -13.568328005173859
+              ]
+            },
+            {
+              "judge": "d32_full",
+              "a": "cosy3_elx_neutral",
+              "b": "vox2_clone",
+              "sentence_delta_pp": -23.862269700420114,
+              "ci95_sentence_delta": [
+                -32.13252267091731,
+                -16.728048481151077
+              ],
+              "corpus_delta_pp": -19.853643016226535,
+              "ci95_corpus_delta": [
+                -27.06821087300384,
+                -13.903204396231802
+              ]
+            }
+          ],
+          "judge_comparisons": [
+            {
+              "judge_a": "whisper_small",
+              "judge_b": "mms",
+              "kendall_tau_b": 0.6,
+              "ci95_tau": [
+                0.0,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0722,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 112.81808260205524,
+                  "ci95_sentence_delta": [
+                    57.63441321794574,
+                    186.74525683833852
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 139.94136284470167,
+                  "ci95_sentence_delta": [
+                    69.41190756661288,
+                    228.03918151541666
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 147.01558478968064,
+                  "ci95_sentence_delta": [
+                    76.81893423388266,
+                    233.89571431754172
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 111.04065957837366,
+                  "ci95_sentence_delta": [
+                    53.336782679427664,
+                    187.641802039608
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 139.7225820366239,
+                  "ci95_sentence_delta": [
+                    86.15399494949429,
+                    211.36226646463965
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "whisper_small",
+              "judge_b": "long1c",
+              "kendall_tau_b": 0.0,
+              "ci95_tau": [
+                -0.6,
+                0.6
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0023,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 121.55493333205506,
+                  "ci95_sentence_delta": [
+                    65.8119775755558,
+                    196.27551159432926
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 157.34703523790287,
+                  "ci95_sentence_delta": [
+                    86.15849831672448,
+                    245.8633848212606
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 161.6247697781343,
+                  "ci95_sentence_delta": [
+                    89.95301128688699,
+                    249.93790564668126
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 120.04513172655143,
+                  "ci95_sentence_delta": [
+                    61.319665729936744,
+                    198.00150851130888
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 155.959763676648,
+                  "ci95_sentence_delta": [
+                    101.65700717531723,
+                    227.6291996136021
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "whisper_small",
+              "judge_b": "d32_streaming",
+              "kendall_tau_b": 0.6,
+              "ci95_tau": [
+                0.0,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0655,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 116.13416015708628,
+                  "ci95_sentence_delta": [
+                    60.50829780975763,
+                    190.4495078999161
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 139.95482581561788,
+                  "ci95_sentence_delta": [
+                    68.6719645136479,
+                    228.74146629962678
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 142.47838757588033,
+                  "ci95_sentence_delta": [
+                    72.23032822581347,
+                    229.35900657213656
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 107.81174038639112,
+                  "ci95_sentence_delta": [
+                    49.300622942358714,
+                    183.95982055489515
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 138.1174218226608,
+                  "ci95_sentence_delta": [
+                    83.07607020514047,
+                    211.03187709684028
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "whisper_small",
+              "judge_b": "d32_full",
+              "kendall_tau_b": 0.4,
+              "ci95_tau": [
+                -0.2,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0282,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 120.38480087530667,
+                  "ci95_sentence_delta": [
+                    64.74440342839546,
+                    194.65957114092265
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 150.07177619365072,
+                  "ci95_sentence_delta": [
+                    78.38243959643945,
+                    238.46493795568185
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 154.75439504322523,
+                  "ci95_sentence_delta": [
+                    83.11840882505729,
+                    243.20927320992126
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 117.30230270154843,
+                  "ci95_sentence_delta": [
+                    58.59078218030188,
+                    195.22606211772165
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 155.0162573326346,
+                  "ci95_sentence_delta": [
+                    99.44870167097855,
+                    227.97704657829888
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "mms",
+              "judge_b": "long1c",
+              "kendall_tau_b": 0.0,
+              "ci95_tau": [
+                -0.2,
+                0.4
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0003,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 8.736850729999821,
+                  "ci95_sentence_delta": [
+                    5.435164203161015,
+                    12.156651907213986
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 17.405672393201183,
+                  "ci95_sentence_delta": [
+                    14.186748040057832,
+                    20.883223246081098
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 14.609184988453638,
+                  "ci95_sentence_delta": [
+                    11.217938735650574,
+                    18.114751639939403
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 9.004472148177765,
+                  "ci95_sentence_delta": [
+                    5.872242008486497,
+                    12.25863363261969
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 16.23718164002411,
+                  "ci95_sentence_delta": [
+                    11.958601908105797,
+                    20.58312471857667
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "mms",
+              "judge_b": "d32_streaming",
+              "kendall_tau_b": 0.6,
+              "ci95_tau": [
+                0.2,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.07,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 3.3160775550310397,
+                  "ci95_sentence_delta": [
+                    -0.45118194963759645,
+                    7.320373548290297
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 0.013462970916204853,
+                  "ci95_sentence_delta": [
+                    -4.564920977898353,
+                    4.732362333789023
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": -4.5371972138003045,
+                  "ci95_sentence_delta": [
+                    -8.785148975845853,
+                    -0.28830315869615614
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": -3.228919191982534,
+                  "ci95_sentence_delta": [
+                    -7.649839263530833,
+                    1.1383061623202348
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": -1.605160213963103,
+                  "ci95_sentence_delta": [
+                    -8.399594124067544,
+                    5.948530941214336
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "mms",
+              "judge_b": "d32_full",
+              "kendall_tau_b": 0.4,
+              "ci95_tau": [
+                0.2,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0404,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 7.566718273251428,
+                  "ci95_sentence_delta": [
+                    4.366954524582063,
+                    10.909742938142006
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 10.130413348949034,
+                  "ci95_sentence_delta": [
+                    6.614013224548897,
+                    13.866828324721377
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 7.738810253544576,
+                  "ci95_sentence_delta": [
+                    3.974451410398345,
+                    11.702725793430881
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 6.261643123174769,
+                  "ci95_sentence_delta": [
+                    2.945373701042883,
+                    9.768565196294464
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 15.293675296010711,
+                  "ci95_sentence_delta": [
+                    8.423354507987996,
+                    23.23960584241884
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "long1c",
+              "judge_b": "d32_streaming",
+              "kendall_tau_b": 0.4,
+              "ci95_tau": [
+                0.0,
+                0.6
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": -5.420773174968781,
+                  "ci95_sentence_delta": [
+                    -8.003997583185443,
+                    -2.7180587167247565
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": -17.392209422284978,
+                  "ci95_sentence_delta": [
+                    -21.00599770431591,
+                    -14.098754646060979
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": -19.146382202253942,
+                  "ci95_sentence_delta": [
+                    -23.62092843079954,
+                    -15.1086044901336
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": -12.2333913401603,
+                  "ci95_sentence_delta": [
+                    -16.246547021603657,
+                    -8.724277256514807
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": -17.842341853987215,
+                  "ci95_sentence_delta": [
+                    -23.060112297248672,
+                    -12.141274035839036
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "long1c",
+              "judge_b": "d32_full",
+              "kendall_tau_b": 0.6,
+              "ci95_tau": [
+                0.0,
+                0.6
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.0008,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": -1.1701324567483926,
+                  "ci95_sentence_delta": [
+                    -3.320924877179273,
+                    1.1656549876563007
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": -7.275259044252148,
+                  "ci95_sentence_delta": [
+                    -9.007999657217253,
+                    -5.574811824428241
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": -6.8703747349090625,
+                  "ci95_sentence_delta": [
+                    -8.915479137748374,
+                    -4.91889415280852
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": -2.7428290250029956,
+                  "ci95_sentence_delta": [
+                    -4.817530556763565,
+                    -0.6859214400853845
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": -0.9435063440134002,
+                  "ci95_sentence_delta": [
+                    -6.266476886485209,
+                    5.1345291724505
+                  ]
+                }
+              }
+            },
+            {
+              "judge_a": "d32_streaming",
+              "judge_b": "d32_full",
+              "kendall_tau_b": 0.8,
+              "ci95_tau": [
+                0.4,
+                1.0
+              ],
+              "undefined_bootstraps": 0,
+              "same_order_bootstrap_fraction": 0.1812,
+              "system_deltas": {
+                "swar": {
+                  "sentence_delta_pp": 4.250640718220389,
+                  "ci95_sentence_delta": [
+                    2.4867595299448437,
+                    6.0616095447526535
+                  ]
+                },
+                "vox2_beat1": {
+                  "sentence_delta_pp": 10.11695037803283,
+                  "ci95_sentence_delta": [
+                    6.897609017316424,
+                    13.554591867806092
+                  ]
+                },
+                "vox2_beat2": {
+                  "sentence_delta_pp": 12.276007467344881,
+                  "ci95_sentence_delta": [
+                    8.296095400861448,
+                    16.78087551962908
+                  ]
+                },
+                "cosy3_elx_neutral": {
+                  "sentence_delta_pp": 9.490562315157304,
+                  "ci95_sentence_delta": [
+                    5.878675183587348,
+                    13.558594514942982
+                  ]
+                },
+                "vox2_clone": {
+                  "sentence_delta_pp": 16.898835509973814,
+                  "ci95_sentence_delta": [
+                    12.664192392169335,
+                    21.308347097865838
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "sources": {
+    "/mnt/wd_data/arena_judges_v1/ranking/whisper_fleurs_shard0_exact.jsonl": "8ebba17e040180c942436a431cefbad005f3249dc823689ddf23aa0bb4fe7640",
+    "/mnt/wd_data/arena_judges_v1/ranking/whisper_fleurs_shard1_exact.jsonl": "9972fbae77dbe5f5b15612095eff8f1f811cd569cec7676592a14e91d5cee1c6",
+    "/mnt/wd_data/arena_judges_v1/ranking/whisper_fleurs_shard2_exact.jsonl": "aa1077c69a38e37a1ffd47261791f17c1cb4cc38a59e020e53455616f3debbf5",
+    "/mnt/wd_data/arena_judges_v1/ranking/whisper_fleurs_shard3_exact.jsonl": "43e3c09cc3d1c6d8634bd07da27392403d7fc35766d9d8d000922443987f14a7",
+    "/mnt/wd_data/arena_judges_v1/ranking/whisper_fleurs_shard4_exact.jsonl": "402d9174c82919443b4c19cd17a2e7f3b0e80d7ccd39d27d558b7a08f66c9994",
+    "/mnt/wd_data/arena_judges_v1/ranking/mms_fleurs.jsonl": "d99d305076b2d68c2e5c0d1b1544589ee59997a555670524c6cc579e7fe27659",
+    "/mnt/wd_data/arena_judges_v1/ranking/long1c_fleurs.jsonl": "c4e835d608bbcac167ba95c97da8dcfe5822611b4bf566f152ae68c236f3ded8",
+    "/mnt/wd_data/arena_judges_v1/ranking/d32_streaming_fleurs.jsonl": "853b8a49f9d4c33dbd8eec713a219959293f08eb408313a3fd750ee3cca519e9",
+    "/mnt/wd_data/arena_judges_v1/ranking/d32_full_fleurs.jsonl": "54970ffe2eb44c14ba183e2026736d71865a67a049a9a382ca96598a2faf01b9"
+  }
+}

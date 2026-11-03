@@ -1,0 +1,1441 @@
+{
+  "schema_version": 1,
+  "job": "arena_judges_v1",
+  "measured_utc": "2026-11-03T20:36:23.858085+00:00",
+  "calibration_sets": {
+    "pv": {
+      "n": 100,
+      "speakers": 4
+    },
+    "fresh": {
+      "n": 96,
+      "speakers": 12
+    }
+  },
+  "bootstrap": {
+    "draws": 10000,
+    "seed": 20261103,
+    "unit": "speaker within cohort; fixed text/session panel"
+  },
+  "profiles": [
+    {
+      "id": "whisper-small-ne-048909d9dafd",
+      "name": "Whisper small · arena legacy",
+      "stage": "asr_small",
+      "primary_policy": "arena_raw",
+      "calibration_policy": "Historical arena normalization: NFC, punctuation removal, digits to ASCII, lowercase, CER excludes spaces; no loanword transliteration",
+      "loanword_policy": "Preserve script; lowercase Latin. Latin tokens are not transliterated.",
+      "status": "uncalibrated for spontaneous Nepali",
+      "public_enabled": true,
+      "provisional": false,
+      "availability": "Current arena worker/import profile.",
+      "calibration": {
+        "pv": {
+          "n": 100,
+          "speakers": 4,
+          "char_errors": 1965.0,
+          "chars": 4009,
+          "corpus_cer_percent": 49.01471688700424,
+          "ci95_corpus_speaker_bootstrap": [
+            40.34771198950303,
+            66.08961303462321
+          ],
+          "mean_cer_percent": 52.030073787334416,
+          "ci95_mean_speaker_bootstrap": [
+            41.47203436900242,
+            62.539034314561604
+          ],
+          "corpus_wer_percent": 117.15425531914893,
+          "ci95_wer_speaker_bootstrap": [
+            109.21658986175115,
+            122.46445497630332
+          ]
+        },
+        "fresh": {
+          "n": 96,
+          "speakers": 12,
+          "char_errors": 8222.0,
+          "chars": 7122,
+          "corpus_cer_percent": 115.44509969109801,
+          "ci95_corpus_speaker_bootstrap": [
+            104.41157243244118,
+            125.87700571424729
+          ],
+          "mean_cer_percent": 126.48540531054509,
+          "ci95_mean_speaker_bootstrap": [
+            109.47738403521694,
+            144.33276942553766
+          ],
+          "corpus_wer_percent": 184.0,
+          "ci95_wer_speaker_bootstrap": [
+            172.39090288287449,
+            196.38183849890265
+          ]
+        }
+      },
+      "controls": {
+        "pv": {
+          "degraded": {
+            "n": 100,
+            "speakers": 4,
+            "char_errors": 7574.0,
+            "chars": 4009,
+            "corpus_cer_percent": 188.9249189324021,
+            "ci95_corpus_speaker_bootstrap": [
+              164.0831390831391,
+              247.65784114052954
+            ],
+            "mean_cer_percent": 224.34563808351763,
+            "ci95_mean_speaker_bootstrap": [
+              177.20128298919792,
+              271.48999317783733
+            ],
+            "corpus_wer_percent": 228.45744680851064,
+            "ci95_wer_speaker_bootstrap": [
+              157.88018433179724,
+              335.9447004608295
+            ],
+            "paired": {
+              "n": 100,
+              "worse_count": 99,
+              "ties": 0,
+              "mean_delta_cer_pp": 172.31556429618323,
+              "ci95_mean_delta_speaker": [
+                132.18924845329025,
+                212.44188013907618
+              ],
+              "corpus_delta_cer_pp": 139.91020204539785,
+              "ci95_corpus_delta_speaker": [
+                123.1958762886598,
+                181.5682281059063
+              ]
+            }
+          },
+          "shuffled_text": {
+            "n": 100,
+            "speakers": 4,
+            "char_errors": 5699.0,
+            "chars": 4009,
+            "corpus_cer_percent": 142.15515091045148,
+            "ci95_corpus_speaker_bootstrap": [
+              92.86422200198216,
+              294.0936863543788
+            ],
+            "mean_cer_percent": 238.3476987292625,
+            "ci95_mean_speaker_bootstrap": [
+              93.77199882779621,
+              382.9233986307288
+            ],
+            "corpus_wer_percent": 164.2287234042553,
+            "ci95_wer_speaker_bootstrap": [
+              102.05607476635514,
+              317.5115207373272
+            ],
+            "paired": {
+              "n": 100,
+              "worse_count": 96,
+              "ties": 0,
+              "mean_delta_cer_pp": 186.31762494192807,
+              "ci95_mean_delta_speaker": [
+                34.72388578903505,
+                337.9113640948211
+              ],
+              "corpus_delta_cer_pp": 93.14043402344724,
+              "ci95_corpus_delta_speaker": [
+                26.774608967358937,
+                250.61829818127012
+              ]
+            }
+          }
+        },
+        "fresh": {
+          "degraded": {
+            "n": 96,
+            "speakers": 12,
+            "char_errors": 11637.0,
+            "chars": 7122,
+            "corpus_cer_percent": 163.3951137320977,
+            "ci95_corpus_speaker_bootstrap": [
+              151.67628637518635,
+              179.319325018446
+            ],
+            "mean_cer_percent": 186.02097460856797,
+            "ci95_mean_speaker_bootstrap": [
+              164.80427908687034,
+              211.1041270089798
+            ],
+            "corpus_wer_percent": 223.67741935483872,
+            "ci95_wer_speaker_bootstrap": [
+              189.2442558169311,
+              256.7804184125827
+            ],
+            "paired": {
+              "n": 96,
+              "worse_count": 72,
+              "ties": 3,
+              "mean_delta_cer_pp": 59.535569298022914,
+              "ci95_mean_delta_speaker": [
+                38.16323632275728,
+                81.76885985723415
+              ],
+              "corpus_delta_cer_pp": 47.95001404099972,
+              "ci95_corpus_delta_speaker": [
+                33.215862409779184,
+                64.38019707940202
+              ]
+            }
+          },
+          "shuffled_text": {
+            "n": 96,
+            "speakers": 12,
+            "char_errors": 9793.0,
+            "chars": 7122,
+            "corpus_cer_percent": 137.5035102499298,
+            "ci95_corpus_speaker_bootstrap": [
+              125.26188105251997,
+              155.30571236643843
+            ],
+            "mean_cer_percent": 154.801090705307,
+            "ci95_mean_speaker_bootstrap": [
+              136.38665824881764,
+              182.1334323549111
+            ],
+            "corpus_wer_percent": 191.5483870967742,
+            "ci95_wer_speaker_bootstrap": [
+              174.42827355298024,
+              211.45519859556725
+            ],
+            "paired": {
+              "n": 96,
+              "worse_count": 76,
+              "ties": 0,
+              "mean_delta_cer_pp": 28.31568539476189,
+              "ci95_mean_delta_speaker": [
+                2.122700512396042,
+                57.061649157556346
+              ],
+              "corpus_delta_cer_pp": 22.0584105588318,
+              "ci95_corpus_delta_speaker": [
+                7.926832638144883,
+                38.4468956498459
+              ]
+            }
+          }
+        }
+      },
+      "retest": {
+        "passes": [
+          {
+            "pass_id": 1,
+            "n": 32,
+            "changed_hypotheses": 0
+          },
+          {
+            "pass_id": 2,
+            "n": 32,
+            "changed_hypotheses": 0
+          }
+        ],
+        "cold_to_cold_changed": 0,
+        "primary_observations": 392,
+        "observations": 456,
+        "unique_retest_inputs": 32,
+        "unique_primary_inputs": 392,
+        "retest_fraction": 0.08163265306122448,
+        "seed_spread": "No TTS generation/seed experiment"
+      },
+      "evidence": "calibration/numbers.json",
+      "limitations": [
+        "Fixed source sessions/texts; four PV speakers and twelve Fresh voices.",
+        "Fresh silver transcripts and historical ASR/speaker admission create selection bias.",
+        "Finite text contamination screen does not prove unseen training/speakers.",
+        "ASR CER is an intelligibility proxy; no new human MOS/transcription study.",
+        "32/392 cold retest inputs fall below prospective 10% sampling gate."
+      ]
+    },
+    {
+      "id": "long1c-phase1b-legacy-v1",
+      "name": "LONG1C · phase1b legacy",
+      "stage": "asr_long1c",
+      "primary_policy": "translit",
+      "calibration_policy": "Frozen phase1b legacy score2.py conditional Latin-hypothesis transliteration; suite normalization and CER including spaces",
+      "loanword_policy": "Transliterate hypothesis Latin tokens only when the reference contains no ASCII Latin, using frozen legacy score2.py/Swar frontend; otherwise preserve hypothesis.",
+      "status": "diagnostic calibration; independent qualification incomplete",
+      "public_enabled": false,
+      "provisional": true,
+      "availability": "Catalog calibration only; executable public worker/import support pending.",
+      "calibration": {
+        "pv": {
+          "n": 100,
+          "speakers": 4,
+          "char_errors": 178.0,
+          "chars": 4660,
+          "corpus_cer_percent": 3.819742489270386,
+          "ci95_corpus_speaker_bootstrap": [
+            2.5283347863993026,
+            4.618897084650509
+          ],
+          "mean_cer_percent": 3.7828647976356553,
+          "ci95_mean_speaker_bootstrap": [
+            2.7744960821434512,
+            4.681866707120323
+          ],
+          "corpus_wer_percent": 16.047745358090186,
+          "ci95_wer_speaker_bootstrap": [
+            9.67741935483871,
+            18.6219739292365
+          ]
+        },
+        "fresh": {
+          "n": 96,
+          "speakers": 12,
+          "char_errors": 785.0,
+          "chars": 8649,
+          "corpus_cer_percent": 9.076193779627703,
+          "ci95_corpus_speaker_bootstrap": [
+            6.62322546237796,
+            12.045435108706283
+          ],
+          "mean_cer_percent": 8.712096409437333,
+          "ci95_mean_speaker_bootstrap": [
+            6.505726019046405,
+            11.394793053336107
+          ],
+          "corpus_wer_percent": 23.525641025641026,
+          "ci95_wer_speaker_bootstrap": [
+            19.20095655196603,
+            28.73077658048892
+          ]
+        }
+      },
+      "controls": {
+        "pv": {
+          "degraded": {
+            "n": 100,
+            "speakers": 4,
+            "char_errors": 3135.0,
+            "chars": 4660,
+            "corpus_cer_percent": 67.27467811158799,
+            "ci95_corpus_speaker_bootstrap": [
+              49.632843791722294,
+              83.52393053790766
+            ],
+            "mean_cer_percent": 72.55140154554827,
+            "ci95_mean_speaker_bootstrap": [
+              54.87624972991628,
+              86.78834637785138
+            ],
+            "corpus_wer_percent": 81.96286472148542,
+            "ci95_wer_speaker_bootstrap": [
+              70.37037037037037,
+              93.61702127659575
+            ],
+            "paired": {
+              "n": 100,
+              "worse_count": 96,
+              "ties": 3,
+              "mean_delta_cer_pp": 68.76853674791262,
+              "ci95_mean_delta_speaker": [
+                50.984018126273085,
+                82.10647967073105
+              ],
+              "corpus_delta_cer_pp": 63.4549356223176,
+              "ci95_corpus_delta_speaker": [
+                46.078104138851806,
+                79.50310559006212
+              ]
+            }
+          },
+          "shuffled_text": {
+            "n": 100,
+            "speakers": 4,
+            "char_errors": 6052.0,
+            "chars": 4660,
+            "corpus_cer_percent": 129.87124463519314,
+            "ci95_corpus_speaker_bootstrap": [
+              86.5641901508682,
+              262.510897994769
+            ],
+            "mean_cer_percent": 210.75705940255466,
+            "ci95_mean_speaker_bootstrap": [
+              86.26709171455894,
+              335.2470270905504
+            ],
+            "corpus_wer_percent": 141.51193633952255,
+            "ci95_wer_speaker_bootstrap": [
+              99.44134078212291,
+              245.6221198156682
+            ],
+            "paired": {
+              "n": 100,
+              "worse_count": 100,
+              "ties": 0,
+              "mean_delta_cer_pp": 206.97419460491903,
+              "ci95_mean_delta_speaker": [
+                82.89826406715056,
+                331.0501251426875
+              ],
+              "corpus_delta_cer_pp": 126.05150214592274,
+              "ci95_corpus_delta_speaker": [
+                84.0358553644689,
+                258.2695088686659
+              ]
+            }
+          }
+        },
+        "fresh": {
+          "degraded": {
+            "n": 96,
+            "speakers": 12,
+            "char_errors": 6278.0,
+            "chars": 8649,
+            "corpus_cer_percent": 72.58642617643659,
+            "ci95_corpus_speaker_bootstrap": [
+              62.713408011640276,
+              81.09859857758184
+            ],
+            "mean_cer_percent": 71.1475092680758,
+            "ci95_mean_speaker_bootstrap": [
+              61.246074139896955,
+              80.03259932567236
+            ],
+            "corpus_wer_percent": 80.32051282051282,
+            "ci95_wer_speaker_bootstrap": [
+              73.03752032592963,
+              86.70595939751146
+            ],
+            "paired": {
+              "n": 96,
+              "worse_count": 95,
+              "ties": 1,
+              "mean_delta_cer_pp": 62.43541285863844,
+              "ci95_mean_delta_speaker": [
+                53.16819940928463,
+                70.68973054152431
+              ],
+              "corpus_delta_cer_pp": 63.510232396808874,
+              "ci95_corpus_delta_speaker": [
+                54.22323342206206,
+                71.54729920435722
+              ]
+            }
+          },
+          "shuffled_text": {
+            "n": 96,
+            "speakers": 12,
+            "char_errors": 7989.0,
+            "chars": 8649,
+            "corpus_cer_percent": 92.36906000693722,
+            "ci95_corpus_speaker_bootstrap": [
+              86.74622435335043,
+              100.20565071826404
+            ],
+            "mean_cer_percent": 102.2446831592589,
+            "ci95_mean_speaker_bootstrap": [
+              91.11409727807579,
+              116.2883899468423
+            ],
+            "corpus_wer_percent": 117.17948717948718,
+            "ci95_wer_speaker_bootstrap": [
+              110.15514656304339,
+              127.12337842226934
+            ],
+            "paired": {
+              "n": 96,
+              "worse_count": 96,
+              "ties": 0,
+              "mean_delta_cer_pp": 93.53258674982158,
+              "ci95_mean_delta_speaker": [
+                81.28095809237892,
+                108.5840093631372
+              ],
+              "corpus_delta_cer_pp": 83.29286622730952,
+              "ci95_corpus_delta_speaker": [
+                75.88621760731783,
+                92.47001541709956
+              ]
+            }
+          }
+        }
+      },
+      "retest": {
+        "passes": [
+          {
+            "pass_id": 1,
+            "n": 32,
+            "changed_hypotheses": 0
+          },
+          {
+            "pass_id": 2,
+            "n": 32,
+            "changed_hypotheses": 0
+          }
+        ],
+        "cold_to_cold_changed": 0,
+        "primary_observations": 392,
+        "observations": 224,
+        "reused_primary_observations": 232,
+        "new_primary_observations": 160,
+        "unique_retest_inputs": 32,
+        "unique_primary_inputs": 392,
+        "retest_fraction": 0.08163265306122448,
+        "reused_phase1b": true,
+        "seed_spread": "No TTS generation/seed experiment"
+      },
+      "evidence": "calibration/numbers.json",
+      "limitations": [
+        "Fixed source sessions/texts; four PV speakers and twelve Fresh voices.",
+        "Fresh silver transcripts and historical ASR/speaker admission create selection bias.",
+        "Finite text contamination screen does not prove unseen training/speakers.",
+        "ASR CER is an intelligibility proxy; no new human MOS/transcription study.",
+        "32/392 cold retest inputs fall below prospective 10% sampling gate."
+      ]
+    },
+    {
+      "id": "mms-1b-all-npi-phase1b-legacy-v1",
+      "name": "MMS-1b-all npi · phase1b legacy",
+      "stage": "asr_mms",
+      "primary_policy": "translit",
+      "calibration_policy": "Frozen phase1b legacy score2.py conditional Latin-hypothesis transliteration; suite normalization and CER including spaces",
+      "loanword_policy": "Transliterate hypothesis Latin tokens only when the reference contains no ASCII Latin, using frozen legacy score2.py/Swar frontend; otherwise preserve hypothesis.",
+      "status": "diagnostic calibration; independent qualification incomplete",
+      "public_enabled": false,
+      "provisional": true,
+      "availability": "Catalog calibration only; executable public worker/import support pending.",
+      "calibration": {
+        "pv": {
+          "n": 100,
+          "speakers": 4,
+          "char_errors": 355.0,
+          "chars": 4660,
+          "corpus_cer_percent": 7.618025751072961,
+          "ci95_corpus_speaker_bootstrap": [
+            6.102877070619006,
+            8.172194777699366
+          ],
+          "mean_cer_percent": 7.322625489158038,
+          "ci95_mean_speaker_bootstrap": [
+            5.161839436991925,
+            8.529177866547933
+          ],
+          "corpus_wer_percent": 33.687002652519894,
+          "ci95_wer_speaker_bootstrap": [
+            24.42396313364055,
+            37.43016759776536
+          ]
+        },
+        "fresh": {
+          "n": 96,
+          "speakers": 12,
+          "char_errors": 2550.0,
+          "chars": 8649,
+          "corpus_cer_percent": 29.483177245924384,
+          "ci95_corpus_speaker_bootstrap": [
+            25.359372743712182,
+            33.056462706817925
+          ],
+          "mean_cer_percent": 29.44917173578816,
+          "ci95_mean_speaker_bootstrap": [
+            25.09280215675167,
+            33.23018273651921
+          ],
+          "corpus_wer_percent": 69.93589743589743,
+          "ci95_wer_speaker_bootstrap": [
+            63.972361767249986,
+            75.11122876682109
+          ]
+        }
+      },
+      "controls": {
+        "pv": {
+          "degraded": {
+            "n": 100,
+            "speakers": 4,
+            "char_errors": 2646.0,
+            "chars": 4660,
+            "corpus_cer_percent": 56.78111587982833,
+            "ci95_corpus_speaker_bootstrap": [
+              46.79572763684913,
+              70.18308631211858
+            ],
+            "mean_cer_percent": 62.36543415006517,
+            "ci95_mean_speaker_bootstrap": [
+              50.10343302680276,
+              72.22507074427004
+            ],
+            "corpus_wer_percent": 98.0106100795756,
+            "ci95_wer_speaker_bootstrap": [
+              90.17951425554382,
+              105.02232142857143
+            ],
+            "paired": {
+              "n": 100,
+              "worse_count": 100,
+              "ties": 0,
+              "mean_delta_cer_pp": 55.04280866090714,
+              "ci95_mean_delta_speaker": [
+                42.773863366704646,
+                65.8636231008283
+              ],
+              "corpus_delta_cer_pp": 49.163090128755364,
+              "ci95_corpus_delta_speaker": [
+                38.61815754339119,
+                64.08020924149956
+              ]
+            }
+          },
+          "shuffled_text": {
+            "n": 100,
+            "speakers": 4,
+            "char_errors": 6051.0,
+            "chars": 4660,
+            "corpus_cer_percent": 129.84978540772534,
+            "ci95_corpus_speaker_bootstrap": [
+              86.5641901508682,
+              262.42371403661724
+            ],
+            "mean_cer_percent": 210.86090240274737,
+            "ci95_mean_speaker_bootstrap": [
+              86.22244307779067,
+              335.49936172770407
+            ],
+            "corpus_wer_percent": 140.84880636604774,
+            "ci95_wer_speaker_bootstrap": [
+              99.25512104283054,
+              243.77880184331798
+            ],
+            "paired": {
+              "n": 100,
+              "worse_count": 100,
+              "ties": 0,
+              "mean_delta_cer_pp": 203.53827691358933,
+              "ci95_mean_delta_speaker": [
+                79.86099543434894,
+                327.2155583928297
+              ],
+              "corpus_delta_cer_pp": 122.23175965665236,
+              "ci95_corpus_delta_speaker": [
+                80.4613130802492,
+                254.31098986923897
+              ]
+            }
+          }
+        },
+        "fresh": {
+          "degraded": {
+            "n": 96,
+            "speakers": 12,
+            "char_errors": 6383.0,
+            "chars": 8649,
+            "corpus_cer_percent": 73.80043935715112,
+            "ci95_corpus_speaker_bootstrap": [
+              67.51729103720275,
+              79.50737298760916
+            ],
+            "mean_cer_percent": 73.69126641291027,
+            "ci95_mean_speaker_bootstrap": [
+              67.14945251149248,
+              79.50160824403858
+            ],
+            "corpus_wer_percent": 98.07692307692308,
+            "ci95_wer_speaker_bootstrap": [
+              96.26285648906446,
+              99.5101683431401
+            ],
+            "paired": {
+              "n": 96,
+              "worse_count": 94,
+              "ties": 0,
+              "mean_delta_cer_pp": 44.24209467712212,
+              "ci95_mean_delta_speaker": [
+                37.52415765716144,
+                49.28521694987034
+              ],
+              "corpus_delta_cer_pp": 44.31726211122673,
+              "ci95_corpus_delta_speaker": [
+                37.3305156310731,
+                49.57764633086593
+              ]
+            }
+          },
+          "shuffled_text": {
+            "n": 96,
+            "speakers": 12,
+            "char_errors": 7686.0,
+            "chars": 8649,
+            "corpus_cer_percent": 88.86576482830385,
+            "ci95_corpus_speaker_bootstrap": [
+              84.75847933497411,
+              94.36204774676347
+            ],
+            "mean_cer_percent": 96.50234894278881,
+            "ci95_mean_speaker_bootstrap": [
+              88.7305212007079,
+              105.59812259514638
+            ],
+            "corpus_wer_percent": 110.32051282051282,
+            "ci95_wer_speaker_bootstrap": [
+              106.28606267857725,
+              115.77977667493795
+            ],
+            "paired": {
+              "n": 96,
+              "worse_count": 96,
+              "ties": 0,
+              "mean_delta_cer_pp": 67.05317720700064,
+              "ci95_mean_delta_speaker": [
+                57.243173478003165,
+                78.16992560655297
+              ],
+              "corpus_delta_cer_pp": 59.382587582379465,
+              "ci95_corpus_delta_speaker": [
+                53.0423478298261,
+                67.05147407451739
+              ]
+            }
+          }
+        }
+      },
+      "retest": {
+        "passes": [
+          {
+            "pass_id": 1,
+            "n": 32,
+            "changed_hypotheses": 0
+          },
+          {
+            "pass_id": 2,
+            "n": 32,
+            "changed_hypotheses": 0
+          }
+        ],
+        "cold_to_cold_changed": 0,
+        "primary_observations": 392,
+        "observations": 312,
+        "reused_primary_observations": 144,
+        "new_primary_observations": 248,
+        "unique_retest_inputs": 32,
+        "unique_primary_inputs": 392,
+        "retest_fraction": 0.08163265306122448,
+        "reused_phase1b": true,
+        "seed_spread": "No TTS generation/seed experiment"
+      },
+      "evidence": "calibration/numbers.json",
+      "limitations": [
+        "Fixed source sessions/texts; four PV speakers and twelve Fresh voices.",
+        "Fresh silver transcripts and historical ASR/speaker admission create selection bias.",
+        "Finite text contamination screen does not prove unseen training/speakers.",
+        "ASR CER is an intelligibility proxy; no new human MOS/transcription study.",
+        "32/392 cold retest inputs fall below prospective 10% sampling gate."
+      ]
+    },
+    {
+      "id": "whisper-v3-turbo-phase1b-legacy-v1",
+      "name": "Whisper v3 turbo · phase1b legacy",
+      "stage": "asr_whisper",
+      "primary_policy": "translit",
+      "calibration_policy": "Frozen phase1b legacy score2.py conditional Latin-hypothesis transliteration; suite normalization and CER including spaces",
+      "loanword_policy": "Transliterate hypothesis Latin tokens only when the reference contains no ASCII Latin, using frozen legacy score2.py/Swar frontend; otherwise preserve hypothesis.",
+      "status": "diagnostic calibration; independent qualification incomplete",
+      "public_enabled": false,
+      "provisional": true,
+      "availability": "Catalog calibration only; executable public worker/import support pending.",
+      "calibration": {
+        "pv": {
+          "n": 100,
+          "speakers": 4,
+          "char_errors": 1567.0,
+          "chars": 4660,
+          "corpus_cer_percent": 33.62660944206009,
+          "ci95_corpus_speaker_bootstrap": [
+            29.598214285714285,
+            39.15401301518438
+          ],
+          "mean_cer_percent": 36.68268749143368,
+          "ci95_mean_speaker_bootstrap": [
+            30.339537388641183,
+            43.02583759422619
+          ],
+          "corpus_wer_percent": 89.92042440318302,
+          "ci95_wer_speaker_bootstrap": [
+            82.58620689655173,
+            94.94680851063829
+          ]
+        },
+        "fresh": {
+          "n": 96,
+          "speakers": 12,
+          "char_errors": 11135.0,
+          "chars": 8649,
+          "corpus_cer_percent": 128.74320730720314,
+          "ci95_corpus_speaker_bootstrap": [
+            91.88877199384973,
+            165.31302395261292
+          ],
+          "mean_cer_percent": 128.85857320458726,
+          "ci95_mean_speaker_bootstrap": [
+            89.96356931418413,
+            170.64153385877668
+          ],
+          "corpus_wer_percent": 185.57692307692307,
+          "ci95_wer_speaker_bootstrap": [
+            144.07609719791105,
+            229.18801051980196
+          ]
+        }
+      },
+      "controls": {
+        "pv": {
+          "degraded": {
+            "n": 100,
+            "speakers": 4,
+            "char_errors": 12487.0,
+            "chars": 4660,
+            "corpus_cer_percent": 267.9613733905579,
+            "ci95_corpus_speaker_bootstrap": [
+              186.06475300400535,
+              346.0398136382889
+            ],
+            "mean_cer_percent": 264.0799252201343,
+            "ci95_mean_speaker_bootstrap": [
+              190.15264070756248,
+              328.327314401922
+            ],
+            "corpus_wer_percent": 392.17506631299733,
+            "ci95_wer_speaker_bootstrap": [
+              296.8253968253968,
+              488.031914893617
+            ],
+            "paired": {
+              "n": 100,
+              "worse_count": 97,
+              "ties": 2,
+              "mean_delta_cer_pp": 227.3972377287007,
+              "ci95_mean_delta_speaker": [
+                148.25580677369805,
+                297.7275478849191
+              ],
+              "corpus_delta_cer_pp": 234.33476394849782,
+              "ci95_corpus_delta_speaker": [
+                149.81642189586114,
+                313.0029648454045
+              ]
+            }
+          },
+          "shuffled_text": {
+            "n": 100,
+            "speakers": 4,
+            "char_errors": 6273.0,
+            "chars": 4660,
+            "corpus_cer_percent": 134.6137339055794,
+            "ci95_corpus_speaker_bootstrap": [
+              86.16567036720751,
+              282.9991281604185
+            ],
+            "mean_cer_percent": 217.79415408760255,
+            "ci95_mean_speaker_bootstrap": [
+              85.81377702407352,
+              349.7745311511315
+            ],
+            "corpus_wer_percent": 150.3978779840849,
+            "ci95_wer_speaker_bootstrap": [
+              100.93109869646183,
+              272.8110599078341
+            ],
+            "paired": {
+              "n": 100,
+              "worse_count": 99,
+              "ties": 0,
+              "mean_delta_cer_pp": 181.11146659616887,
+              "ci95_mean_delta_speaker": [
+                48.26231500063991,
+                313.9606181916978
+              ],
+              "corpus_delta_cer_pp": 100.98712446351932,
+              "ci95_corpus_delta_speaker": [
+                49.28685606903838,
+                250.43436869557362
+              ]
+            }
+          }
+        },
+        "fresh": {
+          "degraded": {
+            "n": 96,
+            "speakers": 12,
+            "char_errors": 21708.0,
+            "chars": 8649,
+            "corpus_cer_percent": 250.9885535900104,
+            "ci95_corpus_speaker_bootstrap": [
+              216.9516656128536,
+              285.24955385665464
+            ],
+            "mean_cer_percent": 263.00482778846066,
+            "ci95_mean_speaker_bootstrap": [
+              220.59621307192117,
+              303.4150467538337
+            ],
+            "corpus_wer_percent": 317.11538461538464,
+            "ci95_wer_speaker_bootstrap": [
+              259.49520863693914,
+              380.3424015009381
+            ],
+            "paired": {
+              "n": 96,
+              "worse_count": 75,
+              "ties": 0,
+              "mean_delta_cer_pp": 134.14625458387334,
+              "ci95_mean_delta_speaker": [
+                88.78360549918119,
+                178.4510884514085
+              ],
+              "corpus_delta_cer_pp": 122.24534628280725,
+              "ci95_corpus_delta_speaker": [
+                83.56529700506846,
+                160.80706955143015
+              ]
+            }
+          },
+          "shuffled_text": {
+            "n": 96,
+            "speakers": 12,
+            "char_errors": 13347.0,
+            "chars": 8649,
+            "corpus_cer_percent": 154.31841831425598,
+            "ci95_corpus_speaker_bootstrap": [
+              125.96168107505461,
+              181.78073437375323
+            ],
+            "mean_cer_percent": 162.80909375980104,
+            "ci95_mean_speaker_bootstrap": [
+              133.54822394685888,
+              191.68406784909777
+            ],
+            "corpus_wer_percent": 196.7948717948718,
+            "ci95_wer_speaker_bootstrap": [
+              159.79910806245624,
+              231.39019129250156
+            ],
+            "paired": {
+              "n": 96,
+              "worse_count": 80,
+              "ties": 0,
+              "mean_delta_cer_pp": 33.95052055521378,
+              "ci95_mean_delta_speaker": [
+                -1.1166863034918524,
+                66.54028353150224
+              ],
+              "corpus_delta_cer_pp": 25.575211007052843,
+              "ci95_corpus_delta_speaker": [
+                7.700805876432352,
+                42.09472124056005
+              ]
+            }
+          }
+        }
+      },
+      "retest": {
+        "passes": [
+          {
+            "pass_id": 1,
+            "n": 32,
+            "changed_hypotheses": 0
+          },
+          {
+            "pass_id": 2,
+            "n": 32,
+            "changed_hypotheses": 0
+          }
+        ],
+        "cold_to_cold_changed": 0,
+        "primary_observations": 392,
+        "observations": 312,
+        "reused_primary_observations": 144,
+        "new_primary_observations": 248,
+        "unique_retest_inputs": 32,
+        "unique_primary_inputs": 392,
+        "retest_fraction": 0.08163265306122448,
+        "reused_phase1b": true,
+        "seed_spread": "No TTS generation/seed experiment"
+      },
+      "evidence": "calibration/numbers.json",
+      "limitations": [
+        "Fixed source sessions/texts; four PV speakers and twelve Fresh voices.",
+        "Fresh silver transcripts and historical ASR/speaker admission create selection bias.",
+        "Finite text contamination screen does not prove unseen training/speakers.",
+        "ASR CER is an intelligibility proxy; no new human MOS/transcription study.",
+        "32/392 cold retest inputs fall below prospective 10% sampling gate."
+      ]
+    },
+    {
+      "id": "d32-v2-step60000-streaming320-legacy-v1",
+      "name": "D32 v2 step 60000 · streaming 320 ms",
+      "stage": "d32_streaming",
+      "primary_policy": "translit",
+      "calibration_policy": "Frozen phase1b legacy score2.py conditional Latin-hypothesis transliteration; suite normalization and CER including spaces",
+      "loanword_policy": "Transliterate hypothesis Latin tokens only when the reference contains no ASCII Latin, using frozen legacy score2.py/Swar frontend; otherwise preserve hypothesis.",
+      "status": "local calibration only; public profile depends on owner decision",
+      "public_enabled": false,
+      "provisional": true,
+      "availability": "Public judge depends on the owner decision about the call-trained 32M model.",
+      "calibration": {
+        "pv": {
+          "n": 100,
+          "speakers": 4,
+          "char_errors": 550.0,
+          "chars": 4660,
+          "corpus_cer_percent": 11.802575107296137,
+          "ci95_corpus_speaker_bootstrap": [
+            7.497820401046208,
+            14.998243765367054
+          ],
+          "mean_cer_percent": 10.364618130105226,
+          "ci95_mean_speaker_bootstrap": [
+            6.760701061875771,
+            14.403153711475998
+          ],
+          "corpus_wer_percent": 31.43236074270557,
+          "ci95_wer_speaker_bootstrap": [
+            17.972350230414747,
+            36.87150837988827
+          ]
+        },
+        "fresh": {
+          "n": 96,
+          "speakers": 12,
+          "char_errors": 1580.0,
+          "chars": 8649,
+          "corpus_cer_percent": 18.2680078621806,
+          "ci95_corpus_speaker_bootstrap": [
+            14.817470456323255,
+            21.847494492101696
+          ],
+          "mean_cer_percent": 18.082076973938676,
+          "ci95_mean_speaker_bootstrap": [
+            14.494289336689528,
+            21.871945453590264
+          ],
+          "corpus_wer_percent": 35.8974358974359,
+          "ci95_wer_speaker_bootstrap": [
+            31.354681325237458,
+            40.92730684326711
+          ]
+        }
+      },
+      "controls": {
+        "pv": {
+          "degraded": {
+            "n": 100,
+            "speakers": 4,
+            "char_errors": 3987.0,
+            "chars": 4660,
+            "corpus_cer_percent": 85.55793991416309,
+            "ci95_corpus_speaker_bootstrap": [
+              80.20780105603815,
+              90.22321428571429
+            ],
+            "mean_cer_percent": 86.84115027001685,
+            "ci95_mean_speaker_bootstrap": [
+              81.27671688251543,
+              90.76289277700694
+            ],
+            "corpus_wer_percent": 95.75596816976127,
+            "ci95_wer_speaker_bootstrap": [
+              94.17989417989418,
+              97.34042553191489
+            ],
+            "paired": {
+              "n": 100,
+              "worse_count": 100,
+              "ties": 0,
+              "mean_delta_cer_pp": 76.47653213991163,
+              "ci95_mean_delta_speaker": [
+                70.25707529671723,
+                82.8102446514834
+              ],
+              "corpus_delta_cer_pp": 73.75536480686695,
+              "ci95_corpus_delta_speaker": [
+                70.05620848237098,
+                80.64516129032259
+              ]
+            }
+          },
+          "shuffled_text": {
+            "n": 100,
+            "speakers": 4,
+            "char_errors": 5947.0,
+            "chars": 4660,
+            "corpus_cer_percent": 127.61802575107296,
+            "ci95_corpus_speaker_bootstrap": [
+              86.64958724736692,
+              253.09503051438534
+            ],
+            "mean_cer_percent": 204.6188915670244,
+            "ci95_mean_speaker_bootstrap": [
+              86.27471458838369,
+              322.96306854566507
+            ],
+            "corpus_wer_percent": 141.6445623342175,
+            "ci95_wer_speaker_bootstrap": [
+              99.25512104283054,
+              246.54377880184333
+            ],
+            "paired": {
+              "n": 100,
+              "worse_count": 100,
+              "ties": 0,
+              "mean_delta_cer_pp": 194.25427343691914,
+              "ci95_mean_delta_speaker": [
+                78.97317210729733,
+                309.53537476654094
+              ],
+              "corpus_delta_cer_pp": 115.81545064377683,
+              "ci95_corpus_delta_speaker": [
+                79.15176684632071,
+                239.88694625591683
+              ]
+            }
+          }
+        },
+        "fresh": {
+          "degraded": {
+            "n": 96,
+            "speakers": 12,
+            "char_errors": 7120.0,
+            "chars": 8649,
+            "corpus_cer_percent": 82.32165568273788,
+            "ci95_corpus_speaker_bootstrap": [
+              77.14348436954697,
+              86.8297698952927
+            ],
+            "mean_cer_percent": 81.80144834488846,
+            "ci95_mean_speaker_bootstrap": [
+              76.22443749746586,
+              86.54382384745149
+            ],
+            "corpus_wer_percent": 89.87179487179488,
+            "ci95_wer_speaker_bootstrap": [
+              87.07569581357347,
+              92.52633172427359
+            ],
+            "paired": {
+              "n": 96,
+              "worse_count": 96,
+              "ties": 0,
+              "mean_delta_cer_pp": 63.71937137094978,
+              "ci95_mean_delta_speaker": [
+                58.54056193347592,
+                69.20503397843754
+              ],
+              "corpus_delta_cer_pp": 64.05364782055729,
+              "ci95_corpus_delta_speaker": [
+                59.31859478679205,
+                69.28451099305784
+              ]
+            }
+          },
+          "shuffled_text": {
+            "n": 96,
+            "speakers": 12,
+            "char_errors": 7788.0,
+            "chars": 8649,
+            "corpus_cer_percent": 90.04509191814083,
+            "ci95_corpus_speaker_bootstrap": [
+              85.20176830897557,
+              96.72182753929809
+            ],
+            "mean_cer_percent": 99.19196787885926,
+            "ci95_mean_speaker_bootstrap": [
+              89.20412604986522,
+              111.67557209410859
+            ],
+            "corpus_wer_percent": 113.91025641025641,
+            "ci95_wer_speaker_bootstrap": [
+              107.89137649430081,
+              122.05313473499889
+            ],
+            "paired": {
+              "n": 96,
+              "worse_count": 96,
+              "ties": 0,
+              "mean_delta_cer_pp": 81.10989090492059,
+              "ci95_mean_delta_speaker": [
+                69.28089897039759,
+                95.10451002375733
+              ],
+              "corpus_delta_cer_pp": 71.77708405596023,
+              "ci95_corpus_delta_speaker": [
+                64.52287701273681,
+                80.42074160674017
+              ]
+            }
+          }
+        }
+      },
+      "retest": {
+        "passes": [
+          {
+            "pass_id": 1,
+            "n": 32,
+            "changed_hypotheses": 0
+          },
+          {
+            "pass_id": 2,
+            "n": 32,
+            "changed_hypotheses": 0
+          }
+        ],
+        "cold_to_cold_changed": 0,
+        "primary_observations": 392,
+        "observations": 456,
+        "unique_retest_inputs": 32,
+        "unique_primary_inputs": 392,
+        "retest_fraction": 0.08163265306122448,
+        "seed_spread": "No TTS generation/seed experiment"
+      },
+      "evidence": "calibration/numbers.json",
+      "limitations": [
+        "Fixed source sessions/texts; four PV speakers and twelve Fresh voices.",
+        "Fresh silver transcripts and historical ASR/speaker admission create selection bias.",
+        "Finite text contamination screen does not prove unseen training/speakers.",
+        "ASR CER is an intelligibility proxy; no new human MOS/transcription study.",
+        "32/392 cold retest inputs fall below prospective 10% sampling gate."
+      ]
+    },
+    {
+      "id": "d32-v2-step60000-fullcontext-legacy-v1",
+      "name": "D32 v2 step 60000 · full context",
+      "stage": "d32_full",
+      "primary_policy": "translit",
+      "calibration_policy": "Frozen phase1b legacy score2.py conditional Latin-hypothesis transliteration; suite normalization and CER including spaces",
+      "loanword_policy": "Transliterate hypothesis Latin tokens only when the reference contains no ASCII Latin, using frozen legacy score2.py/Swar frontend; otherwise preserve hypothesis.",
+      "status": "local calibration only; public profile depends on owner decision",
+      "public_enabled": false,
+      "provisional": true,
+      "availability": "Public judge depends on the owner decision about the call-trained 32M model.",
+      "calibration": {
+        "pv": {
+          "n": 100,
+          "speakers": 4,
+          "char_errors": 367.0,
+          "chars": 4660,
+          "corpus_cer_percent": 7.875536480686695,
+          "ci95_corpus_speaker_bootstrap": [
+            4.707933740191804,
+            9.573704607435051
+          ],
+          "mean_cer_percent": 6.976417381064478,
+          "ci95_mean_speaker_bootstrap": [
+            4.508404903547001,
+            9.213666327074383
+          ],
+          "corpus_wer_percent": 25.862068965517242,
+          "ci95_wer_speaker_bootstrap": [
+            13.36405529953917,
+            31.330472103004293
+          ]
+        },
+        "fresh": {
+          "n": 96,
+          "speakers": 12,
+          "char_errors": 1184.0,
+          "chars": 8649,
+          "corpus_cer_percent": 13.68944386634293,
+          "ci95_corpus_speaker_bootstrap": [
+            10.896794394334561,
+            16.7040001779632
+          ],
+          "mean_cer_percent": 13.315103732724632,
+          "ci95_mean_speaker_bootstrap": [
+            10.693442844642153,
+            16.23263583166446
+          ],
+          "corpus_wer_percent": 29.743589743589745,
+          "ci95_wer_speaker_bootstrap": [
+            25.16699744981292,
+            34.899811845343585
+          ]
+        }
+      },
+      "controls": {
+        "pv": {
+          "degraded": {
+            "n": 100,
+            "speakers": 4,
+            "char_errors": 3303.0,
+            "chars": 4660,
+            "corpus_cer_percent": 70.87982832618026,
+            "ci95_corpus_speaker_bootstrap": [
+              64.07133536320138,
+              77.50952986022871
+            ],
+            "mean_cer_percent": 72.70527537728051,
+            "ci95_mean_speaker_bootstrap": [
+              65.23633777125781,
+              80.17421298330322
+            ],
+            "corpus_wer_percent": 85.94164456233422,
+            "ci95_wer_speaker_bootstrap": [
+              79.13793103448276,
+              90.69148936170212
+            ],
+            "paired": {
+              "n": 100,
+              "worse_count": 98,
+              "ties": 2,
+              "mean_delta_cer_pp": 65.72885799621604,
+              "ci95_mean_delta_speaker": [
+                57.33711595811699,
+                74.79782264292454
+              ],
+              "corpus_delta_cer_pp": 63.00429184549357,
+              "ci95_corpus_delta_speaker": [
+                56.89430187037841,
+                70.37751446679525
+              ]
+            }
+          },
+          "shuffled_text": {
+            "n": 100,
+            "speakers": 4,
+            "char_errors": 5985.0,
+            "chars": 4660,
+            "corpus_cer_percent": 128.43347639484978,
+            "ci95_corpus_speaker_bootstrap": [
+              86.5357244520353,
+              256.7567567567568
+            ],
+            "mean_cer_percent": 207.1538849136213,
+            "ci95_mean_speaker_bootstrap": [
+              86.19864647419809,
+              328.10912335304454
+            ],
+            "corpus_wer_percent": 141.51193633952255,
+            "ci95_wer_speaker_bootstrap": [
+              99.25512104283054,
+              246.08294930875576
+            ],
+            "paired": {
+              "n": 100,
+              "worse_count": 100,
+              "ties": 0,
+              "mean_delta_cer_pp": 200.17746753255685,
+              "ci95_mean_delta_speaker": [
+                81.01912075400145,
+                319.3358143111122
+              ],
+              "corpus_delta_cer_pp": 120.5579399141631,
+              "ci95_corpus_delta_speaker": [
+                81.82779071184349,
+                247.8469930220571
+              ]
+            }
+          }
+        },
+        "fresh": {
+          "degraded": {
+            "n": 96,
+            "speakers": 12,
+            "char_errors": 6497.0,
+            "chars": 8649,
+            "corpus_cer_percent": 75.11851081049832,
+            "ci95_corpus_speaker_bootstrap": [
+              68.57710258155899,
+              80.86977649183123
+            ],
+            "mean_cer_percent": 74.55347861693528,
+            "ci95_mean_speaker_bootstrap": [
+              68.1938759520463,
+              80.34436850730732
+            ],
+            "corpus_wer_percent": 83.65384615384616,
+            "ci95_wer_speaker_bootstrap": [
+              78.91497993425266,
+              87.7813655924377
+            ],
+            "paired": {
+              "n": 96,
+              "worse_count": 96,
+              "ties": 0,
+              "mean_delta_cer_pp": 61.23837488421065,
+              "ci95_mean_delta_speaker": [
+                55.52164139760121,
+                66.70741066025379
+              ],
+              "corpus_delta_cer_pp": 61.429066944155394,
+              "ci95_corpus_delta_speaker": [
+                55.58100090651873,
+                66.86179118382307
+              ]
+            }
+          },
+          "shuffled_text": {
+            "n": 96,
+            "speakers": 12,
+            "char_errors": 7835.0,
+            "chars": 8649,
+            "corpus_cer_percent": 90.58850734188924,
+            "ci95_corpus_speaker_bootstrap": [
+              85.45823771332196,
+              97.44568012792246
+            ],
+            "mean_cer_percent": 99.59204550340175,
+            "ci95_mean_speaker_bootstrap": [
+              89.52923995330067,
+              111.71135741677112
+            ],
+            "corpus_wer_percent": 114.42307692307692,
+            "ci95_wer_speaker_bootstrap": [
+              108.304072455507,
+              122.669784988202
+            ],
+            "paired": {
+              "n": 96,
+              "worse_count": 96,
+              "ties": 0,
+              "mean_delta_cer_pp": 86.27694177067711,
+              "ci95_mean_delta_speaker": [
+                74.82959523612602,
+                99.5828010041161
+              ],
+              "corpus_delta_cer_pp": 76.8990634755463,
+              "ci95_corpus_delta_speaker": [
+                69.78539694458229,
+                85.09173964422361
+              ]
+            }
+          }
+        }
+      },
+      "retest": {
+        "passes": [
+          {
+            "pass_id": 1,
+            "n": 32,
+            "changed_hypotheses": 0
+          },
+          {
+            "pass_id": 2,
+            "n": 32,
+            "changed_hypotheses": 0
+          }
+        ],
+        "cold_to_cold_changed": 0,
+        "primary_observations": 392,
+        "observations": 456,
+        "unique_retest_inputs": 32,
+        "unique_primary_inputs": 392,
+        "retest_fraction": 0.08163265306122448,
+        "seed_spread": "No TTS generation/seed experiment"
+      },
+      "evidence": "calibration/numbers.json",
+      "limitations": [
+        "Fixed source sessions/texts; four PV speakers and twelve Fresh voices.",
+        "Fresh silver transcripts and historical ASR/speaker admission create selection bias.",
+        "Finite text contamination screen does not prove unseen training/speakers.",
+        "ASR CER is an intelligibility proxy; no new human MOS/transcription study.",
+        "32/392 cold retest inputs fall below prospective 10% sampling gate."
+      ]
+    }
+  ]
+}

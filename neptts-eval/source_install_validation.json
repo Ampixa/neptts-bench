@@ -1,0 +1,288 @@
+{
+  "created_utc": "2026-11-03T18:38:01.507819+00:00",
+  "creator": "Codex GPT-6 family /root/docs_reconcile (exact serving model unknown)",
+  "job": "arena_judges_v1",
+  "owner": "Ampixa / Arbiter nenglish-73",
+  "status": "reference",
+  "purpose": "Evidence that documented editable source-install route works on Python3.12; no model inference or checkpoint calibration",
+  "last_review": "2026-11-03T18:38:01.507819+00:00",
+  "next_review": "2026-11-11",
+  "deletion_condition": "Superseded install validation for a reviewed release",
+  "source_host": "local workstation",
+  "source_path": "/Users/cdjk/github/neptts-bench",
+  "hf": "NOT on HF",
+  "licence_usage": "MIT project; installed third-party packages retain own licences",
+  "commands": [
+    {
+      "command": "python3.12 -m venv .local/docs-source-install312",
+      "exit_code": 0
+    },
+    {
+      "command": ".local/docs-source-install312/bin/python -m pip install --no-cache-dir ./neptts-eval",
+      "exit_code": 0
+    },
+    {
+      "command": ".local/docs-source-install312/bin/python -m pip install --no-cache-dir -e ./neptts-eval",
+      "exit_code": 0
+    },
+    {
+      "command": ".local/docs-source-install312/bin/neptts-eval --help",
+      "exit_code": 0
+    },
+    {
+      "command": ".local/docs-source-install312/bin/python -m pip check",
+      "exit_code": 0,
+      "output": "No broken requirements found."
+    },
+    {
+      "command": "From unrelated temporary cwd, override SENTENCES_CACHE to absent path, import installed data.load_sentences()",
+      "exit_code": 0,
+      "result": {
+        "module_source": "neptts-eval/src/neptts_eval/data.py",
+        "records": 365,
+        "sent_ids": 205,
+        "chirp_ids": 160
+      }
+    },
+    {
+      "command": "python3 -m pytest neptts-eval/tests -q",
+      "exit_code": 0,
+      "output": "1 passed in 0.01s"
+    }
+  ],
+  "earlier_attempts": [
+    {
+      "python": "3.14 system-site env",
+      "status": "failed build hook",
+      "reason": "Local sitecustomize/.pth configuration caused standard-library import failure (json/traceback)"
+    },
+    {
+      "python": "3.11",
+      "status": "failed venv ensurepip",
+      "exit_code": 1
+    }
+  ],
+  "installed_packages": [
+    "aiohappyeyeballs==2.7.1",
+    "aiohttp==3.14.5",
+    "aiosignal==1.4.0",
+    "anyio==4.16.0",
+    "attrs==26.1.0",
+    "certifi==2026.10.23",
+    "cffi==2.1.1",
+    "charset-normalizer==3.5.2",
+    "click==8.5.0",
+    "datasets==5.1.0",
+    "dill==0.4.1",
+    "filelock==4.2.7",
+    "flatbuffers==25.12.19",
+    "frozenlist==1.8.0",
+    "fsspec==2026.7.0",
+    "h11==0.16.0",
+    "hf-xet==1.8.0",
+    "httpcore2==2.16.0",
+    "httpx2==2.16.0",
+    "huggingface_hub==2.4.0",
+    "idna==3.20",
+    "Jinja2==3.1.6",
+    "llvmlite==0.50.0",
+    "MarkupSafe==3.0.4",
+    "more-itertools==11.2.1",
+    "mpmath==1.3.0",
+    "multidict==7.2.1",
+    "multiprocess==0.70.19",
+    "-e git+ssh://git@github.com/Ampixa/neptts-bench.git@210dd973ca5ea80149fcccbe68c73ca8f203c624#egg=neptts_eval&subdirectory=neptts-eval",
+    "networkx==3.7",
+    "numba==0.68.1",
+    "numpy==2.5.4",
+    "onnxruntime==1.31.1",
+    "openai-whisper==20250625",
+    "packaging==26.3",
+    "pandas==3.1.0",
+    "propcache==0.5.4",
+    "protobuf==7.36.2",
+    "pyarrow==26.0.1",
+    "pycparser==3.12",
+    "python-dateutil==4.0.0",
+    "PyYAML==6.0.3",
+    "regex==2026.9.29",
+    "requests==2.34.2",
+    "scoreq==1.0.1",
+    "setuptools==84.2.1",
+    "soundfile==0.14.0",
+    "sympy==1.14.0",
+    "tiktoken==0.14.0",
+    "torch==2.15.0",
+    "torchaudio==2.11.1",
+    "tqdm==4.70.1",
+    "truststore==0.10.5",
+    "typing_extensions==4.16.0",
+    "tzdata==2026.6",
+    "urllib3==2.8.0",
+    "xxhash==4.0.2",
+    "yarl==1.25.1"
+  ],
+  "temporary_logs": {
+    ".local/docs-source-install.log": {
+      "bytes": 1346,
+      "sha256": "1333a2284704eb0adb7894ac2486bc28e5248d5a60f05104c5771d58fc5cfb82",
+      "retention": "removed after compact receipt; original log not restorable without rerun"
+    },
+    ".local/docs-source-install312.log": {
+      "bytes": 19110,
+      "sha256": "4736180709662a640c8470fc6c3115a9894012fc156a4790246a0b50845267ec",
+      "retention": "removed after compact receipt; original log not restorable without rerun"
+    },
+    ".local/docs-source-editable312.log": {
+      "bytes": 12060,
+      "sha256": "110a263dbc3a4c4021a50478cd4f37dbd1cc9e996aa83f74a7a4782291c56dc4",
+      "retention": "removed after compact receipt; original log not restorable without rerun"
+    },
+    ".local/docs-source-help312.log": {
+      "bytes": 1656,
+      "sha256": "90d5ae578032462d7d8a84c7448a6a434512b5b1ac094638d3f696687faebd3e",
+      "retention": "removed after compact receipt; original log not restorable without rerun"
+    },
+    ".local/docs-source-check312.log": {
+      "bytes": 30,
+      "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+      "retention": "removed after compact receipt; original log not restorable without rerun"
+    },
+    ".local/docs-source-freeze312.txt": {
+      "bytes": 1092,
+      "sha256": "ea71ffd64a9dadd83973fc0564096257cff400a9f2582b207554399e428967ba",
+      "retention": "removed after compact receipt; original log not restorable without rerun"
+    }
+  },
+  "source_hashes": {
+    "neptts-eval/pyproject.toml": "40c2a36015977a6afe94fab3b3a348dfaae520946d4a08ca025d566b35d56b54",
+    "neptts-eval/src/neptts_eval/data.py": "850d40385e7453c8260997105d8accc3a546e777b763fb695af51ae1002172ee",
+    "neptts-eval/tests/test_source_data.py": "7cf772b2287957319d3bee92f3828ea2bb7c67fe60d0d3da64c74683ace51b71"
+  },
+  "unverified": [
+    "No ASR/SCOREQ/NepaliMOS model inference was run",
+    "No public or private model tensor/config equivalence or score calibration was tested",
+    "No full historical private rating/release mapping was rederived"
+  ],
+  "cleanup": {
+    "utc": "2026-11-03T18:38:28.704834+00:00",
+    "active_process_check": "ps found no executable within named environments",
+    "removed": [
+      {
+        "path": ".local/docs-source-install",
+        "apparent_bytes": 11509739,
+        "allocated_bytes": 13533184,
+        "reason": "Completed source-install consumer; compact validation preserved; reproducible environment/logs no longer needed"
+      },
+      {
+        "path": ".local/docs-source-install311",
+        "apparent_bytes": 297,
+        "allocated_bytes": 4096,
+        "reason": "Completed source-install consumer; compact validation preserved; reproducible environment/logs no longer needed"
+      },
+      {
+        "path": ".local/docs-source-install312",
+        "apparent_bytes": 1278665325,
+        "allocated_bytes": 1355321344,
+        "reason": "Completed source-install consumer; compact validation preserved; reproducible environment/logs no longer needed"
+      },
+      {
+        "path": ".local/docs-source-install.log",
+        "apparent_bytes": 1346,
+        "allocated_bytes": 4096,
+        "reason": "Completed source-install consumer; compact validation preserved; reproducible environment/logs no longer needed"
+      },
+      {
+        "path": ".local/docs-source-install312.log",
+        "apparent_bytes": 19110,
+        "allocated_bytes": 20480,
+        "reason": "Completed source-install consumer; compact validation preserved; reproducible environment/logs no longer needed"
+      },
+      {
+        "path": ".local/docs-source-editable312.log",
+        "apparent_bytes": 12060,
+        "allocated_bytes": 12288,
+        "reason": "Completed source-install consumer; compact validation preserved; reproducible environment/logs no longer needed"
+      },
+      {
+        "path": ".local/docs-source-help312.log",
+        "apparent_bytes": 1656,
+        "allocated_bytes": 4096,
+        "reason": "Completed source-install consumer; compact validation preserved; reproducible environment/logs no longer needed"
+      },
+      {
+        "path": ".local/docs-source-check312.log",
+        "apparent_bytes": 30,
+        "allocated_bytes": 4096,
+        "reason": "Completed source-install consumer; compact validation preserved; reproducible environment/logs no longer needed"
+      },
+      {
+        "path": ".local/docs-source-freeze312.txt",
+        "apparent_bytes": 1092,
+        "allocated_bytes": 4096,
+        "reason": "Completed source-install consumer; compact validation preserved; reproducible environment/logs no longer needed"
+      },
+      {
+        "path": ".local/docs-install-artifacts.provenance.md",
+        "apparent_bytes": 1708,
+        "allocated_bytes": 4096,
+        "reason": "Completed source-install consumer; compact validation preserved; reproducible environment/logs no longer needed"
+      }
+    ],
+    "allocated_bytes_removed": 1368911872,
+    "free_bytes_before": 97192562688,
+    "free_bytes_after": 98578919424,
+    "observed_free_delta": 1386356736,
+    "scope": "Only these job-created disposable install environments/logs; no pre-existing project data removed",
+    "restoration": "Rerun recorded install commands; original dependency environment/log bytes not retained"
+  },
+  "original_install_source_hashes": {
+    "neptts-eval/pyproject.toml": "40c2a36015977a6afe94fab3b3a348dfaae520946d4a08ca025d566b35d56b54",
+    "neptts-eval/src/neptts_eval/data.py": "a787d80731b391b73c0429e82a2d9b9c8be89ae7d317f9eab0ffc945dcbe11f3",
+    "neptts-eval/tests/test_source_data.py": "e79a2b5a95f6ebe0e6d94a5409e342d1a0f9528c4ceceb5ee2f14d08eba8908a"
+  },
+  "source_hashes_scope": "Final source after documented precedence/error-handling review; original clean-install input hashes preserved separately.",
+  "post_install_source_review": {
+    "utc": "2026-11-03T18:55:21.284872+00:00",
+    "creator": "Codex /root/docs_reconcile",
+    "changes": [
+      "Versioned module-relative source prompts precede stale cache and unrelated cwd",
+      "Hugging Face failure is chained through informative FileNotFoundError instead of ignored",
+      "Legacy fallback remains module-relative, never caller-cwd-relative"
+    ],
+    "tests": {
+      "command": "python3 -m pytest neptts-eval/tests -q --basetemp=.local/docs-tests",
+      "exit_code": 0,
+      "result": "3 passed in 0.01s",
+      "coverage": [
+        "Unrelated-cwd offline current inventory",
+        "193-row stale cache and caller-relative replacement cannot supersede source prompts",
+        "Download error retains original cause and cache restoration path"
+      ]
+    },
+    "install_rerun": false,
+    "reason": "Only pure prompt-loader behavior changed; no dependency/build/entry-point metadata changed; direct source regression tests cover behavior.",
+    "fixture_cleanup": {
+      "utc": "2026-11-03T18:55:21.284872+00:00",
+      "reason": "Three completed source-loader fixture consumers; only generated dummy stale/cache JSON and pytest symlink fixtures",
+      "allocated_bytes": 16384,
+      "files": [
+        {
+          "path": ".local/docs-tests/test_source_prompts_override_s0/sentences.json",
+          "bytes": 10229,
+          "sha256": "ccb6f33661b6d6aa860e80b04cb0f67964eee94cf2f4f43ee467ca13778dd0b0"
+        },
+        {
+          "path": ".local/docs-tests/test_source_prompts_override_s0/benchmark/sentences.json",
+          "bytes": 53,
+          "sha256": "5e295d8c0bce2c6d562081f302aea1b7ca6a15740b2856f14d5c915a9d52de9f"
+        }
+      ],
+      "active_job_check": "pytest command exited zero; no background process was launched",
+      "reproduction": "Rerun recorded pytest command; original temporary bytes no longer retained",
+      "free_bytes_before": 98671345664,
+      "free_bytes_after": 98671362048,
+      "observed_free_delta": 16384
+    }
+  }
+}

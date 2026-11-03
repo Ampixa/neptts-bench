@@ -1,0 +1,102 @@
+{
+  "schema": "neptts-documentation-scopes-v1",
+  "created_utc": "2026-11-03T18:36:17.374604+00:00",
+  "creator": "Codex GPT-6 family /root/docs_reconcile (exact serving model unknown)",
+  "owner": "Ampixa / Arbiter nenglish-73",
+  "status": "reference",
+  "last_review": "2026-11-03T18:55:21.284872+00:00",
+  "next_review": "2026-11-11",
+  "source_host": "local workstation",
+  "source_path": "/Users/cdjk/github/neptts-bench",
+  "purpose": "Freeze source identities and distinct counts for README correction; not a release or raw-rating export",
+  "hf": "NOT on HF (this manifest); public checkpoint metadata refers to dataset ampixa/neptts-bench revision d07d5495968f5e1ec4e18e852bb926f8babc1335",
+  "licence_usage": "Repository documentation/software MIT; no audio or private rater rows included",
+  "deletion_condition": "Superseded by a reviewed release/filter manifest with preserved source identities",
+  "reproduction": "Read keys then count sent_ and chirp_ IDs; group phonological_minimal_pairs by pair_id; compare study counts with checked-in paper Table human_mos and REVISION_NOTES",
+  "sources": {
+    "benchmark/sentences.json": {
+      "sha256": "2ef983ccb6135b39d7eff770a21e1e94fe9399dfd85093a65eb2ea5d92aec2fc",
+      "bytes": 130767
+    },
+    "paper/neptts_bench.tex": {
+      "sha256": "095e07b5cac06ff9d45650bfeedeb88f17b46a8ea34af608aa75b56508bd0bc3",
+      "bytes": 50094
+    },
+    "paper/REVISION_NOTES.md": {
+      "sha256": "cdf55a990819d26162ba568d1bf9954e2371fb3fcad65dd18da73904d1c30923",
+      "bytes": 15951
+    },
+    "benchmark/results/nepalimos_loso.json": {
+      "sha256": "586a4dcb0f17f8776ca99864dec4afa197d6987049a14b66d44f1c6e6a59b76a",
+      "bytes": 391993
+    },
+    "neptts-eval/src/neptts_eval/baselines.json": {
+      "sha256": "0b5e987c53b75b4232255dd589b305552c96e50acf93bafd086672a10081ef77",
+      "bytes": 1850
+    }
+  },
+  "scopes": {
+    "current_prompt_file": {
+      "total": 365,
+      "synthesis": 205,
+      "natural_references": 160,
+      "phonological_prompts": 149,
+      "pair_ids": 77,
+      "complete_two_prompt_pairs": 72,
+      "singleton_probes": 5
+    },
+    "paper_native_human_study": {
+      "source": "paper/neptts_bench.tex Table human_mos",
+      "ratings": 6962,
+      "contributing_self_declared_native_speakers": 180,
+      "native_registrations": 207,
+      "tts_systems": 10,
+      "human_baselines": 2,
+      "confidence_interval": "95% rater-cluster bootstrap, 2000 resamples; copied reported results, not re-estimated"
+    },
+    "predictor_matched_targets": {
+      "source": "paper/REVISION_NOTES.md Sample-size correction",
+      "utterances": 1697,
+      "matched_audio_ratings": 5865,
+      "matched_native_registration_ratings": 5804
+    },
+    "research_cli_saved_tts_baselines": 9,
+    "older_readme": {
+      "listeners": "164+",
+      "ratings": "5760+",
+      "prompts": 193,
+      "status": "superseded; exact export date and row-level filter unknown"
+    },
+    "other_export_counts": {
+      "ratings": 7249,
+      "audio_files": 3547,
+      "status": "reported in prior review from an Ubuntu README; scope/filter not independently frozen here; not used as current study totals"
+    },
+    "hub_audio_paths": {
+      "count": 1894,
+      "revision": "d07d5495968f5e1ec4e18e852bb926f8babc1335",
+      "status": "metadata-only count recorded by 2026-11-03 review; not asserted as study-rated clip count"
+    }
+  },
+  "unverified": [
+    "Private DB not accessed or re-exported; row-level study membership not frozen here",
+    "Cross-export mapping between 7249 ratings / 3547 audio files, 1894 Hub paths and paper study remains unresolved",
+    "Public full-state checkpoint tensor/config compatibility and score calibration not run",
+    "Paper and Hub cards are outside this documentation correction; paper still uses 77 minimal pairs where current prompt inventory contains five singleton probes"
+  ],
+  "implementation_sources": {
+    "neptts-eval/pyproject.toml": {
+      "bytes": 1443,
+      "sha256": "40c2a36015977a6afe94fab3b3a348dfaae520946d4a08ca025d566b35d56b54"
+    },
+    "neptts-eval/src/neptts_eval/data.py": {
+      "bytes": 2691,
+      "sha256": "850d40385e7453c8260997105d8accc3a546e777b763fb695af51ae1002172ee"
+    },
+    "neptts-eval/tests/test_source_data.py": {
+      "bytes": 2445,
+      "sha256": "7cf772b2287957319d3bee92f3828ea2bb7c67fe60d0d3da64c74683ace51b71"
+    }
+  },
+  "source_prompt_precedence": "module-relative versioned benchmark/sentences.json, then user cache, then Hugging Face, with module-relative legacy fallback on download failure"
+}
