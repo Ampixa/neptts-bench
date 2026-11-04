@@ -27,7 +27,7 @@ def validate_d32_report(report):
         raise ValueError("Unsupported D32 report fields.")
     if report["human_mos"] is not None or report["predicted_mos"] is not None:
         raise ValueError("D32 reports accept CER/WER only.")
-    totals = dict(char_errors=0, chars=0, word_errors=0, words=0)
+    totals = {"char_errors": 0, "chars": 0, "word_errors": 0, "words": 0}
     for row in report["per_sentence"].values():
         if set(row) != {"cer", "wer", *totals}:
             raise ValueError("Unsupported D32 sentence fields.")

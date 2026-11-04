@@ -36,8 +36,9 @@ def judge_profiles():
     if calibrated is not None:
         # The existing evaluator installs the repository-local toolkit path.
         # These imports load public identity code only, never private weights.
-        from .evaluation import BENCHMARK
         from neptts_eval import d32
+
+        from .evaluation import BENCHMARK
 
         instrument = d32.profile(BENCHMARK)
         if instrument["id"] in ids:
