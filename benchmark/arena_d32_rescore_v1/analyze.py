@@ -55,6 +55,9 @@ def main():
     args = parser.parse_args()
     folder = args.input
     inventory = read(folder / 'approved_inventory.json')
+    gate = read(folder / 'calibration_gate.json')
+    if not gate['passed'] or gate['changed_hypotheses_vs_calibration']:
+        raise ValueError('Calibration reproduction failed')
     sentences = read(ROOT / 'benchmark/sentences.json')
     prompt = {r['sent_id']: r for r in sentences if r['sent_id'].startswith('sent_')}
     ids = sorted(prompt)
@@ -67,6 +70,8 @@ def main():
         if payload['submission_id'] != sid or payload['audio_sha256'] != item['audio_sha256']:
             raise ValueError('Submission binding mismatch')
         d32.validate_profile(payload['report']['profile'], payload['benchmark'])
+        if payload['report']['profile'] != gate['profile'] or payload['benchmark'] != gate['profile']['benchmark']:
+            raise ValueError('Report instrument/benchmark differs from calibration gate')
         for report in [payload['report'], item['report']]:
             if set(report['per_sentence']) != set(ids):
                 raise ValueError('Incomplete system')
@@ -78,9 +83,6 @@ def main():
         if set(rows) != set(ids):
             raise ValueError('Incomplete reference system')
         systems[name] = dict(name=name, kind='reference_only', rows=rows)
-    gate = read(folder / 'calibration_gate.json')
-    if not gate['passed'] or gate['changed_hypotheses_vs_calibration']:
-        raise ValueError('Calibration reproduction failed')
     output = dict(created_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
         profile=gate['profile'], n_prompts=205, bootstrap_draws=B, seed=SEED,
         calibration=gate['cohorts'], analyses={})

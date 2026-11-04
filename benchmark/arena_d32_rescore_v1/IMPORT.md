@@ -4,15 +4,17 @@ The PR is intentionally unmerged. **No D32 result has been imported to the live 
 
 Created 2026-11-04 UTC by Codex `/root`, job `arena_d32_rescore_v1`; owner Ampixa / Arbiter nenglish-73, active review instructions, next review 2026-11-11. This source document owns itself; no secrets or audio, NOT on HF.
 
-From the reviewed repository checkout, substitute this PR number and check that the PR was merged. Do not run these commands while it is open. Set `PR_NUMBER` to the number linked in the PR handoff.
+From the reviewed repository checkout, verify PR #7 was merged. The state check below stops the sequence while it is open.
 
 ```sh
-PR_NUMBER=<reviewed PR number>
+PR_NUMBER=7
+test "$(gh pr view "$PR_NUMBER" --json state --jq .state)" = MERGED
 gh pr view "$PR_NUMBER" --json state,mergeCommit,url
 MERGE_SHA=$(gh pr view "$PR_NUMBER" --json mergeCommit --jq '.mergeCommit.oid')
-gh run list --workflow arena.yml --commit "$MERGE_SHA"
-# Wait for the listed main-branch deployment run to finish successfully.
-gh run watch <deployment run ID> --exit-status
+DEPLOY_RUN=$(gh run list --workflow arena.yml --commit "$MERGE_SHA" --event push --json databaseId --jq '.[0].databaseId')
+test -n "$DEPLOY_RUN"
+test "$DEPLOY_RUN" != null
+gh run watch "$DEPLOY_RUN" --exit-status
 ```
 
 The importer verifies that the deployed `SOURCE_COMMIT` equals the exact merged commit. It reads credentials only in VM memory via `sudo`, checks all five legacy report hashes before and after each operation, verifies the submission/audio binding through the reviewer API, and uses only numeric report JSON already present in the deployed source. It fails on any changed legacy report or conflicting D32 result. Repeated successful imports leave identical existing results alone. A partial failure does not roll back earlier independent imports; inspect the error, resolve it, and rerun the same command.
