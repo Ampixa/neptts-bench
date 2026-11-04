@@ -1,0 +1,1728 @@
+{
+  "submission_id": "fa9281699611497598c9ca60c4b83ad3",
+  "benchmark": "neptts-synthesis-v1-e85f91670812",
+  "audio_sha256": "fb568cc4631f737e4e0dcd29afde5435bb10620be570812a247df91659f3da81",
+  "report": {
+    "profile": {
+      "benchmark": "neptts-synthesis-v1-e85f91670812",
+      "model": "d32v2-s60000-full-translit",
+      "weights_sha256": "97392051e0fd5aa764b0098c7a39ebe2223e521c76701bfffdf5b99f1f39b213",
+      "bpe_sha256": "efef2f02304881a9a5aa269aec829b9ee1ba1ada0ff48f1f2d3feae7fb51394f",
+      "code_sha256": "b198f7942de3ac8a3c3315568cc6e51313d9c0221c22d967227a4cc37a86ba2c",
+      "packages": {
+        "numpy": "2.5.4",
+        "scipy": "1.18.1",
+        "sentencepiece": "0.2.2",
+        "torch": "2.8.0",
+        "lhotse": "1.33.0",
+        "k2": "1.24.4.dev20260625+cpu.torch2.8.0",
+        "soundfile": "0.14.0"
+      },
+      "recipe_hashes": {
+        "amrnb_codec.py": "1491686c6f136044b9b359253f1ef87d0841560b193043ddee0a9d1bc4a3a7f6",
+        "asr_datamodule.py": "5c66012d8e6aa5f905eb93632e83ba4ac97c6747624987d3b3a7382e675b8c4f",
+        "attention_decoder.py": "a9984edb638bb55aa5d987a2f325095cf5cc26d393c6c617e6ff3a83cad1d2f1",
+        "beam_search.py": "ae6afa2654215175ba5be630c7c34ee885a42df4cc79b1abb743c707d716212a",
+        "coverage_pass.py": "65c2721a154b4239a2758d091fd371336a6f32f132cdc3d253e3fc3489d95f5d",
+        "ddp_sync.py": "6beca33dc71b096266fdd39622ca73c3722361c1b85e786e005e648f8e9f6421",
+        "decoder.py": "92ee967e4b927a3ef2e4cc2d900756609a191f859c956a400cfe642d6ef0cf52",
+        "encoder_interface.py": "fc70f530c33e2489435ff2cb4bb0dad8b9d6f58a248c425cbd6100c62f628569",
+        "joiner.py": "2d924a5a00f7a2bb2340c1a991f8a71037bcfbc7e98cbabe26527ffa7d4030d4",
+        "label_smoothing.py": "32234a83a21a2444d2f789990e2a99d4d3e70f561c5de0184182d84658ac7867",
+        "liveness.py": "7c80acaac021e67a0a84a49b5f7440422698172d59c0a1274d11a595fe22d4bf",
+        "loader_mix.py": "8b6bcf7bdfd014500a299bb752fdef36699e04d21fead4cac3ec0dcd5f08dd0e",
+        "loader_shutdown.py": "b6cc6b85cf93f6d601483daff1eef0d5d7350689cdeebb449c5a2e1a73cbff83",
+        "model.py": "3528ed374adc5ff3d13f8aada753e88325c0a9155f0cf00c030363840d2a78b3",
+        "optim.py": "7282cd6db1d234e086110feb1f39f076a76095a6b026b939cebc81f2ed0f5d45",
+        "scaler_step.py": "4c56498833fe2e3aab45fb17f33e533ad98aba02ebd27421dc3649c838857133",
+        "scaling.py": "d5a5db141cd00b4beaa990fe6827599b3248b2fddd87e8dc7809b0dbd9d6633b",
+        "subsampling.py": "f2ab130931f70364bf1f7730bc2cc0e336c0c6528cb26fefc676ae4ba06eecc1",
+        "train.py": "17f6ff9d99a16bb7109385629ece23186a1708de23f8a7e212109d253331d4e2",
+        "train_clock.py": "0b225292a9689ea9b6baa7c9032ecfe9f4663be31cb8907f027a25b107745947",
+        "zipformer.py": "4d5365ed19dee07f5a51fcaaa26e18310f7fafbdf2a391e24a7cc01d1b2e8cfe"
+      },
+      "icefall_commit": "c1eda5427c46502b2cfdcbeb910bf35f2134a0d4",
+      "normalizer_hashes": {
+        "normalization_snapshot/frontend/__init__.py": "86030d8daebbba0407330fe96d450ff22109f09ad9ee482ac4453c89d2c27fe0",
+        "normalization_snapshot/frontend/english.py": "64c1df6f45bb570819a90878224edcdee623378d05306036a4af2c6a03043f64",
+        "normalization_snapshot/frontend/english_fix.py": "1b4c40a8ca66881a68ac3db8dbd242ae54ab1fcac9786fe76210929ee945f7d8",
+        "normalization_snapshot/frontend/g2p.py": "fbd2d67574c8af0aa53e0bd2b3c6117be736987727773788d53aef5b358ff59d",
+        "normalization_snapshot/frontend/normalize.py": "7e251f6ce39f35971d7a38d4b0b3b464b67b9724b568a3fdf25185ba3433b7b2",
+        "normalization_snapshot/frontend/pron.py": "c18575dca11ee61f595cc97125165de981b4619de9f4ef3626d328b146fc139c",
+        "normalization_snapshot/frontend/romanize.py": "6259d0055360ab8cb1f53c6abea04ef202ee77bd5da1e8accf1f72c0998a0e1e",
+        "normalization_snapshot/data/loanwords.tsv": "12e60d7abca1c5f6df901e77f8ff3b33a31558b0090c60cdcb203b4c8dd50ef9",
+        "normalization_snapshot/data/cmudict.dict.gz": "22fa821495811a78b406e4a81cca773a2939fd38e7b973b87dabcf4f5197f7d9",
+        "normalization_snapshot/data/cmudict.LICENSE": "bd4ce8e44170a5f9f481310ca85c51de3c4f851a65e679b40e603b143bd3542a",
+        "normalization_snapshot/data/ne_wordfreq.tsv.gz": "066793f1b8493c39084c146843a0c095f278d892da3d726dce3608ca4bafe705",
+        "normalization_snapshot/data/lexicons/ampixa/loanwords_latin.tsv": "21cfd0abc71b8016a05002a8034fc779baed8962181c5366558fad792d573214",
+        "normalization_snapshot/data/lexicons/google/lexicon.tsv": "a9f616db4ecc35ecde4e519e1438c5501d8574b3623d43370fb0089a31ea8a83",
+        "normalization_snapshot/suite_common.py": "03d5904d1b5b911971b547ccaa7d7588c6e5993880b152f3013e8b7b2890b226",
+        "normalization_snapshot/nepali_norm.py": "670e1d5b557009efbb53ba6c12e494c5746f4ce8fe0dcf2060b176cdb67cb160"
+      },
+      "normalization_manifest_sha256": "67d30baf75129d68eac255a904202081b4cdea5778206171ad9cd1a7ecac57f5",
+      "language": "ne",
+      "device": "cpu",
+      "threads": 1,
+      "parameters": 33447414,
+      "step": 60000,
+      "chunk_size": -1,
+      "left_context_frames": -1,
+      "decoding": "greedy_search_batch; full-context FP32",
+      "audio": "soundfile float32; mono channel mean; scipy resample_poly to 16000 Hz",
+      "features": "lhotse Fbank(FbankConfig(num_filters=80)); 30 log-eps right-pad frames",
+      "normalization": "legacy score2 conditional Latin-hypothesis transliteration; frozen suite CER includes spaces",
+      "aggregation": "macro-average sentence CER/WER",
+      "development_only": false,
+      "availability": "private owner-operated reviewer profile; call-trained weights not released",
+      "id": "d32v2-s60000-full-translit-279b835f5fe9"
+    },
+    "per_sentence": {
+      "sent_001": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 17,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_002": {
+        "cer": 0.14285714285714285,
+        "wer": 0.3333333333333333,
+        "char_errors": 2,
+        "chars": 14,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_003": {
+        "cer": 0.2,
+        "wer": 0.3333333333333333,
+        "char_errors": 2,
+        "chars": 10,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_004": {
+        "cer": 0.23076923076923078,
+        "wer": 0.6666666666666666,
+        "char_errors": 3,
+        "chars": 13,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_005": {
+        "cer": 0.0625,
+        "wer": 0.25,
+        "char_errors": 1,
+        "chars": 16,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_006": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 21,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_007": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 14,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_008": {
+        "cer": 0.07692307692307693,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 13,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_009": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 18,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_010": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 18,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_011": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 17,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_012": {
+        "cer": 0.5,
+        "wer": 1.0,
+        "char_errors": 7,
+        "chars": 14,
+        "word_errors": 3,
+        "words": 3
+      },
+      "sent_013": {
+        "cer": 0.4666666666666667,
+        "wer": 0.6666666666666666,
+        "char_errors": 7,
+        "chars": 15,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_014": {
+        "cer": 0.06666666666666667,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 15,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_015": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 18,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_016": {
+        "cer": 0.05,
+        "wer": 0.2,
+        "char_errors": 1,
+        "chars": 20,
+        "word_errors": 1,
+        "words": 5
+      },
+      "sent_017": {
+        "cer": 0.18181818181818182,
+        "wer": 0.3333333333333333,
+        "char_errors": 2,
+        "chars": 11,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_018": {
+        "cer": 0.5833333333333334,
+        "wer": 1.5,
+        "char_errors": 7,
+        "chars": 12,
+        "word_errors": 3,
+        "words": 2
+      },
+      "sent_019": {
+        "cer": 0.14285714285714285,
+        "wer": 0.5,
+        "char_errors": 2,
+        "chars": 14,
+        "word_errors": 1,
+        "words": 2
+      },
+      "sent_020": {
+        "cer": 0.47058823529411764,
+        "wer": 1.0,
+        "char_errors": 8,
+        "chars": 17,
+        "word_errors": 4,
+        "words": 4
+      },
+      "sent_021": {
+        "cer": 0.125,
+        "wer": 0.6666666666666666,
+        "char_errors": 2,
+        "chars": 16,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_022": {
+        "cer": 0.3181818181818182,
+        "wer": 0.6666666666666666,
+        "char_errors": 7,
+        "chars": 22,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_023": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 17,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_024": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 17,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_025": {
+        "cer": 0.2857142857142857,
+        "wer": 0.5,
+        "char_errors": 2,
+        "chars": 7,
+        "word_errors": 1,
+        "words": 2
+      },
+      "sent_026": {
+        "cer": 0.42857142857142855,
+        "wer": 1.0,
+        "char_errors": 3,
+        "chars": 7,
+        "word_errors": 2,
+        "words": 2
+      },
+      "sent_027": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 13,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_028": {
+        "cer": 0.875,
+        "wer": 1.0,
+        "char_errors": 7,
+        "chars": 8,
+        "word_errors": 2,
+        "words": 2
+      },
+      "sent_029": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 15,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_030": {
+        "cer": 0.42857142857142855,
+        "wer": 1.0,
+        "char_errors": 6,
+        "chars": 14,
+        "word_errors": 3,
+        "words": 3
+      },
+      "sent_031": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 17,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_032": {
+        "cer": 0.3076923076923077,
+        "wer": 0.6666666666666666,
+        "char_errors": 4,
+        "chars": 13,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_033": {
+        "cer": 0.8333333333333334,
+        "wer": 1.0,
+        "char_errors": 10,
+        "chars": 12,
+        "word_errors": 3,
+        "words": 3
+      },
+      "sent_034": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 16,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_035": {
+        "cer": 0.07692307692307693,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 13,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_036": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 13,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_037": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 15,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_038": {
+        "cer": 0.058823529411764705,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 17,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_039": {
+        "cer": 0.041666666666666664,
+        "wer": 0.25,
+        "char_errors": 1,
+        "chars": 24,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_040": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 19,
+        "word_errors": 0,
+        "words": 5
+      },
+      "sent_041": {
+        "cer": 0.75,
+        "wer": 1.0,
+        "char_errors": 12,
+        "chars": 16,
+        "word_errors": 4,
+        "words": 4
+      },
+      "sent_042": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 19,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_043": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 9,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_044": {
+        "cer": 0.06666666666666667,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 15,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_045": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 15,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_046": {
+        "cer": 0.6,
+        "wer": 0.75,
+        "char_errors": 9,
+        "chars": 15,
+        "word_errors": 3,
+        "words": 4
+      },
+      "sent_047": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 17,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_048": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 25,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_049": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 19,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_050": {
+        "cer": 0.05263157894736842,
+        "wer": 0.25,
+        "char_errors": 1,
+        "chars": 19,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_051": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 15,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_052": {
+        "cer": 0.20833333333333334,
+        "wer": 0.75,
+        "char_errors": 5,
+        "chars": 24,
+        "word_errors": 3,
+        "words": 4
+      },
+      "sent_053": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 12,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_054": {
+        "cer": 0.3,
+        "wer": 0.75,
+        "char_errors": 6,
+        "chars": 20,
+        "word_errors": 3,
+        "words": 4
+      },
+      "sent_055": {
+        "cer": 0.375,
+        "wer": 1.0,
+        "char_errors": 6,
+        "chars": 16,
+        "word_errors": 4,
+        "words": 4
+      },
+      "sent_056": {
+        "cer": 0.22727272727272727,
+        "wer": 0.25,
+        "char_errors": 5,
+        "chars": 22,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_057": {
+        "cer": 0.125,
+        "wer": 0.6666666666666666,
+        "char_errors": 2,
+        "chars": 16,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_058": {
+        "cer": 0.42857142857142855,
+        "wer": 0.6666666666666666,
+        "char_errors": 9,
+        "chars": 21,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_059": {
+        "cer": 0.1111111111111111,
+        "wer": 0.6666666666666666,
+        "char_errors": 2,
+        "chars": 18,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_060": {
+        "cer": 0.4090909090909091,
+        "wer": 0.75,
+        "char_errors": 9,
+        "chars": 22,
+        "word_errors": 3,
+        "words": 4
+      },
+      "sent_061": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 17,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_062": {
+        "cer": 0.1875,
+        "wer": 0.6666666666666666,
+        "char_errors": 3,
+        "chars": 16,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_063": {
+        "cer": 0.375,
+        "wer": 1.0,
+        "char_errors": 3,
+        "chars": 8,
+        "word_errors": 2,
+        "words": 2
+      },
+      "sent_064": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 12,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_065": {
+        "cer": 0.29411764705882354,
+        "wer": 1.0,
+        "char_errors": 5,
+        "chars": 17,
+        "word_errors": 3,
+        "words": 3
+      },
+      "sent_066": {
+        "cer": 0.09090909090909091,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 11,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_067": {
+        "cer": 0.15384615384615385,
+        "wer": 0.3333333333333333,
+        "char_errors": 2,
+        "chars": 13,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_068": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 16,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_069": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 15,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_070": {
+        "cer": 0.058823529411764705,
+        "wer": 0.6666666666666666,
+        "char_errors": 1,
+        "chars": 17,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_071": {
+        "cer": 0.26666666666666666,
+        "wer": 1.0,
+        "char_errors": 4,
+        "chars": 15,
+        "word_errors": 3,
+        "words": 3
+      },
+      "sent_072": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 16,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_073": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 18,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_074": {
+        "cer": 0.07142857142857142,
+        "wer": 0.3333333333333333,
+        "char_errors": 2,
+        "chars": 28,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_075": {
+        "cer": 0.21739130434782608,
+        "wer": 0.25,
+        "char_errors": 5,
+        "chars": 23,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_076": {
+        "cer": 0.058823529411764705,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 17,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_077": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 15,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_078": {
+        "cer": 0.125,
+        "wer": 0.3333333333333333,
+        "char_errors": 2,
+        "chars": 16,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_079": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 20,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_080": {
+        "cer": 0.15789473684210525,
+        "wer": 0.6666666666666666,
+        "char_errors": 3,
+        "chars": 19,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_081": {
+        "cer": 0.23529411764705882,
+        "wer": 0.6666666666666666,
+        "char_errors": 4,
+        "chars": 17,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_082": {
+        "cer": 0.17647058823529413,
+        "wer": 0.6666666666666666,
+        "char_errors": 3,
+        "chars": 17,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_083": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 12,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_084": {
+        "cer": 0.21052631578947367,
+        "wer": 0.5,
+        "char_errors": 4,
+        "chars": 19,
+        "word_errors": 2,
+        "words": 4
+      },
+      "sent_085": {
+        "cer": 0.23529411764705882,
+        "wer": 0.25,
+        "char_errors": 4,
+        "chars": 17,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_086": {
+        "cer": 0.8125,
+        "wer": 1.0,
+        "char_errors": 13,
+        "chars": 16,
+        "word_errors": 4,
+        "words": 4
+      },
+      "sent_087": {
+        "cer": 0.047619047619047616,
+        "wer": 0.25,
+        "char_errors": 1,
+        "chars": 21,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_088": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 14,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_089": {
+        "cer": 0.13333333333333333,
+        "wer": 0.3333333333333333,
+        "char_errors": 2,
+        "chars": 15,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_090": {
+        "cer": 0.05263157894736842,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 19,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_091": {
+        "cer": 0.15384615384615385,
+        "wer": 1.0,
+        "char_errors": 2,
+        "chars": 13,
+        "word_errors": 2,
+        "words": 2
+      },
+      "sent_092": {
+        "cer": 0.26666666666666666,
+        "wer": 0.6666666666666666,
+        "char_errors": 4,
+        "chars": 15,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_093": {
+        "cer": 0.05263157894736842,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 19,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_094": {
+        "cer": 0.23529411764705882,
+        "wer": 0.25,
+        "char_errors": 4,
+        "chars": 17,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_095": {
+        "cer": 0.4,
+        "wer": 0.8,
+        "char_errors": 8,
+        "chars": 20,
+        "word_errors": 4,
+        "words": 5
+      },
+      "sent_096": {
+        "cer": 0.26666666666666666,
+        "wer": 0.6666666666666666,
+        "char_errors": 4,
+        "chars": 15,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_097": {
+        "cer": 0.42857142857142855,
+        "wer": 0.6666666666666666,
+        "char_errors": 6,
+        "chars": 14,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_098": {
+        "cer": 0.07142857142857142,
+        "wer": 0.25,
+        "char_errors": 1,
+        "chars": 14,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_099": {
+        "cer": 0.5,
+        "wer": 0.75,
+        "char_errors": 7,
+        "chars": 14,
+        "word_errors": 3,
+        "words": 4
+      },
+      "sent_100": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 17,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_101": {
+        "cer": 0.3157894736842105,
+        "wer": 0.75,
+        "char_errors": 6,
+        "chars": 19,
+        "word_errors": 3,
+        "words": 4
+      },
+      "sent_102": {
+        "cer": 0.14285714285714285,
+        "wer": 0.6666666666666666,
+        "char_errors": 2,
+        "chars": 14,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_103": {
+        "cer": 0.5555555555555556,
+        "wer": 0.6666666666666666,
+        "char_errors": 10,
+        "chars": 18,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_104": {
+        "cer": 0.12,
+        "wer": 0.2,
+        "char_errors": 3,
+        "chars": 25,
+        "word_errors": 1,
+        "words": 5
+      },
+      "sent_105": {
+        "cer": 0.125,
+        "wer": 0.6666666666666666,
+        "char_errors": 2,
+        "chars": 16,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_106": {
+        "cer": 0.17647058823529413,
+        "wer": 0.3333333333333333,
+        "char_errors": 3,
+        "chars": 17,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_107": {
+        "cer": 0.2222222222222222,
+        "wer": 1.0,
+        "char_errors": 4,
+        "chars": 18,
+        "word_errors": 3,
+        "words": 3
+      },
+      "sent_108": {
+        "cer": 0.23809523809523808,
+        "wer": 0.5,
+        "char_errors": 5,
+        "chars": 21,
+        "word_errors": 2,
+        "words": 4
+      },
+      "sent_109": {
+        "cer": 0.06666666666666667,
+        "wer": 0.5,
+        "char_errors": 1,
+        "chars": 15,
+        "word_errors": 1,
+        "words": 2
+      },
+      "sent_110": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 12,
+        "word_errors": 0,
+        "words": 2
+      },
+      "sent_111": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 6,
+        "word_errors": 0,
+        "words": 2
+      },
+      "sent_112": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 17,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_113": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 11,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_114": {
+        "cer": 0.26666666666666666,
+        "wer": 0.6666666666666666,
+        "char_errors": 4,
+        "chars": 15,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_115": {
+        "cer": 0.4,
+        "wer": 0.6666666666666666,
+        "char_errors": 6,
+        "chars": 15,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_116": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 17,
+        "word_errors": 0,
+        "words": 5
+      },
+      "sent_117": {
+        "cer": 0.7272727272727273,
+        "wer": 0.6666666666666666,
+        "char_errors": 8,
+        "chars": 11,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_118": {
+        "cer": 0.2,
+        "wer": 0.3333333333333333,
+        "char_errors": 2,
+        "chars": 10,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_119": {
+        "cer": 0.1111111111111111,
+        "wer": 0.25,
+        "char_errors": 2,
+        "chars": 18,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_120": {
+        "cer": 0.03333333333333333,
+        "wer": 0.2,
+        "char_errors": 1,
+        "chars": 30,
+        "word_errors": 1,
+        "words": 5
+      },
+      "sent_121": {
+        "cer": 0.11538461538461539,
+        "wer": 0.4,
+        "char_errors": 3,
+        "chars": 26,
+        "word_errors": 2,
+        "words": 5
+      },
+      "sent_122": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 13,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_123": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 13,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_124": {
+        "cer": 0.23076923076923078,
+        "wer": 0.3333333333333333,
+        "char_errors": 3,
+        "chars": 13,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_125": {
+        "cer": 0.05555555555555555,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 18,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_126": {
+        "cer": 0.03333333333333333,
+        "wer": 0.2,
+        "char_errors": 1,
+        "chars": 30,
+        "word_errors": 1,
+        "words": 5
+      },
+      "sent_137": {
+        "cer": 0.16666666666666666,
+        "wer": 0.6666666666666666,
+        "char_errors": 3,
+        "chars": 18,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_138": {
+        "cer": 0.11764705882352941,
+        "wer": 0.3333333333333333,
+        "char_errors": 2,
+        "chars": 17,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_139": {
+        "cer": 0.09523809523809523,
+        "wer": 0.25,
+        "char_errors": 2,
+        "chars": 21,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_140": {
+        "cer": 0.11764705882352941,
+        "wer": 0.3333333333333333,
+        "char_errors": 2,
+        "chars": 17,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_141": {
+        "cer": 0.23529411764705882,
+        "wer": 1.0,
+        "char_errors": 4,
+        "chars": 17,
+        "word_errors": 3,
+        "words": 3
+      },
+      "sent_142": {
+        "cer": 0.045454545454545456,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 22,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_143": {
+        "cer": 0.05555555555555555,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 18,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_144": {
+        "cer": 0.0625,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 16,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_145": {
+        "cer": 0.2972972972972973,
+        "wer": 0.6666666666666666,
+        "char_errors": 11,
+        "chars": 37,
+        "word_errors": 4,
+        "words": 6
+      },
+      "sent_146": {
+        "cer": 0.4,
+        "wer": 0.8,
+        "char_errors": 12,
+        "chars": 30,
+        "word_errors": 4,
+        "words": 5
+      },
+      "sent_147": {
+        "cer": 0.7209302325581395,
+        "wer": 0.7142857142857143,
+        "char_errors": 31,
+        "chars": 43,
+        "word_errors": 5,
+        "words": 7
+      },
+      "sent_148": {
+        "cer": 1.0,
+        "wer": 1.0,
+        "char_errors": 2,
+        "chars": 2,
+        "word_errors": 1,
+        "words": 1
+      },
+      "sent_149": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 3,
+        "word_errors": 0,
+        "words": 1
+      },
+      "sent_150": {
+        "cer": 0.08695652173913043,
+        "wer": 3.0,
+        "char_errors": 2,
+        "chars": 23,
+        "word_errors": 3,
+        "words": 1
+      },
+      "sent_151": {
+        "cer": 0.11538461538461539,
+        "wer": 0.25,
+        "char_errors": 3,
+        "chars": 26,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_152": {
+        "cer": 0.21052631578947367,
+        "wer": 0.5,
+        "char_errors": 8,
+        "chars": 38,
+        "word_errors": 3,
+        "words": 6
+      },
+      "sent_153": {
+        "cer": 0.1016949152542373,
+        "wer": 0.5,
+        "char_errors": 6,
+        "chars": 59,
+        "word_errors": 3,
+        "words": 6
+      },
+      "sent_154": {
+        "cer": 0.13114754098360656,
+        "wer": 0.42857142857142855,
+        "char_errors": 8,
+        "chars": 61,
+        "word_errors": 3,
+        "words": 7
+      },
+      "sent_155": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 6,
+        "word_errors": 0,
+        "words": 1
+      },
+      "sent_156": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 7,
+        "word_errors": 0,
+        "words": 1
+      },
+      "sent_157": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 6,
+        "word_errors": 0,
+        "words": 1
+      },
+      "sent_158": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 7,
+        "word_errors": 0,
+        "words": 1
+      },
+      "sent_159": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 13,
+        "word_errors": 0,
+        "words": 2
+      },
+      "sent_160": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 6,
+        "word_errors": 0,
+        "words": 2
+      },
+      "sent_161": {
+        "cer": 0.2,
+        "wer": 1.0,
+        "char_errors": 1,
+        "chars": 5,
+        "word_errors": 1,
+        "words": 1
+      },
+      "sent_162": {
+        "cer": 0.0625,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 16,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_163": {
+        "cer": 0.3333333333333333,
+        "wer": 1.0,
+        "char_errors": 5,
+        "chars": 15,
+        "word_errors": 2,
+        "words": 2
+      },
+      "sent_164": {
+        "cer": 0.2,
+        "wer": 0.5,
+        "char_errors": 3,
+        "chars": 15,
+        "word_errors": 1,
+        "words": 2
+      },
+      "sent_165": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 21,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_166": {
+        "cer": 0.3333333333333333,
+        "wer": 0.5,
+        "char_errors": 5,
+        "chars": 15,
+        "word_errors": 2,
+        "words": 4
+      },
+      "sent_167": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 17,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_168": {
+        "cer": 0.047619047619047616,
+        "wer": 0.25,
+        "char_errors": 1,
+        "chars": 21,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_169": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 14,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_170": {
+        "cer": 0.21052631578947367,
+        "wer": 0.5,
+        "char_errors": 4,
+        "chars": 19,
+        "word_errors": 2,
+        "words": 4
+      },
+      "sent_171": {
+        "cer": 0.024390243902439025,
+        "wer": 0.2,
+        "char_errors": 1,
+        "chars": 41,
+        "word_errors": 1,
+        "words": 5
+      },
+      "sent_172": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 92,
+        "word_errors": 0,
+        "words": 11
+      },
+      "sent_173": {
+        "cer": 0.3150684931506849,
+        "wer": 1.0,
+        "char_errors": 23,
+        "chars": 73,
+        "word_errors": 7,
+        "words": 7
+      },
+      "sent_174": {
+        "cer": 0.3898305084745763,
+        "wer": 0.7777777777777778,
+        "char_errors": 23,
+        "chars": 59,
+        "word_errors": 7,
+        "words": 9
+      },
+      "sent_175": {
+        "cer": 0.038461538461538464,
+        "wer": 0.25,
+        "char_errors": 1,
+        "chars": 26,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_176": {
+        "cer": 0.375,
+        "wer": 1.0,
+        "char_errors": 6,
+        "chars": 16,
+        "word_errors": 3,
+        "words": 3
+      },
+      "sent_177": {
+        "cer": 0.14285714285714285,
+        "wer": 0.5,
+        "char_errors": 3,
+        "chars": 21,
+        "word_errors": 2,
+        "words": 4
+      },
+      "sent_178": {
+        "cer": 0.3888888888888889,
+        "wer": 0.5,
+        "char_errors": 7,
+        "chars": 18,
+        "word_errors": 2,
+        "words": 4
+      },
+      "sent_179": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 10,
+        "word_errors": 0,
+        "words": 2
+      },
+      "sent_180": {
+        "cer": 0.07142857142857142,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 14,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_181": {
+        "cer": 0.13333333333333333,
+        "wer": 0.25,
+        "char_errors": 2,
+        "chars": 15,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_182": {
+        "cer": 0.13333333333333333,
+        "wer": 0.25,
+        "char_errors": 2,
+        "chars": 15,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_183": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 15,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_184": {
+        "cer": 0.06666666666666667,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 15,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_185": {
+        "cer": 0.06666666666666667,
+        "wer": 0.3333333333333333,
+        "char_errors": 1,
+        "chars": 15,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_186": {
+        "cer": 0.1875,
+        "wer": 0.25,
+        "char_errors": 3,
+        "chars": 16,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_187": {
+        "cer": 0.35714285714285715,
+        "wer": 1.0,
+        "char_errors": 5,
+        "chars": 14,
+        "word_errors": 3,
+        "words": 3
+      },
+      "sent_188": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 17,
+        "word_errors": 0,
+        "words": 3
+      },
+      "sent_189": {
+        "cer": 0.3333333333333333,
+        "wer": 1.0,
+        "char_errors": 4,
+        "chars": 12,
+        "word_errors": 2,
+        "words": 2
+      },
+      "sent_190": {
+        "cer": 0.22727272727272727,
+        "wer": 0.5,
+        "char_errors": 5,
+        "chars": 22,
+        "word_errors": 2,
+        "words": 4
+      },
+      "sent_191": {
+        "cer": 0.3333333333333333,
+        "wer": 0.3333333333333333,
+        "char_errors": 4,
+        "chars": 12,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_192": {
+        "cer": 0.375,
+        "wer": 0.5,
+        "char_errors": 6,
+        "chars": 16,
+        "word_errors": 2,
+        "words": 4
+      },
+      "sent_193": {
+        "cer": 0.4444444444444444,
+        "wer": 1.0,
+        "char_errors": 8,
+        "chars": 18,
+        "word_errors": 3,
+        "words": 3
+      },
+      "sent_194": {
+        "cer": 0.047619047619047616,
+        "wer": 0.25,
+        "char_errors": 1,
+        "chars": 21,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_195": {
+        "cer": 0.14285714285714285,
+        "wer": 0.5,
+        "char_errors": 1,
+        "chars": 7,
+        "word_errors": 1,
+        "words": 2
+      },
+      "sent_196": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 16,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_197": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 21,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_198": {
+        "cer": 0.20833333333333334,
+        "wer": 0.75,
+        "char_errors": 5,
+        "chars": 24,
+        "word_errors": 3,
+        "words": 4
+      },
+      "sent_199": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 16,
+        "word_errors": 0,
+        "words": 4
+      },
+      "sent_200": {
+        "cer": 0.375,
+        "wer": 0.5,
+        "char_errors": 6,
+        "chars": 16,
+        "word_errors": 2,
+        "words": 4
+      },
+      "sent_201": {
+        "cer": 0.14285714285714285,
+        "wer": 0.3333333333333333,
+        "char_errors": 2,
+        "chars": 14,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_202": {
+        "cer": 0.07142857142857142,
+        "wer": 0.25,
+        "char_errors": 1,
+        "chars": 14,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_203": {
+        "cer": 0.10526315789473684,
+        "wer": 0.6666666666666666,
+        "char_errors": 2,
+        "chars": 19,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_204": {
+        "cer": 0.058823529411764705,
+        "wer": 0.25,
+        "char_errors": 1,
+        "chars": 17,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_205": {
+        "cer": 0.2,
+        "wer": 0.6666666666666666,
+        "char_errors": 3,
+        "chars": 15,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_206": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 14,
+        "word_errors": 0,
+        "words": 2
+      },
+      "sent_207": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 8,
+        "word_errors": 0,
+        "words": 2
+      },
+      "sent_208": {
+        "cer": 0.17647058823529413,
+        "wer": 0.3333333333333333,
+        "char_errors": 3,
+        "chars": 17,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_209": {
+        "cer": 0.13333333333333333,
+        "wer": 0.3333333333333333,
+        "char_errors": 2,
+        "chars": 15,
+        "word_errors": 1,
+        "words": 3
+      },
+      "sent_210": {
+        "cer": 0.05263157894736842,
+        "wer": 0.25,
+        "char_errors": 1,
+        "chars": 19,
+        "word_errors": 1,
+        "words": 4
+      },
+      "sent_211": {
+        "cer": 0.21052631578947367,
+        "wer": 0.6666666666666666,
+        "char_errors": 4,
+        "chars": 19,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_212": {
+        "cer": 0.5,
+        "wer": 0.6666666666666666,
+        "char_errors": 4,
+        "chars": 8,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_213": {
+        "cer": 0.2727272727272727,
+        "wer": 0.6666666666666666,
+        "char_errors": 3,
+        "chars": 11,
+        "word_errors": 2,
+        "words": 3
+      },
+      "sent_214": {
+        "cer": 0.21428571428571427,
+        "wer": 0.5,
+        "char_errors": 3,
+        "chars": 14,
+        "word_errors": 2,
+        "words": 4
+      },
+      "sent_215": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "char_errors": 0,
+        "chars": 26,
+        "word_errors": 0,
+        "words": 4
+      }
+    },
+    "cer": 0.16460368614441384,
+    "wer": 0.39879984514130856,
+    "corpus_cer": 0.16195443315948393,
+    "corpus_wer": 0.38373751783166904,
+    "human_mos": null,
+    "predicted_mos": null
+  }
+}

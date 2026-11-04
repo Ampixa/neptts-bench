@@ -1,0 +1,60 @@
+{
+  "created_utc": "2026-11-04T15:47:54.410718+00:00",
+  "scope": "Only five new reviewer-package ZIP copies and transient extracted WAVs in this job",
+  "originals": "Arena VM originals unchanged; initial reviewer export verified every original WAV SHA; same legacy/audio hashes rechecked after scoring",
+  "source_data_unique": false,
+  "no_active_consumer": true,
+  "lsof_returncode": 1,
+  "detailed_audio_manifest_sha256": "8bd2fba3a19f4e57e11cb9d585358b470aa654cf9195e259e3fcb7aa2625fdd6",
+  "n_packages_deleted": 5,
+  "n_audio_members": 1025,
+  "n_retest_temporary_copies": 105,
+  "extraction_cleanup": "TemporaryDirectory removed each offline extraction and retest copy; parent verified empty after every consumer",
+  "package_bytes_deleted": 63823040,
+  "allocated_package_bytes_deleted": 65339392,
+  "free_bytes_before": 16622067712,
+  "free_bytes_after": 16686288896,
+  "measured_free_delta_bytes": 64221184,
+  "measured_delta_limit": "Host-concurrent activity may affect free-space delta",
+  "verified_zero_job_wav_zip": true,
+  "records": [
+    {
+      "submission_id": "2c3c1fa16ff74da09a0a8a079e0d03bb",
+      "bytes": 10539040,
+      "allocated_bytes": 10551296,
+      "sha256": "c0c9e7523dd73ce73ce9b4bb5964b32c6a57ee6b9bdaf4fe98faaf15918404fd",
+      "reason": "Complete205-prompt result +21-prompt cold numeric retest; original arena upload retained"
+    },
+    {
+      "submission_id": "6a10898f09fc44478fa1d0b4245d5e33",
+      "bytes": 10159095,
+      "allocated_bytes": 10551296,
+      "sha256": "6e4c9c26660523796be411d6da7555ff71b6f06202cdaad19fbefc148088b9a5",
+      "reason": "Complete205-prompt result +21-prompt cold numeric retest; original arena upload retained"
+    },
+    {
+      "submission_id": "8655521b564d46cf9b7b4c5c0d08ed5d",
+      "bytes": 10533485,
+      "allocated_bytes": 10551296,
+      "sha256": "8f53eb08b126f0f715bbc27b5205762ac4638d8fafc08815c5dce06983a8e57c",
+      "reason": "Complete205-prompt result +21-prompt cold numeric retest; original arena upload retained"
+    },
+    {
+      "submission_id": "a2a264fe53fe4eee958b150f6aadfd03",
+      "bytes": 10910972,
+      "allocated_bytes": 11599872,
+      "sha256": "96797766e7ce09e7f17664be1e67f5be77205de2baab25ba7b34680bc0ec9f1f",
+      "reason": "Complete205-prompt result +21-prompt cold numeric retest; original arena upload retained"
+    },
+    {
+      "submission_id": "fa9281699611497598c9ca60c4b83ad3",
+      "bytes": 21680448,
+      "allocated_bytes": 22085632,
+      "sha256": "ebd14334531a1f27d17fa64380d399037fd7f5605a9c38211802c8fcc4e12f91",
+      "reason": "Complete205-prompt result +21-prompt cold numeric retest; original arena upload retained"
+    }
+  ],
+  "restoration": "Original arena uploads remain reviewer-only; authorized re-download required. Exact ZIP container serialization may differ; audio hashes bind exact WAV bytes.",
+  "hf": "NOT on HF",
+  "backups_created": false
+}

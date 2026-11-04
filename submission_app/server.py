@@ -260,9 +260,27 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
             rows = c.execute(
                 "SELECT * FROM submissions WHERE state='published' ORDER BY created DESC"
             ).fetchall()
+            additional = (
+                {
+                    row["submission_id"]: row
+                    for row in c.execute(
+                        "SELECT * FROM profile_evaluations WHERE state='published' AND profile=?",
+                        (profile,),
+                    )
+                }
+                if profile is not None
+                else {}
+            )
         entries = []
         for row in rows:
             d = unpack(row)
+            if d["id"] in additional:
+                extra = additional[d["id"]]
+                d.update(
+                    report=json.loads(extra["report"]),
+                    profile=extra["profile"],
+                    updated=extra["updated"],
+                )
             group = selection_group(d["manifest"])
             if selection != "all" and selection != group:
                 continue
@@ -290,11 +308,20 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
         }
 
     @app.get("/api/leaderboard/{sid}/report")
-    def report(sid: str):
+    def report(sid: str, profile: str | None = None):
         row = row_for(sid)
         if row["state"] != "published":
             raise HTTPException(404)
         d = unpack(row)
+        if profile is not None and profile != d["profile"]:
+            with db(root) as c:
+                extra = c.execute(
+                    "SELECT report FROM profile_evaluations WHERE submission_id=? AND profile=? AND state='published'",
+                    (sid, profile),
+                ).fetchone()
+            if not extra:
+                raise HTTPException(404, "Approved profile result not found.")
+            d["report"] = json.loads(extra["report"])
         return {
             "id": sid,
             "manifest": d["manifest"],
@@ -424,6 +451,131 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
             )
             event(c, sid, "awaiting_review", message)
         return {"id": sid, "state": "awaiting_review"}
+
+    @app.get("/api/admin/submissions/{sid}/profiles", dependencies=[Depends(admin)])
+    def profile_results(sid: str):
+        row_for(sid)
+        with db(root) as c:
+            rows = c.execute(
+                "SELECT * FROM profile_evaluations WHERE submission_id=? ORDER BY created",
+                (sid,),
+            ).fetchall()
+        return [{**dict(row), "report": json.loads(row["report"])} for row in rows]
+
+    @app.post(
+        "/api/admin/submissions/{sid}/profiles/{profile_id}/results",
+        dependencies=[Depends(admin)],
+    )
+    async def import_profile_results(sid: str, profile_id: str, request: Request):
+        raw = bytearray()
+        async for chunk in request.stream():
+            raw.extend(chunk)
+            if len(raw) > 2 * 1024**2:
+                raise HTTPException(413, "Result JSON must be at most 2 MiB.")
+        try:
+            payload = json.loads(raw)
+        except (ValueError, UnicodeDecodeError):
+            raise HTTPException(422, "Upload a valid result JSON file.") from None
+        with db(root) as c:
+            c.execute("BEGIN IMMEDIATE")
+            row = c.execute("SELECT * FROM submissions WHERE id=?", (sid,)).fetchone()
+            if not row:
+                raise HTTPException(404)
+            if row["state"] != "published":
+                raise HTTPException(
+                    409, "Additional profiles require an approved submission."
+                )
+            try:
+                report = validate_import(payload, sid, row["audio_sha256"])
+                if (
+                    report["profile"].get("model") != "d32v2-s60000-full-translit"
+                    or report["profile"]["id"] != profile_id
+                ):
+                    raise ValueError(
+                        "Use the pinned D32 profile and matching profile ID."
+                    )
+            except (ValueError, TypeError, AttributeError, KeyError) as error:
+                raise HTTPException(422, str(error)) from None
+            if (
+                c.execute(
+                    "SELECT 1 FROM profile_evaluations WHERE submission_id=? AND profile=?",
+                    (sid, profile_id),
+                ).fetchone()
+                or row["profile"] == profile_id
+            ):
+                raise HTTPException(
+                    409, "This profile result already exists; results are immutable."
+                )
+            now = time.time()
+            c.execute(
+                "INSERT INTO profile_evaluations(submission_id,profile,created,updated,state,report) VALUES(?,?,?,?,?,?)",
+                (
+                    sid,
+                    profile_id,
+                    now,
+                    now,
+                    "awaiting_review",
+                    json.dumps(report, allow_nan=False),
+                ),
+            )
+            event(
+                c,
+                sid,
+                "published",
+                f"Additional judge {profile_id} imported; awaiting separate approval.",
+            )
+        return {"id": sid, "profile": profile_id, "state": "awaiting_review"}
+
+    class ProfileDecision(BaseModel):
+        action: str = Field(pattern="^(approve|reject)$")
+        note: str = Field(min_length=3, max_length=1000)
+
+    @app.post(
+        "/api/admin/submissions/{sid}/profiles/{profile_id}/decision",
+        dependencies=[Depends(admin)],
+    )
+    def decide_profile(sid: str, profile_id: str, body: ProfileDecision):
+        with db(root) as c:
+            c.execute("BEGIN IMMEDIATE")
+            submission = c.execute(
+                "SELECT * FROM submissions WHERE id=?", (sid,)
+            ).fetchone()
+            row = c.execute(
+                "SELECT * FROM profile_evaluations WHERE submission_id=? AND profile=?",
+                (sid, profile_id),
+            ).fetchone()
+            if not row or not submission:
+                raise HTTPException(404)
+            if submission["state"] != "published" or row["state"] != "awaiting_review":
+                raise HTTPException(
+                    409, "A pending profile on an approved submission is required."
+                )
+            if body.action == "approve":
+                try:
+                    validate_import(
+                        {
+                            "submission_id": sid,
+                            "benchmark": BENCHMARK,
+                            "audio_sha256": submission["audio_sha256"],
+                            "report": json.loads(row["report"]),
+                        },
+                        sid,
+                        submission["audio_sha256"],
+                    )
+                except (ValueError, TypeError, AttributeError, KeyError) as error:
+                    raise HTTPException(409, str(error)) from None
+            state = "published" if body.action == "approve" else "rejected"
+            c.execute(
+                "UPDATE profile_evaluations SET state=?,reviewer_note=?,updated=? WHERE submission_id=? AND profile=?",
+                (state, body.note, time.time(), sid, profile_id),
+            )
+            event(
+                c,
+                sid,
+                "published",
+                f"Additional judge {profile_id}: {state}. {body.note}",
+            )
+        return {"id": sid, "profile": profile_id, "state": state}
 
     class Decision(BaseModel):
         action: str = Field(pattern="^(queue|approve|reject)$")

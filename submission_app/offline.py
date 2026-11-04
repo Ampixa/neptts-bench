@@ -3,12 +3,58 @@
 import argparse
 import hashlib
 import json
+import math
 import tempfile
 import zipfile
 from pathlib import Path
 
 from .contract import BENCHMARK, MAX_ARCHIVE, MAX_EXPANDED, SENTENCES, validate_archive
 from .evaluation import evaluate, validate_report
+
+
+def validate_d32_report(report):
+    """Accept numeric evidence only; reject transcripts, paths and unbound counts."""
+    if set(report) != {
+        "profile",
+        "per_sentence",
+        "cer",
+        "wer",
+        "corpus_cer",
+        "corpus_wer",
+        "human_mos",
+        "predicted_mos",
+    }:
+        raise ValueError("Unsupported D32 report fields.")
+    if report["human_mos"] is not None or report["predicted_mos"] is not None:
+        raise ValueError("D32 reports accept CER/WER only.")
+    totals = dict(char_errors=0, chars=0, word_errors=0, words=0)
+    for row in report["per_sentence"].values():
+        if set(row) != {"cer", "wer", *totals}:
+            raise ValueError("Unsupported D32 sentence fields.")
+        for field in totals:
+            if type(row[field]) is not int or row[field] < (
+                1 if field in ("chars", "words") else 0
+            ):
+                raise ValueError("Invalid D32 edit counts.")
+            totals[field] += row[field]
+        for metric, errors, units in (
+            ("cer", "char_errors", "chars"),
+            ("wer", "word_errors", "words"),
+        ):
+            if abs(row[metric] - row[errors] / row[units]) > 1e-8:
+                raise ValueError("D32 sentence metric does not match edit counts.")
+    for metric, errors, units in (
+        ("corpus_cer", "char_errors", "chars"),
+        ("corpus_wer", "word_errors", "words"),
+    ):
+        value = report[metric]
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(value)
+            or abs(value - totals[errors] / totals[units]) > 1e-8
+        ):
+            raise ValueError("D32 corpus metric does not match edit counts.")
 
 
 def validate_import(payload, sid, audio_sha):
@@ -23,6 +69,13 @@ def validate_import(payload, sid, audio_sha):
     if not isinstance(report, dict) or not isinstance(report.get("profile"), dict):
         raise TypeError("Missing evaluator report/profile.")
     spec = report["profile"]
+    if spec.get("model") == "d32v2-s60000-full-translit":
+        from neptts_eval import d32
+
+        d32.validate_profile(spec, BENCHMARK)
+        validate_report(report, spec["id"])
+        validate_d32_report(report)
+        return report
     if (
         spec.get("benchmark") != BENCHMARK
         or spec.get("model") != "small"
@@ -57,12 +110,31 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--package", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument(
+        "--profile",
+        choices=["whisper-small", "d32v2-s60000-full-translit"],
+        default="whisper-small",
+    )
+    for name in ("checkpoint", "bpe", "recipe", "icefall", "normalizer-root"):
+        parser.add_argument("--" + name, type=Path)
     args = parser.parse_args()
+    if args.profile == "d32v2-s60000-full-translit" and not all(
+        getattr(args, key)
+        for key in ("checkpoint", "bpe", "recipe", "icefall", "normalizer_root")
+    ):
+        parser.error(
+            "D32 requires checkpoint, bpe, recipe, icefall and normalizer-root."
+        )
     if args.output.exists():
         parser.error("Output already exists; choose a new path.")
     if args.package.stat().st_size > MAX_ARCHIVE + 16384:
         raise ValueError("Package exceeds size limit.")
-    with tempfile.TemporaryDirectory() as temp:
+    temporary_root = (
+        args.package.resolve().parent
+        if args.profile == "d32v2-s60000-full-translit"
+        else None
+    )
+    with tempfile.TemporaryDirectory(dir=temporary_root) as temp:
         temp = Path(temp)
         with zipfile.ZipFile(args.package) as source:
             # Never extract arbitrary paths or execute files supplied in a package.
@@ -88,9 +160,23 @@ def main():
             or job.get("benchmark") != BENCHMARK
         ):
             raise ValueError("Package integrity/benchmark mismatch.")
-        report = evaluate(
-            temp / "audio", "small", lambda n: print(f"Evaluated {n}/205", flush=True)
-        )
+
+        def progress(n):
+            print(f"Evaluated {n}/{len(SENTENCES)}", flush=True)
+
+        if args.profile == "whisper-small":
+            report = evaluate(temp / "audio", "small", progress)
+        else:
+            from neptts_eval import d32
+
+            config = {
+                key: getattr(args, key)
+                for key in ("checkpoint", "bpe", "recipe", "icefall", "normalizer_root")
+            }
+            config["threads"] = 1
+            report = d32.evaluate(
+                temp / "audio", SENTENCES, BENCHMARK, config, progress
+            )
         payload = {**job, "report": report}
         validate_import(payload, job["submission_id"], validation["audio_sha256"])
         args.output.write_text(json.dumps(payload, allow_nan=False, indent=2) + "\n")

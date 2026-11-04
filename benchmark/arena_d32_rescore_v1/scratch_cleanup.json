@@ -1,0 +1,23 @@
+{
+  "created_utc": "2026-11-04T15:50:58.832445+00:00",
+  "reason": "Scoring/retest consumers complete; original normalizer snapshot15hashes reverified on Ubuntu; source panel pin verified at calibration; validator deps reinstallable from pinned pydantic2.12.5; obsolete preflight source superseded by final Git source",
+  "paths": [
+    "validation_deps",
+    "normalization_snapshot",
+    "src",
+    "panel.json",
+    "calibration_tasks.json",
+    "calibration_numeric.json"
+  ],
+  "n_files": 280,
+  "apparent_bytes": 17038349,
+  "allocated_bytes": 18944000,
+  "free_before": 16681537536,
+  "free_after": 16700121088,
+  "measured_free_delta_bytes": 18583552,
+  "manifest_sha256": "b1f8a98293bdad985fd1100a78a99d34ace7e78edb9bfc0c098050a9153e793f",
+  "no_open_files": true,
+  "originals_deleted": false,
+  "hf": "NOT on HF",
+  "restoration": "Recreate job-local normalizer from verified Ubuntu phase1b snapshot; install pydantic2.12.5 to job target; run prepare_k2.py; private panel requires authorization. Preflight staging layout is disposable; final executable retained in Git/repo copy."
+}

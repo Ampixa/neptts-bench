@@ -1,0 +1,18 @@
+{
+  "verified_checkpoint_tokenizer": {
+    "checkpoint_sha256": "97392051e0fd5aa764b0098c7a39ebe2223e521c76701bfffdf5b99f1f39b213",
+    "bpe_sha256": "efef2f02304881a9a5aa269aec829b9ee1ba1ada0ff48f1f2d3feae7fb51394f"
+  },
+  "verified_recipe": {
+    "train.py": "17f6ff9d99a16bb7109385629ece23186a1708de23f8a7e212109d253331d4e2",
+    "zipformer.py": "4d5365ed19dee07f5a51fcaaa26e18310f7fafbdf2a391e24a7cc01d1b2e8cfe",
+    "subsampling.py": "f2ab130931f70364bf1f7730bc2cc0e336c0c6528cb26fefc676ae4ba06eecc1",
+    "model.py": "3528ed374adc5ff3d13f8aada753e88325c0a9155f0cf00c030363840d2a78b3",
+    "beam_search.py": "ae6afa2654215175ba5be630c7c34ee885a42df4cc79b1abb743c707d716212a"
+  },
+  "worker_sha256": "674848466fae613dfb0e006db5d1c897a2b65a59c27a98b172af1f76c773bbb4",
+  "n_calibration_targets": 196,
+  "source_metadata_sha256": "9fd369d567813a57b7a613884a55f4463d0eee6f59ff3d9149555fff38c3179b",
+  "source_task_sha256": "5624ea1c31be1ca73d307ac7b55523d9c6b11b9b7a8f2b4c74072c521c8038a5",
+  "normalizer_manifest_sha256": "67d30baf75129d68eac255a904202081b4cdea5778206171ad9cd1a7ecac57f5"
+}
