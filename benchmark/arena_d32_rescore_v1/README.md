@@ -23,6 +23,7 @@ Purpose/value: reviewer can audit an independently stored D32 score while preser
 - `copy_verification.json`: all twelve transported numeric outputs match k2 size/SHA exactly; no restricted content transported.
 - `download_receipt.json`: direct VM→k2 pipe return codes; no Mac audio copy or model API transport.
 - `audio_cleanup.json`: consumed private-copy deletion evidence, per-package hashes/sizes, empty extraction checks, lsof and measured reclaimed space. Detailed per-member ID/size/hash manifest remains only in the documented k2 job directory; all new submitted WAV/ZIP copies were deleted.
+- `blog_handoff.json`: Bemine accepted one draft with a clean style check; its automatically refreshed preview was mirrored to Ampixa/ampixa-site main by Bemine. Post-push SHA256 comparison of all 212 live/repo site files was identical. The required pre-submit parity check was missed because the submit command's automatic preview refresh was discovered afterward; no manual site edits were made.
 - `scratch_cleanup.json`: measured removal of redundant job-local normalizer/dependency/preflight source and restricted panel/task copies after original snapshot verification. Original data and shared runtimes were untouched.
 - `reviewer_fetch.py`, `download_packages.py`, `prepare_k2.py`, `calibrate_k2.py`, `score_k2.py`, `retest_k2.py`, `cleanup_k2.py`, `cleanup_scratch_k2.py`, `document_k2.py`: source for the actual restricted execution and guarded documentation/cleanup. Run only with the prerequisites and sequencing in EXECUTION.md.
 
