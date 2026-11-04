@@ -1,0 +1,244 @@
+{
+ "description": "Swar (Naamche Labs), open Nepali zero-shot voice cloning, scored with neptts-eval 0.2 on the 205 scored sentences. One take per sentence, no selection.",
+ "model": "https://huggingface.co/Aarjan/swar",
+ "audio": "https://huggingface.co/datasets/Aarjan/swar-neptts-bench",
+ "code": "https://github.com/Naamche-Labs/swar",
+ "systems": {
+  "swar_studio": {
+   "system": "swar_studio",
+   "benchmark_version": "1.0",
+   "eval_date": "2026-10-24",
+   "n_files_evaluated": 205,
+   "scoreq": {
+    "avg_mos": 4.3,
+    "n_scored": 205
+   },
+   "nepalimos": {
+    "avg_mos": 2.96,
+    "n_scored": 205
+   },
+   "asr_roundtrip": {
+    "avg_cer": 0.3287,
+    "avg_wer": 0.8949,
+    "n_files": 205,
+    "per_category": {
+     "contrastive_stress": 0.2859,
+     "emotion": 0.3709,
+     "homographs": 0.4605,
+     "newspaper_ambiguities": 0.284,
+     "phonological_minimal_pairs": 0.3009,
+     "phrases": 0.5483,
+     "question_intonation": 0.2878,
+     "robustness": 0.5045
+    }
+   },
+   "comparison": [
+    {
+     "system": "edge_tts/hemkala",
+     "scoreq_mos": 3.737,
+     "nepalimos": 3.224,
+     "chirp2_cer": 0.1695,
+     "mms_cer": 0.3009,
+     "xlsr_nepali_cer": 0.1612,
+     "whisper_small_cer": 0.457
+    },
+    {
+     "system": "edge_tts/sagar",
+     "scoreq_mos": 3.627,
+     "nepalimos": 3.198,
+     "chirp2_cer": 0.1462,
+     "mms_cer": 0.279,
+     "xlsr_nepali_cer": 0.1485,
+     "whisper_small_cer": 0.6519
+    },
+    {
+     "system": "elevenlabs",
+     "scoreq_mos": 4.448,
+     "nepalimos": 3.461,
+     "chirp2_cer": 0.1063,
+     "mms_cer": 0.2775,
+     "xlsr_nepali_cer": 0.2217,
+     "whisper_small_cer": 0.4699
+    },
+    {
+     "system": "gemini",
+     "scoreq_mos": 4.102,
+     "nepalimos": 3.196,
+     "chirp2_cer": 0.1437,
+     "mms_cer": 0.2136,
+     "xlsr_nepali_cer": 0.1988,
+     "whisper_small_cer": 0.3715
+    },
+    {
+     "system": "gtts",
+     "scoreq_mos": 3.023,
+     "nepalimos": 2.512,
+     "chirp2_cer": 0.4727,
+     "mms_cer": 0.5312,
+     "xlsr_nepali_cer": 0.279,
+     "whisper_small_cer": 0.5861
+    },
+    {
+     "system": "piper",
+     "scoreq_mos": 3.486,
+     "nepalimos": 3.517,
+     "chirp2_cer": 0.186,
+     "mms_cer": 0.2911,
+     "xlsr_nepali_cer": 0.1675,
+     "whisper_small_cer": 0.471
+    },
+    {
+     "system": "tingting_asmita",
+     "scoreq_mos": 4.168,
+     "nepalimos": 3.395,
+     "chirp2_cer": 0.1405,
+     "mms_cer": 0.2337,
+     "xlsr_nepali_cer": 0.1975,
+     "whisper_small_cer": 0.4836
+    },
+    {
+     "system": "tingting_sambriddhi",
+     "scoreq_mos": 4.051,
+     "nepalimos": 3.177,
+     "chirp2_cer": 0.2164,
+     "mms_cer": 0.3129,
+     "xlsr_nepali_cer": 0.2345,
+     "whisper_small_cer": 0.5543
+    },
+    {
+     "system": "tingting_subina",
+     "scoreq_mos": 4.269,
+     "nepalimos": 3.357,
+     "chirp2_cer": 0.1204,
+     "mms_cer": 0.1809,
+     "xlsr_nepali_cer": 0.1604,
+     "whisper_small_cer": 0.5142
+    },
+    {
+     "system": "swar_fin_pod",
+     "scoreq_mos": 4.3,
+     "nepalimos": 2.96,
+     "whisper_small_cer": 0.3287
+    }
+   ]
+  },
+  "swar_maya": {
+   "system": "swar_maya",
+   "benchmark_version": "1.0",
+   "eval_date": "2026-10-24",
+   "n_files_evaluated": 205,
+   "scoreq": {
+    "avg_mos": 4.571,
+    "n_scored": 205
+   },
+   "nepalimos": {
+    "avg_mos": 2.88,
+    "n_scored": 205
+   },
+   "asr_roundtrip": {
+    "avg_cer": 0.506,
+    "avg_wer": 1.0631,
+    "n_files": 205,
+    "per_category": {
+     "contrastive_stress": 0.3588,
+     "emotion": 0.6394,
+     "homographs": 0.4461,
+     "newspaper_ambiguities": 0.2724,
+     "phonological_minimal_pairs": 0.431,
+     "phrases": 0.4829,
+     "question_intonation": 0.2907,
+     "robustness": 2.0013
+    }
+   },
+   "comparison": [
+    {
+     "system": "edge_tts/hemkala",
+     "scoreq_mos": 3.737,
+     "nepalimos": 3.224,
+     "chirp2_cer": 0.1695,
+     "mms_cer": 0.3009,
+     "xlsr_nepali_cer": 0.1612,
+     "whisper_small_cer": 0.457
+    },
+    {
+     "system": "edge_tts/sagar",
+     "scoreq_mos": 3.627,
+     "nepalimos": 3.198,
+     "chirp2_cer": 0.1462,
+     "mms_cer": 0.279,
+     "xlsr_nepali_cer": 0.1485,
+     "whisper_small_cer": 0.6519
+    },
+    {
+     "system": "elevenlabs",
+     "scoreq_mos": 4.448,
+     "nepalimos": 3.461,
+     "chirp2_cer": 0.1063,
+     "mms_cer": 0.2775,
+     "xlsr_nepali_cer": 0.2217,
+     "whisper_small_cer": 0.4699
+    },
+    {
+     "system": "gemini",
+     "scoreq_mos": 4.102,
+     "nepalimos": 3.196,
+     "chirp2_cer": 0.1437,
+     "mms_cer": 0.2136,
+     "xlsr_nepali_cer": 0.1988,
+     "whisper_small_cer": 0.3715
+    },
+    {
+     "system": "gtts",
+     "scoreq_mos": 3.023,
+     "nepalimos": 2.512,
+     "chirp2_cer": 0.4727,
+     "mms_cer": 0.5312,
+     "xlsr_nepali_cer": 0.279,
+     "whisper_small_cer": 0.5861
+    },
+    {
+     "system": "piper",
+     "scoreq_mos": 3.486,
+     "nepalimos": 3.517,
+     "chirp2_cer": 0.186,
+     "mms_cer": 0.2911,
+     "xlsr_nepali_cer": 0.1675,
+     "whisper_small_cer": 0.471
+    },
+    {
+     "system": "tingting_asmita",
+     "scoreq_mos": 4.168,
+     "nepalimos": 3.395,
+     "chirp2_cer": 0.1405,
+     "mms_cer": 0.2337,
+     "xlsr_nepali_cer": 0.1975,
+     "whisper_small_cer": 0.4836
+    },
+    {
+     "system": "tingting_sambriddhi",
+     "scoreq_mos": 4.051,
+     "nepalimos": 3.177,
+     "chirp2_cer": 0.2164,
+     "mms_cer": 0.3129,
+     "xlsr_nepali_cer": 0.2345,
+     "whisper_small_cer": 0.5543
+    },
+    {
+     "system": "tingting_subina",
+     "scoreq_mos": 4.269,
+     "nepalimos": 3.357,
+     "chirp2_cer": 0.1204,
+     "mms_cer": 0.1809,
+     "xlsr_nepali_cer": 0.1604,
+     "whisper_small_cer": 0.5142
+    },
+    {
+     "system": "swar_fin_maya",
+     "scoreq_mos": 4.571,
+     "nepalimos": 2.88,
+     "whisper_small_cer": 0.506
+    }
+   ]
+  }
+ }
+}
