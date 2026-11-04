@@ -2,6 +2,7 @@
 import datetime
 import json
 from pathlib import Path
+import os
 import subprocess
 
 
@@ -16,8 +17,8 @@ def main():
         sid = row['id']
         if len(sid) != 32 or any(c not in '0123456789abcdef' for c in sid):
             raise RuntimeError('Invalid submission ID')
-        sender = subprocess.Popen(['ssh', '-i', str(Path.home() / '.ssh/affine-test-ap-south-1'),
-            'ubuntu@3.108.203.159', 'python3 - --id ' + sid],
+        sender = subprocess.Popen(['ssh', '-i', os.environ['ARENA_SSH_KEY'],
+            os.environ['ARENA_SSH_HOST'], 'python3 - --id ' + sid],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         sender.stdin.write(source)
         sender.stdin.close()

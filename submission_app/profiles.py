@@ -52,8 +52,9 @@ def judge_profiles():
             offline_enabled=True,
             availability=(
                 "Private owner-operated offline scoring only; no public worker. "
-                "Call-trained weights are not released. Scores are reproducible only "
-                "by Ampixa until the owner decision on weight release."
+                "Call-trained weights are not released yet; per the owner decision on weight release, "
+                "public release is planned after Tihar 2026. Until then scores are "
+                "reproducible only by Ampixa."
             ),
             source_calibration_id=calibrated["id"],
             instrument=instrument,

@@ -19,17 +19,19 @@ gh run watch "$DEPLOY_RUN" --exit-status
 
 The importer verifies that the deployed `SOURCE_COMMIT` equals the exact merged commit. It reads credentials only in VM memory via `sudo`, checks all five legacy report hashes before and after each operation, verifies the submission/audio binding through the reviewer API, and uses only numeric report JSON already present in the deployed source. It fails on any changed legacy report or conflicting D32 result. Repeated successful imports leave identical existing results alone. A partial failure does not roll back earlier independent imports; inspect the error, resolve it, and rerun the same command.
 
+Set `ARENA_SSH_HOST` (user@host of the arena VM) and `ARENA_SSH_KEY` (operator key path) from the private operator notes first.
+
 Import into review, with **no publication**:
 
 ```sh
-ssh -i ~/.ssh/affine-test-ap-south-1 ubuntu@3.108.203.159 \
+ssh -i "$ARENA_SSH_KEY" "$ARENA_SSH_HOST" \
   "python3 /opt/ampixa-arena/current/benchmark/arena_d32_rescore_v1/import_results.py --deployed-commit '$MERGE_SHA' --mode import"
 ```
 
 After inspecting the five D32 reports and the profile card, publish the separate profile results:
 
 ```sh
-ssh -i ~/.ssh/affine-test-ap-south-1 ubuntu@3.108.203.159 \
+ssh -i "$ARENA_SSH_KEY" "$ARENA_SSH_HOST" \
   "python3 /opt/ampixa-arena/current/benchmark/arena_d32_rescore_v1/import_results.py --deployed-commit '$MERGE_SHA' --mode approve"
 ```
 
