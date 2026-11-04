@@ -1,0 +1,37 @@
+{
+  "cold_process": true,
+  "scope": "numeric CER/WER/edit counts; no stored private hypotheses",
+  "rows": [
+    {
+      "submission_id": "2c3c1fa16ff74da09a0a8a079e0d03bb",
+      "n": 21,
+      "total": 205,
+      "changed_numeric_rows": 0
+    },
+    {
+      "submission_id": "6a10898f09fc44478fa1d0b4245d5e33",
+      "n": 21,
+      "total": 205,
+      "changed_numeric_rows": 0
+    },
+    {
+      "submission_id": "8655521b564d46cf9b7b4c5c0d08ed5d",
+      "n": 21,
+      "total": 205,
+      "changed_numeric_rows": 0
+    },
+    {
+      "submission_id": "a2a264fe53fe4eee958b150f6aadfd03",
+      "n": 21,
+      "total": 205,
+      "changed_numeric_rows": 0
+    },
+    {
+      "submission_id": "fa9281699611497598c9ca60c4b83ad3",
+      "n": 21,
+      "total": 205,
+      "changed_numeric_rows": 0
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,21 @@
+{
+  "mode": "offline",
+  "threads": 1,
+  "provider": "cpu",
+  "worker_sha256": "674848466fae613dfb0e006db5d1c897a2b65a59c27a98b172af1f76c773bbb4",
+  "checkpoint_sha256": "97392051e0fd5aa764b0098c7a39ebe2223e521c76701bfffdf5b99f1f39b213",
+  "bpe_sha256": "efef2f02304881a9a5aa269aec829b9ee1ba1ada0ff48f1f2d3feae7fb51394f",
+  "chunk_size": -1,
+  "left_context_frames": -1,
+  "parameters": 33447414,
+  "features": "lhotse Fbank(FbankConfig(num_filters=80)); 30 log-eps right-pad frames",
+  "recipe_hashes": {
+    "train.py": "17f6ff9d99a16bb7109385629ece23186a1708de23f8a7e212109d253331d4e2",
+    "zipformer.py": "4d5365ed19dee07f5a51fcaaa26e18310f7fafbdf2a391e24a7cc01d1b2e8cfe",
+    "subsampling.py": "f2ab130931f70364bf1f7730bc2cc0e336c0c6528cb26fefc676ae4ba06eecc1",
+    "model.py": "3528ed374adc5ff3d13f8aada753e88325c0a9155f0cf00c030363840d2a78b3",
+    "beam_search.py": "ae6afa2654215175ba5be630c7c34ee885a42df4cc79b1abb743c707d716212a"
+  },
+  "torch": "2.8.0",
+  "lhotse": "1.33.0"
+}

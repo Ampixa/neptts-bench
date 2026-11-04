@@ -37,6 +37,12 @@ def initialize(root):
         CREATE TABLE IF NOT EXISTS user_sessions (token_hash TEXT PRIMARY KEY, github_id TEXT NOT NULL, login TEXT NOT NULL, expires REAL NOT NULL);
         CREATE TABLE IF NOT EXISTS oauth_states (state_hash TEXT PRIMARY KEY, binding_hash TEXT NOT NULL, verifier TEXT NOT NULL, expires REAL NOT NULL, callback TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS rate_limits (key TEXT PRIMARY KEY, start REAL NOT NULL, count INTEGER NOT NULL);
+        CREATE TABLE IF NOT EXISTS profile_evaluations (
+          submission_id TEXT NOT NULL, profile TEXT NOT NULL,
+          created REAL NOT NULL, updated REAL NOT NULL,
+          state TEXT NOT NULL CHECK(state IN ('awaiting_review','published','rejected')),
+          report TEXT NOT NULL, reviewer_note TEXT NOT NULL DEFAULT '',
+          PRIMARY KEY(submission_id, profile));
         """)
 
         if "owner_id" not in {

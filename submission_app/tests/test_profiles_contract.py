@@ -152,7 +152,7 @@ def test_checked_in_profiles_match_complete_calibration_and_owner_gate():
         (root / "benchmark/judge_calibration_v1/calibration/numbers.json").read_text()
     )
     profiles = judge_profiles()
-    assert len(profiles) == 6
+    assert len(profiles) == 7
     assert {p["stage"] for p in profiles} == {
         "asr_small",
         "asr_long1c",
@@ -181,6 +181,38 @@ def test_checked_in_profiles_match_complete_calibration_and_owner_gate():
         for p in profiles
         if p["stage"].startswith("d32_")
     )
+
+
+def test_private_executable_d32_card_matches_profile_identity_and_calibration():
+    from neptts_eval import d32
+
+    from submission_app.contract import BENCHMARK
+    from submission_app.profiles import CALIBRATION
+
+    original = CALIBRATION.read_bytes()
+    catalog = json.loads(original)["profiles"]
+    profiles = judge_profiles()
+    assert profiles[:6] == catalog
+    card = profiles[-1]
+    source = next(profile for profile in catalog if profile["stage"] == "d32_full")
+    assert card["id"] == d32.profile(BENCHMARK)["id"]
+    assert card["instrument"] == d32.profile(BENCHMARK)
+    assert card["source_calibration_id"] == source["id"]
+    for key in ("calibration", "controls", "retest", "primary_policy", "stage"):
+        assert card[key] == source[key]
+    assert card["calibration"]["pv"]["corpus_cer_percent"] == pytest.approx(
+        7.875536480686695
+    )
+    assert card["calibration"]["fresh"]["corpus_cer_percent"] == pytest.approx(
+        13.68944386634293
+    )
+    assert card["public_enabled"] is False
+    assert card["offline_enabled"] is True
+    assert "Call-trained weights are not released" in card["availability"]
+    assert "reproducible only by Ampixa" in card["availability"]
+    assert "owner decision on weight release" in card["availability"]
+    assert "no public worker" in card["availability"]
+    assert CALIBRATION.read_bytes() == original
 
 
 @pytest.mark.parametrize(

@@ -1,0 +1,21 @@
+{
+  "created_utc": "2026-11-04T16:02:12.895837+00:00",
+  "plugin_skill": "ampixa-blog",
+  "skill_path": "/Users/cdjk/.codex/skills/ampixa-blog/SKILL.md",
+  "status": "draft queued; not article publication",
+  "slug": "a-private-33-45m-judge-rescores-five-arena-submissions",
+  "preview_url": "https://ampixa.com/blog/preview/a-private-33-45m-judge-rescores-five-arena-submissions/",
+  "style_problems": [],
+  "source_dir": "ubuntu:/home/cdjk/Documents/Mayor/Blog/drafts/a-private-33-45m-judge-rescores-five-arena-submissions",
+  "site_mirror": {
+    "repo": "Ampixa/ampixa-site",
+    "branch": "main",
+    "commit": "5f1f64d2541d0914253d0e6310f5996e5ea70a5b",
+    "live_site_files_sha256_checked": 212,
+    "repo_site_files_sha256_checked": 212,
+    "differences": 0,
+    "mirror_who": "Bemine submit automatically refreshed draft previews and committed/pushed mirror; root performed read-only post-submit after-push SHA256 comparison",
+    "pre_submit_parity_checked": false,
+    "pre_submit_limit": "Automatic preview refresh was learned after invoking submit; required pre-edit check was missed. Full post-push site hash parity subsequently verified identical; no manual site edits or extra main push."
+  }
+}

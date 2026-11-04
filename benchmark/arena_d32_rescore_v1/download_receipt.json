@@ -1,0 +1,31 @@
+{
+  "created_utc": "2026-11-04T15:43:26.263339+00:00",
+  "route": "reviewer API -> VM stdout -> SSH pipe -> k2 job directory; no Mac audio file",
+  "records": [
+    {
+      "submission_id": "2c3c1fa16ff74da09a0a8a079e0d03bb",
+      "sender_returncode": 0,
+      "receiver_returncode": 0
+    },
+    {
+      "submission_id": "6a10898f09fc44478fa1d0b4245d5e33",
+      "sender_returncode": 0,
+      "receiver_returncode": 0
+    },
+    {
+      "submission_id": "8655521b564d46cf9b7b4c5c0d08ed5d",
+      "sender_returncode": 0,
+      "receiver_returncode": 0
+    },
+    {
+      "submission_id": "a2a264fe53fe4eee958b150f6aadfd03",
+      "sender_returncode": 0,
+      "receiver_returncode": 0
+    },
+    {
+      "submission_id": "fa9281699611497598c9ca60c4b83ad3",
+      "sender_returncode": 0,
+      "receiver_returncode": 0
+    }
+  ]
+}

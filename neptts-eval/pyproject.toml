@@ -30,6 +30,14 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+d32 = [
+    "torch==2.8.0",
+    "lhotse==1.33.0",
+    "sentencepiece==0.2.2",
+    "numpy==2.5.4",
+    "scipy==1.18.1",
+    "soundfile==0.14.0",
+]
 mms = [
     "transformers>=4.35.0",
     "torch>=2.0.0",
@@ -57,6 +65,7 @@ dev = [
 
 [project.scripts]
 neptts-eval = "neptts_eval.cli:main"
+neptts-eval-d32 = "neptts_eval.d32:main"
 
 [project.urls]
 Homepage = "https://github.com/bolne/neptts-eval"
