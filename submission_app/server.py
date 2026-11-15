@@ -18,6 +18,8 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from starlette.background import BackgroundTask
 
+from . import autoreview
+from .arena import consent_granted, install_arena
 from .auth import install_auth
 from .contract import (
     BENCHMARK,
@@ -26,9 +28,10 @@ from .contract import (
     sentence_pack,
     validate_archive,
 )
+from .donations import install_donations
 from .evaluation import validate_report
-from .offline import validate_import
-from .profiles import judge_profiles, selection_group
+from .offline import ADDITIONAL_MODELS, validate_import
+from .profiles import judge_profiles, primary_profile_id, selection_group
 from .storage import db, event, initialize, unpack
 
 STATIC = Path(__file__).parent / "static"
@@ -92,6 +95,9 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
         if sessions.get(hashlib.sha256(token.encode()).hexdigest(), 0) < time.time():
             raise HTTPException(401, "Sign in to review submissions.")
         return True
+
+    install_arena(app, root, rate, origin, current_user, admin)
+    install_donations(app, root, rate, origin, admin)
 
     def row_for(sid):
         with db(root) as c:
@@ -185,6 +191,8 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
                             "This audio package was already submitted. Use its saved receipt.",
                         )
                     shutil.move(str(work / "audio"), target)
+                    auto = autoreview.enabled()
+                    state = "queued" if auto else "validated"
                     c.execute(
                         "INSERT INTO submissions(id,token_hash,created,updated,state,manifest,validation,audio_sha256,message,owner_id) VALUES(?,?,?,?,?,?,?,?,?,?)",
                         (
@@ -192,11 +200,13 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
                             hashlib.sha256(token.encode()).hexdigest(),
                             now,
                             now,
-                            "validated",
+                            state,
                             json.dumps(manifest),
                             json.dumps(validation),
                             validation["audio_sha256"],
-                            "Audio checks passed. Waiting for an evaluator to be assigned.",
+                            "Audio checks passed. Queued for evaluation."
+                            if auto
+                            else "Audio checks passed. Waiting for an evaluator to be assigned.",
                             identity["github_id"],
                         ),
                     )
@@ -206,10 +216,12 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
                         "validated",
                         f"All {len(SENTENCES)} prompts passed audio checks.",
                     )
+                    if auto:
+                        event(c, sid, "queued", f"Queued automatically by {autoreview.VERSION}.")
                 return {
                     "id": sid,
                     "token": token,
-                    "state": "validated",
+                    "state": state,
                     "validation": {
                         k: v for k, v in validation.items() if k != "per_file"
                     },
@@ -233,6 +245,8 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
                 )
             ]
         d["validation"].pop("per_file", None)
+        with db(root) as c:
+            d["listening_consent"] = consent_granted(c, sid, d["manifest"])
         return d
 
     @app.get("/api/submissions/{sid}/audio/{sent_id}")
@@ -250,7 +264,8 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
 
     @app.get("/api/judge-profiles")
     def profiles():
-        return {"schema_version": 1, "profiles": judge_profiles()}
+        return {"schema_version": 1, "profiles": judge_profiles(),
+                "primary": primary_profile_id()}
 
     @app.get("/api/leaderboard")
     def leaderboard(selection: str = "single_take", profile: str | None = None):
@@ -450,7 +465,10 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
                 ),
             )
             event(c, sid, "awaiting_review", message)
-        return {"id": sid, "state": "awaiting_review"}
+        state = "awaiting_review"
+        if autoreview.enabled():
+            state = autoreview.review(root, sid, primary_profile_id())
+        return {"id": sid, "state": state}
 
     @app.get("/api/admin/submissions/{sid}/profiles", dependencies=[Depends(admin)])
     def profile_results(sid: str):
@@ -488,11 +506,11 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
             try:
                 report = validate_import(payload, sid, row["audio_sha256"])
                 if (
-                    report["profile"].get("model") != "d32v2-s60000-full-translit"
+                    report["profile"].get("model") not in ADDITIONAL_MODELS
                     or report["profile"]["id"] != profile_id
                 ):
                     raise ValueError(
-                        "Use the pinned D32 profile and matching profile ID."
+                        "Use a pinned additional judge (D32 or Rani) and matching profile ID."
                     )
             except (ValueError, TypeError, AttributeError, KeyError) as error:
                 raise HTTPException(422, str(error)) from None
@@ -613,13 +631,17 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
                     "Reviewed and published on the leaderboard.",
                 )
             else:
-                if row["state"] in ("evaluating", "published", "rejected"):
+                if row["state"] in ("evaluating", "rejected"):
                     raise HTTPException(
                         409, "This submission cannot be rejected in its current state."
                     )
+                # Rejecting a published entry is a takedown: automatic approval must
+                # always be reversible by a person.
                 state, message = (
                     "rejected",
-                    "Not accepted for publication. See the review note.",
+                    "Removed from the leaderboard by a reviewer. See the review note."
+                    if row["state"] == "published"
+                    else "Not accepted for publication. See the review note.",
                 )
             c.execute(
                 "UPDATE submissions SET state=?,message=?,reviewer_note=?,updated=? WHERE id=?",

@@ -1,0 +1,19 @@
+.arena-meta{margin:-10px 0 14px}
+.arena-prompt{margin-bottom:20px}
+.arena-text{font-size:24px;line-height:1.6;color:var(--ink)!important;margin:10px 0 0}
+.arena-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.arena-side h3{font-size:18px}
+.arena-question{font-size:15px;color:var(--ink)!important;font-weight:600}
+.arena-choices{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.arena-choices .btn{flex-direction:column;gap:4px;padding:14px 10px;font-size:14px}
+.arena-choices .btn small{font-size:10px;font-weight:400;color:var(--muted)}
+.arena-choices .btn.active{border-color:var(--red);box-shadow:inset 0 0 0 1px var(--red);background:#fff6f7}
+.arena-tags{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:8px 0 18px}
+.arena-tags>div{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.arena-tags b{width:100%;font-size:12px}
+.arena-tag{cursor:pointer;background:#fff;font-size:11px;padding:5px 8px}
+.arena-screen{border:1px solid var(--line);margin:0}
+.arena-screen legend{padding:0 6px}
+.arena-option{display:flex;gap:10px;align-items:flex-start;padding:10px 0;font-size:16px;border-top:1px solid var(--line)}
+.arena-option input{accent-color:var(--red);margin-top:6px}
+@media(max-width:700px){.arena-pair,.arena-tags{grid-template-columns:1fr}.arena-choices{grid-template-columns:1fr 1fr}.arena-text{font-size:20px}}

@@ -38,6 +38,11 @@ d32 = [
     "scipy==1.18.1",
     "soundfile==0.14.0",
 ]
+rani = [
+    "nemo_toolkit[asr]==3.0.0",
+    "scipy>=1.10",
+    "soundfile>=0.12.0",
+]
 mms = [
     "transformers>=4.35.0",
     "torch>=2.0.0",
@@ -66,6 +71,7 @@ dev = [
 [project.scripts]
 neptts-eval = "neptts_eval.cli:main"
 neptts-eval-d32 = "neptts_eval.d32:main"
+neptts-eval-rani = "neptts_eval.rani:main"
 
 [project.urls]
 Homepage = "https://github.com/bolne/neptts-eval"

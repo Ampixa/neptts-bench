@@ -55,6 +55,9 @@ class Manifest(BaseModel):
     judge_family_details: str = Field(min_length=1, max_length=1000)
     training_overlap: str = Field(min_length=1, max_length=500)
     permission_to_evaluate_and_publish: bool
+    # Optional: approved audio may be played, anonymised, to listeners in the blind
+    # human-preference arena. Absent in older manifests, which therefore opt out.
+    permission_to_play_audio_to_listeners: bool = Field(default=False, strict=True)
 
     @model_validator(mode="after")
     def selection_contract(self):
@@ -131,6 +134,7 @@ def template():
         "judge_family_details": "No judge-family model used for selection, filtering or RL",
         "training_overlap": "Declare any training on these benchmark sentences, or unknown",
         "permission_to_evaluate_and_publish": False,
+        "permission_to_play_audio_to_listeners": False,
     }
 
 
@@ -159,7 +163,10 @@ def sentence_pack():
             "State selection-pool size separately from total attempts, plus per-prompt variation/retries.\n"
             "Disclose any manual selector in selection_policy.\n"
             "Use audio you may submit for evaluation. Uploaded audio stays private to reviewers;\n"
-            "approved model metadata, scores and report are public. Human MOS is a separate study.\n",
+            "approved model metadata, scores and report are public. Human MOS is a separate study.\n"
+            "Optional: set permission_to_play_audio_to_listeners to true so approved audio can be\n"
+            "played, anonymised and loudness-matched, in the blind human-preference arena. You can\n"
+            "withdraw this later from your submission page; votes already cast are kept.\n",
         )
     return out.getvalue()
 
