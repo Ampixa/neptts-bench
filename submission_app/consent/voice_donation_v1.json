@@ -1,0 +1,65 @@
+{
+  "version": "voice-donation-v1",
+  "status": "draft",
+  "review_note": "DRAFT written by engineering. Needs legal review and a native-speaker review of the Nepali text before status can become \"approved\". Enrollment is closed while status is draft.",
+  "title": {
+    "en": "Voice donation consent",
+    "ne": "आवाज दान सहमति"
+  },
+  "sections": [
+    {
+      "en": "You will read Nepali sentences aloud and record them in your browser. Each recording is checked automatically (volume, noise, and whether the sentence was read) and may be checked by an Ampixa reviewer.",
+      "ne": "तपाईंले नेपाली वाक्यहरू ठूलो स्वरमा पढेर आफ्नो ब्राउजरमा रेकर्ड गर्नुहुनेछ। प्रत्येक रेकर्डिङ स्वचालित रूपमा जाँचिन्छ (आवाजको स्तर, होहल्ला, र वाक्य पढिएको छ कि छैन), र Ampixa का समीक्षकले पनि सुन्न सक्छन्।"
+    },
+    {
+      "en": "Your voice is personal data. Recordings are stored privately. They are never published under your name, and we do not ask for your name unless you join the paid programme.",
+      "ne": "तपाईंको आवाज व्यक्तिगत तथ्याङ्क हो। रेकर्डिङहरू निजी रूपमा राखिन्छन्। तपाईंको नाममा कहिल्यै प्रकाशित गरिँदैन, र भुक्तानी कार्यक्रममा सामेल नभएसम्म हामी तपाईंको नाम सोध्दैनौं।"
+    },
+    {
+      "en": "Recordings of benchmark sentences are used only to evaluate speech systems. They are never released or used to train models.",
+      "ne": "बेन्चमार्क वाक्यहरूका रेकर्डिङ बोली प्रणालीहरूको मूल्याङ्कनका लागि मात्र प्रयोग हुन्छन्। ती कहिल्यै सार्वजनिक गरिँदैनन् र मोडेल तालिमका लागि प्रयोग गरिँदैनन्।"
+    },
+    {
+      "en": "You can listen to and delete any recording, or withdraw completely, at any time from your page. Deleting removes the audio. Results already computed from it (such as an anonymous score) may remain.",
+      "ne": "तपाईं आफ्नो पृष्ठबाट जुनसुकै बेला कुनै पनि रेकर्डिङ सुन्न र मेटाउन, वा पूर्ण रूपमा फिर्ता हुन सक्नुहुन्छ। मेटाउँदा आवाज हटाइन्छ। त्यसबाट पहिले नै निकालिएका नतिजा (जस्तै बेनामी अङ्क) रहन सक्छन्।"
+    },
+    {
+      "en": "You must be 18 or older, and you must record only your own voice.",
+      "ne": "तपाईं १८ वर्ष वा माथिको हुनुपर्छ, र आफ्नै आवाज मात्र रेकर्ड गर्नुपर्छ।"
+    }
+  ],
+  "purposes": [
+    {
+      "id": "benchmark_reference",
+      "required": true,
+      "en": "Use my recordings as human reference speech to evaluate Nepali speech systems.",
+      "ne": "मेरा रेकर्डिङलाई नेपाली बोली प्रणालीहरूको मूल्याङ्कनका लागि मानव सन्दर्भ आवाजको रूपमा प्रयोग गर्नुहोस्।"
+    },
+    {
+      "id": "asr_evaluation",
+      "required": false,
+      "en": "Use my recordings to measure how well speech recognisers understand Nepali.",
+      "ne": "बोली पहिचान प्रणालीले नेपाली कति राम्ररी बुझ्छ भनी नाप्न मेरा रेकर्डिङ प्रयोग गर्नुहोस्।"
+    },
+    {
+      "id": "listener_playback",
+      "required": false,
+      "en": "Play my recordings anonymously to listeners in the blind listening arena.",
+      "ne": "अन्धा सुनाइ प्रतिस्पर्धामा श्रोताहरूलाई मेरा रेकर्डिङ बेनामी रूपमा सुनाउनुहोस्।"
+    },
+    {
+      "id": "model_training",
+      "required": false,
+      "open_sets_only": true,
+      "en": "Use my recordings of open (non-benchmark) sentences to train Nepali speech models.",
+      "ne": "खुला (बेन्चमार्क बाहिरका) वाक्यका मेरा रेकर्डिङलाई नेपाली बोली मोडेल तालिम दिन प्रयोग गर्नुहोस्।"
+    },
+    {
+      "id": "commercial_license",
+      "required": false,
+      "open_sets_only": true,
+      "en": "Allow Ampixa to license my open-sentence recordings to other organisations.",
+      "ne": "मेरा खुला-वाक्य रेकर्डिङलाई अन्य संस्थाहरूलाई इजाजतपत्र दिन Ampixa लाई अनुमति दिनुहोस्।"
+    }
+  ]
+}

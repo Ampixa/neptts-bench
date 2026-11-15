@@ -60,7 +60,50 @@ def judge_profiles():
             instrument=instrument,
         )
         profiles.append(executable)
+    profiles.extend(rani_profiles(ids))
     return profiles
+
+
+def primary_profile_id():
+    """The judge that ranks the main leaderboard: Rani, once its weights are pinned."""
+    from neptts_eval import rani
+
+    from .evaluation import BENCHMARK
+
+    return rani.profile(BENCHMARK)["id"] if rani.is_pinned() else None
+
+
+def rani_profiles(existing_ids):
+    """Rani appears only once its contract pins exact weights and runtime."""
+    from neptts_eval import rani
+
+    from .evaluation import BENCHMARK
+
+    if not rani.is_pinned():
+        return []
+    instrument = rani.profile(BENCHMARK)
+    if instrument["id"] in existing_ids:
+        raise ValueError("Duplicate Rani profile ID.")
+    return [{
+        "id": instrument["id"],
+        "name": "Rani · Ampixa Labs",
+        "stage": "rani",
+        "primary_policy": "neptel_v02",
+        "calibration_policy": instrument["normalization"]
+        + "; digits to spoken Nepali words; CER excludes spaces",
+        "loanword_policy": "English in either script maps to one Devanagari form (Rani latin_map).",
+        "status": "primary judge · intelligibility proxy; real-speech calibration pending",
+        "public_enabled": True,
+        "provisional": True,
+        "availability": "Arena worker profile. Credit: " + instrument["attribution"]
+        + ". Weights public with gated access approval.",
+        "limitations": [
+            "Trained for conversational and phone speech, so it may forgive mispronounced minimal pairs that listeners would notice.",
+            "Upstream scorer spells numbers with short-i forms, giving every system the same small penalty on the one prompt with digits.",
+            "Rani and the arena are both run by Ampixa; submissions that used Rani for selection must declare it as judge-family use.",
+        ],
+        "instrument": instrument,
+    }]
 
 
 def selection_group(manifest):

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "model": "rani",
+  "attribution": "Rani (Ampixa Labs), https://github.com/Ampixa/rani-asr",
+  "source": {
+    "repository": "https://github.com/Ampixa/rani-asr",
+    "commit": "583dbef2f876fefc4dbd77b8c19a886bd51b7c1c",
+    "weights": "https://huggingface.co/ampixa/rani-asr",
+    "checkpoint_file": "rani/rani.nemo",
+    "upstream_sha256": {
+      "eval/score_v02.py": "49ce257e9d8312c91bb7e0428fbba0f4ebbff5b17e85f0585f13472ee178e309",
+      "eval/nepali_numbers.py": "670e1d5b557009efbb53ba6c12e494c5746f4ce8fe0dcf2060b176cdb67cb160",
+      "benchmark/latin_map.json": "7d6a2bc53a4c2817ed09c673abf1923b04412c0520fda31a56bdec4050d97402"
+    }
+  },
+  "checkpoint_sha256": "b015e46e1e0ed9dee1f76c78157a513c03098de9d1713a05dafcc59d85821b52",
+  "packages": {
+    "nemo_toolkit": "3.0.0",
+    "torch": "2.15.0+cpu",
+    "numpy": "2.4.6",
+    "scipy": "1.18.1",
+    "soundfile": "0.14.0"
+  }
+}

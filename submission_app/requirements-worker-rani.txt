@@ -1,0 +1,9 @@
+# Separate environment for the primary Rani worker (`python -m submission_app.worker --checkpoint ...`).
+# NeMo is heavy and conflicts with openai-whisper pins; do not merge with requirements-worker.txt.
+# CPU-only install (avoids multi-GB CUDA wheels):
+#   pip install --extra-index-url https://download.pytorch.org/whl/cpu -r requirements-worker-rani.txt
+# After installing, pin exact versions with: python -m neptts_eval.rani pin --checkpoint <rani.nemo>
+-r requirements.txt
+nemo_toolkit[asr]==3.0.0
+scipy
+soundfile

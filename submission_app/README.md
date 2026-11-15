@@ -16,14 +16,14 @@ python -m submission_app.server
 
 Open http://127.0.0.1:5193. Admin access uses the password above. There is no default password. The process binds only to loopback. The local preview uses SQLite and stores audio under `.local/submissions`, excluded from Git. `NEPTTS_DATA`, `NEPTTS_PORT` and `NEPTTS_ORIGIN` configure the root, port and exact browser origin. If changing the port, update the origin too.
 
-For evaluation, install `submission_app/requirements-worker.txt` and FFmpeg, then run one worker:
+For evaluation, set up the primary Rani worker (see [Rani judge](#rani-judge-primary-profile) for the one-time pinning):
 
 ```sh
-pip install -r submission_app/requirements-worker.txt
-python -m submission_app.worker --data .local/submissions --model small
+pip install -r submission_app/requirements-worker-rani.txt
+python -m submission_app.worker --data .local/submissions --checkpoint ~/models/rani-asr/rani/rani.nemo
 ```
 
-The worker serializes jobs, runs CPU inference with two Torch threads, and holds a process lock. Model weights are downloaded by the trusted Whisper package and checksum-verified by its loader. Set `NEPTTS_MODEL_CACHE` for the model cache. Use `--once` for one queued job. Interrupted jobs become failed on worker restart; retry requires an admin decision. Logs stay on the operator's machine; raw exceptions are not shown to submitters.
+The worker serializes jobs and holds a per-engine process lock. Use `--once` to stop when idle. Interrupted jobs are requeued on worker restart, once; after a second failure a reviewer must retry. Whisper remains available as a fallback or second opinion (`pip install -r submission_app/requirements-worker.txt`, then `--engine whisper --model small`); its weights are downloaded by the trusted Whisper package and checksum-verified by its loader, with `NEPTTS_MODEL_CACHE` for the cache. Logs stay on the operator's machine; raw exceptions are not shown to submitters.
 
 `--model tiny` is a development-only profile. It runs genuine ASR but **cannot be approved for the public leaderboard**. Automated tests inject a deterministic scorer to exercise publication without downloading models or claiming real quality results.
 
@@ -52,11 +52,29 @@ The helper refuses to overwrite an existing archive. Uploads are capped at 150 M
 ## Review and publication
 
 1. GitHub sign-in is required to upload. Submissions belong to the immutable GitHub user ID and appear under My submissions across browsers. Successful validation returns a random private receipt token. The browser stores it locally and offers a private tracking link; retain it for optional bearer-link access. Earlier anonymous receipts remain valid, but are not automatically claimed by an account.
-2. The reviewer reads declarations, can listen to protected audio and queues evaluation.
-3. The worker verifies stored audio hashes, evaluates the full set and requires finite metrics for every prompt. Any failure leaves the entry unpublished.
-4. The reviewer supplies a note and approves or rejects. Only an approved result appears on the public API/leaderboard.
+2. A validated upload is queued for evaluation automatically.
+3. The worker verifies stored audio hashes, evaluates the full set with the primary judge (Rani) and requires finite metrics for every prompt. A failed or interrupted run is retried once automatically; after that it waits for a reviewer. Any failure leaves the entry unpublished.
+4. Automatic review (`autoreview.py`, policy `auto-review-v1`) publishes the result if every check passes. Otherwise it holds the submission in `awaiting_review` with its reasons, shown to the reviewer and the submitter. The policy never rejects.
+5. A reviewer handles only the held submissions: approve or reject with a note. Reviewers can also **take down** anything already published (reject on a published entry). Only published results appear on the public API/leaderboard.
 
-The initial automated track uses Whisper small Nepali ASR round-trip macro CER/WER with a fixed normalization implementation. Its profile records model weight SHA, evaluator/normalizer/scorer code identity, package versions and inference settings. Each profile is ranked separately. CER/WER are intelligibility proxies, not human quality scores. NepaliMOS/SCOREQ and human MOS remain absent rather than using incompatible checkpoints or invented ratings. Later metrics must have explicit versions, full coverage and a new comparison profile.
+Automatic review holds a submission when:
+
+| Reason | Check |
+|---|---|
+| `no_primary_judge` / `not_primary_judge` | Rani is not pinned, or the report came from another judge (for example an offline D32 import) |
+| `development_judge`, `invalid_report` | Development profile, or the report fails the consistency checks used for manual approval |
+| `selection_unknown` | Single-take / best-of-N declaration incomplete |
+| `judge_family` | Declares a judge-family model (Rani) used for selection, filtering or RL |
+| `placeholder` | Name, version, organization, voice, settings or overlap still contain the template text |
+| `duplicate_name` | Another non-rejected submission has the same system name and version |
+| `shared_audio` | More than 5% of WAVs are byte-identical to another submission's |
+| `failed_prompts` | More than 20% of prompts score CER ≥ 0.9: wrong files, order or language |
+| `implausibly_good` | CER below `PLAUSIBLE_FLOOR`, the real-speech floor. Off until Rani's real-speech calibration is done |
+
+Set `NEPTTS_AUTO_REVIEW=off` on the web server **and** the worker to go back to fully manual review. Results from an
+additional judge (for example Whisper as a second opinion) are published automatically once they pass the report checks.
+
+The automated track originally used Whisper small Nepali ASR round-trip macro CER/WER with a fixed normalization implementation. Its profile records model weight SHA, evaluator/normalizer/scorer code identity, package versions and inference settings. Each profile is ranked separately. CER/WER are intelligibility proxies, not human quality scores. NepaliMOS/SCOREQ and human MOS remain absent rather than using incompatible checkpoints or invented ratings. Later metrics must have explicit versions, full coverage and a new comparison profile.
 
 Historical human MOS in the UI is a labelled snapshot of the source README, linked to the cloned commit, and is shown separately. It is not silently compared against new automated submissions.
 
@@ -165,3 +183,149 @@ Import does not publish. Only an approved additional report appears at `/api/lea
 `study_snapshot.json` is a compact source-derived aggregate artifact used by `/api/historical-study` and the UI. Its self-documenting provenance records creator, source hash/revision/date, purpose, owner, review/retention status, reproduction, known duplicate aggregate locations, HF exclusion and usage. It contains the 12 rows of the checked-in paper's human-MOS table (10 TTS systems and 2 human baselines), copied reported 95% rater-bootstrap intervals and counts from `neptts-eval/documentation_scopes_v1.json`; no private rating rows were accessed or re-estimated. The UI dates and links this historical table separately from current ASR submissions. Top-four intervals overlap, so the display does not establish a unique winner.
 
 Snapshot bytes: 3759; SHA256: `e0028fdca4aa06e73bec5ee04fc1146223fd9b0f9c457b14ce59d734cd714423`. Retain as the current historical display input until superseded by a reviewed study/filter snapshot; last reviewed 2026-11-03, next review 2026-11-11. Source/Git history provides code and documentation revision provenance; this compact JSON is NOT an audio/model backup.
+
+## Rani judge (primary profile)
+
+[Rani](https://github.com/Ampixa/rani-asr) (Ampixa Labs) is a NeMo TDT/CTC Conformer for conversational Nepali. It is the
+**primary judge**: it scores the submission queue, and its profile is the default leaderboard tab (`primary` in
+`/api/judge-profiles`). Submissions published earlier under Whisper are backfilled into `profile_evaluations` by the same
+worker. Whisper-small real-speech CER was 49% (PV) and 115% (Fresh) in phase-1b calibration, which is why it was
+replaced. Licence: evaluating with Rani requires the credit
+"Rani (Ampixa Labs)" with a link, which the profile and catalog entry carry.
+
+Scoring matches Rani's official NepTel 0.2 scorer (`neptts_eval/rani_text.py`, verified identical on all 368 benchmark
+texts): digits become spoken Nepali words, English in either script maps to one Devanagari form, CER excludes spaces.
+
+One-time setup on the evaluation machine (separate environment from the Whisper worker):
+
+```sh
+pip install -r submission_app/requirements-worker-rani.txt
+hf download ampixa/rani-asr --local-dir ~/models/rani-asr          # gated: request access first
+python -m neptts_eval.rani pin --checkpoint ~/models/rani-asr/rani/rani.nemo
+git add neptts-eval/src/neptts_eval/rani_contract.json              # review and commit the pins
+```
+
+Until the contract is pinned, the Rani profile, catalog entry and import all fail closed. Re-pinning (`--force`)
+creates a new profile ID, so old and new Rani scores are never mixed.
+
+Run the primary worker. Each loop it checks donated takes first, then the submission queue, then backfills published
+submissions that lack a Rani score:
+
+```sh
+python -m submission_app.worker --data .local/submissions --checkpoint ~/models/rani-asr/rani/rani.nemo
+```
+
+Optional Whisper second opinion, in the Whisper environment, scoring every published submission:
+
+```sh
+python -m submission_app.worker --data .local/submissions --engine whisper --model small --role additional
+```
+
+`--once` stops when there is no work left. A failed backfill is logged, recorded as an event and skipped until the
+worker restarts. Offline reviewer packages work too: `python -m submission_app.offline --profile rani --checkpoint ... --package ... --output ...`.
+
+Validation (2026-11-15, pinned checkpoint `b015e46e…`, NeMo 3.0.0, torch 2.15.0+cpu, 2 threads on x86 under WSL): on
+NepTel 0.2 the pinned judge scores **33.81** WER with Rani's official `score_v02.py`, against **33.51** for Rani's
+published outputs. Transcripts are not byte-identical (226 word edits in 2,520, mostly word boundaries such as
+"एम्पिक्सा" / "एम पिक्सा"), as expected from greedy decoding of 8 kHz phone audio on a different CPU and torch build;
+re-runs on the same machine are identical. One 205-prompt submission takes about 3 minutes on CPU. Scores are only
+comparable within one pinned profile, which records exactly this runtime.
+
+Limitations: Rani is an intelligibility proxy with real-speech calibration pending. Because it is trained for messy
+conversational speech, it may forgive mispronounced minimal pairs (149 of the 205 prompts). Validate it against the
+human pairwise ranking before treating it as more than a content check.
+
+## Blind listening arena (human preference)
+
+`#vote` lets native listeners compare two anonymous systems on the same prompt. The question is "Which sounds more
+natural, as though spoken by a real person?", answered A, B, both natural, or neither natural, with optional
+per-side issue tags (including Nepali-specific ones: schwa deletion, numbers, English words). Names appear after the
+vote. `#human` shows the ranking.
+
+- **Vote caps.** A listener gets at most 50 comparisons per 24 hours and 200 in total; one network address at most
+  300 per 24 hours, so fresh browser sessions from one machine do not reset the limit. In the ranking each listener
+  counts for at most 50 votes: someone with more has every vote scaled down (`bt.cap_listener_weight`), so 500 votes
+  move the ratings no more than 50 would. The leaderboard reports how many listeners were capped.
+- **Who is compared:** approved submissions whose owners allow it, via `permission_to_play_audio_to_listeners` in
+  the manifest or the toggle on their submission page (owner account or receipt holder only; reviewers cannot decide
+  for them). Withdrawing stops new comparisons and deletes the playback cache; votes already cast are kept.
+- **Blinding:** clips are re-encoded to mono 24 kHz PCM16 at -23 dBFS active-speech RMS (`arena_audio.py`) and served
+  under one-time battle tokens without ETag/Last-Modified, so format, level, URL and cache headers reveal nothing.
+- **Listener quality:** a listening check first (hear a clip, pick its sentence from four, including its minimal-pair
+  partner; three correct, three attempts). Votes count only if both clips were fetched and the longer one had time to
+  play. About one battle in eight after warm-up is a hidden check (identical clips, or clean against degraded);
+  listeners failing most checks are excluded. A listener votes on any one system at most 60 times.
+- **Ranking (`bt.py`):** Bradley-Terry fitted by the minorise-maximise method, ties as half wins, one virtual tie per
+  system against a fixed anchor, so ratings stay finite. Elo scale centred on 1000. 95% intervals and rank ranges come
+  from 200 bootstrap resamples of whole listeners. Systems under 30 counted votes are marked provisional.
+- **Pair choice:** pairs with fewer counted votes are preferred (weight `1/(1+n)^2`); prompts not yet heard by the
+  listener come first.
+- **Privacy:** listeners are anonymous (random ID in an HttpOnly cookie). Stored: answers, tags, timings.
+
+Reviewer statistics (listeners, screened, battle kinds, excluded votes by reason) are at `GET /api/admin/arena`.
+
+Not yet: a real-speech anchor (no human recordings of the 205 prompts exist), an export of vote rows for research,
+and a paid listener panel kept separate from volunteers.
+
+## Voice donation and paid voice programme
+
+`#donate` → `#record` → `#my-voice`; reviewers use `#donations-admin`.
+
+- **Closed until consent is approved.** `submission_app/consent/voice_donation_v1.json` holds the bilingual consent
+  text and per-purpose checkboxes. It ships as `"status": "draft"`. After legal and native-speaker review, set it to
+  `"approved"`. Donors record the version and SHA-256 they agreed to, and any edit to the file forces them to re-read it.
+  Changing approved wording means a new versioned file, not an in-place edit.
+- **Anonymous donors.** No account. Enrollment collects age band, gender, province, first language and device (each
+  with a prefer-not option), sets an HttpOnly session cookie and shows a one-time recovery code. Recovering on another
+  device ends the old session.
+- **Prompt sets.** `anchor-v1` is the 205 benchmark prompts. These recordings are evaluation-only (human reference
+  speech and judge calibration) and must never be released for training. Open sets come from
+  `benchmark/donation_prompts.json` (`{"sets":[{"id":"open-…","source":…,"license":…,"prompts":[{"id","text"}]}]}`), are
+  validated at start-up and may not repeat benchmark prompts. None are shipped: add a licensed corpus. Training and
+  licensing purposes apply to open sets only.
+- **Recording.** An AudioWorklet captures raw PCM with echo cancellation, noise suppression and auto-gain off, and
+  the page encodes 16-bit mono WAV, so there is no lossy codec and no FFmpeg on the server. A mic check comes first.
+- **Instant signal checks** (`donation_audio.py`) reject before storing: wrong format, under 1 s or over 20 s,
+  silent, quieter than -40 dBFS, clipped, or under 15 dB above the noise floor (the quietest 100 ms).
+- **ASR check.** The Rani worker also processes donated takes, before submissions. Prompt CER at most 0.15 is
+  accepted, at most 0.40 goes to a reviewer, anything higher is rejected. Reviewers accept or reject borderline takes with a note
+  the donor can see.
+- **Donor control.** Donors can play and delete any take, or withdraw. Withdrawing deletes all audio and the profile.
+  The payout ledger stays as a financial record.
+- **Paid programme.** Set `NEPTTS_DONOR_RATE_NPR_PER_MIN` to open it. Donors apply with an eSewa, Khalti or bank handle
+  (visible to reviewers only). Reviewers approve at a per-minute rate. Earnings are accepted minutes times rate. Payouts are
+  recorded manually with a transaction reference and cannot exceed the balance. No money moves automatically.
+
+### Where donated audio is stored
+
+Donated audio lives in **private Hugging Face datasets** owned by Ampixa (`donation_store.py`). The server keeps only
+metadata in SQLite and a short-lived spool. Without configuration (local development, tests) takes stay under
+`<NEPTTS_DATA>/donations/`.
+
+| Variable | Meaning |
+|---|---|
+| `NEPTTS_HF_DONATIONS_BENCHMARK_REPO` | Private dataset for `anchor-v1` takes, e.g. `ampixa/neptts-donations-benchmark`. Setting it switches storage to Hugging Face |
+| `NEPTTS_HF_DONATIONS_OPEN_REPO` | Private dataset for open prompt sets. Required once open sets exist; must differ from the benchmark repo |
+| `HF_TOKEN` | Fine-grained token with write access to these two repos only. The Rani worker needs read access |
+| `NEPTTS_HF_SYNC_SECONDS` | Sync interval inside the web server, default 300. `0` disables the in-server loop |
+
+1. An upload passes the signal checks and is written to `<NEPTTS_DATA>/donation_spool/` (`stored='spool'`).
+2. Every sync interval the server checks the repo is still **private** (it refuses to write otherwise) and commits up to
+   200 spooled takes plus `metadata.jsonl` in one commit, then deletes the spooled files (`stored='hub'`). Existing
+   local takes are uploaded the same way when Hugging Face is first configured.
+3. Playback and the Rani worker read from the spool while a take is there, otherwise from Hugging Face (the worker
+   uses a temporary copy that is deleted after scoring). Browsers never see the repo.
+4. Deleting or withdrawing queues a delete commit. After it lands, the audio object is permanently erased from the
+   repo's storage and history (`permanently_delete_lfs_files`, matched by the take's SHA-256), so it does not survive
+   in old revisions. Objects not stored as LFS fall back to a history squash.
+5. If Hugging Face is down, takes wait in the spool and the error shows on the donation review page. Uploads are
+   refused with 503 once 2 GiB is waiting or the disk has less than 2 GiB free.
+
+Repo layout: `audio/<donor id>/<recording id>.wav` plus `metadata.jsonl` in Hugging Face's audio-folder format
+(`file_name`, recording and donor ids, prompt and text, duration, sample rate, SNR, Rani CER, review state, month).
+Demographics, device, payout details and recovery hashes are never uploaded. Before going live, check against the
+real Hub that permanent deletion covers these repos' storage backend, and add Hugging Face as storage provider to the
+consent text.
+
+Not yet: wiring accepted `anchor-v1` takes into the arena as a "Human reference" system (needs the
+`listener_playback` purpose), encryption at rest for payout handles, and an export for consented open-set data.

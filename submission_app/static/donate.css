@@ -1,0 +1,13 @@
+.donate-consent{border-left:2px solid var(--line);padding-left:14px}
+.donate-consent p{margin:0 0 6px}
+.donate-consent p[lang=ne]{color:var(--ink);font-size:14px}
+.donate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:4px 16px;align-items:end}
+.donate-code{font:600 24px/1.4 "IBM Plex Mono",Monaco,monospace;letter-spacing:1px;color:var(--ink)!important;overflow-wrap:anywhere}
+.donate-stats{margin:-10px 0 14px}
+.donate-card{display:grid;gap:18px}
+.donate-text{font-size:28px;line-height:1.6;color:var(--ink)!important;margin:0}
+.donate-meter{height:8px;background:#eceae6;border-radius:4px;overflow:hidden}
+.donate-meter span{display:block;height:100%;width:0;background:var(--green);transition:width .08s linear}
+.donate-rec p{margin:0 0 6px;color:var(--ink)}
+.donate-rec{gap:14px;align-items:center}
+@media(max-width:700px){.donate-text{font-size:22px}.donate-rec{flex-direction:column;align-items:flex-start}}

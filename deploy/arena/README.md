@@ -2,7 +2,7 @@
 
 Arena runs independently of AFFiNE and mail: system user `ampixa-arena`, loopback port 5193, unit `ampixa-arena.service`, releases in `/opt/ampixa-arena/releases`, persistent SQLite/audio in `/var/lib/ampixa-arena`, root-only credentials in `/etc/ampixa-arena/environment`.
 
-The web service is capped at 512 MiB and 50% of one CPU. **No Whisper worker is installed or started on the shared 2 GiB VM.** Validated submissions remain pending until an operator queues them and provisions an appropriately sized worker with access to the data. Do not claim automatic scoring is operational before that step. The small model may contend with AFFiNE and mail; choose a separate evaluation machine or upgrade capacity first.
+The web service is capped at 512 MiB and 50% of one CPU. **No evaluation worker is installed or started on the shared 2 GiB VM.** Uploads are queued automatically, but nothing is scored or published until an operator provisions the Rani worker (`python -m submission_app.worker --checkpoint …`) on an appropriately sized machine with access to the data. Do not claim automatic scoring is operational before that step. The small model may contend with AFFiNE and mail; choose a separate evaluation machine or upgrade capacity first.
 
 ## First installation
 
@@ -30,6 +30,6 @@ Use the existing Certbot account to issue a webroot certificate using `/var/www/
 
 Set `NEPTTS_ORIGIN=https://ampixa.benchmarks.cloud`, `NEPTTS_GITHUB_CLIENT_ID`, and `NEPTTS_GITHUB_CLIENT_SECRET` in the protected environment file. OAuth callback is `https://ampixa.benchmarks.cloud/api/auth/github/callback`. Restart only Arena. Until OAuth is configured, the public leaderboard works but uploads are closed. GitHub sign-in does not confer reviewer rights. Retrieve the generated admin password directly on the VM, never in CI logs.
 
-Before accepting public uploads, decide retention and configure regular off-host backups. Stop only Arena and its evaluator for a consistent backup of `/var/lib/ampixa-arena` plus the protected environment file. Keep backups encrypted/private. Application rollback does not roll back SQLite migrations; current ownership migration is additive. Future schema changes require a backup/compatibility plan.
+Donated voice audio is kept on private Hugging Face datasets, not on this VM: set `NEPTTS_HF_DONATIONS_BENCHMARK_REPO` and a repo-scoped `HF_TOKEN` in the protected environment file before opening donations (see `submission_app/README.md`). Before accepting public uploads, decide retention and configure regular off-host backups of the database. Stop only Arena and its evaluator for a consistent backup of `/var/lib/ampixa-arena` plus the protected environment file. Keep backups encrypted/private. Application rollback does not roll back SQLite migrations; current ownership migration is additive. Future schema changes require a backup/compatibility plan.
 
 The ampixa.com navigation entry should be an ordinary external link to `https://ampixa.benchmarks.cloud` labelled **Ampixa Benchmarks Arena**. No rewrite or redirect of the entire ampixa.com site is intended.

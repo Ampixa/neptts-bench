@@ -11,8 +11,17 @@ from pathlib import Path
 from .contract import BENCHMARK, MAX_ARCHIVE, MAX_EXPANDED, SENTENCES, validate_archive
 from .evaluation import evaluate, validate_report
 
+D32_MODEL = "d32v2-s60000-full-translit"
+RANI_MODEL = "rani"
+# Additional judges scored with edit counts, approved separately from the primary profile.
+ADDITIONAL_MODELS = (D32_MODEL, RANI_MODEL)
+
 
 def validate_d32_report(report):
+    return validate_count_report(report, "D32")
+
+
+def validate_count_report(report, label):
     """Accept numeric evidence only; reject transcripts, paths and unbound counts."""
     if set(report) != {
         "profile",
@@ -24,25 +33,25 @@ def validate_d32_report(report):
         "human_mos",
         "predicted_mos",
     }:
-        raise ValueError("Unsupported D32 report fields.")
+        raise ValueError(f"Unsupported {label} report fields.")
     if report["human_mos"] is not None or report["predicted_mos"] is not None:
-        raise ValueError("D32 reports accept CER/WER only.")
+        raise ValueError(f"{label} reports accept CER/WER only.")
     totals = {"char_errors": 0, "chars": 0, "word_errors": 0, "words": 0}
     for row in report["per_sentence"].values():
         if set(row) != {"cer", "wer", *totals}:
-            raise ValueError("Unsupported D32 sentence fields.")
+            raise ValueError(f"Unsupported {label} sentence fields.")
         for field in totals:
             if type(row[field]) is not int or row[field] < (
                 1 if field in ("chars", "words") else 0
             ):
-                raise ValueError("Invalid D32 edit counts.")
+                raise ValueError(f"Invalid {label} edit counts.")
             totals[field] += row[field]
         for metric, errors, units in (
             ("cer", "char_errors", "chars"),
             ("wer", "word_errors", "words"),
         ):
             if abs(row[metric] - row[errors] / row[units]) > 1e-8:
-                raise ValueError("D32 sentence metric does not match edit counts.")
+                raise ValueError(f"{label} sentence metric does not match edit counts.")
     for metric, errors, units in (
         ("corpus_cer", "char_errors", "chars"),
         ("corpus_wer", "word_errors", "words"),
@@ -54,7 +63,7 @@ def validate_d32_report(report):
             or not math.isfinite(value)
             or abs(value - totals[errors] / totals[units]) > 1e-8
         ):
-            raise ValueError("D32 corpus metric does not match edit counts.")
+            raise ValueError(f"{label} corpus metric does not match edit counts.")
 
 
 def validate_import(payload, sid, audio_sha):
@@ -69,12 +78,19 @@ def validate_import(payload, sid, audio_sha):
     if not isinstance(report, dict) or not isinstance(report.get("profile"), dict):
         raise TypeError("Missing evaluator report/profile.")
     spec = report["profile"]
-    if spec.get("model") == "d32v2-s60000-full-translit":
+    if spec.get("model") == D32_MODEL:
         from neptts_eval import d32
 
         d32.validate_profile(spec, BENCHMARK)
         validate_report(report, spec["id"])
         validate_d32_report(report)
+        return report
+    if spec.get("model") == RANI_MODEL:
+        from neptts_eval import rani
+
+        rani.validate_profile(spec, BENCHMARK)
+        validate_report(report, spec["id"])
+        validate_count_report(report, "Rani")
         return report
     if (
         spec.get("benchmark") != BENCHMARK
@@ -112,7 +128,7 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument(
         "--profile",
-        choices=["whisper-small", "d32v2-s60000-full-translit"],
+        choices=["whisper-small", D32_MODEL, RANI_MODEL],
         default="whisper-small",
     )
     for name in ("checkpoint", "bpe", "recipe", "icefall", "normalizer-root"):
@@ -125,6 +141,8 @@ def main():
         parser.error(
             "D32 requires checkpoint, bpe, recipe, icefall and normalizer-root."
         )
+    if args.profile == RANI_MODEL and not args.checkpoint:
+        parser.error("Rani requires --checkpoint (the pinned rani.nemo).")
     if args.output.exists():
         parser.error("Output already exists; choose a new path.")
     if args.package.stat().st_size > MAX_ARCHIVE + 16384:
@@ -166,6 +184,13 @@ def main():
 
         if args.profile == "whisper-small":
             report = evaluate(temp / "audio", "small", progress)
+        elif args.profile == RANI_MODEL:
+            from neptts_eval import rani
+
+            report = rani.evaluate(
+                temp / "audio", SENTENCES, BENCHMARK,
+                {"checkpoint": args.checkpoint}, progress,
+            )
         else:
             from neptts_eval import d32
 
