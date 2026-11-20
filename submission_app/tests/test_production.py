@@ -83,7 +83,7 @@ def test_seeded_baseline_is_scored_like_any_submission_and_labelled(app, monkeyp
     monkeypatch.setenv("NEPTTS_AUTO_REVIEW", "on")
     root = app.state.root
     baseline_wavs = wav_dir(tmp_path, 3)
-    sid, token = seed.seed(root, baseline_wavs, FIELDS, "baseline", "generated 2026-11-20")
+    sid, _token = seed.seed(root, baseline_wavs, FIELDS, "baseline", "generated 2026-11-20")
     r = row(app, sid)
     assert r["state"] == "queued" and r["owner_id"] == seed.OWNER
     evaluate(app)
@@ -153,7 +153,7 @@ def test_doctor_cli_exit_status(tmp_path, capsys):
 def test_sample_sentence_never_battles_and_samples_need_eligibility(app):
     owner = client(app)
     a, _ = publish(app, owner, 0)
-    b, _ = publish(app, owner, 1)
+    publish(app, owner, 1)
     hidden, _ = publish(app, owner, 2, consent=False)
     c = listener(app)
     start(c, app)

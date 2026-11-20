@@ -533,7 +533,7 @@ def install_arena(app, root, rate, origin, current_user, admin):
                 "issues": dict(sorted(share.items(), key=lambda x: -x[1])[:3]),
             })
         regions = {}
-        for lid, region in {r["listener_id"]: r["region"] for r in counted}.items():
+        for region in {r["listener_id"]: r["region"] for r in counted}.values():
             regions[region or "undeclared"] = regions.get(region or "undeclared", 0) + 1
         result = {
             "entries": entries,

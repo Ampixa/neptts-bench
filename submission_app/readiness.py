@@ -58,7 +58,7 @@ def checks(root, env=None, online=False):
         from .profiles import primary_profile_id
 
         primary = primary_profile_id()
-    except Exception as error:  # neptts_eval missing or contract unreadable
+    except Exception as error:  # noqa: BLE001 - doctor must report, not crash: missing toolkit or unreadable contract
         primary, detail = None, f"Could not load the Rani contract: {error}"
     else:
         detail = primary or "rani_contract.json does not pin a checkpoint yet."
@@ -139,7 +139,7 @@ def checks(root, env=None, online=False):
             out.append(_check("hf_private", "donations", "ok" if info.private else "todo",
                               "Donation dataset is private", repo,
                               "Make the dataset private; the sync refuses public repos."))
-        except Exception as error:
+        except Exception as error:  # noqa: BLE001 - any Hub/auth/network failure is reported as a todo
             out.append(_check("hf_private", "donations", "todo", "Donation dataset reachable",
                               str(error)[:300], "Check the token's repo permissions."))
 
