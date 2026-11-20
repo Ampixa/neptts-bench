@@ -1,0 +1,34 @@
+[Unit]
+Description=Ampixa Benchmarks Arena Rani evaluation worker
+# Same host as the web service: the queue is SQLite in /var/lib/ampixa-arena, which must
+# not be shared over a network filesystem. Needs ≥4 GiB RAM free for NeMo on CPU.
+After=network.target ampixa-arena.service
+
+[Service]
+User=ampixa-arena
+Group=ampixa-arena
+WorkingDirectory=/opt/ampixa-arena/current
+EnvironmentFile=/etc/ampixa-arena/environment
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=OMP_NUM_THREADS=2
+Environment=HF_HUB_OFFLINE=0
+# Separate venv (NeMo + CPU torch); see PRODUCTION_SETUP.md step 4. The web release
+# directory provides the code, so a deploy updates the worker after a restart.
+ExecStart=/opt/ampixa-arena/worker-venv/bin/python -m submission_app.worker --data /var/lib/ampixa-arena --checkpoint ${NEPTTS_RANI_CHECKPOINT}
+Restart=on-failure
+RestartSec=30
+Nice=10
+MemoryHigh=3584M
+MemoryMax=4G
+CPUQuota=200%
+TasksMax=128
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/ampixa-arena
+ReadOnlyPaths=/var/lib/ampixa-arena-models
+
+[Install]
+WantedBy=multi-user.target

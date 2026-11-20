@@ -18,3 +18,11 @@ def rani_unpinned(monkeypatch):
     from neptts_eval import rani
 
     monkeypatch.setattr(rani, "PINS", {**rani.PINS, "checkpoint_sha256": None, "packages": None})
+
+
+@pytest.fixture(autouse=True)
+def fresh_arena_ratings(monkeypatch):
+    """Tests read the board right after voting; production refreshes it on a timer."""
+    from submission_app import arena
+
+    monkeypatch.setattr(arena, "RATINGS_REFRESH", 0)

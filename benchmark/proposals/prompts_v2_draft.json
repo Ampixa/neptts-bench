@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "status": "draft",
+  "review_note": "DRAFT written by engineering. Needs review by native Nepali speakers from several regions and a linguist before any prompt enters a benchmark version. Adding prompts creates a new benchmark ID; existing submissions keep their v1 scores.",
+  "visibility": "public-candidate. These are published in the repository, so they can only become PUBLIC-set prompts. The private held-out set must be written separately by Ampixa and never committed (see deploy/arena/PRODUCTION_SETUP.md).",
+  "why": "v1 has 149 of 205 synthesis prompts as phonological minimal-pair probes, and no prompts for numbers or code-switching although the arena has issue tags for both.",
+  "prompts": [
+    {
+      "id": "v2_draft_001",
+      "category": "numbers_dates_currency",
+      "text_devanagari": "मेरो फोन नम्बर ९८४१२३४५६७ हो।",
+      "target": "Digit strings: read digit by digit, not as one number."
+    },
+    {
+      "id": "v2_draft_002",
+      "category": "numbers_dates_currency",
+      "text_devanagari": "बैठक २०८२ साल मंसिर ५ गते बिहान १०:३० बजे सुरु हुन्छ।",
+      "target": "Bikram Sambat date and clock time."
+    },
+    {
+      "id": "v2_draft_003",
+      "category": "numbers_dates_currency",
+      "text_devanagari": "यो झोलाको मूल्य रु. १,२५०.५० मात्र हो।",
+      "target": "Currency abbreviation, thousands separator, paisa."
+    },
+    {
+      "id": "v2_draft_004",
+      "category": "numbers_dates_currency",
+      "text_devanagari": "सगरमाथाको उचाइ ८,८४८.८६ मिटर छ।",
+      "target": "Decimal and unit."
+    },
+    {
+      "id": "v2_draft_005",
+      "category": "numbers_dates_currency",
+      "text_devanagari": "कक्षा १२ को नतिजामा ९२.५ प्रतिशत विद्यार्थी उत्तीर्ण भए।",
+      "target": "Percentage."
+    },
+    {
+      "id": "v2_draft_006",
+      "category": "numbers_dates_currency",
+      "text_devanagari": "बस नम्बर बा ३ ख ४५६७ कलङ्की तर्फ जाँदैछ।",
+      "target": "Vehicle plate: letters and digits mixed."
+    },
+    {
+      "id": "v2_draft_007",
+      "category": "numbers_dates_currency",
+      "text_devanagari": "आज तापक्रम न्यूनतम ४ र अधिकतम १८ डिग्री सेल्सियस रहनेछ।",
+      "target": "Weather bulletin."
+    },
+    {
+      "id": "v2_draft_008",
+      "category": "numbers_dates_currency",
+      "text_devanagari": "तपाईंको खातामा २५ हजार ५ सय रुपैयाँ जम्मा भएको छ।",
+      "target": "Mixed digits and number words."
+    },
+    {
+      "id": "v2_draft_009",
+      "category": "code_switching",
+      "text_devanagari": "मेरो laptop को battery छिट्टै सकिन्छ, charger कहाँ छ?",
+      "target": "Latin-script English nouns inside Nepali."
+    },
+    {
+      "id": "v2_draft_010",
+      "category": "code_switching",
+      "text_devanagari": "आजको meeting Zoom मा हुन्छ, link म WhatsApp मा पठाउँछु।",
+      "target": "Brand names and English nouns."
+    },
+    {
+      "id": "v2_draft_011",
+      "category": "code_switching",
+      "text_devanagari": "कृपया आफ्नो OTP कसैलाई पनि share नगर्नुहोस्।",
+      "target": "Acronym spelled letter by letter."
+    },
+    {
+      "id": "v2_draft_012",
+      "category": "code_switching",
+      "text_devanagari": "यो app download गरेर register गर्नुहोस् अनि login गर्नुहोस्।",
+      "target": "English verbs with Nepali light verbs."
+    },
+    {
+      "id": "v2_draft_013",
+      "category": "code_switching",
+      "text_devanagari": "Online payment का लागि eSewa वा Khalti प्रयोग गर्न सकिन्छ।",
+      "target": "Sentence-initial English; Nepali brands."
+    },
+    {
+      "id": "v2_draft_014",
+      "category": "code_switching",
+      "text_devanagari": "Deadline भोलि साँझ ५ बजेसम्म छ, त्यसैले report आजै submit गर।",
+      "target": "Informal register with English."
+    },
+    {
+      "id": "v2_draft_015",
+      "category": "named_entities",
+      "text_devanagari": "नेपाल राष्ट्र बैंकले नयाँ मौद्रिक नीति सार्वजनिक गरेको छ।",
+      "target": "Institution name."
+    },
+    {
+      "id": "v2_draft_016",
+      "category": "named_entities",
+      "text_devanagari": "धनगढी, बिराटनगर र पोखराबाट काठमाडौंका लागि दैनिक उडान छन्।",
+      "target": "Place names across regions."
+    },
+    {
+      "id": "v2_draft_017",
+      "category": "named_entities",
+      "text_devanagari": "त्रिभुवन विश्वविद्यालयको परीक्षा नियन्त्रण कार्यालय बल्खुमा छ।",
+      "target": "Institution and locality."
+    },
+    {
+      "id": "v2_draft_018",
+      "category": "named_entities",
+      "text_devanagari": "लक्ष्मीप्रसाद देवकोटालाई महाकवि भनिन्छ।",
+      "target": "Person name."
+    },
+    {
+      "id": "v2_draft_019",
+      "category": "named_entities",
+      "text_devanagari": "जनकपुरधामको जानकी मन्दिर मिथिला शैलीमा बनेको छ।",
+      "target": "Madhesh place and cultural terms."
+    },
+    {
+      "id": "v2_draft_020",
+      "category": "conversational",
+      "text_devanagari": "हजुर, नमस्ते! म तपाईंलाई के सहयोग गर्न सक्छु?",
+      "target": "Polite service greeting."
+    },
+    {
+      "id": "v2_draft_021",
+      "category": "conversational",
+      "text_devanagari": "ए दाइ, यो बाटो भएर रत्नपार्क पुगिन्छ कि नाइँ?",
+      "target": "Colloquial question with tag."
+    },
+    {
+      "id": "v2_draft_022",
+      "category": "conversational",
+      "text_devanagari": "अनि खाना खानुभयो त? आज त निकै जाडो छ है।",
+      "target": "Discourse particles त, है."
+    },
+    {
+      "id": "v2_draft_023",
+      "category": "conversational",
+      "text_devanagari": "माफ गर्नुहोला, मैले तपाईंको कुरा राम्ररी बुझिनँ। फेरि भन्नुहुन्छ कि?",
+      "target": "Apology and repair request."
+    },
+    {
+      "id": "v2_draft_024",
+      "category": "ivr_service",
+      "text_devanagari": "तपाईंको गुनासो दर्ता भएको छ। तीन कार्यदिवसभित्र सम्पर्क गरिनेछ।",
+      "target": "Call-centre confirmation."
+    },
+    {
+      "id": "v2_draft_025",
+      "category": "ivr_service",
+      "text_devanagari": "खाता ब्यालेन्स सुन्न एक थिच्नुहोस्, ग्राहक सेवा प्रतिनिधिसँग कुरा गर्न शून्य थिच्नुहोस्।",
+      "target": "IVR menu."
+    },
+    {
+      "id": "v2_draft_026",
+      "category": "long_form",
+      "text_devanagari": "हिमाली क्षेत्रमा हिउँ पर्न थालेपछि धेरै बाटाहरू अवरुद्ध भएका छन्। स्थानीय प्रशासनले यात्रुहरूलाई अनावश्यक यात्रा नगर्न आग्रह गरेको छ। मौसम सफा भएपछि मात्र सडक खुला गरिनेछ।",
+      "target": "News paragraph, three sentences."
+    },
+    {
+      "id": "v2_draft_027",
+      "category": "long_form",
+      "text_devanagari": "बिहान सबेरै उठेर हामी नगरकोटतर्फ लाग्यौं। घुमाउरो बाटो, चिसो हावा र टाढा देखिने हिमशृङ्खलाले यात्रा अविस्मरणीय बनायो। घाम झुल्किँदा पूरै आकाश सुनौलो देखियो।",
+      "target": "Narrative, descriptive prosody."
+    },
+    {
+      "id": "v2_draft_028",
+      "category": "long_form",
+      "text_devanagari": "स्वास्थ्य मन्त्रालयका अनुसार यस वर्ष डेंगुका बिरामी गत वर्षभन्दा कम छन्। तर पनि घरवरिपरि पानी जम्न नदिन र लामखुट्टेबाट बच्न अनुरोध गरिएको छ।",
+      "target": "Public-service announcement."
+    }
+  ]
+}

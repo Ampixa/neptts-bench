@@ -5,6 +5,7 @@ import fcntl
 import hashlib
 import json
 import logging
+import os
 import time
 from pathlib import Path
 
@@ -14,6 +15,19 @@ from .donations import apply_asr, load_prompt_sets, next_asr_job
 from .evaluation import evaluate, profile, validate_report
 from .offline import validate_count_report
 from .storage import db, event, initialize
+
+
+def heartbeat(root, engine, role, profile_id, worked, started):
+    """Tell the web service (and `python -m submission_app.doctor`) this worker is alive."""
+    now = time.time()
+    with db(root) as c:
+        c.execute(
+            "INSERT INTO worker_heartbeats(engine,role,profile,pid,started,last_seen,last_work) "
+            "VALUES(?,?,?,?,?,?,?) ON CONFLICT(engine) DO UPDATE SET role=excluded.role, "
+            "profile=excluded.profile, pid=excluded.pid, started=excluded.started, "
+            "last_seen=excluded.last_seen, last_work=COALESCE(excluded.last_work, last_work)",
+            (engine, role, profile_id, os.getpid(), started, now, now if worked else None),
+        )
 
 
 def verify_audio(files, validation):
@@ -59,7 +73,7 @@ def process_additional(root, spec, scorer, label, skip=None, check=None):
             if current is None or current["state"] != "published":
                 return True
             now = time.time()
-            auto = autoreview.enabled()
+            auto = autoreview.publishes()
             c.execute(
                 "INSERT OR IGNORE INTO profile_evaluations(submission_id,profile,created,updated,state,report,reviewer_note) VALUES(?,?,?,?,?,?,?)",
                 (sid, spec["id"], now, now, "published" if auto else "awaiting_review",
@@ -134,7 +148,7 @@ def process_one(root, model="small", scorer=evaluate, spec=None, check=None):
             autoreview.retry_or_fail(c, row, "Evaluation did not complete.")
         return True
     if autoreview.enabled():
-        autoreview.review(root, sid, spec["id"])
+        autoreview.review(root, sid, spec["id"])  # publishes only in mode `on`
     return True
 
 
@@ -160,11 +174,13 @@ def main():
     # One lock per engine: Rani and Whisper run in different Python environments.
     lock = (args.data / f".worker-{args.engine}.lock").open("a")
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    args.started = time.time()
     if args.role == "additional":
         label, skip = args.engine.capitalize(), set()
         while True:
             worked = process_additional(args.data, spec, lambda f, p: scorer(f, args.model, p),
                                         label, skip, check)
+            heartbeat(args.data, args.engine, args.role, spec["id"], worked, args.started)
             if args.once and not worked:
                 return
             if not worked:
@@ -224,6 +240,8 @@ def run_primary(args, spec, scorer, check):
         worked = worked or process_additional(
             args.data, spec, lambda f, p: scorer(f, args.model, p),
             args.engine.capitalize(), backfill_skip, check)
+        heartbeat(args.data, args.engine, "primary", spec["id"], worked,
+                  getattr(args, "started", time.time()))
         if args.once and not worked:
             break
         if not worked:

@@ -1,0 +1,8 @@
+[Unit]
+Description=Ampixa Benchmarks Arena encrypted off-host backup
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/ampixa-arena-backup
+Nice=15
+IOSchedulingClass=idle

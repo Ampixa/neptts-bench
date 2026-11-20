@@ -20,8 +20,11 @@ Clips are re-encoded to one format and loudness (arena_audio.py) and served only
 under opaque per-battle tokens.
 """
 
+import csv
 import hashlib
+import io
 import json
+import os
 import random
 import secrets
 import shutil
@@ -30,7 +33,7 @@ import uuid
 from typing import Literal
 
 from fastapi import Depends, HTTPException, Request
-from fastapi.responses import Response
+from fastapi.responses import PlainTextResponse, Response
 from pydantic import BaseModel, ConfigDict, Field
 
 from . import arena_audio, bt
@@ -64,6 +67,36 @@ VOTE_WEIGHT_CAP = 50  # a listener's votes count for at most this many in the ra
 MIN_GAP = 1.0
 MIN_CHECKS, MAX_CHECK_FAIL = 2, 0.5
 PROVISIONAL_VOTES = 30
+# The public board is recomputed at most this often (seconds). A vote no longer forces a
+# full bootstrap on the next page view; consent changes and new systems still do.
+RATINGS_REFRESH = 30
+MIN_CATEGORY_VOTES = 40  # a prompt category gets its own (point-estimate) ratings from here
+# Optional, self-declared. Nepali differs by region; this lets the ranking be split later.
+REGIONS = {
+    "kathmandu_valley": ("काठमाडौं उपत्यका", "Kathmandu Valley"),
+    "eastern": ("पूर्वी पहाड/हिमाल", "Eastern hills or mountains"),
+    "central_western": ("गण्डकी/पश्चिम पहाड", "Gandaki or western hills"),
+    "karnali_far_west": ("कर्णाली/सुदूरपश्चिम", "Karnali or Far-West"),
+    "madhesh_terai": ("मधेस/तराई", "Madhesh or Terai"),
+    "diaspora_south_asia": ("भारत/भुटानका नेपालीभाषी", "Nepali speaker in India or Bhutan"),
+    "diaspora_other": ("अन्य देशमा", "Elsewhere abroad"),
+}
+KINDS = {"baseline": "Ampixa baseline", "human_reference": "Human reference"}
+
+
+def _sample_sentence():
+    """One fixed prompt for public samples. It never appears in battles or screening, so
+    a sample's bytes can't be matched against a battle clip to unblind it."""
+    ids = sorted(SENTENCES)
+    phrases = [k for k in ids if SENTENCES[k].get("category") == "phrases" and not SENTENCES[k].get("pair_id")]
+    return (phrases or ids)[0]
+
+
+SAMPLE_SENTENCE = _sample_sentence()
+
+
+def export_public():
+    return os.environ.get("NEPTTS_ARENA_PUBLIC_EXPORT", "off").strip().lower() in ("on", "1", "true")
 METHOD = (
     "Blind pairwise preference on identical prompts. Question: which sounds more natural, "
     "as though spoken by a real person? Bradley-Terry ratings on the Elo scale (ties count "
@@ -86,6 +119,11 @@ def display(manifest):
         "voice": manifest.get("voice", ""),
         "model_version": manifest.get("model_version", ""),
     }
+
+
+def kinds(c):
+    """{submission id: 'baseline' | 'human_reference'} for first-party entries."""
+    return {r["submission_id"]: r["kind"] for r in c.execute("SELECT submission_id, kind FROM system_kinds")}
 
 
 def consent_granted(c, sid, manifest):
@@ -153,6 +191,7 @@ def install_arena(app, root, rate, origin, current_user, admin):
         model_config = ConfigDict(extra="forbid")
         native_speaker: Literal[True]
         headphones: bool
+        region: Literal[tuple(REGIONS)] | None = None
 
     @app.post("/api/arena/session")
     def start_session(body: SessionBody, request: Request, response: Response):
@@ -164,8 +203,8 @@ def install_arena(app, root, rate, origin, current_user, admin):
         token = secrets.token_urlsafe(32)
         with db(root) as c:
             c.execute(
-                "INSERT INTO arena_listeners(id,token_hash,created,native_declared) VALUES(?,?,?,1)",
-                (uuid.uuid4().hex, digest(token), now()),
+                "INSERT INTO arena_listeners(id,token_hash,created,native_declared,region) VALUES(?,?,?,1,?)",
+                (uuid.uuid4().hex, digest(token), now(), body.region),
             )
         response.set_cookie(COOKIE, token, max_age=180 * 86400, httponly=True,
                             samesite="lax", secure=secure, path="/")
@@ -175,7 +214,8 @@ def install_arena(app, root, rate, origin, current_user, admin):
     def public_state():
         with db(root) as c:
             systems = len(eligible(c))
-        return {"systems": systems, "ready": systems >= 2, "tags": TAGS}
+        return {"systems": systems, "ready": systems >= 2, "tags": TAGS,
+                "regions": [{"id": k, "ne": ne, "en": en} for k, (ne, en) in REGIONS.items()]}
 
     def allowance(c, lid):
         today = c.execute("SELECT COUNT(*) FROM arena_battles WHERE listener_id=? AND served>?",
@@ -215,7 +255,8 @@ def install_arena(app, root, rate, origin, current_user, admin):
             for sid, s in SENTENCES.items():
                 if s.get("pair_id"):
                     partners.setdefault(s["pair_id"], []).append(sid)
-            candidates = [ids for ids in partners.values() if len(ids) == 2]
+            candidates = [ids for ids in partners.values()
+                          if len(ids) == 2 and SAMPLE_SENTENCE not in ids]
             rng.shuffle(candidates)
             items = []
             for pair in candidates:
@@ -227,7 +268,7 @@ def install_arena(app, root, rate, origin, current_user, admin):
                 )
                 if not sources or sources[0][0] > SCREEN_MAX_CER:
                     continue
-                others = rng.sample([k for k in SENTENCES if k not in pair], 2)
+                others = rng.sample([k for k in SENTENCES if k not in pair and k != SAMPLE_SENTENCE], 2)
                 options = [target, partner, *others]
                 rng.shuffle(options)
                 items.append((sources[0][1], target, options, options.index(target)))
@@ -311,7 +352,8 @@ def install_arena(app, root, rate, origin, current_user, admin):
                 (row["id"],),
             ).fetchall()
             used = {b["sent_id"] for b in mine}
-            pool = [s for s in SENTENCES if s not in used] or list(SENTENCES)
+            prompts = [s for s in SENTENCES if s != SAMPLE_SENTENCE]
+            pool = [s for s in prompts if s not in used] or prompts
             sent_id = rng.choice(pool)
             kind, side = "compare", None
             if len(mine) >= CHECK_WARMUP and rng.random() < CHECK_RATE:
@@ -410,7 +452,6 @@ def install_arena(app, root, rate, origin, current_user, admin):
                     (battle["sub_a"], battle["sub_b"]),
                 )
             }
-        cache.clear()
         reveal = {s: display(manifests.get(battle["sub_" + s], {})) for s in ("a", "b")}
         if battle["kind"] == "null":
             note = "Listening check: both clips were identical."
@@ -425,19 +466,23 @@ def install_arena(app, root, rate, origin, current_user, admin):
 
     def ratings():
         with db(root) as c:
-            key = c.execute("SELECT COUNT(*), MAX(battle_id) FROM arena_votes").fetchone()
-            key = tuple(key) + tuple(sorted(eligible(c)))
-            if key in cache:
-                return cache[key]
+            systems_now = tuple(sorted(eligible(c)))
+            key = tuple(c.execute("SELECT COUNT(*), MAX(battle_id) FROM arena_votes").fetchone()) + systems_now
+            cached = cache.get("board")
+            if cached and (cached["key"] == key or (
+                    cached["key"][2:] == systems_now and now() - cached["at"] < RATINGS_REFRESH)):
+                return cached["result"]
             rows = c.execute(
-                "SELECT v.listener_id, v.choice, v.tags, v.valid, v.reason, b.kind, b.sub_a, b.sub_b, "
-                "b.degraded_side, l.screened FROM arena_votes v JOIN arena_battles b ON b.id=v.battle_id "
-                "JOIN arena_listeners l ON l.id=v.listener_id"
+                "SELECT v.listener_id, v.choice, v.tags, v.valid, v.reason, v.created, b.kind, b.sent_id, "
+                "b.sub_a, b.sub_b, b.degraded_side, l.screened, l.region FROM arena_votes v "
+                "JOIN arena_battles b ON b.id=v.battle_id JOIN arena_listeners l ON l.id=v.listener_id "
+                "ORDER BY v.battle_id"
             ).fetchall()
             manifests = {
                 r["id"]: json.loads(r["manifest"])
                 for r in c.execute("SELECT id, manifest FROM submissions WHERE state='published'")
             }
+            entry_kinds = kinds(c)
         checks = {}
         for r in rows:
             if r["kind"] != "compare":
@@ -447,7 +492,7 @@ def install_arena(app, root, rate, origin, current_user, admin):
             lid for lid, (passed, total) in checks.items()
             if total >= MIN_CHECKS and (total - passed) / total > MAX_CHECK_FAIL
         }
-        votes, issues, appearances, invalid = [], {}, {}, {}
+        votes, issues, appearances, invalid, counted, by_category = [], {}, {}, {}, [], {}
         for r in rows:
             if r["kind"] != "compare" or not r["screened"]:
                 continue
@@ -458,6 +503,9 @@ def install_arena(app, root, rate, origin, current_user, admin):
                 invalid[reason] = invalid.get(reason, 0) + 1
                 continue
             votes.append((r["listener_id"], r["sub_a"], r["sub_b"], SCORES[r["choice"]]))
+            category = SENTENCES.get(r["sent_id"], {}).get("category", "unknown")
+            by_category.setdefault(category, []).append(votes[-1])
+            counted.append(r)
             tags = json.loads(r["tags"])
             for side in ("a", "b"):
                 sid = r["sub_" + side]
@@ -466,18 +514,38 @@ def install_arena(app, root, rate, origin, current_user, admin):
                     issues.setdefault(sid, {}).setdefault(t, 0)
                     issues[sid][t] += 1
         systems = sorted({v[1] for v in votes} | {v[2] for v in votes})
+        categories = {}
+        for category, cat_votes in sorted(by_category.items()):
+            if len(cat_votes) < MIN_CATEGORY_VOTES:
+                continue
+            cat_systems = sorted({v[1] for v in cat_votes} | {v[2] for v in cat_votes})
+            weighted, _ = bt.cap_listener_weight(cat_votes, VOTE_WEIGHT_CAP)
+            categories[category] = {"votes": len(cat_votes),
+                                    "elo": bt.fit(cat_systems, weighted) if len(cat_systems) > 1 else {}}
         votes, capped = bt.cap_listener_weight(votes, VOTE_WEIGHT_CAP)
         entries = []
         for r in bt.leaderboard(systems, votes):
             sid = r.pop("system")
             share = {t: n / appearances[sid] for t, n in issues.get(sid, {}).items()}
             entries.append({
-                "id": sid, **display(manifests[sid]), **r,
+                "id": sid, **display(manifests[sid]), **r, "kind": entry_kinds.get(sid),
                 "provisional": r["votes"] < PROVISIONAL_VOTES,
                 "issues": dict(sorted(share.items(), key=lambda x: -x[1])[:3]),
             })
+        regions = {}
+        for region in {r["listener_id"]: r["region"] for r in counted}.values():
+            regions[region or "undeclared"] = regions.get(region or "undeclared", 0) + 1
         result = {
             "entries": entries,
+            "updated": now(),
+            "categories": categories,
+            "category_note": f"Point estimates for prompt categories with at least {MIN_CATEGORY_VOTES} "
+                             "counted votes; no intervals.",
+            "listener_regions": regions,
+            "sample_sentence": {"id": SAMPLE_SENTENCE, "text": SENTENCES[SAMPLE_SENTENCE]["text_devanagari"]},
+            "kinds": KINDS,
+            "export_public": export_public(),
+            "_counted": counted,
             "votes": len(votes),
             "listeners": len({v[0] for v in votes}),
             "excluded_listeners": len(excluded),
@@ -486,15 +554,55 @@ def install_arena(app, root, rate, origin, current_user, admin):
             "method": METHOD,
             "tags": TAGS,
         }
-        cache.clear()
-        cache[key] = result
+        cache["board"] = {"key": key, "at": now(), "result": result}
         return result
 
     @app.get("/api/arena/leaderboard")
     def arena_leaderboard():
         result = dict(ratings())
         result.pop("excluded_votes")
+        result.pop("_counted")
         return result
+
+    @app.get("/api/arena/samples/{sid}")
+    def sample(sid: str):
+        """A fixed, never-battled prompt from one listed system, for the leaderboard player."""
+        with db(root) as c:
+            if sid not in eligible(c):
+                raise HTTPException(404, "Sample unavailable.")
+        path, _ = clip(sid, SAMPLE_SENTENCE)
+        return Response(path.read_bytes(), media_type="audio/wav",
+                        headers={"Cache-Control": "public, max-age=3600"})
+
+    @app.get("/api/arena/votes.csv")
+    def export_votes(request: Request):
+        """Counted votes, pseudonymised, so anyone can refit the ranking.
+
+        Public only with NEPTTS_ARENA_PUBLIC_EXPORT=on; otherwise reviewers only.
+        Listener IDs become per-export sequence numbers; times are rounded to the UTC day.
+        """
+        if not export_public():
+            admin(request)
+        result = ratings()
+        with db(root) as c:
+            names = {r["id"]: json.loads(r["manifest"]).get("system_name", "")
+                     for r in c.execute("SELECT id, manifest FROM submissions")}
+        pseudonym = {}
+        out = io.StringIO()
+        writer = csv.writer(out)
+        writer.writerow(["listener", "region", "date_utc", "sent_id", "category", "system_a_id",
+                         "system_a", "system_b_id", "system_b", "choice", "score_a", "tags_a", "tags_b"])
+        for r in result["_counted"]:
+            tags = json.loads(r["tags"])
+            writer.writerow([
+                pseudonym.setdefault(r["listener_id"], len(pseudonym) + 1), r["region"] or "",
+                time.strftime("%Y-%m-%d", time.gmtime(r["created"])), r["sent_id"],
+                SENTENCES.get(r["sent_id"], {}).get("category", ""),
+                r["sub_a"], names.get(r["sub_a"], ""), r["sub_b"], names.get(r["sub_b"], ""),
+                r["choice"], SCORES[r["choice"]], " ".join(tags.get("a", [])), " ".join(tags.get("b", [])),
+            ])
+        return PlainTextResponse(out.getvalue(), media_type="text/csv", headers={
+            "Content-Disposition": 'attachment; filename="ampixa-arena-votes.csv"'})
 
     @app.get("/api/admin/arena", dependencies=[Depends(admin)])
     def arena_admin():
@@ -510,6 +618,7 @@ def install_arena(app, root, rate, origin, current_user, admin):
             "battles": {b["kind"]: b["n"] for b in battles},
             "counted_votes": result["votes"], "excluded_votes": result["excluded_votes"],
             "excluded_listeners": result["excluded_listeners"], "eligible_systems": systems,
+            "listener_regions": result["listener_regions"],
         }
 
     # ------------------------------------------------------------------ consent

@@ -18,7 +18,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from starlette.background import BackgroundTask
 
-from . import autoreview
+from . import autoreview, readiness
 from .arena import consent_granted, install_arena
 from .auth import install_auth
 from .contract import (
@@ -35,6 +35,9 @@ from .profiles import judge_profiles, primary_profile_id, selection_group
 from .storage import db, event, initialize, unpack
 
 STATIC = Path(__file__).parent / "static"
+# Shareable paths. Each serves the single-page app, which opens the matching view.
+PAGES = ("leaderboard", "arena", "vote", "human", "methodology", "guide", "submit", "donate",
+         "record", "my-voice", "receipts")
 
 
 def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
@@ -650,9 +653,24 @@ def create_app(root: Path, password: str, origin="http://127.0.0.1:5193"):
             event(c, sid, state, body.note)
         return {"id": sid, "state": state}
 
+    @app.get("/api/health")
+    def health():
+        """Liveness for load balancers and uptime monitors. No secrets, no detail."""
+        commit = Path(__file__).parent.parent / "SOURCE_COMMIT"
+        with db(root) as c:
+            c.execute("SELECT 1").fetchone()
+        return {"ok": True, "commit": commit.read_text().strip() if commit.exists() else None}
+
+    @app.get("/api/admin/readiness", dependencies=[Depends(admin)])
+    def admin_readiness():
+        return readiness.summary(readiness.checks(root))
+
     @app.get("/")
     def index():
         return FileResponse(STATIC / "index.html")
+
+    for page in PAGES:
+        app.add_api_route(f"/{page}", index, methods=["GET"], include_in_schema=False)
 
     app.mount("/static", StaticFiles(directory=STATIC), name="static")
     return app

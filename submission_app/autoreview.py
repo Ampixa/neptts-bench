@@ -4,7 +4,13 @@ The policy never rejects. It either publishes (every check passed) or holds the
 submission in `awaiting_review` with machine-readable reasons, so a reviewer only
 sees what needs judgement. Reviewers can still take down anything it published.
 
-Set NEPTTS_AUTO_REVIEW=off to return to fully manual review.
+NEPTTS_AUTO_REVIEW selects the mode:
+- on (default): queue, retry, publish clean results, hold the rest.
+- shadow: queue and retry as with `on`, and record what the policy would decide,
+  but publish nothing. A reviewer approves every submission, and the admin
+  readiness report shows how often they agreed with the policy. Run this for a
+  few weeks before switching to `on`.
+- off: fully manual review.
 """
 
 import json
@@ -42,8 +48,21 @@ REASONS = {
 }
 
 
+def mode():
+    value = os.environ.get("NEPTTS_AUTO_REVIEW", "on").strip().lower()
+    if value in ("off", "0", "false"):
+        return "off"
+    return "shadow" if value == "shadow" else "on"
+
+
 def enabled():
-    return os.environ.get("NEPTTS_AUTO_REVIEW", "on").lower() not in ("off", "0", "false")
+    """Uploads queue themselves and failed runs retry (modes `on` and `shadow`)."""
+    return mode() != "off"
+
+
+def publishes():
+    """The policy may publish without a person (mode `on` only)."""
+    return mode() == "on"
 
 
 def norm(text):
@@ -103,8 +122,15 @@ def review(root, sid, primary_id):
         if row is None or row["state"] != "awaiting_review" or not row["report"]:
             return row["state"] if row else None
         reasons = assess(c, row, json.loads(row["report"]), primary_id)
+        shadow = not publishes()
         record = json.dumps({"policy": VERSION, "time": time.time(), "reasons": reasons,
-                             "details": [REASONS[r] for r in reasons]})
+                             "details": [REASONS[r] for r in reasons], "shadow": shadow})
+        if shadow:
+            verdict = ("would hold it: " + ", ".join(reasons)) if reasons else "would publish it"
+            c.execute("UPDATE submissions SET message=?,auto_review=?,updated=? WHERE id=?",
+                      ("Evaluation complete. Awaiting reviewer approval.", record, time.time(), sid))
+            event(c, sid, "awaiting_review", f"{VERSION} (shadow) {verdict}. A reviewer decides.")
+            return "awaiting_review"
         if reasons:
             message = "Held for a reviewer: " + " ".join(REASONS[r] for r in reasons)
             c.execute("UPDATE submissions SET message=?,auto_review=?,updated=? WHERE id=?",
@@ -133,3 +159,21 @@ def retry_or_fail(c, row, message):
                time.time(), row["id"]))
     event(c, row["id"], "evaluation_failed", message + " No scores published.")
     return "evaluation_failed"
+
+
+def shadow_agreement(c):
+    """How reviewers decided on submissions the policy judged in shadow mode."""
+    out = {"would_publish": {"published": 0, "rejected": 0, "pending": 0},
+           "would_hold": {"published": 0, "rejected": 0, "pending": 0}}
+    for row in c.execute("SELECT state, auto_review FROM submissions WHERE auto_review IS NOT NULL"):
+        record = json.loads(row["auto_review"])
+        if not record.get("shadow"):
+            continue
+        verdict = "would_hold" if record["reasons"] else "would_publish"
+        outcome = row["state"] if row["state"] in ("published", "rejected") else "pending"
+        out[verdict][outcome] += 1
+    decided = sum(out[v][o] for v in out for o in ("published", "rejected"))
+    agreed = out["would_publish"]["published"] + out["would_hold"]["rejected"]
+    out["decided"] = decided
+    out["agreement"] = agreed / decided if decided else None
+    return out

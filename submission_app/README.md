@@ -329,3 +329,13 @@ consent text.
 
 Not yet: wiring accepted `anchor-v1` takes into the arena as a "Human reference" system (needs the
 `listener_playback` purpose), encryption at rest for payout handles, and an export for consented open-set data.
+
+## Operating in production
+
+- **Readiness:** `python -m submission_app.doctor --data <dir>` (also `GET /api/admin/readiness`, shown on the reviewer page) lists every launch step still missing, with the fix. See [deploy/arena/PRODUCTION_SETUP.md](../deploy/arena/PRODUCTION_SETUP.md).
+- **Shadow review:** `NEPTTS_AUTO_REVIEW=shadow` queues and scores automatically and records what `auto-review-v1` would decide, but a reviewer approves everything. The readiness report shows how often reviewers agreed.
+- **First-party systems:** `python -m submission_app.seed --kind baseline|human_reference --wav-dir … --manifest …` adds Ampixa-generated baselines and human readings through the normal checks and scoring. The arena labels them; a human reference anchors the Elo scale.
+- **Worker heartbeat:** each worker loop records itself in `worker_heartbeats`; a primary worker silent for 15 minutes shows as down.
+- **Health:** `GET /api/health` returns `{ok, commit}` for uptime monitors.
+- **Arena extras:** `GET /api/arena/samples/<id>` plays one fixed prompt that is never used in battles or screening (so sample bytes can't unblind a battle). `GET /api/arena/votes.csv` exports pseudonymised counted votes (reviewers only unless `NEPTTS_ARENA_PUBLIC_EXPORT=on`). The board recomputes at most every `RATINGS_REFRESH` seconds and adds point-estimate ratings per prompt category once it has `MIN_CATEGORY_VOTES` votes. Listeners may declare a region (optional).
+- **Shareable paths:** `/arena`, `/leaderboard`, `/methodology`, `/submit`, `/donate` … serve the app and open that view.

@@ -86,6 +86,13 @@ def initialize(root):
           created REAL NOT NULL, committed REAL);
         CREATE TABLE IF NOT EXISTS donor_hub_sync (
           repo TEXT PRIMARY KEY, metadata_sha TEXT, last_sync REAL, last_error TEXT);
+        CREATE TABLE IF NOT EXISTS worker_heartbeats (
+          engine TEXT PRIMARY KEY, role TEXT NOT NULL, profile TEXT NOT NULL, pid INTEGER NOT NULL,
+          started REAL NOT NULL, last_seen REAL NOT NULL, last_work REAL);
+        CREATE TABLE IF NOT EXISTS system_kinds (
+          submission_id TEXT PRIMARY KEY REFERENCES submissions(id),
+          kind TEXT NOT NULL CHECK(kind IN ('baseline','human_reference')),
+          note TEXT NOT NULL DEFAULT '', created REAL NOT NULL);
         CREATE TABLE IF NOT EXISTS donor_payouts (
           id INTEGER PRIMARY KEY, donor_id TEXT NOT NULL REFERENCES donors(id),
           amount_npr REAL NOT NULL CHECK(amount_npr > 0), reference TEXT NOT NULL,
@@ -101,6 +108,8 @@ def initialize(root):
         c.execute(
             "CREATE INDEX IF NOT EXISTS submissions_owner ON submissions(owner_id)"
         )
+        if "region" not in {r[1] for r in c.execute("PRAGMA table_info(arena_listeners)")}:
+            c.execute("ALTER TABLE arena_listeners ADD COLUMN region TEXT")
         # Where a donated take's audio is: local (dev), spool (waiting for Hugging Face) or hub.
         if "stored" not in {r[1] for r in c.execute("PRAGMA table_info(donor_recordings)")}:
             c.execute("ALTER TABLE donor_recordings ADD COLUMN stored TEXT NOT NULL DEFAULT 'local'")
