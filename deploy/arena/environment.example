@@ -1,0 +1,38 @@
+# /etc/ampixa-arena/environment — root:ampixa-arena, mode 640. Never commit the real file.
+# bootstrap.sh creates it with NEPTTS_ORIGIN and a random NEPTTS_ADMIN_PASSWORD.
+# After editing: sudo systemctl restart ampixa-arena ampixa-arena-worker
+# Check what is still missing: see "Verify" in PRODUCTION_SETUP.md (python -m submission_app.doctor).
+
+# --- Site (required) --------------------------------------------------------
+NEPTTS_ORIGIN=https://ampixa.benchmarks.cloud
+# Reviewer password, ≥24 characters. Share via the team password manager only.
+NEPTTS_ADMIN_PASSWORD=
+
+# --- Submissions: GitHub OAuth App owned by the Ampixa org (required for uploads)
+# Callback URL: https://ampixa.benchmarks.cloud/api/auth/github/callback
+NEPTTS_GITHUB_CLIENT_ID=
+NEPTTS_GITHUB_CLIENT_SECRET=
+
+# --- Automatic review -------------------------------------------------------
+# shadow: queue + score + record the policy's verdict, a person approves (start here)
+# on:     publish clean results automatically    off: fully manual
+NEPTTS_AUTO_REVIEW=shadow
+
+# --- Rani worker (read by ampixa-arena-worker.service) ----------------------
+# Gated weights: https://huggingface.co/ampixa/rani-asr. Must match rani_contract.json's sha256.
+NEPTTS_RANI_CHECKPOINT=/var/lib/ampixa-arena-models/rani-asr/rani/rani.nemo
+
+# --- Arena -----------------------------------------------------------------
+# on: anyone can download pseudonymised counted votes at /api/arena/votes.csv
+NEPTTS_ARENA_PUBLIC_EXPORT=off
+
+# --- Voice donations (only once consent/voice_donation_v1.json is approved) --
+# Create both with scripts/create_hf_donation_repos.py. They must be private and different.
+NEPTTS_HF_DONATIONS_BENCHMARK_REPO=
+NEPTTS_HF_DONATIONS_OPEN_REPO=
+# Fine-grained token: write access to the two donation repos (+ read on ampixa/rani-asr for the worker).
+HF_TOKEN=
+# Seconds between batched commits to Hugging Face.
+NEPTTS_HF_SYNC_SECONDS=300
+# Paid programme rate shown to donors (Nepali rupees per accepted minute).
+NEPTTS_DONOR_RATE_NPR_PER_MIN=

@@ -1,5 +1,7 @@
 # Shared VM deployment (no Docker)
 
+> **Going live?** Follow [PRODUCTION_SETUP.md](PRODUCTION_SETUP.md): the ten org-side steps, owners and checks. `python -m submission_app.doctor` reports which remain.
+
 Arena runs independently of AFFiNE and mail: system user `ampixa-arena`, loopback port 5193, unit `ampixa-arena.service`, releases in `/opt/ampixa-arena/releases`, persistent SQLite/audio in `/var/lib/ampixa-arena`, root-only credentials in `/etc/ampixa-arena/environment`.
 
 The web service is capped at 512 MiB and 50% of one CPU. **No evaluation worker is installed or started on the shared 2 GiB VM.** Uploads are queued automatically, but nothing is scored or published until an operator provisions the Rani worker (`python -m submission_app.worker --checkpoint …`) on an appropriately sized machine with access to the data. Do not claim automatic scoring is operational before that step. The small model may contend with AFFiNE and mail; choose a separate evaluation machine or upgrade capacity first.

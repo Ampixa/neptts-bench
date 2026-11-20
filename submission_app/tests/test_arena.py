@@ -103,7 +103,9 @@ def test_blind_flow_reveals_only_after_vote(app):
     hidden, _ = publish(app, owner, 2, consent=False)
     c = listener(app)
     assert c.get("/api/arena/state").json() == {"listener": None, "systems": 2, "ready": True,
-                                                 "tags": arena.TAGS}
+                                                 "tags": arena.TAGS,
+                                                 "regions": [{"id": k, "ne": ne, "en": en}
+                                                             for k, (ne, en) in arena.REGIONS.items()]}
     assert c.post("/api/arena/battles").status_code == 401
     assert c.post("/api/arena/session", json={"native_speaker": False, "headphones": True}).status_code == 422
     assert c.post("/api/arena/session", json={"native_speaker": True, "headphones": True}).status_code == 200

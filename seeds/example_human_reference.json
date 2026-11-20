@@ -1,0 +1,10 @@
+{
+  "system_name": "Human reference",
+  "model_version": "speaker-01-2026-11",
+  "organization": "Ampixa",
+  "model_url": "",
+  "voice": "speaker-01 (female, Kathmandu)",
+  "generation_settings": "Studio read, one take per prompt, 48 kHz mono, consented under voice-donation-v1",
+  "post_processing": "Loudness normalised to -23 LUFS; leading/trailing silence trimmed to 200 ms",
+  "training_overlap": "none (human speech)"
+}
